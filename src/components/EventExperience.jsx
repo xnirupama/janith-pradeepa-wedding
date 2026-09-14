@@ -17,6 +17,7 @@ import LocationSection from "./LocationSection";
 import AddToCalendar from "./AddToCalendar";
 import RSVPForm from "./RSVPForm";
 import ClosingSection from "./ClosingSection";
+import SectionNavigator from "./SectionNavigator";
 
 function InvitationMessage({ invitation, active }) {
   return (
@@ -41,7 +42,7 @@ function InvitationMessage({ invitation, active }) {
 function Arrival({ arrival, invitation, active }) {
   if (!arrival) return null;
   return (
-    <section className="arrival-section cinematic-section section-shell">
+    <section className="arrival-section cinematic-section section-shell" id="event-details">
       <VideoBackdrop src={invitation.sectionVideos.arrival} fallbackSrc={invitation.videos.feature} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
       <SectionReveal className="arrival-card">
         <div className="heritage-card-crown" aria-hidden="true" />
@@ -88,11 +89,12 @@ export default function EventExperience({ invitation, galleryImages }) {
   const contentActive = open && openingFinished;
 
   return (
-    <main className={`event-page theme-${invitation.theme}`}>
+    <main className={`event-page theme-${invitation.theme} ${contentActive ? "has-section-nav" : ""}`}>
       <InvitationGate invitation={invitation} open={open} onOpen={openInvitation} />
       <OpeningFilm invitation={invitation} visible={open && !openingFinished} onComplete={finishOpening} />
       <MusicController src={invitation.music} invitationOpen={open} />
       <FloatingAtmosphere />
+      {contentActive && <SectionNavigator invitation={invitation} />}
       <HeroSection invitation={invitation} active={contentActive} />
       <InvitationMessage invitation={invitation} active={contentActive} />
       <PhotoFeature invitation={invitation} active={contentActive} />

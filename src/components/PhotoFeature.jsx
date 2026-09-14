@@ -11,7 +11,7 @@ export default function PhotoFeature({ invitation, active }) {
   const featurePhoto = invitation.featurePhoto || invitation.heroPhoto;
 
   return (
-    <section className="photo-feature cinematic-section section-shell">
+    <section className="photo-feature cinematic-section section-shell" id="our-story">
       <VideoBackdrop src={invitation.sectionVideos.feature} fallbackSrc={invitation.videos.feature} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" position="center" opacity={.78} />
       <SectionReveal className="featured-couple-layout">
         <div className="featured-couple-copy">

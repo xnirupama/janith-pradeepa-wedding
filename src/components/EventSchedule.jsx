@@ -3,7 +3,7 @@ import VideoBackdrop from "./VideoBackdrop";
 
 export default function EventSchedule({ items, invitation, active }) {
   return (
-    <section className="schedule-section cinematic-section section-shell" aria-labelledby="schedule-title">
+    <section className="schedule-section cinematic-section section-shell" id="event-details" aria-labelledby="schedule-title">
       <VideoBackdrop src={invitation.sectionVideos.schedule} fallbackSrc={invitation.videos.feature} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
       <SectionReveal className="section-heading">
         <p className="section-kicker">The day unfolds</p>

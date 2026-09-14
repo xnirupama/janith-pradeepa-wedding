@@ -67,7 +67,7 @@ export default function RSVPForm({ invitation, active }) {
   };
 
   return (
-    <section className="rsvp-section cinematic-section section-shell" aria-labelledby="rsvp-title">
+    <section className="rsvp-section cinematic-section section-shell" id="rsvp" aria-labelledby="rsvp-title">
       <VideoBackdrop src={invitation.sectionVideos.rsvp} fallbackSrc={invitation.videos.feature} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" opacity={.62} />
       <SectionReveal className="section-heading">
         <div className="rsvp-title-seal" aria-hidden="true"><Sparkles size={18} /></div>
