@@ -51,6 +51,11 @@ export const invitations = {
       hero: "/assets/wedding/backgrounds/wedding-hero-bg.jpeg",
       section: "/assets/wedding/backgrounds/wedding-section-bg.jpeg",
     },
+    gateArtwork: {
+      mandala: "/assets/wedding/decor/wedding-gate-mandala.webp",
+      lotus: "/assets/wedding/decor/wedding-gate-lotus.webp",
+      procession: "/assets/wedding/decor/wedding-gate-procession.webp",
+    },
     location: {
       enabled: true,
       name: "Hemandra Grand Hotel",

@@ -7,6 +7,9 @@ All media is optional during development. Replace files without changing their p
 | Wedding | Hero couple photo | `public/assets/wedding/photos/wedding-hero.jpg` |
 | Wedding | Gallery | `public/assets/wedding/gallery/wedding-gallery-01.jpg` (continue numerically) |
 | Wedding | Couple opening film | `public/assets/wedding/videos/wedding-opening-couple.mp4` |
+| Wedding | Gate mandala ornament | `public/assets/wedding/decor/wedding-gate-mandala.webp` |
+| Wedding | Gate white lotus ornament | `public/assets/wedding/decor/wedding-gate-lotus.webp` |
+| Wedding | Gate ceremonial procession | `public/assets/wedding/decor/wedding-gate-procession.webp` |
 | Wedding | Hero video | `public/assets/wedding/videos/wedding-hero-loop.mp4` |
 | Wedding | Floral/media video | `public/assets/wedding/videos/wedding-floral-loop.mp4` |
 | Wedding | Closing video | `public/assets/wedding/videos/wedding-closing-loop.mp4` |
