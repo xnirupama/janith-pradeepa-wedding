@@ -1,11 +1,16 @@
 "use client";
 
+import { useReducedMotion } from "framer-motion";
 import { ArrowUp, Heart } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 import VideoBackdrop from "./VideoBackdrop";
 
 export default function ClosingSection({ invitation, active }) {
-  const backToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  const reduceMotion = useReducedMotion();
+  const backToTop = () => {
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+    window.history.replaceState(null, "", "#top");
+  };
 
   return (
     <section className="closing-section">
@@ -17,6 +22,7 @@ export default function ClosingSection({ invitation, active }) {
         <p className="sinhala-blessing" lang="si">{invitation.sinhalaBlessing}</p>
         <Heart className="closing-heart" size={17} fill="currentColor" aria-hidden="true" />
         <h2>{invitation.couple}</h2>
+        <span className="closing-divider" aria-hidden="true"><i /><Heart size={11} fill="currentColor" /><i /></span>
         <div className="closing-copy">
           {invitation.closing.map((line) => <p key={line}>{line}</p>)}
         </div>

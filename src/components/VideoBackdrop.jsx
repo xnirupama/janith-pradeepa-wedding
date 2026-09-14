@@ -19,6 +19,7 @@ export default function VideoBackdrop({
   const [nearby, setNearby] = useState(false);
   const [staticOnly, setStaticOnly] = useState(true);
   const [useFallback, setUseFallback] = useState(false);
+  const [ready, setReady] = useState(false);
   const videoSrc = useFallback ? fallbackSrc : src;
 
   useEffect(() => {
@@ -40,7 +41,10 @@ export default function VideoBackdrop({
     if (!element || !active || failed || staticOnly || !videoSrc) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => setNearby(entry.isIntersecting),
+      ([entry]) => {
+        setNearby(entry.isIntersecting);
+        if (!entry.isIntersecting) setReady(false);
+      },
       { rootMargin: "200px 0px", threshold: 0.01 },
     );
     observer.observe(element);
@@ -57,6 +61,7 @@ export default function VideoBackdrop({
   const shouldMountVideo = Boolean(videoSrc && active && nearby && !failed && !staticOnly);
 
   const handleVideoError = () => {
+    setReady(false);
     if (!useFallback && fallbackSrc && fallbackSrc !== src) setUseFallback(true);
     else setFailed(true);
   };
@@ -82,6 +87,8 @@ export default function VideoBackdrop({
           loop
           playsInline
           preload="metadata"
+          className={ready ? "is-ready" : ""}
+          onCanPlay={() => setReady(true)}
           onError={handleVideoError}
         />
       )}

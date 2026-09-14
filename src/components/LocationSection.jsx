@@ -8,10 +8,15 @@ export default function LocationSection({ location, invitation, active }) {
   return (
     <section className="location-section cinematic-section section-shell" id="location" aria-labelledby="location-title">
       <VideoBackdrop src={invitation.sectionVideos.location} fallbackSrc={invitation.videos.feature} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
+      <SectionReveal className="section-heading location-heading">
+        <p className="section-kicker">Where we celebrate</p>
+        <h2 id="location-title">The Location</h2>
+        <span className="heading-flourish" aria-hidden="true" />
+      </SectionReveal>
       <SectionReveal className="location-card">
         <div className="location-icon"><MapPin size={28} aria-hidden="true" /></div>
         <p className="section-kicker">Join us at</p>
-        <h2 id="location-title">{location.name}</h2>
+        <h3 className="location-venue">{location.name}</h3>
         {(location.addressLines?.length > 0 || location.address) && (
           <address>
             {(location.addressLines?.length ? location.addressLines : [location.address]).map((line) => <span key={line}>{line}</span>)}
