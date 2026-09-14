@@ -193,6 +193,8 @@ img, video { max-width: 100%; }
   left: 0;
   width: min(31rem, calc(100% - 1.5rem));
   margin-inline: auto;
+  isolation: isolate;
+  pointer-events: none;
   animation: sectionNavEnter .55s cubic-bezier(.22, 1, .36, 1) both;
 }
 
@@ -207,6 +209,7 @@ img, video { max-width: 100%; }
   background: var(--nav-bg);
   box-shadow: 0 18px 45px rgba(37, 17, 4, .2), inset 0 1px rgba(255, 255, 255, .7);
   backdrop-filter: blur(18px) saturate(1.15);
+  pointer-events: auto;
 }
 
 .section-navigator a {
@@ -240,6 +243,18 @@ img, video { max-width: 100%; }
 .section-navigator a.is-active { background: var(--nav-active); color: var(--nav-active-ink); }
 .section-navigator a.is-active::before { opacity: .75; transform: scaleX(1); }
 .section-navigator a:focus-visible { outline-color: var(--nav-ink); outline-offset: 2px; }
+
+.theme-wedding .section-navigator {
+  --nav-bg: rgba(252, 248, 235, .96);
+  --nav-border: rgba(180, 140, 67, .56);
+  --nav-ink: #8f2736;
+  --nav-active: #8f2736;
+  --nav-active-ink: #fffaf0;
+}
+
+.theme-wedding .section-navigator-inner {
+  box-shadow: 0 18px 46px rgba(65, 35, 8, .23), inset 0 1px rgba(255, 255, 255, .8);
+}
 
 .theme-homecoming .section-navigator {
   --nav-bg: rgba(48, 5, 19, .94);
@@ -276,6 +291,15 @@ img, video { max-width: 100%; }
 /* Hero */
 .hero-section { position: relative; z-index: 2; display: grid; min-height: 100svh; place-items: center; overflow: hidden; isolation: isolate; }
 .hero-background, .video-backdrop, .hero-scrim { position: absolute; inset: -7%; }
+.hero-background,
+.video-backdrop,
+.hero-scrim,
+.hero-ornament,
+.celebration-scrim,
+.closing-scrim,
+.opening-film-vignette,
+.wedding-gate-artwork,
+.cinematic-section::after { pointer-events: none; }
 .hero-background { z-index: -4; background: var(--hero-image), linear-gradient(135deg, var(--bg-deep), var(--bg)); background-position: center; background-size: cover; }
 .video-backdrop { z-index: -3; overflow: hidden; }
 .video-backdrop video { width: 100%; height: 100%; object-fit: cover; }
@@ -873,6 +897,13 @@ img, video { max-width: 100%; }
   overflow: hidden;
   pointer-events: none;
 }
+
+.theme-wedding .wedding-gate-mandala,
+.theme-wedding .wedding-gate-lotus,
+.theme-wedding .wedding-gate-procession,
+.theme-wedding .wedding-gate-petals,
+.theme-wedding .wedding-gate-particles,
+.theme-wedding .wedding-gate-light-sweep { pointer-events: none; }
 
 .theme-wedding .wedding-gate-mandala,
 .theme-wedding .wedding-gate-lotus,
@@ -1976,6 +2007,13 @@ img, video { max-width: 100%; }
   pointer-events: none;
 }
 .closing-content h2 { animation: closingNameGlow 7s ease-in-out infinite; }
+.closing-content .sinhala-blessing {
+  margin-top: .65rem;
+  color: #f0ca7c;
+  font-family: "Noto Sans Sinhala", "Nirmala UI", "Iskoola Pota", sans-serif;
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  line-height: 1.55;
+}
 .closing-divider {
   display: grid;
   width: min(13rem, 58vw);

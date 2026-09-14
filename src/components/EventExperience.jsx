@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Heart, Sparkles } from "lucide-react";
 import InvitationGate from "./InvitationGate";
 import OpeningFilm from "./OpeningFilm";
@@ -73,6 +73,15 @@ function Celebration({ invitation, active }) {
 export default function EventExperience({ invitation, galleryImages }) {
   const [open, setOpen] = useState(false);
   const [openingFinished, setOpeningFinished] = useState(false);
+  const pendingHashRef = useRef("");
+
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (["top", "our-story", "event-details", "location", "rsvp"].includes(hash)) {
+      pendingHashRef.current = hash;
+    }
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, []);
 
   const openInvitation = useCallback(() => {
     const audio = document.getElementById("invitation-music");
@@ -87,6 +96,37 @@ export default function EventExperience({ invitation, galleryImages }) {
 
   const finishOpening = useCallback(() => setOpeningFinished(true), []);
   const contentActive = open && openingFinished;
+
+  useEffect(() => {
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+
+    if (!contentActive) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
+    };
+  }, [contentActive]);
+
+  useEffect(() => {
+    if (!contentActive || !pendingHashRef.current) return;
+    const targetId = pendingHashRef.current;
+    pendingHashRef.current = "";
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById(targetId)?.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "start",
+      });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [contentActive]);
 
   return (
     <main className={`event-page theme-${invitation.theme} ${contentActive ? "has-section-nav" : ""}`}>
