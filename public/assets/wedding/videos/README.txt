@@ -1,0 +1,1 @@
+Expected: wedding-opening-couple.mp4, wedding-hero-loop.mp4, wedding-floral-loop.mp4, and wedding-closing-loop.mp4. The opening couple film should be vertical 9:16, 8–10 seconds, muted, and ideally below 8 MB.

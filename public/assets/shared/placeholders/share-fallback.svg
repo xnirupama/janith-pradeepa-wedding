@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Janith and Pradeepa invitation</title>
+  <desc id="desc">Elegant cream and burgundy invitation preview</desc>
+  <defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f7f0e5"/><stop offset=".55" stop-color="#eadcc5"/><stop offset="1" stop-color="#4b0d20"/></linearGradient><radialGradient id="glow"><stop stop-color="#fff" stop-opacity=".8"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1200" height="630" fill="url(#bg)"/><circle cx="210" cy="80" r="430" fill="url(#glow)" opacity=".65"/>
+  <rect x="42" y="42" width="1116" height="546" rx="20" fill="none" stroke="#b58a49" stroke-opacity=".55"/>
+  <path d="M460 259h95m90 0h95" stroke="#a97d3e"/><path d="M600 267c-20-17-46-2-38 20 8 22 38 40 38 40s30-18 38-40c8-22-18-37-38-20z" fill="#9b2948"/>
+  <text x="600" y="200" text-anchor="middle" fill="#7b5a31" font-family="Georgia,serif" font-size="23" letter-spacing="7">SRI SUBHA MANGALAM!</text>
+  <text x="600" y="405" text-anchor="middle" fill="#5b382d" font-family="Georgia,serif" font-size="85" font-style="italic">Janith &amp; Pradeepa</text>
+  <text x="600" y="470" text-anchor="middle" fill="#644f43" font-family="Arial,sans-serif" font-size="19" letter-spacing="5">WEDDING CELEBRATIONS · NOVEMBER 2026</text>
+</svg>

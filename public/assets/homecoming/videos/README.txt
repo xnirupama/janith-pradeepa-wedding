@@ -1,0 +1,1 @@
+Expected: homecoming-opening-couple.mp4, homecoming-hero-loop.mp4, homecoming-glow-loop.mp4, and homecoming-closing-loop.mp4. The opening couple film should be vertical 9:16, 8–10 seconds, muted, and ideally below 8 MB.
