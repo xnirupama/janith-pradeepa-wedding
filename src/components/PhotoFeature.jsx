@@ -4,12 +4,14 @@ import { useState } from "react";
 import Image from "next/image";
 import { Heart } from "lucide-react";
 import SectionReveal from "./SectionReveal";
+import VideoBackdrop from "./VideoBackdrop";
 
-export default function PhotoFeature({ invitation }) {
+export default function PhotoFeature({ invitation, active }) {
   const [failed, setFailed] = useState(false);
 
   return (
-    <section className="photo-feature section-shell">
+    <section className="photo-feature cinematic-section section-shell">
+      <VideoBackdrop src={invitation.sectionVideos.photo} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" position="center" opacity={.72} />
       <SectionReveal className="photo-frame-wrap">
         <span className="portrait-fan portrait-fan-left" aria-hidden="true" />
         <span className="portrait-fan portrait-fan-right" aria-hidden="true" />

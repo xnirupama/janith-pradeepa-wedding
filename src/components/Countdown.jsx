@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SectionReveal from "./SectionReveal";
+import VideoBackdrop from "./VideoBackdrop";
 
 const ZERO = { days: 0, hours: 0, minutes: 0, seconds: 0, complete: false };
 
@@ -18,7 +19,7 @@ function calculate(target) {
   };
 }
 
-export default function Countdown({ invitation }) {
+export default function Countdown({ invitation, active }) {
   const [remaining, setRemaining] = useState(null);
 
   useEffect(() => {
@@ -36,7 +37,8 @@ export default function Countdown({ invitation }) {
   ];
 
   return (
-    <section className="countdown-section section-shell" aria-labelledby="countdown-title">
+    <section className="countdown-section cinematic-section section-shell" aria-labelledby="countdown-title">
+      <VideoBackdrop src={invitation.sectionVideos.countdown} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
       <SectionReveal className="section-heading">
         <p className="section-kicker">A moment worth waiting for</p>
         <h2 id="countdown-title">{invitation.countdownHeading}</h2>

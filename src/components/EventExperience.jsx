@@ -18,9 +18,10 @@ import AddToCalendar from "./AddToCalendar";
 import RSVPForm from "./RSVPForm";
 import ClosingSection from "./ClosingSection";
 
-function InvitationMessage({ invitation }) {
+function InvitationMessage({ invitation, active }) {
   return (
-    <section className="invitation-message section-shell">
+    <section className="invitation-message cinematic-section section-shell" id="invitation-message">
+      <VideoBackdrop src={invitation.sectionVideos.invitation} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
       <SectionReveal className="section-heading message-heading">
         <div className="heritage-section-emblem" aria-hidden="true"><Sparkles size={17} /></div>
         <p className="section-kicker">Together with joyful hearts</p>
@@ -37,10 +38,11 @@ function InvitationMessage({ invitation }) {
   );
 }
 
-function Arrival({ arrival }) {
+function Arrival({ arrival, invitation, active }) {
   if (!arrival) return null;
   return (
-    <section className="arrival-section section-shell">
+    <section className="arrival-section cinematic-section section-shell">
+      <VideoBackdrop src={invitation.sectionVideos.arrival} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
       <SectionReveal className="arrival-card">
         <div className="heritage-card-crown" aria-hidden="true" />
         <p className="section-kicker">A joyful welcome</p>
@@ -54,8 +56,8 @@ function Arrival({ arrival }) {
 
 function Celebration({ invitation, active }) {
   return (
-    <section className="celebration-section" style={{ "--section-image": `url(${invitation.backgrounds.section})` }}>
-      <VideoBackdrop src={invitation.videos.feature} active={active} className="feature-video" />
+    <section className="celebration-section cinematic-section" style={{ "--section-image": `url(${invitation.backgrounds.section})` }}>
+      <VideoBackdrop src={invitation.videos.feature} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="none" className="feature-video" />
       <div className="celebration-scrim" />
       <SectionReveal className="celebration-content">
         <div className="heritage-section-emblem heritage-section-emblem-light" aria-hidden="true"><Heart size={15} fill="currentColor" /></div>
@@ -83,6 +85,7 @@ export default function EventExperience({ invitation, galleryImages }) {
   }, []);
 
   const finishOpening = useCallback(() => setOpeningFinished(true), []);
+  const contentActive = open && openingFinished;
 
   return (
     <main className={`event-page theme-${invitation.theme}`}>
@@ -90,17 +93,17 @@ export default function EventExperience({ invitation, galleryImages }) {
       <OpeningFilm invitation={invitation} visible={open && !openingFinished} onComplete={finishOpening} />
       <MusicController src={invitation.music} invitationOpen={open} />
       <FloatingAtmosphere />
-      <HeroSection invitation={invitation} active={open && openingFinished} />
-      <InvitationMessage invitation={invitation} />
-      <PhotoFeature invitation={invitation} />
-      {invitation.schedule && <EventSchedule items={invitation.schedule} />}
-      <Arrival arrival={invitation.arrival} />
-      <Countdown invitation={invitation} />
-      <Gallery images={galleryImages} />
-      <Celebration invitation={invitation} active={open && openingFinished} />
-      <LocationSection location={invitation.location} />
-      <RSVPForm invitation={invitation} />
-      <ClosingSection invitation={invitation} active={open && openingFinished} />
+      <HeroSection invitation={invitation} active={contentActive} />
+      <InvitationMessage invitation={invitation} active={contentActive} />
+      <PhotoFeature invitation={invitation} active={contentActive} />
+      {invitation.schedule && <EventSchedule items={invitation.schedule} invitation={invitation} active={contentActive} />}
+      <Arrival arrival={invitation.arrival} invitation={invitation} active={contentActive} />
+      <Countdown invitation={invitation} active={contentActive} />
+      <Gallery images={galleryImages} invitation={invitation} contentActive={contentActive} />
+      <Celebration invitation={invitation} active={contentActive} />
+      <LocationSection location={invitation.location} invitation={invitation} active={contentActive} />
+      <RSVPForm invitation={invitation} active={contentActive} />
+      <ClosingSection invitation={invitation} active={contentActive} />
     </main>
   );
 }

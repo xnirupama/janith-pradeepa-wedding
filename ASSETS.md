@@ -13,6 +13,13 @@ All media is optional during development. Replace files without changing their p
 | Wedding | Hero video | `public/assets/wedding/videos/wedding-hero-loop.mp4` |
 | Wedding | Floral/media video | `public/assets/wedding/videos/wedding-floral-loop.mp4` |
 | Wedding | Closing video | `public/assets/wedding/videos/wedding-closing-loop.mp4` |
+| Wedding | Optional invitation-section video | `public/assets/wedding/videos/wedding-invitation-loop.mp4` |
+| Wedding | Optional photo-section video | `public/assets/wedding/videos/wedding-photo-loop.mp4` |
+| Wedding | Optional schedule-section video | `public/assets/wedding/videos/wedding-schedule-loop.mp4` |
+| Wedding | Optional countdown-section video | `public/assets/wedding/videos/wedding-countdown-loop.mp4` |
+| Wedding | Optional gallery-section video | `public/assets/wedding/videos/wedding-gallery-loop.mp4` |
+| Wedding | Optional location-section video | `public/assets/wedding/videos/wedding-location-loop.mp4` |
+| Wedding | Optional RSVP-section video | `public/assets/wedding/videos/wedding-rsvp-loop.mp4` |
 | Wedding | Hero background | `public/assets/wedding/backgrounds/wedding-hero-bg.jpeg` |
 | Wedding | Section background | `public/assets/wedding/backgrounds/wedding-section-bg.jpeg` |
 | Wedding | Background music | `public/assets/wedding/music/wedding-theme.mp3` |
@@ -23,6 +30,13 @@ All media is optional during development. Replace files without changing their p
 | Homecoming | Hero video | `public/assets/homecoming/videos/homecoming-hero-loop.mp4` |
 | Homecoming | Glow/media video | `public/assets/homecoming/videos/homecoming-glow-loop.mp4` |
 | Homecoming | Closing video | `public/assets/homecoming/videos/homecoming-closing-loop.mp4` |
+| Homecoming | Optional invitation-section video | `public/assets/homecoming/videos/homecoming-invitation-loop.mp4` |
+| Homecoming | Optional photo-section video | `public/assets/homecoming/videos/homecoming-photo-loop.mp4` |
+| Homecoming | Optional arrival-section video | `public/assets/homecoming/videos/homecoming-arrival-loop.mp4` |
+| Homecoming | Optional countdown-section video | `public/assets/homecoming/videos/homecoming-countdown-loop.mp4` |
+| Homecoming | Optional gallery-section video | `public/assets/homecoming/videos/homecoming-gallery-loop.mp4` |
+| Homecoming | Optional location-section video | `public/assets/homecoming/videos/homecoming-location-loop.mp4` |
+| Homecoming | Optional RSVP-section video | `public/assets/homecoming/videos/homecoming-rsvp-loop.mp4` |
 | Homecoming | Hero background | `public/assets/homecoming/backgrounds/homecoming-hero-bg.jpeg` |
 | Homecoming | Section background | `public/assets/homecoming/backgrounds/homecoming-section-bg.jpeg` |
 | Homecoming | Background music | `public/assets/homecoming/music/homecoming-theme.mp3` |
@@ -31,3 +45,5 @@ All media is optional during development. Replace files without changing their p
 | Shared | Optional icons | `public/assets/shared/icons/` |
 
 For previews, 1200×630 is recommended. Keep videos compressed (ideally below roughly 8 MB each) and use sensible image dimensions.
+
+The optional section-specific videos are not required yet. `src/data/invitations.js` currently reuses the existing hero, feature, and closing loops so every section has working motion and a poster fallback. Replace the corresponding `sectionVideos` value after uploading a dedicated loop.

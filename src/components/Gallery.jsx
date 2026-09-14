@@ -5,8 +5,9 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import SectionReveal from "./SectionReveal";
+import VideoBackdrop from "./VideoBackdrop";
 
-export default function Gallery({ images }) {
+export default function Gallery({ images, invitation, contentActive }) {
   const [active, setActive] = useState(null);
   const touchStart = useRef(null);
 
@@ -32,7 +33,8 @@ export default function Gallery({ images }) {
   if (!images.length) return null;
 
   return (
-    <section className="gallery-section section-shell" aria-labelledby="gallery-title">
+    <section className="gallery-section cinematic-section section-shell" aria-labelledby="gallery-title">
+      <VideoBackdrop src={invitation.sectionVideos.gallery} poster={invitation.backgrounds.section} active={contentActive} tone={invitation.theme} overlay="strong" className="section-video" opacity={.68} />
       <SectionReveal className="section-heading">
         <p className="section-kicker">A few favourite moments</p>
         <h2 id="gallery-title">Our Gallery</h2>

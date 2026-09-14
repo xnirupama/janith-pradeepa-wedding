@@ -4,10 +4,11 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, LockKeyhole, MessageSquareText, Minus, Phone, Plus, Send, Sparkles, UserRound, UsersRound } from "lucide-react";
 import SectionReveal from "./SectionReveal";
+import VideoBackdrop from "./VideoBackdrop";
 
 const initial = { fullName: "", phoneNumber: "", attending: "", numberOfGuests: "1", message: "" };
 
-export default function RSVPForm({ invitation }) {
+export default function RSVPForm({ invitation, active }) {
   const [form, setForm] = useState(initial);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
@@ -66,7 +67,8 @@ export default function RSVPForm({ invitation }) {
   };
 
   return (
-    <section className="rsvp-section section-shell" aria-labelledby="rsvp-title">
+    <section className="rsvp-section cinematic-section section-shell" aria-labelledby="rsvp-title">
+      <VideoBackdrop src={invitation.sectionVideos.rsvp} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" opacity={.62} />
       <SectionReveal className="section-heading">
         <div className="rsvp-title-seal" aria-hidden="true"><Sparkles size={18} /></div>
         <p className="section-kicker">Kindly Reply</p>

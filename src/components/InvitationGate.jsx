@@ -4,9 +4,20 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Heart } from "lucide-react";
 import WeddingGateArtwork from "./WeddingGateArtwork";
 
+const weddingCopyVariants = {
+  hidden: {},
+  visible: { transition: { delayChildren: .38, staggerChildren: .18 } },
+};
+
+const weddingItemVariants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: .62, ease: [0.22, 1, 0.36, 1] } },
+};
+
 export default function InvitationGate({ invitation, open, onOpen }) {
   const reduceMotion = useReducedMotion();
   const isWedding = invitation.theme === "wedding";
+  const [firstName, secondName] = invitation.couple.split(" & ");
 
   return (
     <AnimatePresence>
@@ -44,21 +55,30 @@ export default function InvitationGate({ invitation, open, onOpen }) {
             <span className="gate-corner gate-corner-tr" aria-hidden="true" />
             <span className="gate-corner gate-corner-bl" aria-hidden="true" />
             <span className="gate-corner gate-corner-br" aria-hidden="true" />
-            <div className={isWedding ? "wedding-gate-copy" : "gate-copy"}>
-              <p className="blessing">{invitation.blessing}</p>
-              <p className="sinhala-blessing" lang="si">{invitation.sinhalaBlessing}</p>
-              {isWedding ? (
-                <>
-                  <p className="wedding-gate-eyebrow">{invitation.eyebrow}</p>
-                  <h1 className="couple-signature"><span>Janith</span><i>&amp;</i><span>Pradeepa</span></h1>
-                  <span className="wedding-gate-divider"><i /><Heart size={11} fill="currentColor" /><i /></span>
-                  <div className="wedding-gate-date" aria-label={invitation.date}>
-                    <span>{invitation.dateParts.weekday}</span>
-                    <strong>{invitation.dateParts.day}</strong>
-                    <span>{invitation.dateParts.month} {invitation.dateParts.year}</span>
-                  </div>
-                </>
-              ) : (
+            {isWedding ? (
+              <motion.div
+                className="wedding-gate-copy"
+                variants={weddingCopyVariants}
+                initial={reduceMotion ? false : "hidden"}
+                animate="visible"
+              >
+                <motion.p className="blessing" variants={weddingItemVariants}>{invitation.blessing}</motion.p>
+                <motion.p className="sinhala-blessing" lang="si" variants={weddingItemVariants}>{invitation.sinhalaBlessing}</motion.p>
+                <motion.p className="wedding-gate-eyebrow" variants={weddingItemVariants}>{invitation.eyebrow}</motion.p>
+                <motion.h1 className="couple-signature" variants={weddingItemVariants}>
+                  <span>{firstName}</span><i>&amp;</i><span>{secondName}</span>
+                </motion.h1>
+                <motion.span className="wedding-gate-divider" variants={weddingItemVariants}><i /><Heart size={11} fill="currentColor" /><i /></motion.span>
+                <motion.div className="wedding-gate-date" aria-label={invitation.date} variants={weddingItemVariants}>
+                  <span>{invitation.dateParts.weekday}</span>
+                  <strong>{invitation.dateParts.day}</strong>
+                  <span>{invitation.dateParts.month} {invitation.dateParts.year}</span>
+                </motion.div>
+              </motion.div>
+            ) : (
+              <div className="gate-copy">
+                <p className="blessing">{invitation.blessing}</p>
+                <p className="sinhala-blessing" lang="si">{invitation.sinhalaBlessing}</p>
                 <>
                   <span className="ornament"><i /><Heart size={14} fill="currentColor" /><i /></span>
                   <h1 className="couple-signature">{invitation.couple}</h1>
@@ -69,14 +89,17 @@ export default function InvitationGate({ invitation, open, onOpen }) {
                     <span>{invitation.dateParts.month} · {invitation.dateParts.year}</span>
                   </div>
                 </>
-              )}
-            </div>
+              </div>
+            )}
             <motion.button
               type="button"
               className={`primary-button gate-button ${isWedding ? "wedding-gate-button" : ""}`}
               onClick={onOpen}
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.98 }}
+              initial={isWedding && !reduceMotion ? { opacity: 0, y: 10 } : false}
+              animate={{ opacity: 1, y: 0 }}
+              transition={isWedding && !reduceMotion ? { duration: .62, delay: 2.05, ease: [0.22, 1, 0.36, 1] } : undefined}
+              whileHover={{ y: -2, transition: { duration: .2, delay: 0 } }}
+              whileTap={{ scale: .98, transition: { duration: .12, delay: 0 } }}
             >
               <span>Open Invitation</span>
               <Heart size={16} aria-hidden="true" />

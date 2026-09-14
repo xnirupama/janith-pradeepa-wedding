@@ -47,6 +47,15 @@ export const invitations = {
       feature: "/assets/wedding/videos/wedding-floral-loop.mp4",
       closing: "/assets/wedding/videos/wedding-closing-loop.mp4",
     },
+    sectionVideos: {
+      invitation: "/assets/wedding/videos/wedding-hero-loop.mp4",
+      photo: "/assets/wedding/videos/wedding-floral-loop.mp4",
+      schedule: "/assets/wedding/videos/wedding-closing-loop.mp4",
+      countdown: "/assets/wedding/videos/wedding-floral-loop.mp4",
+      gallery: "/assets/wedding/videos/wedding-hero-loop.mp4",
+      location: "/assets/wedding/videos/wedding-closing-loop.mp4",
+      rsvp: "/assets/wedding/videos/wedding-floral-loop.mp4",
+    },
     backgrounds: {
       hero: "/assets/wedding/backgrounds/wedding-hero-bg.jpeg",
       section: "/assets/wedding/backgrounds/wedding-section-bg.jpeg",
@@ -111,6 +120,15 @@ export const invitations = {
       hero: "/assets/homecoming/videos/homecoming-hero-loop.mp4",
       feature: "/assets/homecoming/videos/homecoming-glow-loop.mp4",
       closing: "/assets/homecoming/videos/homecoming-closing-loop.mp4",
+    },
+    sectionVideos: {
+      invitation: "/assets/homecoming/videos/homecoming-glow-loop.mp4",
+      photo: "/assets/homecoming/videos/homecoming-hero-loop.mp4",
+      arrival: "/assets/homecoming/videos/homecoming-closing-loop.mp4",
+      countdown: "/assets/homecoming/videos/homecoming-glow-loop.mp4",
+      gallery: "/assets/homecoming/videos/homecoming-hero-loop.mp4",
+      location: "/assets/homecoming/videos/homecoming-closing-loop.mp4",
+      rsvp: "/assets/homecoming/videos/homecoming-glow-loop.mp4",
     },
     backgrounds: {
       hero: "/assets/homecoming/backgrounds/homecoming-hero-bg.jpeg",

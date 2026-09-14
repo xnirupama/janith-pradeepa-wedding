@@ -9,7 +9,7 @@ export default function ClosingSection({ invitation, active }) {
 
   return (
     <section className="closing-section">
-      <VideoBackdrop src={invitation.videos.closing} active={active} className="closing-video" />
+      <VideoBackdrop src={invitation.videos.closing} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="none" className="closing-video" />
       <div className="closing-scrim" />
       <SectionReveal className="closing-content">
         {invitation.closingLead && <p className="closing-lead">{invitation.closingLead}</p>}
