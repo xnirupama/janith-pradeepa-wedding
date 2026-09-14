@@ -5,6 +5,7 @@ All media is optional during development. Replace files without changing their p
 | Event | Purpose | Exact path |
 |---|---|---|
 | Wedding | Hero couple photo | `public/assets/wedding/photos/wedding-hero.jpg` |
+| Wedding | Featured couple portrait | `public/assets/wedding/photos/wedding-couple-feature.jpeg` |
 | Wedding | Gallery | `public/assets/wedding/gallery/wedding-gallery-01.jpg` (continue numerically) |
 | Wedding | Couple opening film | `public/assets/wedding/videos/wedding-opening-couple.mp4` |
 | Wedding | Gate mandala ornament | `public/assets/wedding/decor/wedding-gate-mandala.webp` |
@@ -12,6 +13,9 @@ All media is optional during development. Replace files without changing their p
 | Wedding | Gate ceremonial procession | `public/assets/wedding/decor/wedding-gate-procession.webp` |
 | Wedding | Hero video | `public/assets/wedding/videos/wedding-hero-loop.mp4` |
 | Wedding | Floral/media video | `public/assets/wedding/videos/wedding-floral-loop.mp4` |
+| Wedding | Floral frame section video | `public/assets/wedding/videos/wedding-floral-frame-loop.mp4` |
+| Wedding | Falling petals section video | `public/assets/wedding/videos/wedding-petals-loop.mp4` |
+| Wedding | Soft light section video | `public/assets/wedding/videos/wedding-soft-light-loop.mp4` |
 | Wedding | Closing video | `public/assets/wedding/videos/wedding-closing-loop.mp4` |
 | Wedding | Optional invitation-section video | `public/assets/wedding/videos/wedding-invitation-loop.mp4` |
 | Wedding | Optional photo-section video | `public/assets/wedding/videos/wedding-photo-loop.mp4` |
@@ -25,10 +29,14 @@ All media is optional during development. Replace files without changing their p
 | Wedding | Background music | `public/assets/wedding/music/wedding-theme.mp3` |
 | Wedding | Social preview | `public/assets/wedding/share/wedding-og.jpg` |
 | Homecoming | Hero couple photo | `public/assets/homecoming/photos/homecoming-hero.jpg` |
+| Homecoming | Featured couple portrait | `public/assets/homecoming/photos/homecoming-couple-feature.jpeg` |
 | Homecoming | Gallery | `public/assets/homecoming/gallery/homecoming-gallery-01.jpg` (continue numerically) |
 | Homecoming | Couple opening film | `public/assets/homecoming/videos/homecoming-opening-couple.mp4` |
 | Homecoming | Hero video | `public/assets/homecoming/videos/homecoming-hero-loop.mp4` |
 | Homecoming | Glow/media video | `public/assets/homecoming/videos/homecoming-glow-loop.mp4` |
+| Homecoming | Floral frame section video | `public/assets/homecoming/videos/homecoming-floral-frame-loop.mp4` |
+| Homecoming | Falling petals section video | `public/assets/homecoming/videos/homecoming-petals-loop.mp4` |
+| Homecoming | Butterfly countdown video | `public/assets/homecoming/videos/homecoming-countdown-butterfly-loop.mp4` |
 | Homecoming | Closing video | `public/assets/homecoming/videos/homecoming-closing-loop.mp4` |
 | Homecoming | Optional invitation-section video | `public/assets/homecoming/videos/homecoming-invitation-loop.mp4` |
 | Homecoming | Optional photo-section video | `public/assets/homecoming/videos/homecoming-photo-loop.mp4` |
@@ -46,4 +54,4 @@ All media is optional during development. Replace files without changing their p
 
 For previews, 1200×630 is recommended. Keep videos compressed (ideally below roughly 8 MB each) and use sensible image dimensions.
 
-The optional section-specific videos are not required yet. `src/data/invitations.js` currently reuses the existing hero, feature, and closing loops so every section has working motion and a poster fallback. Replace the corresponding `sectionVideos` value after uploading a dedicated loop.
+The uploaded section-specific videos are mapped centrally in `src/data/invitations.js`. Each section falls back to the event's existing feature loop if its dedicated video cannot load, and then to the static section poster if video playback is unavailable.

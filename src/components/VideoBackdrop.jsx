@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 export default function VideoBackdrop({
   src,
+  fallbackSrc,
   poster,
   className = "",
   active = true,
@@ -17,6 +18,8 @@ export default function VideoBackdrop({
   const [failed, setFailed] = useState(false);
   const [nearby, setNearby] = useState(false);
   const [staticOnly, setStaticOnly] = useState(true);
+  const [useFallback, setUseFallback] = useState(false);
+  const videoSrc = useFallback ? fallbackSrc : src;
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -34,7 +37,7 @@ export default function VideoBackdrop({
 
   useEffect(() => {
     const element = containerRef.current;
-    if (!element || !active || failed || staticOnly || !src) return;
+    if (!element || !active || failed || staticOnly || !videoSrc) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => setNearby(entry.isIntersecting),
@@ -42,16 +45,21 @@ export default function VideoBackdrop({
     );
     observer.observe(element);
     return () => observer.disconnect();
-  }, [active, failed, src, staticOnly]);
+  }, [active, failed, staticOnly, videoSrc]);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
     if (nearby && active && !staticOnly) video.play().catch(() => {});
     else video.pause();
-  }, [active, nearby, staticOnly]);
+  }, [active, nearby, staticOnly, videoSrc]);
 
-  const shouldMountVideo = Boolean(src && active && nearby && !failed && !staticOnly);
+  const shouldMountVideo = Boolean(videoSrc && active && nearby && !failed && !staticOnly);
+
+  const handleVideoError = () => {
+    if (!useFallback && fallbackSrc && fallbackSrc !== src) setUseFallback(true);
+    else setFailed(true);
+  };
 
   return (
     <div
@@ -66,14 +74,15 @@ export default function VideoBackdrop({
     >
       {shouldMountVideo && (
         <video
+          key={videoSrc}
           ref={videoRef}
-          src={src}
+          src={videoSrc}
           poster={poster}
           muted
           loop
           playsInline
           preload="metadata"
-          onError={() => setFailed(true)}
+          onError={handleVideoError}
         />
       )}
     </div>

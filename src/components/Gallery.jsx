@@ -34,7 +34,7 @@ export default function Gallery({ images, invitation, contentActive }) {
 
   return (
     <section className="gallery-section cinematic-section section-shell" aria-labelledby="gallery-title">
-      <VideoBackdrop src={invitation.sectionVideos.gallery} poster={invitation.backgrounds.section} active={contentActive} tone={invitation.theme} overlay="strong" className="section-video" opacity={.68} />
+      <VideoBackdrop src={invitation.sectionVideos.gallery} fallbackSrc={invitation.videos.feature} poster={invitation.backgrounds.section} active={contentActive} tone={invitation.theme} overlay="strong" className="section-video" opacity={.68} />
       <SectionReveal className="section-heading">
         <p className="section-kicker">A few favourite moments</p>
         <h2 id="gallery-title">Our Gallery</h2>

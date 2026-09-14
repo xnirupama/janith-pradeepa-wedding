@@ -21,7 +21,7 @@ import ClosingSection from "./ClosingSection";
 function InvitationMessage({ invitation, active }) {
   return (
     <section className="invitation-message cinematic-section section-shell" id="invitation-message">
-      <VideoBackdrop src={invitation.sectionVideos.invitation} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
+      <VideoBackdrop src={invitation.sectionVideos.invitation} fallbackSrc={invitation.videos.feature} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
       <SectionReveal className="section-heading message-heading">
         <div className="heritage-section-emblem" aria-hidden="true"><Sparkles size={17} /></div>
         <p className="section-kicker">Together with joyful hearts</p>
@@ -42,7 +42,7 @@ function Arrival({ arrival, invitation, active }) {
   if (!arrival) return null;
   return (
     <section className="arrival-section cinematic-section section-shell">
-      <VideoBackdrop src={invitation.sectionVideos.arrival} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
+      <VideoBackdrop src={invitation.sectionVideos.arrival} fallbackSrc={invitation.videos.feature} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
       <SectionReveal className="arrival-card">
         <div className="heritage-card-crown" aria-hidden="true" />
         <p className="section-kicker">A joyful welcome</p>

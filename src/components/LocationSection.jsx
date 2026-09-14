@@ -7,7 +7,7 @@ export default function LocationSection({ location, invitation, active }) {
 
   return (
     <section className="location-section cinematic-section section-shell" aria-labelledby="location-title">
-      <VideoBackdrop src={invitation.sectionVideos.location} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
+      <VideoBackdrop src={invitation.sectionVideos.location} fallbackSrc={invitation.videos.feature} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
       <SectionReveal className="location-card">
         <div className="location-icon"><MapPin size={28} aria-hidden="true" /></div>
         <p className="section-kicker">Join us at</p>
