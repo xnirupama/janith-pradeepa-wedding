@@ -31,7 +31,17 @@ export async function POST(request) {
   }
 
   const scriptUrl = process.env.RSVP_GOOGLE_SCRIPT_URL;
-  if (!scriptUrl) {
+  let configuredUrl;
+  try {
+    configuredUrl = new URL(scriptUrl);
+  } catch {
+    configuredUrl = null;
+  }
+  const isConfigured = configuredUrl
+    && configuredUrl.protocol === "https:"
+    && configuredUrl.hostname === "script.google.com"
+    && configuredUrl.pathname.endsWith("/exec");
+  if (!isConfigured) {
     return NextResponse.json(
       { success: false, error: "RSVP submissions are not configured yet. Please contact the couple directly." },
       { status: 503 },
@@ -41,7 +51,7 @@ export async function POST(request) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 10000);
   try {
-    const response = await fetch(scriptUrl, {
+    const response = await fetch(configuredUrl.toString(), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -50,7 +60,11 @@ export async function POST(request) {
     });
     const result = await response.json().catch(() => null);
     if (!response.ok || !result?.success) throw new Error("Upstream RSVP service rejected the request.");
-    return NextResponse.json({ success: true, message: "Your RSVP has been received with love. Thank you!" });
+    return NextResponse.json({
+      success: true,
+      updated: result.updated === true,
+      notificationSent: result.notificationSent === true,
+    });
   } catch {
     return NextResponse.json({ success: false, error: "We could not save your RSVP just now. Please try again in a moment." }, { status: 502 });
   } finally {

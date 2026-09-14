@@ -43,9 +43,10 @@ export default function RSVPForm({ invitation, active }) {
 
   const validate = () => {
     const next = {};
-    if (!form.fullName.trim()) next.fullName = "Please enter your full name.";
-    if (!form.phoneNumber.trim()) next.phoneNumber = "Please enter your phone number.";
+    if (form.fullName.trim().length < 2) next.fullName = "Please enter your full name.";
+    if (!/^[+()\-\s\d]{7,40}$/.test(form.phoneNumber.trim())) next.phoneNumber = "Please enter a valid phone number.";
     if (!form.attending) next.attending = "Please tell us whether you can attend.";
+    if (form.message.trim().length > 800) next.message = "Please keep your message under 800 characters.";
     if (form.attending === "yes" && (!Number.isInteger(Number(form.numberOfGuests)) || Number(form.numberOfGuests) < 1 || Number(form.numberOfGuests) > 20)) {
       next.numberOfGuests = "Please enter a guest count from 1 to 20.";
     }
@@ -65,10 +66,19 @@ export default function RSVPForm({ invitation, active }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, event: invitation.slug, numberOfGuests: form.attending === "no" ? 0 : Number(form.numberOfGuests) }),
       });
-      const result = await response.json();
-      if (!response.ok) throw new Error(result.error || "We could not send your RSVP. Please try again.");
+      const result = await response.json().catch(() => null);
+      if (!response.ok) {
+        if (result?.errors) setErrors(result.errors);
+        throw new Error(result?.error || "We couldn't save your RSVP just now. Please try again in a moment.");
+      }
       setStatus("success");
-      setServerMessage(result.message);
+      setServerMessage(
+        result.updated
+          ? "Your RSVP has been updated successfully."
+          : form.attending === "yes"
+            ? "Your RSVP has been received. We are delighted to celebrate with you."
+            : "Your response has been received. We truly appreciate you letting us know.",
+      );
       setCooldown(SUBMISSION_COOLDOWN);
     } catch (error) {
       setStatus("error");
@@ -96,9 +106,9 @@ export default function RSVPForm({ invitation, active }) {
             <motion.div className="rsvp-success" key="success" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }}>
               <span className="rsvp-success-flourish" aria-hidden="true">{Array.from({ length: 5 }, (_, index) => <i key={index} style={{ "--flourish-index": index }} />)}</span>
               <span><Check size={30} /></span>
-              <h3>Thank you, {form.fullName.split(" ")[0]}!</h3>
+              <h3>Thank you, {form.fullName.trim().split(/\s+/)[0]}{form.attending === "no" ? "." : "!"}</h3>
               <p>{serverMessage || "Your RSVP has been received. We are so happy to share this celebration with you."}</p>
-              <button type="button" className="text-button" onClick={() => { setForm(initial); setStatus("idle"); }}>Submit another response</button>
+              <button type="button" className="text-button" onClick={() => { setForm(initial); setErrors({}); setServerMessage(""); setCooldown(0); setStatus("idle"); }}>Submit another response</button>
             </motion.div>
           ) : (
             <motion.form key="form" onSubmit={submit} noValidate initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .55, ease: [0.22, 1, 0.36, 1] }}>
@@ -142,7 +152,8 @@ export default function RSVPForm({ invitation, active }) {
               </div>
               <div className="form-field message-field">
                 <label htmlFor={`${invitation.slug}-message`}><span><MessageSquareText size={15} /> A Note for the Couple</span><em>optional</em></label>
-                <textarea id={`${invitation.slug}-message`} name="message" rows="4" placeholder="Share your wishes…" value={form.message} onChange={update} />
+                <textarea id={`${invitation.slug}-message`} name="message" rows="4" maxLength="800" placeholder="Share your wishes…" value={form.message} onChange={update} aria-invalid={!!errors.message} aria-describedby={errors.message ? `${invitation.slug}-message-error` : undefined} />
+                {errors.message && <small id={`${invitation.slug}-message-error`} className="field-error">{errors.message}</small>}
               </div>
               {status === "error" && <p className="form-status" role="alert">{serverMessage}</p>}
               <button className="primary-button submit-button" type="submit" disabled={status === "sending" || cooldown > 0}>
