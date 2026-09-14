@@ -49,9 +49,29 @@ All media is optional during development. Replace files without changing their p
 | Homecoming | Section background | `public/assets/homecoming/backgrounds/homecoming-section-bg.jpeg` |
 | Homecoming | Background music | `public/assets/homecoming/music/homecoming-theme.mp3` |
 | Homecoming | Social preview | `public/assets/homecoming/share/homecoming-og.jpg` |
+| Wedding | Hero video poster | `public/assets/wedding/posters/wedding-hero-poster.webp` |
+| Wedding | Invitation video poster | `public/assets/wedding/posters/wedding-invitation-poster.webp` |
+| Wedding | Feature video poster | `public/assets/wedding/posters/wedding-feature-poster.webp` |
+| Wedding | Schedule video poster | `public/assets/wedding/posters/wedding-schedule-poster.webp` |
+| Wedding | Countdown video poster | `public/assets/wedding/posters/wedding-countdown-poster.webp` |
+| Wedding | Gallery video poster | `public/assets/wedding/posters/wedding-gallery-poster.webp` |
+| Wedding | Location video poster | `public/assets/wedding/posters/wedding-location-poster.webp` |
+| Wedding | RSVP video poster | `public/assets/wedding/posters/wedding-rsvp-poster.webp` |
+| Wedding | Closing video poster | `public/assets/wedding/posters/wedding-closing-poster.webp` |
+| Homecoming | Hero video poster | `public/assets/homecoming/posters/homecoming-hero-poster.webp` |
+| Homecoming | Invitation video poster | `public/assets/homecoming/posters/homecoming-invitation-poster.webp` |
+| Homecoming | Feature video poster | `public/assets/homecoming/posters/homecoming-feature-poster.webp` |
+| Homecoming | Arrival video poster | `public/assets/homecoming/posters/homecoming-arrival-poster.webp` |
+| Homecoming | Countdown video poster | `public/assets/homecoming/posters/homecoming-countdown-poster.webp` |
+| Homecoming | Gallery video poster | `public/assets/homecoming/posters/homecoming-gallery-poster.webp` |
+| Homecoming | Location video poster | `public/assets/homecoming/posters/homecoming-location-poster.webp` |
+| Homecoming | RSVP video poster | `public/assets/homecoming/posters/homecoming-rsvp-poster.webp` |
+| Homecoming | Closing video poster | `public/assets/homecoming/posters/homecoming-closing-poster.webp` |
 | Shared | Optional placeholders | `public/assets/shared/placeholders/` |
 | Shared | Optional icons | `public/assets/shared/icons/` |
 
 For previews, 1200×630 is recommended. Keep videos compressed (ideally below roughly 8 MB each) and use sensible image dimensions.
 
 The uploaded section-specific videos are mapped centrally in `src/data/invitations.js`. Each section falls back to the event's existing feature loop if its dedicated video cannot load, and then to the static section poster if video playback is unavailable.
+
+Dedicated WebP posters are optional. The invitation first paints the existing event background, checks the dedicated poster in the browser, and only swaps it in after it loads successfully. Missing poster files therefore do not create a black flash, broken block, or build failure.

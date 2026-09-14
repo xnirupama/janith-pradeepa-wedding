@@ -17,7 +17,7 @@ export default function PhotoFeature({ invitation, active }) {
 
   return (
     <section ref={sectionRef} className="photo-feature cinematic-section section-shell" id="our-story">
-      <VideoBackdrop src={invitation.sectionVideos.feature} fallbackSrc={invitation.videos.feature} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" position="center" opacity={.78} />
+      <VideoBackdrop src={invitation.sectionVideos.feature} fallbackSrc={invitation.videos.feature} poster={invitation.videoPosters?.feature} fallbackPoster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" position="center" opacity={.78} />
       <SectionReveal className="featured-couple-layout">
         <div className="featured-couple-copy">
           <p className="section-kicker">A portrait of our story</p>

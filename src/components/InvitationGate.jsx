@@ -25,7 +25,7 @@ export default function InvitationGate({ invitation, open, onOpen }) {
         <motion.div
           className={`invitation-gate invitation-gate--${invitation.theme}`}
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          exit={{ opacity: 0, pointerEvents: "none" }}
           transition={{ duration: reduceMotion ? 0.2 : 1.05, delay: reduceMotion ? 0 : 0.5 }}
         >
           <motion.div

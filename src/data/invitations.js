@@ -61,6 +61,17 @@ export const invitations = {
       hero: "/assets/wedding/backgrounds/wedding-hero-bg.jpeg",
       section: "/assets/wedding/backgrounds/wedding-section-bg.jpeg",
     },
+    videoPosters: {
+      hero: "/assets/wedding/posters/wedding-hero-poster.webp",
+      invitation: "/assets/wedding/posters/wedding-invitation-poster.webp",
+      feature: "/assets/wedding/posters/wedding-feature-poster.webp",
+      schedule: "/assets/wedding/posters/wedding-schedule-poster.webp",
+      countdown: "/assets/wedding/posters/wedding-countdown-poster.webp",
+      gallery: "/assets/wedding/posters/wedding-gallery-poster.webp",
+      location: "/assets/wedding/posters/wedding-location-poster.webp",
+      rsvp: "/assets/wedding/posters/wedding-rsvp-poster.webp",
+      closing: "/assets/wedding/posters/wedding-closing-poster.webp",
+    },
     gateArtwork: {
       mandala: "/assets/wedding/decor/wedding-gate-mandala.webp",
       lotus: "/assets/wedding/decor/wedding-gate-lotus.webp",
@@ -135,6 +146,17 @@ export const invitations = {
     backgrounds: {
       hero: "/assets/homecoming/backgrounds/homecoming-hero-bg.jpeg",
       section: "/assets/homecoming/backgrounds/homecoming-section-bg.jpeg",
+    },
+    videoPosters: {
+      hero: "/assets/homecoming/posters/homecoming-hero-poster.webp",
+      invitation: "/assets/homecoming/posters/homecoming-invitation-poster.webp",
+      feature: "/assets/homecoming/posters/homecoming-feature-poster.webp",
+      arrival: "/assets/homecoming/posters/homecoming-arrival-poster.webp",
+      countdown: "/assets/homecoming/posters/homecoming-countdown-poster.webp",
+      gallery: "/assets/homecoming/posters/homecoming-gallery-poster.webp",
+      location: "/assets/homecoming/posters/homecoming-location-poster.webp",
+      rsvp: "/assets/homecoming/posters/homecoming-rsvp-poster.webp",
+      closing: "/assets/homecoming/posters/homecoming-closing-poster.webp",
     },
     location: {
       enabled: true,

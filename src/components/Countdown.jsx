@@ -38,7 +38,7 @@ export default function Countdown({ invitation, active }) {
 
   return (
     <section className="countdown-section cinematic-section section-shell" aria-labelledby="countdown-title">
-      <VideoBackdrop src={invitation.sectionVideos.countdown} fallbackSrc={invitation.videos.feature} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
+      <VideoBackdrop src={invitation.sectionVideos.countdown} fallbackSrc={invitation.videos.feature} poster={invitation.videoPosters?.countdown} fallbackPoster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
       <SectionReveal className="section-heading">
         <p className="section-kicker">A moment worth waiting for</p>
         <h2 id="countdown-title">{invitation.countdownHeading}</h2>

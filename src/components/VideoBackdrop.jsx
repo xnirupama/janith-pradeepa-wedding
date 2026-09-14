@@ -6,6 +6,7 @@ export default function VideoBackdrop({
   src,
   fallbackSrc,
   poster,
+  fallbackPoster,
   className = "",
   active = true,
   tone = "wedding",
@@ -17,15 +18,25 @@ export default function VideoBackdrop({
   const videoRef = useRef(null);
   const [failed, setFailed] = useState(false);
   const [nearby, setNearby] = useState(false);
-  const [staticOnly, setStaticOnly] = useState(true);
+  const [loadProfile, setLoadProfile] = useState("static");
   const [useFallback, setUseFallback] = useState(false);
   const [ready, setReady] = useState(false);
+  const [posterSrc, setPosterSrc] = useState(fallbackPoster || poster || "");
   const videoSrc = useFallback ? fallbackSrc : src;
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    const updatePreference = () => setStaticOnly(reduceMotion.matches || Boolean(connection?.saveData));
+    const updatePreference = () => {
+      const effectiveType = connection?.effectiveType;
+      if (reduceMotion.matches || connection?.saveData || effectiveType === "slow-2g" || effectiveType === "2g") {
+        setLoadProfile("static");
+      } else if (effectiveType === "3g") {
+        setLoadProfile("conservative");
+      } else {
+        setLoadProfile("normal");
+      }
+    };
 
     updatePreference();
     reduceMotion.addEventListener?.("change", updatePreference);
@@ -37,28 +48,39 @@ export default function VideoBackdrop({
   }, []);
 
   useEffect(() => {
+    const safePoster = fallbackPoster || poster || "";
+    if (!nearby || loadProfile === "static" || !poster || poster === safePoster) return;
+    let cancelled = false;
+    const preload = new window.Image();
+    preload.onload = () => { if (!cancelled) setPosterSrc(poster); };
+    preload.onerror = () => { if (!cancelled) setPosterSrc(safePoster); };
+    preload.src = poster;
+    return () => { cancelled = true; };
+  }, [fallbackPoster, loadProfile, nearby, poster]);
+
+  useEffect(() => {
     const element = containerRef.current;
-    if (!element || !active || failed || staticOnly || !videoSrc) return;
+    if (!element || !active || failed || loadProfile === "static" || !videoSrc) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         setNearby(entry.isIntersecting);
         if (!entry.isIntersecting) setReady(false);
       },
-      { rootMargin: "200px 0px", threshold: 0.01 },
+      { rootMargin: loadProfile === "conservative" ? "150px 0px" : "220px 0px", threshold: 0.01 },
     );
     observer.observe(element);
     return () => observer.disconnect();
-  }, [active, failed, staticOnly, videoSrc]);
+  }, [active, failed, loadProfile, videoSrc]);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    if (nearby && active && !staticOnly) video.play().catch(() => {});
+    if (nearby && active && loadProfile !== "static") video.play().catch(() => {});
     else video.pause();
-  }, [active, nearby, staticOnly, videoSrc]);
+  }, [active, loadProfile, nearby, videoSrc]);
 
-  const shouldMountVideo = Boolean(videoSrc && active && nearby && !failed && !staticOnly);
+  const shouldMountVideo = Boolean(videoSrc && active && nearby && !failed && loadProfile !== "static");
 
   const handleVideoError = () => {
     setReady(false);
@@ -69,9 +91,9 @@ export default function VideoBackdrop({
   return (
     <div
       ref={containerRef}
-      className={`video-backdrop video-backdrop--${tone} video-backdrop--${overlay} ${className} ${failed || staticOnly ? "video-fallback" : ""}`}
+      className={`video-backdrop video-backdrop--${tone} video-backdrop--${overlay} ${className} ${failed || loadProfile === "static" ? "video-fallback" : ""}`}
       style={{
-        "--video-poster": poster ? `url(${poster})` : "none",
+        "--video-poster": posterSrc ? `url("${posterSrc}")` : "none",
         "--video-position": position,
         "--video-opacity": opacity,
       }}
@@ -82,7 +104,7 @@ export default function VideoBackdrop({
           key={videoSrc}
           ref={videoRef}
           src={videoSrc}
-          poster={poster}
+          poster={posterSrc || undefined}
           muted
           loop
           playsInline

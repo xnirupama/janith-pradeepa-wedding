@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { CalendarDays, Heart, Home, Mail, MapPin } from "lucide-react";
 
 const SECTION_IDS = ["top", "our-story", "event-details", "location", "rsvp"];
@@ -9,6 +9,8 @@ const SECTION_IDS = ["top", "our-story", "event-details", "location", "rsvp"];
 export default function SectionNavigator({ invitation }) {
   const [activeSection, setActiveSection] = useState("top");
   const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll();
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 135, damping: 26, mass: .24 });
   const navigatingRef = useRef(false);
   const navigationTimerRef = useRef(null);
   const eventLabel = invitation.arrival ? "Arrival" : "Schedule";
@@ -39,7 +41,8 @@ export default function SectionNavigator({ invitation }) {
 
     navigatingRef.current = true;
     setActiveSection(id);
-    target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    const targetTop = Math.max(0, target.getBoundingClientRect().top + window.scrollY - 16);
+    window.scrollTo({ top: targetTop, behavior: reduceMotion ? "auto" : "smooth" });
     window.history.replaceState(null, "", `#${id}`);
 
     window.removeEventListener("scrollend", finishNavigation);
@@ -76,6 +79,9 @@ export default function SectionNavigator({ invitation }) {
 
   return (
     <nav className="section-navigator" aria-label="Invitation sections">
+      <span className="section-progress-track" aria-hidden="true">
+        <motion.span className="section-progress-fill" style={{ scaleX: reduceMotion ? scrollYProgress : smoothProgress }} />
+      </span>
       <div className="section-navigator-inner">
         {links.map(({ id, label, icon: Icon }) => (
           <a
@@ -87,7 +93,8 @@ export default function SectionNavigator({ invitation }) {
             data-label={label}
             onClick={(event) => handleNavigate(event, id)}
           >
-            <Icon size={21} strokeWidth={1.8} aria-hidden="true" />
+            <span className="section-nav-icon"><Icon size={21} strokeWidth={1.8} aria-hidden="true" /></span>
+            <span className="section-nav-label" aria-hidden="true">{label}</span>
           </a>
         ))}
       </div>

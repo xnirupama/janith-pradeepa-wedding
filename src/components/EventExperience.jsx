@@ -22,7 +22,7 @@ import SectionNavigator from "./SectionNavigator";
 function InvitationMessage({ invitation, active }) {
   return (
     <section className="invitation-message cinematic-section section-shell" id="invitation-message">
-      <VideoBackdrop src={invitation.sectionVideos.invitation} fallbackSrc={invitation.videos.feature} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
+      <VideoBackdrop src={invitation.sectionVideos.invitation} fallbackSrc={invitation.videos.feature} poster={invitation.videoPosters?.invitation} fallbackPoster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
       <SectionReveal className="section-heading message-heading">
         <div className="heritage-section-emblem" aria-hidden="true"><Sparkles size={17} /></div>
         <p className="section-kicker">Together with joyful hearts</p>
@@ -43,12 +43,16 @@ function Arrival({ arrival, invitation, active }) {
   if (!arrival) return null;
   return (
     <section className="arrival-section cinematic-section section-shell" id="event-details">
-      <VideoBackdrop src={invitation.sectionVideos.arrival} fallbackSrc={invitation.videos.feature} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
+      <VideoBackdrop src={invitation.sectionVideos.arrival} fallbackSrc={invitation.videos.feature} poster={invitation.videoPosters?.arrival} fallbackPoster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
       <SectionReveal className="arrival-card">
         <div className="heritage-card-crown" aria-hidden="true" />
         <p className="section-kicker">A joyful welcome</p>
         <h2>{arrival.title}</h2>
-        <strong>{arrival.time}</strong>
+        <div className="arrival-time-ring" aria-label={`Arrival time ${arrival.time}`}>
+          <span aria-hidden="true" />
+          <strong>{arrival.time}</strong>
+          <i aria-hidden="true" />
+        </div>
         <p>{arrival.text}</p>
       </SectionReveal>
     </section>
@@ -58,7 +62,7 @@ function Arrival({ arrival, invitation, active }) {
 function Celebration({ invitation, active }) {
   return (
     <section className="celebration-section cinematic-section" style={{ "--section-image": `url(${invitation.backgrounds.section})` }}>
-      <VideoBackdrop src={invitation.videos.feature} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="none" className="feature-video" />
+      <VideoBackdrop src={invitation.videos.feature} poster={invitation.videoPosters?.feature} fallbackPoster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="none" className="feature-video" />
       <div className="celebration-scrim" />
       <SectionReveal className="celebration-content">
         <div className="heritage-section-emblem heritage-section-emblem-light" aria-hidden="true"><Heart size={15} fill="currentColor" /></div>
@@ -86,7 +90,7 @@ export default function EventExperience({ invitation, galleryImages }) {
   const openInvitation = useCallback(() => {
     const audio = document.getElementById("invitation-music");
     if (audio) {
-      audio.volume = 0.35;
+      audio.volume = 0;
       audio.play().catch(() => {});
     }
     setOpen(true);

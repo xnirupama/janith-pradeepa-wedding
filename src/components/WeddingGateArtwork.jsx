@@ -38,7 +38,7 @@ export default function WeddingGateArtwork({ artwork }) {
   const markMissing = (key) => setMissing((current) => ({ ...current, [key]: true }));
 
   return (
-    <div className="wedding-gate-artwork" aria-hidden="true">
+    <div className="wedding-gate-artwork" aria-hidden="true" style={{ pointerEvents: "none" }}>
       <motion.div
         className="wedding-gate-mandala"
         initial={reduceMotion ? false : { opacity: 0, scale: .965 }}

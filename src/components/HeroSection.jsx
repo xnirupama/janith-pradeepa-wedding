@@ -22,7 +22,7 @@ export default function HeroSection({ invitation, active }) {
   return (
     <section className="hero-section" id="top" style={{ "--hero-image": `url(${invitation.backgrounds.hero})` }}>
       <motion.div className="hero-background" style={{ y: backgroundY }} />
-      <VideoBackdrop src={invitation.videos.hero} poster={invitation.backgrounds.hero} active={active} tone={invitation.theme} overlay="none" className="hero-video" />
+      <VideoBackdrop src={invitation.videos.hero} poster={invitation.videoPosters?.hero} fallbackPoster={invitation.backgrounds.hero} active={active} tone={invitation.theme} overlay="none" className="hero-video" />
       <div className="hero-scrim" />
       <div className="heritage-mandala hero-mandala" aria-hidden="true"><span /><i /></div>
       <span className="hero-ornament hero-ornament-left" aria-hidden="true" />

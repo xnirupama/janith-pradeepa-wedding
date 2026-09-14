@@ -25,3 +25,18 @@ export function createCalendarFile(calendar) {
     "END:VCALENDAR",
   ].join("\r\n");
 }
+
+export function createGoogleCalendarUrl(calendar) {
+  const dates = calendar.allDay
+    ? `${calendar.startDate}/${calendar.endDate}`
+    : `${calendar.start}/${calendar.end}`;
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: calendar.title,
+    dates,
+    details: calendar.description || "",
+    location: calendar.location || "",
+  });
+  if (!calendar.allDay) params.set("ctz", "Asia/Colombo");
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}

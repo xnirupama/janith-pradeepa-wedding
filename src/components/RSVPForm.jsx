@@ -1,18 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, LockKeyhole, MessageSquareText, Minus, Phone, Plus, Send, Sparkles, UserRound, UsersRound } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 import VideoBackdrop from "./VideoBackdrop";
 
-const initial = { fullName: "", phoneNumber: "", attending: "", numberOfGuests: "1", message: "" };
+const initial = { fullName: "", phoneNumber: "", attending: "", numberOfGuests: "1", message: "", website: "" };
+const SUBMISSION_COOLDOWN = 15;
 
 export default function RSVPForm({ invitation, active }) {
   const [form, setForm] = useState(initial);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
   const [serverMessage, setServerMessage] = useState("");
+  const [cooldown, setCooldown] = useState(0);
+
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const timer = window.setTimeout(() => setCooldown((current) => Math.max(0, current - 1)), 1000);
+    return () => window.clearTimeout(timer);
+  }, [cooldown]);
 
   const update = (event) => {
     const { name, value } = event.target;
@@ -47,6 +55,7 @@ export default function RSVPForm({ invitation, active }) {
 
   const submit = async (event) => {
     event.preventDefault();
+    if (status === "sending" || cooldown > 0) return;
     if (!validate()) return;
     setStatus("sending");
     setServerMessage("");
@@ -60,6 +69,7 @@ export default function RSVPForm({ invitation, active }) {
       if (!response.ok) throw new Error(result.error || "We could not send your RSVP. Please try again.");
       setStatus("success");
       setServerMessage(result.message);
+      setCooldown(SUBMISSION_COOLDOWN);
     } catch (error) {
       setStatus("error");
       setServerMessage(error.message);
@@ -68,7 +78,7 @@ export default function RSVPForm({ invitation, active }) {
 
   return (
     <section className="rsvp-section cinematic-section section-shell" id="rsvp" aria-labelledby="rsvp-title">
-      <VideoBackdrop src={invitation.sectionVideos.rsvp} fallbackSrc={invitation.videos.feature} poster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" opacity={.62} />
+      <VideoBackdrop src={invitation.sectionVideos.rsvp} fallbackSrc={invitation.videos.feature} poster={invitation.videoPosters?.rsvp} fallbackPoster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" opacity={.62} />
       <SectionReveal className="section-heading">
         <div className="rsvp-title-seal" aria-hidden="true"><Sparkles size={18} /></div>
         <p className="section-kicker">Kindly Reply</p>
@@ -84,13 +94,18 @@ export default function RSVPForm({ invitation, active }) {
         <AnimatePresence mode="wait">
           {status === "success" ? (
             <motion.div className="rsvp-success" key="success" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }}>
+              <span className="rsvp-success-flourish" aria-hidden="true">{Array.from({ length: 5 }, (_, index) => <i key={index} style={{ "--flourish-index": index }} />)}</span>
               <span><Check size={30} /></span>
               <h3>Thank you, {form.fullName.split(" ")[0]}!</h3>
               <p>{serverMessage || "Your RSVP has been received. We are so happy to share this celebration with you."}</p>
               <button type="button" className="text-button" onClick={() => { setForm(initial); setStatus("idle"); }}>Submit another response</button>
             </motion.div>
           ) : (
-            <motion.form key="form" onSubmit={submit} noValidate initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <motion.form key="form" onSubmit={submit} noValidate initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .55, ease: [0.22, 1, 0.36, 1] }}>
+              <div className="honeypot-field" aria-hidden="true">
+                <label htmlFor={`${invitation.slug}-website`}>Website</label>
+                <input id={`${invitation.slug}-website`} name="website" value={form.website} onChange={update} tabIndex={-1} autoComplete="off" />
+              </div>
               <div className="rsvp-form-heading">
                 <span className="rsvp-monogram">J <i>&amp;</i> P</span>
                 <p>Please share your response below</p>
@@ -130,9 +145,9 @@ export default function RSVPForm({ invitation, active }) {
                 <textarea id={`${invitation.slug}-message`} name="message" rows="4" placeholder="Share your wishes…" value={form.message} onChange={update} />
               </div>
               {status === "error" && <p className="form-status" role="alert">{serverMessage}</p>}
-              <button className="primary-button submit-button" type="submit" disabled={status === "sending"}>
+              <button className="primary-button submit-button" type="submit" disabled={status === "sending" || cooldown > 0}>
                 <Send size={17} aria-hidden="true" />
-                {status === "sending" ? "Sending…" : "Send RSVP"}
+                {status === "sending" ? "Sending…" : cooldown > 0 ? `Please wait ${cooldown}s` : "Send RSVP"}
               </button>
               <p className="rsvp-privacy"><LockKeyhole size={12} /> Your response is shared privately with the couple.</p>
             </motion.form>

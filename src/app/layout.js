@@ -1,4 +1,4 @@
-import { Cormorant_Garamond, Great_Vibes, Manrope } from "next/font/google";
+import { Cormorant_Garamond, Great_Vibes, Manrope, Noto_Serif_Sinhala } from "next/font/google";
 import "./globals.css";
 
 const display = Cormorant_Garamond({
@@ -22,6 +22,13 @@ const body = Manrope({
   weight: ["400", "500", "600", "700"],
 });
 
+const sinhala = Noto_Serif_Sinhala({
+  subsets: ["sinhala"],
+  variable: "--font-sinhala",
+  display: "swap",
+  weight: ["400", "600"],
+});
+
 export const metadata = {
   metadataBase: new URL("https://janith-pradeepa.vercel.app"),
   title: "Janith & Pradeepa",
@@ -31,7 +38,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${display.variable} ${signature.variable} ${body.variable}`}>
+      <body className={`${display.variable} ${signature.variable} ${body.variable} ${sinhala.variable}`}>
         {children}
       </body>
     </html>

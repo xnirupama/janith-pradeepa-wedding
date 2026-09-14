@@ -2,14 +2,30 @@ import { NextResponse } from "next/server";
 import { validateRsvp } from "@/lib/validation";
 
 export async function POST(request) {
+  const contentType = request.headers.get("content-type") || "";
+  const contentLength = Number(request.headers.get("content-length") || 0);
+  if (!contentType.includes("application/json")) {
+    return NextResponse.json({ success: false, error: "Invalid RSVP request." }, { status: 415 });
+  }
+  if (contentLength > 5000) {
+    return NextResponse.json({ success: false, error: "RSVP request is too large." }, { status: 413 });
+  }
+
   let payload;
   try {
-    payload = await request.json();
+    const rawBody = await request.text();
+    if (rawBody.length > 5000) {
+      return NextResponse.json({ success: false, error: "RSVP request is too large." }, { status: 413 });
+    }
+    payload = JSON.parse(rawBody);
   } catch {
     return NextResponse.json({ success: false, error: "Please submit valid RSVP details." }, { status: 400 });
   }
 
-  const { data, errors } = validateRsvp(payload);
+  const { data, errors, spam } = validateRsvp(payload);
+  if (spam) {
+    return NextResponse.json({ success: true, message: "Your RSVP has been received with love. Thank you!" });
+  }
   if (Object.keys(errors).length) {
     return NextResponse.json({ success: false, error: "Please check the highlighted details and try again.", errors }, { status: 400 });
   }
@@ -22,9 +38,9 @@ export async function POST(request) {
     );
   }
 
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10000);
   try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
     const response = await fetch(scriptUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -32,11 +48,12 @@ export async function POST(request) {
       cache: "no-store",
       signal: controller.signal,
     });
-    clearTimeout(timeout);
     const result = await response.json().catch(() => null);
     if (!response.ok || !result?.success) throw new Error("Upstream RSVP service rejected the request.");
     return NextResponse.json({ success: true, message: "Your RSVP has been received with love. Thank you!" });
   } catch {
     return NextResponse.json({ success: false, error: "We could not save your RSVP just now. Please try again in a moment." }, { status: 502 });
+  } finally {
+    clearTimeout(timeout);
   }
 }
