@@ -74,10 +74,12 @@ function Celebration({ invitation, active }) {
   );
 }
 
-export default function EventExperience({ invitation, galleryImages }) {
+export default function EventExperience({ invitation, galleryImages, guestName = "" }) {
   const [open, setOpen] = useState(false);
   const [openingFinished, setOpeningFinished] = useState(false);
+  const [replayingOpening, setReplayingOpening] = useState(false);
   const pendingHashRef = useRef("");
+  const replayScrollRef = useRef(0);
 
   useEffect(() => {
     const hash = window.location.hash.slice(1);
@@ -99,13 +101,23 @@ export default function EventExperience({ invitation, galleryImages }) {
   }, []);
 
   const finishOpening = useCallback(() => setOpeningFinished(true), []);
+  const replayOpening = useCallback(() => {
+    replayScrollRef.current = window.scrollY;
+    setReplayingOpening(true);
+  }, []);
+  const finishReplay = useCallback(() => {
+    setReplayingOpening(false);
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: replayScrollRef.current, behavior: "auto" });
+    });
+  }, []);
   const contentActive = open && openingFinished;
 
   useEffect(() => {
     const previousBodyOverflow = document.body.style.overflow;
     const previousHtmlOverflow = document.documentElement.style.overflow;
 
-    if (!contentActive) {
+    if (!contentActive || replayingOpening) {
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
     } else {
@@ -117,7 +129,7 @@ export default function EventExperience({ invitation, galleryImages }) {
       document.body.style.overflow = previousBodyOverflow;
       document.documentElement.style.overflow = previousHtmlOverflow;
     };
-  }, [contentActive]);
+  }, [contentActive, replayingOpening]);
 
   useEffect(() => {
     if (!contentActive || !pendingHashRef.current) return;
@@ -134,8 +146,13 @@ export default function EventExperience({ invitation, galleryImages }) {
 
   return (
     <main className={`event-page theme-${invitation.theme} ${contentActive ? "has-section-nav" : ""}`}>
-      <InvitationGate invitation={invitation} open={open} onOpen={openInvitation} />
-      <OpeningFilm invitation={invitation} visible={open && !openingFinished} onComplete={finishOpening} />
+      <InvitationGate invitation={invitation} guestName={guestName} open={open} onOpen={openInvitation} />
+      <OpeningFilm
+        key={replayingOpening ? "replay" : "initial"}
+        invitation={invitation}
+        visible={(open && !openingFinished) || replayingOpening}
+        onComplete={replayingOpening ? finishReplay : finishOpening}
+      />
       <MusicController src={invitation.music} invitationOpen={open} />
       <FloatingAtmosphere />
       {contentActive && <SectionNavigator invitation={invitation} />}
@@ -149,7 +166,7 @@ export default function EventExperience({ invitation, galleryImages }) {
       <Celebration invitation={invitation} active={contentActive} />
       <LocationSection location={invitation.location} invitation={invitation} active={contentActive} />
       <RSVPForm invitation={invitation} active={contentActive} />
-      <ClosingSection invitation={invitation} active={contentActive} />
+      <ClosingSection invitation={invitation} active={contentActive} onReplayOpening={replayOpening} />
     </main>
   );
 }

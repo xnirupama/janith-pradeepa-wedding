@@ -112,8 +112,6 @@ function storeRsvpReceipt(requestId, receipt) {
 
 function doGet() {
   const properties = PropertiesService.getScriptProperties();
-  const spreadsheetPropertyConfigured = Boolean(cleanText(properties.getProperty("RSVP_SPREADSHEET_ID")));
-  const notificationEmailConfigured = Boolean(cleanText(properties.getProperty("RSVP_NOTIFICATION_EMAIL")));
   let spreadsheetAccessible = false;
 
   try {
@@ -125,10 +123,6 @@ function doGet() {
 
   return jsonResponse({
     success: spreadsheetAccessible,
-    service: "Janith & Pradeepa RSVP",
-    spreadsheetPropertyConfigured: spreadsheetPropertyConfigured,
-    spreadsheetAccessible: spreadsheetAccessible,
-    notificationEmailConfigured: notificationEmailConfigured,
     receipts: getRecentRsvpReceipts(),
   });
 }
@@ -259,6 +253,44 @@ function updateSummary(summary, weddingSheet, homecomingSheet, nowText) {
   summary.getRange("A15:B15").setFontWeight("bold");
   summary.setColumnWidth(1, 190);
   summary.setColumnWidth(2, 190);
+}
+
+/**
+ * One-time pre-launch cleanup for test responses.
+ *
+ * Before running, create the Script Property:
+ * RSVP_CLEAR_CONFIRMATION = CLEAR TEST RSVP DATA
+ *
+ * The confirmation property is deleted automatically after a successful clear.
+ * Headers, tabs, formatting, and the Summary structure are preserved.
+ */
+function clearRsvpTestData() {
+  const properties = PropertiesService.getScriptProperties();
+  const confirmation = cleanText(properties.getProperty("RSVP_CLEAR_CONFIRMATION"));
+  if (confirmation !== "CLEAR TEST RSVP DATA") {
+    throw new Error("Cleanup cancelled. Set RSVP_CLEAR_CONFIRMATION to CLEAR TEST RSVP DATA first.");
+  }
+
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const spreadsheet = getRsvpSpreadsheet(properties);
+    const sheets = ensureSheets(spreadsheet);
+    [sheets.wedding, sheets.homecoming].forEach(function (sheet) {
+      const responseCount = Math.max(0, sheet.getLastRow() - 1);
+      if (responseCount > 0) {
+        sheet.getRange(2, 1, responseCount, RESPONSE_HEADERS.length).clearContent();
+      }
+    });
+
+    CacheService.getScriptCache().remove(RECENT_RECEIPTS_CACHE_KEY);
+    const nowText = Utilities.formatDate(new Date(), TIMEZONE, "yyyy-MM-dd HH:mm:ss");
+    updateSummary(sheets.summary, sheets.wedding, sheets.homecoming, nowText);
+    properties.deleteProperty("RSVP_CLEAR_CONFIRMATION");
+    console.log("All Wedding and Homecoming test RSVP rows were cleared successfully.");
+  } finally {
+    lock.releaseLock();
+  }
 }
 
 function buildEmail(data, updated, submittedAt) {

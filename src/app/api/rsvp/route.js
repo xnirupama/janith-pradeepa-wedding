@@ -85,13 +85,27 @@ export async function POST(request) {
       cache: "no-store",
       signal: controller.signal,
     });
-    const result = await response.json().catch(() => null);
-    if (!response.ok || !result?.success) {
-      console.error("Apps Script rejected an RSVP request.", {
+    const responseText = await response.text();
+    let result = null;
+    try {
+      result = responseText ? JSON.parse(responseText) : null;
+    } catch {
+      result = null;
+    }
+    if (!result) {
+      console.error("RSVP upstream returned non-JSON", {
         status: response.status,
-        responseType: result ? "json" : "non-json",
-        upstreamError: typeof result?.error === "string" ? result.error : undefined,
+        statusText: response.statusText,
+        responsePreview: responseText.slice(0, 500),
       });
+    } else if (!response.ok || result.success !== true) {
+      console.error("RSVP upstream rejected submission", {
+        status: response.status,
+        statusText: response.statusText,
+        responsePreview: responseText.slice(0, 500),
+      });
+    }
+    if (!response.ok || !result?.success) {
       failureReason = `Apps Script returned ${response.status} without a success response.`;
     } else {
       return NextResponse.json({
@@ -101,6 +115,7 @@ export async function POST(request) {
       });
     }
   } catch (error) {
+    console.error("RSVP API error", error);
     failureReason = error instanceof Error && error.name === "AbortError"
       ? "Apps Script request timed out."
       : "Apps Script request failed.";

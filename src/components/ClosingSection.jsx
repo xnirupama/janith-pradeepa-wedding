@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUp, Heart } from "lucide-react";
+import { ArrowUp, Heart, RotateCcw } from "lucide-react";
 import ShareInvitation from "./ShareInvitation";
 import VideoBackdrop from "./VideoBackdrop";
 
@@ -15,7 +15,7 @@ const closingItem = {
   visible: { opacity: 1, y: 0, transition: { duration: .68, ease: [0.22, 1, 0.36, 1] } },
 };
 
-export default function ClosingSection({ invitation, active }) {
+export default function ClosingSection({ invitation, active, onReplayOpening }) {
   const reduceMotion = useReducedMotion();
   const backToTop = () => {
     window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
@@ -45,6 +45,10 @@ export default function ClosingSection({ invitation, active }) {
         </motion.div>
         <motion.div className="closing-actions" variants={closingItem}>
           <ShareInvitation invitation={invitation} />
+          <button type="button" className="replay-opening" onClick={onReplayOpening}>
+            <RotateCcw size={16} aria-hidden="true" />
+            Replay Opening
+          </button>
           <button type="button" className="back-to-top" onClick={backToTop}>
             <ArrowUp size={16} aria-hidden="true" />
             Back to top

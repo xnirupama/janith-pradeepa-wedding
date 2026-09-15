@@ -1,4 +1,4 @@
-import { MapPin, Navigation } from "lucide-react";
+import { MapPin, MessageCircle, Navigation, Phone } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 import VideoBackdrop from "./VideoBackdrop";
 
@@ -29,6 +29,21 @@ export default function LocationSection({ location, invitation, active }) {
             Get Directions
           </a>
         )}
+      </SectionReveal>
+      <SectionReveal className="contact-help-card">
+        <p className="section-kicker">Need help finding the venue?</p>
+        <h3>Contact Us</h3>
+        <p>Call or message us if you need any assistance.</p>
+        <div className="contact-help-actions">
+          <a href="tel:+94705525625" aria-label="Call us on plus 94 70 552 5625">
+            <Phone size={18} aria-hidden="true" />
+            <span><small>Call</small>+94 705 525 625</span>
+          </a>
+          <a href="https://wa.me/94705525625" target="_blank" rel="noopener noreferrer" aria-label="Message us on WhatsApp">
+            <MessageCircle size={18} aria-hidden="true" />
+            <span><small>WhatsApp</small>Send a message</span>
+          </a>
+        </div>
       </SectionReveal>
     </section>
   );

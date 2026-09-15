@@ -35,9 +35,14 @@ export const metadata = {
   description: "Wedding and Homecoming invitations for Janith & Pradeepa.",
 };
 
+export const viewport = {
+  themeColor: "#f5eddc",
+  colorScheme: "light dark",
+};
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body className={`${display.variable} ${signature.variable} ${body.variable} ${sinhala.variable}`}>
         {children}
       </body>

@@ -14,7 +14,7 @@ const weddingItemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: .62, ease: [0.22, 1, 0.36, 1] } },
 };
 
-export default function InvitationGate({ invitation, open, onOpen }) {
+export default function InvitationGate({ invitation, guestName, open, onOpen }) {
   const reduceMotion = useReducedMotion();
   const isWedding = invitation.theme === "wedding";
   const [firstName, secondName] = invitation.couple.split(" & ");
@@ -55,6 +55,7 @@ export default function InvitationGate({ invitation, open, onOpen }) {
             <span className="gate-corner gate-corner-tr" aria-hidden="true" />
             <span className="gate-corner gate-corner-bl" aria-hidden="true" />
             <span className="gate-corner gate-corner-br" aria-hidden="true" />
+            {guestName && <p className="gate-personalization">Especially for <strong>{guestName}</strong></p>}
             {isWedding ? (
               <motion.div
                 className="wedding-gate-copy"

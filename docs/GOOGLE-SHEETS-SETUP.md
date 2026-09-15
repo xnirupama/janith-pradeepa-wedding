@@ -72,7 +72,9 @@ Each server submission also carries a random, non-personal request ID. Apps Scri
 
 20. **Redeploy after future script changes.** Saving `Code.gs` does not necessarily update the active Web App. Choose **Deploy -> Manage deployments -> Edit -> New version -> Deploy**, then retest both forms.
 
-    After deployment, opening the `/exec` URL in a browser returns a safe JSON health check. All three configuration fields should be `true`: `spreadsheetPropertyConfigured`, `spreadsheetAccessible`, and `notificationEmailConfigured`. The health response never exposes the Spreadsheet ID or email address.
+    After deployment, opening the `/exec` URL in a browser returns a minimal JSON health check with `success: true`. Its temporary `receipts` list contains only random request IDs and save-status booleans used for response reconciliation; it never exposes guest details, the Spreadsheet ID, the notification address, or Script Property values.
+
+    The Next.js site also exposes `/api/rsvp/health`. It returns only `configured` and `upstreamReachable` booleans, making it safe to use for deployment checks without exposing the Apps Script URL or any RSVP data.
 
 ## Automatically created Google Sheet tabs
 
@@ -144,6 +146,18 @@ Run these after deployment:
 13. MailApp failure — RSVP remains saved and the response reports `notificationSent: false`.
 14. Missing `RSVP_GOOGLE_SCRIPT_URL` — returns the safe configuration message and does not expose environment details.
 
+## Clear test responses before launch
+
+The `clearRsvpTestData` Apps Script function clears all response rows from **Wedding RSVPs** and **Homecoming RSVPs**, removes temporary receipts, and resets **Summary** while preserving the tabs, headers, and formatting.
+
+1. Confirm that every current response row is test data.
+2. In **Apps Script -> Project Settings -> Script Properties**, add `RSVP_CLEAR_CONFIRMATION` with the exact value `CLEAR TEST RSVP DATA`.
+3. In the Apps Script editor, select `clearRsvpTestData` from the function dropdown.
+4. Click **Run** and confirm the execution completes successfully.
+5. Refresh the spreadsheet and verify both RSVP tabs contain headers only.
+
+The script automatically deletes `RSVP_CLEAR_CONFIRMATION` after a successful cleanup, preventing an accidental second run. Google Sheets version history can be used if test rows need to be recovered later.
+
 ## Troubleshooting the configuration message
 
 If the form says **“RSVP submissions are not configured yet. Please contact the couple directly.”**, Next.js cannot find a valid `RSVP_GOOGLE_SCRIPT_URL` ending in `/exec`.
@@ -155,6 +169,6 @@ Check that:
 - The local Next.js server was restarted after editing `.env.local`.
 - Vercel contains the variable for the deployment environment being tested.
 - Vercel was redeployed after the variable was added or changed.
-- Opening the `/exec` URL reports `spreadsheetAccessible: true`.
+- Opening the `/exec` URL reports `success: true`, and `/api/rsvp/health` reports both booleans as `true`.
 
 The script accepts either the raw Spreadsheet ID or a full Google Sheets URL in `RSVP_SPREADSHEET_ID`, although the raw ID is recommended. If the script was created through **Extensions -> Apps Script**, it can also fall back to its bound spreadsheet when that property is missing.
