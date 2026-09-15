@@ -6,6 +6,8 @@ This project uses a free server-side RSVP flow:
 
 The browser never receives or posts directly to the Apps Script URL. Wedding and Homecoming responses are stored in separate tabs inside one spreadsheet.
 
+Each server submission also carries a random, non-personal request ID. Apps Script stores a short-lived confirmation receipt after the Sheet write. If Google's final redirected response fails, the Next.js server checks that receipt before deciding whether to show success, so a saved RSVP is not incorrectly reported as failed.
+
 ## One-time setup
 
 1. **Create the spreadsheet.** Open Google Sheets, create a blank spreadsheet, and name it **Janith & Pradeepa — RSVP Responses**.

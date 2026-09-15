@@ -1,9 +1,32 @@
+import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { validateRsvp } from "@/lib/validation";
 
 export const maxDuration = 60;
 
-const RSVP_UPSTREAM_TIMEOUT_MS = 55000;
+const RSVP_UPSTREAM_TIMEOUT_MS = 45000;
+const RSVP_RECEIPT_TIMEOUT_MS = 10000;
+
+async function confirmSavedReceipt(configuredUrl, requestId) {
+  const receiptUrl = new URL(configuredUrl);
+  receiptUrl.searchParams.set("action", "receipt");
+  receiptUrl.searchParams.set("requestId", requestId);
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), RSVP_RECEIPT_TIMEOUT_MS);
+
+  try {
+    const response = await fetch(receiptUrl.toString(), {
+      cache: "no-store",
+      signal: controller.signal,
+    });
+    const receipt = await response.json().catch(() => null);
+    return response.ok && receipt?.success && receipt?.saved ? receipt : null;
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
 
 export async function POST(request) {
   const contentType = request.headers.get("content-type") || "";
@@ -52,13 +75,15 @@ export async function POST(request) {
     );
   }
 
+  const requestId = randomUUID();
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), RSVP_UPSTREAM_TIMEOUT_MS);
+  let failureReason = "Apps Script request failed.";
   try {
     const response = await fetch(configuredUrl.toString(), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, requestId }),
       cache: "no-store",
       signal: controller.signal,
     });
@@ -69,20 +94,33 @@ export async function POST(request) {
         responseType: result ? "json" : "non-json",
         upstreamError: typeof result?.error === "string" ? result.error : undefined,
       });
-      throw new Error("Upstream RSVP service rejected the request.");
+      failureReason = `Apps Script returned ${response.status} without a success response.`;
+    } else {
+      return NextResponse.json({
+        success: true,
+        updated: result.updated === true,
+        notificationSent: result.notificationSent === true,
+      });
     }
-    return NextResponse.json({
-      success: true,
-      updated: result.updated === true,
-      notificationSent: result.notificationSent === true,
-    });
   } catch (error) {
-    console.error(
-      "RSVP forwarding failed.",
-      error instanceof Error && error.name === "AbortError" ? "Apps Script request timed out." : "Apps Script request failed.",
-    );
-    return NextResponse.json({ success: false, error: "We could not save your RSVP just now. Please try again in a moment." }, { status: 502 });
+    failureReason = error instanceof Error && error.name === "AbortError"
+      ? "Apps Script request timed out."
+      : "Apps Script request failed.";
   } finally {
     clearTimeout(timeout);
   }
+
+  const receipt = await confirmSavedReceipt(configuredUrl, requestId);
+  if (receipt) {
+    console.info("RSVP success confirmed through its save receipt after the primary response failed.");
+    return NextResponse.json({
+      success: true,
+      updated: receipt.updated === true,
+      notificationSent: receipt.notificationSent === true,
+      reconciled: true,
+    });
+  }
+
+  console.error("RSVP forwarding failed.", failureReason);
+  return NextResponse.json({ success: false, error: "We could not save your RSVP just now. Please try again in a moment." }, { status: 502 });
 }
