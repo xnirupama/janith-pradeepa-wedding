@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import { validateRsvp } from "@/lib/validation";
 
+export const maxDuration = 60;
+
+const RSVP_UPSTREAM_TIMEOUT_MS = 55000;
+
 export async function POST(request) {
   const contentType = request.headers.get("content-type") || "";
   const contentLength = Number(request.headers.get("content-length") || 0);
@@ -49,7 +53,7 @@ export async function POST(request) {
   }
 
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 10000);
+  const timeout = setTimeout(() => controller.abort(), RSVP_UPSTREAM_TIMEOUT_MS);
   try {
     const response = await fetch(configuredUrl.toString(), {
       method: "POST",
@@ -59,13 +63,24 @@ export async function POST(request) {
       signal: controller.signal,
     });
     const result = await response.json().catch(() => null);
-    if (!response.ok || !result?.success) throw new Error("Upstream RSVP service rejected the request.");
+    if (!response.ok || !result?.success) {
+      console.error("Apps Script rejected an RSVP request.", {
+        status: response.status,
+        responseType: result ? "json" : "non-json",
+        upstreamError: typeof result?.error === "string" ? result.error : undefined,
+      });
+      throw new Error("Upstream RSVP service rejected the request.");
+    }
     return NextResponse.json({
       success: true,
       updated: result.updated === true,
       notificationSent: result.notificationSent === true,
     });
-  } catch {
+  } catch (error) {
+    console.error(
+      "RSVP forwarding failed.",
+      error instanceof Error && error.name === "AbortError" ? "Apps Script request timed out." : "Apps Script request failed.",
+    );
     return NextResponse.json({ success: false, error: "We could not save your RSVP just now. Please try again in a moment." }, { status: 502 });
   } finally {
     clearTimeout(timeout);

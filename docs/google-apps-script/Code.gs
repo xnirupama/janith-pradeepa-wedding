@@ -56,6 +56,50 @@ function normalizePhoneNumber(value) {
   return digits;
 }
 
+function normalizeSpreadsheetId(value) {
+  const raw = cleanText(value).replace(/^['"]|['"]$/g, "");
+  const urlMatch = raw.match(/\/spreadsheets\/d\/([^/?#]+)/);
+  return urlMatch ? urlMatch[1] : raw;
+}
+
+function getRsvpSpreadsheet(properties) {
+  const configuredId = normalizeSpreadsheetId(properties.getProperty("RSVP_SPREADSHEET_ID"));
+  if (configuredId) return SpreadsheetApp.openById(configuredId);
+
+  // A container-bound Apps Script can still use its parent Sheet if the
+  // Script Property was accidentally omitted. Script Properties remain the
+  // preferred production configuration.
+  const activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  if (activeSpreadsheet) {
+    console.error("RSVP_SPREADSHEET_ID is missing; using the bound spreadsheet.");
+    return activeSpreadsheet;
+  }
+
+  throw new Error("Missing RSVP_SPREADSHEET_ID Script Property.");
+}
+
+function doGet() {
+  const properties = PropertiesService.getScriptProperties();
+  const spreadsheetPropertyConfigured = Boolean(cleanText(properties.getProperty("RSVP_SPREADSHEET_ID")));
+  const notificationEmailConfigured = Boolean(cleanText(properties.getProperty("RSVP_NOTIFICATION_EMAIL")));
+  let spreadsheetAccessible = false;
+
+  try {
+    const spreadsheet = getRsvpSpreadsheet(properties);
+    spreadsheetAccessible = Boolean(spreadsheet && spreadsheet.getId());
+  } catch (error) {
+    console.error("RSVP health check could not access the spreadsheet.", error);
+  }
+
+  return jsonResponse({
+    success: spreadsheetAccessible,
+    service: "Janith & Pradeepa RSVP",
+    spreadsheetPropertyConfigured: spreadsheetPropertyConfigured,
+    spreadsheetAccessible: spreadsheetAccessible,
+    notificationEmailConfigured: notificationEmailConfigured,
+  });
+}
+
 function validatePayload(payload) {
   if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
     throw new Error("Invalid request payload.");
@@ -251,8 +295,6 @@ function doPost(e) {
 
     const data = validatePayload(payload);
     const properties = PropertiesService.getScriptProperties();
-    const spreadsheetId = properties.getProperty("RSVP_SPREADSHEET_ID");
-    if (!spreadsheetId) throw new Error("Missing RSVP_SPREADSHEET_ID Script Property.");
 
     const now = new Date();
     const nowText = Utilities.formatDate(now, TIMEZONE, "yyyy-MM-dd HH:mm:ss");
@@ -262,7 +304,7 @@ function doPost(e) {
 
     lock.waitLock(10000);
     try {
-      const spreadsheet = SpreadsheetApp.openById(spreadsheetId);
+      const spreadsheet = getRsvpSpreadsheet(properties);
       const sheets = ensureSheets(spreadsheet);
       const responseSheet = sheets[data.event];
       const existingRow = findResponseRow(responseSheet, data.phoneNumber);
@@ -296,7 +338,7 @@ function doPost(e) {
     }
 
     let notificationSent = false;
-    const notificationEmail = properties.getProperty("RSVP_NOTIFICATION_EMAIL");
+    const notificationEmail = cleanText(properties.getProperty("RSVP_NOTIFICATION_EMAIL"));
     if (!notificationEmail) {
       console.error("RSVP saved, but RSVP_NOTIFICATION_EMAIL is not configured.");
     } else {

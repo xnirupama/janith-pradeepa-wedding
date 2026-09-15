@@ -70,6 +70,8 @@ The browser never receives or posts directly to the Apps Script URL. Wedding and
 
 20. **Redeploy after future script changes.** Saving `Code.gs` does not necessarily update the active Web App. Choose **Deploy -> Manage deployments -> Edit -> New version -> Deploy**, then retest both forms.
 
+    After deployment, opening the `/exec` URL in a browser returns a safe JSON health check. All three configuration fields should be `true`: `spreadsheetPropertyConfigured`, `spreadsheetAccessible`, and `notificationEmailConfigured`. The health response never exposes the Spreadsheet ID or email address.
+
 ## Automatically created Google Sheet tabs
 
 The first valid RSVP automatically creates these tabs if they do not exist:
@@ -151,3 +153,6 @@ Check that:
 - The local Next.js server was restarted after editing `.env.local`.
 - Vercel contains the variable for the deployment environment being tested.
 - Vercel was redeployed after the variable was added or changed.
+- Opening the `/exec` URL reports `spreadsheetAccessible: true`.
+
+The script accepts either the raw Spreadsheet ID or a full Google Sheets URL in `RSVP_SPREADSHEET_ID`, although the raw ID is recommended. If the script was created through **Extensions -> Apps Script**, it can also fall back to its bound spreadsheet when that property is missing.
