@@ -78,43 +78,39 @@ function getRsvpSpreadsheet(properties) {
   throw new Error("Missing RSVP_SPREADSHEET_ID Script Property.");
 }
 
-function receiptCacheKey(requestId) {
-  return "rsvp-receipt:" + requestId;
+const RECENT_RECEIPTS_CACHE_KEY = "rsvp-recent-receipts";
+
+function getRecentRsvpReceipts() {
+  try {
+    const cached = CacheService.getScriptCache().get(RECENT_RECEIPTS_CACHE_KEY);
+    if (!cached) return [];
+    const receipts = JSON.parse(cached);
+    return Array.isArray(receipts) ? receipts : [];
+  } catch (error) {
+    console.error("Recent RSVP receipts could not be read.", error);
+    return [];
+  }
 }
 
 function storeRsvpReceipt(requestId, receipt) {
   if (!requestId) return;
   try {
-    CacheService.getScriptCache().put(receiptCacheKey(requestId), JSON.stringify(receipt), 600);
+    const receipts = getRecentRsvpReceipts().filter(function (item) {
+      return item && item.requestId !== requestId;
+    });
+    receipts.unshift({
+      requestId: requestId,
+      saved: receipt.saved === true,
+      updated: receipt.updated === true,
+      notificationSent: receipt.notificationSent === true,
+    });
+    CacheService.getScriptCache().put(RECENT_RECEIPTS_CACHE_KEY, JSON.stringify(receipts.slice(0, 30)), 600);
   } catch (error) {
     console.error("RSVP was saved, but its temporary receipt could not be stored.", error);
   }
 }
 
-function doGet(e) {
-  const action = e && e.parameter ? cleanText(e.parameter.action).toLowerCase() : "";
-  if (action === "receipt") {
-    const requestId = cleanText(e.parameter.requestId);
-    if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(requestId)) {
-      return jsonResponse({ success: false, saved: false });
-    }
-
-    const cached = CacheService.getScriptCache().get(receiptCacheKey(requestId));
-    if (!cached) return jsonResponse({ success: true, saved: false });
-    try {
-      const receipt = JSON.parse(cached);
-      return jsonResponse({
-        success: true,
-        saved: receipt.saved === true,
-        updated: receipt.updated === true,
-        notificationSent: receipt.notificationSent === true,
-      });
-    } catch (error) {
-      console.error("An RSVP receipt could not be parsed.", error);
-      return jsonResponse({ success: false, saved: false });
-    }
-  }
-
+function doGet() {
   const properties = PropertiesService.getScriptProperties();
   const spreadsheetPropertyConfigured = Boolean(cleanText(properties.getProperty("RSVP_SPREADSHEET_ID")));
   const notificationEmailConfigured = Boolean(cleanText(properties.getProperty("RSVP_NOTIFICATION_EMAIL")));
@@ -133,6 +129,7 @@ function doGet(e) {
     spreadsheetPropertyConfigured: spreadsheetPropertyConfigured,
     spreadsheetAccessible: spreadsheetAccessible,
     notificationEmailConfigured: notificationEmailConfigured,
+    receipts: getRecentRsvpReceipts(),
   });
 }
 

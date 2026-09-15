@@ -8,19 +8,17 @@ const RSVP_UPSTREAM_TIMEOUT_MS = 45000;
 const RSVP_RECEIPT_TIMEOUT_MS = 10000;
 
 async function confirmSavedReceipt(configuredUrl, requestId) {
-  const receiptUrl = new URL(configuredUrl);
-  receiptUrl.searchParams.set("action", "receipt");
-  receiptUrl.searchParams.set("requestId", requestId);
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), RSVP_RECEIPT_TIMEOUT_MS);
 
   try {
-    const response = await fetch(receiptUrl.toString(), {
+    const response = await fetch(configuredUrl.toString(), {
       cache: "no-store",
       signal: controller.signal,
     });
-    const receipt = await response.json().catch(() => null);
-    return response.ok && receipt?.success && receipt?.saved ? receipt : null;
+    const health = await response.json().catch(() => null);
+    if (!response.ok || !health?.success || !Array.isArray(health.receipts)) return null;
+    return health.receipts.find((receipt) => receipt?.requestId === requestId && receipt.saved === true) || null;
   } catch {
     return null;
   } finally {
