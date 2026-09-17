@@ -1935,11 +1935,186 @@ img, video { max-width: 100%; }
 
 /* RSVP */
 .rsvp-section { padding-top: var(--section-space); }
-.rsvp-card { background: linear-gradient(145deg, rgba(255, 252, 244, .97), rgba(239, 226, 196, .95)); }
+/* ── Homecoming RSVP Card — luxurious deep burgundy & gold aesthetic ── */
 .theme-homecoming .rsvp-card {
-  border-color: rgba(221, 174, 86, .52);
-  box-shadow: 0 34px 86px rgba(8, 0, 3, .42), inset 0 0 65px rgba(255, 255, 255, .32);
+  --form-ink: #fff6eb;
+  --form-muted: #d4b29f;
+  --form-accent: #f7dda4;
+  border-color: rgba(230, 185, 105, .55);
+  border-top: 2px solid rgba(245, 217, 137, .75);
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(175, 28, 62, .42) 0, transparent 65%),
+    linear-gradient(155deg, rgba(72, 9, 30, .96), rgba(35, 3, 15, .98));
+  color: var(--form-ink);
+  box-shadow:
+    inset 0 1px rgba(255, 220, 140, .18),
+    inset 0 0 50px rgba(160, 20, 50, .22),
+    0 32px 85px rgba(8, 0, 4, .55);
 }
+
+.theme-homecoming .rsvp-card::before {
+  border-color: rgba(226, 183, 101, .25);
+  background: repeating-conic-gradient(from 0deg, transparent 0 10deg, rgba(239, 199, 120, .065) 10.5deg 11.5deg, transparent 12deg 20deg);
+}
+
+.theme-homecoming .rsvp-corner::before,
+.theme-homecoming .rsvp-corner::after {
+  background: rgba(239, 199, 120, .65);
+}
+
+.theme-homecoming .rsvp-monogram {
+  color: #f7dda4;
+  text-shadow: 0 2px 14px rgba(220, 160, 60, .35);
+}
+
+.theme-homecoming .rsvp-monogram i {
+  color: #e5b25d;
+}
+
+.theme-homecoming .rsvp-form-heading p {
+  color: #d8b8a5;
+}
+
+.theme-homecoming .rsvp-card .form-field label,
+.theme-homecoming .rsvp-card .form-field legend {
+  color: #fcebd2;
+}
+
+.theme-homecoming .rsvp-card .form-field label > span,
+.theme-homecoming .rsvp-card .form-field legend > span {
+  color: #fcebd2;
+}
+
+.theme-homecoming .rsvp-card .form-field label > span svg,
+.theme-homecoming .rsvp-card .form-field legend > span svg {
+  color: #e5b25d;
+}
+
+.theme-homecoming .rsvp-card .form-field label b,
+.theme-homecoming .rsvp-card .form-field legend b {
+  color: #ff9dae;
+}
+
+.theme-homecoming .rsvp-card .form-field input:not([type="radio"]),
+.theme-homecoming .rsvp-card .form-field textarea {
+  border: 1px solid rgba(226, 183, 101, .36);
+  border-radius: .55rem;
+  background: rgba(24, 2, 9, .72);
+  color: #fff6eb;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, .45);
+}
+
+.theme-homecoming .rsvp-card .form-field input::placeholder,
+.theme-homecoming .rsvp-card .form-field textarea::placeholder {
+  color: rgba(215, 180, 165, .45);
+}
+
+.theme-homecoming .rsvp-card .form-field input:focus,
+.theme-homecoming .rsvp-card .form-field textarea:focus {
+  border-color: #efc778;
+  background: rgba(30, 3, 12, .85);
+  box-shadow: 0 0 0 3px rgba(239, 199, 120, .22), inset 0 2px 5px rgba(0, 0, 0, .45);
+}
+
+.theme-homecoming .rsvp-card .choice-row label span {
+  border: 1px solid rgba(226, 183, 101, .3);
+  border-radius: .6rem;
+  background: rgba(24, 2, 9, .62);
+  color: #d6b49e;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, .3);
+  transition: all .2s ease;
+}
+
+.theme-homecoming .rsvp-card .choice-row label:hover span {
+  border-color: rgba(239, 199, 120, .55);
+  background: rgba(36, 4, 15, .75);
+  color: #fff2e0;
+}
+
+.theme-homecoming .rsvp-card .choice-row input:checked + span {
+  border-color: #efc778;
+  background: linear-gradient(135deg, rgba(165, 26, 60, .55), rgba(85, 8, 30, .65));
+  color: #fff6eb;
+  box-shadow: 0 0 18px rgba(226, 183, 101, .25), inset 0 0 12px rgba(239, 199, 120, .15);
+}
+
+.theme-homecoming .guest-stepper {
+  border: 1px solid rgba(226, 183, 101, .36);
+  background: rgba(24, 2, 9, .72);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, .4);
+}
+
+.theme-homecoming .guest-stepper button {
+  background: rgba(239, 199, 120, .18);
+  color: #f7dda4;
+  border: 1px solid rgba(239, 199, 120, .35);
+  transition: background .2s ease, transform .15s ease;
+}
+
+.theme-homecoming .guest-stepper button:hover:not(:disabled) {
+  background: rgba(239, 199, 120, .32);
+  color: #fff;
+}
+
+.theme-homecoming .rsvp-card .guest-stepper input:not([type="radio"]) {
+  color: #f7dda4;
+  text-shadow: 0 2px 10px rgba(239, 199, 120, .3);
+}
+
+.theme-homecoming .guest-field small {
+  color: #c9a794;
+}
+
+.theme-homecoming .field-error {
+  color: #ff94a4;
+}
+
+.theme-homecoming .rsvp-card .submit-button {
+  border: 1px solid #f2cf85;
+  border-radius: .6rem;
+  background: linear-gradient(135deg, #a81c3b 0%, #d93859 100%);
+  color: #fff8ee;
+  box-shadow: 0 14px 34px rgba(160, 20, 50, .45), 0 0 20px rgba(239, 199, 120, .25);
+  font-weight: 600;
+  letter-spacing: .06em;
+  transition: all .25s ease;
+}
+
+.theme-homecoming .rsvp-card .submit-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #bd2445 0%, #ec4668 100%);
+  box-shadow: 0 16px 40px rgba(180, 25, 60, .55), 0 0 28px rgba(239, 199, 120, .4);
+  transform: translateY(-1px);
+}
+
+.theme-homecoming .rsvp-privacy {
+  color: #c9a794;
+}
+
+.theme-homecoming .rsvp-privacy svg {
+  color: #e5b25d;
+}
+
+.theme-homecoming .rsvp-success {
+  color: #fff5e9;
+}
+
+.theme-homecoming .rsvp-success h3 {
+  color: #f7dda4;
+  text-shadow: 0 2px 12px rgba(220, 160, 60, .35);
+}
+
+.theme-homecoming .rsvp-success p {
+  color: #d8b8a5;
+}
+
+.theme-homecoming .rsvp-success span svg {
+  color: #efc778;
+}
+
+.theme-homecoming .rsvp-success .text-button {
+  color: #efc778;
+}
+
 .rsvp-card .form-field input:not([type="radio"]),
 .rsvp-card .form-field textarea { min-height: 3rem; font-size: 1rem; }
 .rsvp-card .form-field textarea { min-height: 7.5rem; }
@@ -2399,33 +2574,79 @@ img, video { max-width: 100%; }
 .arrival-time-ring {
   position: relative;
   display: grid;
-  width: clamp(10rem, 44vw, 14rem);
+  width: clamp(11rem, 50vw, 15.5rem);
   aspect-ratio: 1;
-  margin: 1.25rem auto;
+  margin: 1.6rem auto;
   place-items: center;
-  border: 1px solid rgba(239, 199, 120, .52);
+  /* Double-ring border effect */
+  border: 2px solid rgba(239, 199, 120, .72);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(208, 153, 57, .15), transparent 64%);
-  box-shadow: 0 0 0 8px rgba(218, 170, 84, .045), 0 0 3rem rgba(218, 158, 64, .14);
-  animation: arrivalGlow 5.5s ease-in-out infinite;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(208, 153, 57, .28), transparent 58%),
+    radial-gradient(circle, rgba(140, 20, 48, .22), rgba(68, 5, 26, .18) 100%);
+  box-shadow:
+    0 0 0 6px rgba(218, 170, 84, .08),
+    0 0 0 14px rgba(218, 170, 84, .035),
+    0 0 4rem rgba(218, 158, 64, .22),
+    inset 0 0 2.5rem rgba(190, 130, 38, .12);
+  animation: arrivalGlow 4.5s ease-in-out infinite;
+  overflow: hidden;
 }
-.arrival-time-ring::before,
+/* Rotating light sweep inside the ring */
+.arrival-time-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0 80%, rgba(245, 210, 130, .12) 85% 95%, transparent 100%);
+  animation: arrivalRingSweep 8s linear infinite;
+}
+/* Cardinal diamond markers — top, bottom, left, right */
 .arrival-time-ring::after,
 .arrival-time-ring > span,
 .arrival-time-ring > i {
   content: "";
   position: absolute;
-  width: .42rem;
-  height: .42rem;
+  width: .46rem;
+  height: .46rem;
   border-radius: 50% 0 50% 50%;
-  background: var(--accent-light);
-  opacity: .68;
+  background: #efc876;
+  opacity: .88;
+  box-shadow: 0 0 4px rgba(239, 199, 120, .5);
 }
-.arrival-time-ring::before { top: .8rem; left: 50%; transform: translateX(-50%) rotate(45deg); }
-.arrival-time-ring::after { bottom: .8rem; left: 50%; transform: translateX(-50%) rotate(225deg); }
-.arrival-time-ring > span { top: 50%; left: .8rem; transform: translateY(-50%) rotate(-45deg); }
-.arrival-time-ring > i { top: 50%; right: .8rem; transform: translateY(-50%) rotate(135deg); }
-.arrival-card .arrival-time-ring strong { margin: 0; font-size: clamp(2.55rem, 10vw, 4.8rem); text-shadow: 0 0 1.5rem rgba(240, 202, 124, .22); }
+.arrival-time-ring::after { bottom: .65rem; left: 50%; transform: translateX(-50%) rotate(225deg); }
+.arrival-time-ring > span { top: 50%; left: .65rem; transform: translateY(-50%) rotate(-45deg); }
+.arrival-time-ring > i { top: 50%; right: .65rem; transform: translateY(-50%) rotate(135deg); }
+/* Top cardinal */
+.arrival-card .arrival-time-ring > strong::before {
+  content: "";
+  position: absolute;
+  top: .65rem;
+  left: 50%;
+  width: .46rem;
+  height: .46rem;
+  border-radius: 50% 0 50% 50%;
+  background: #efc876;
+  opacity: .88;
+  box-shadow: 0 0 4px rgba(239, 199, 120, .5);
+  transform: translateX(-50%) rotate(45deg);
+}
+.arrival-card .arrival-time-ring strong {
+  position: relative;
+  margin: 0;
+  font-size: clamp(2.85rem, 12vw, 5.4rem);
+  letter-spacing: .01em;
+  color: #fff4e0;
+  text-shadow:
+    0 0 1.2rem rgba(240, 202, 124, .48),
+    0 0 3.5rem rgba(240, 180, 80, .22),
+    0 4px 18px rgba(0, 0, 0, .38);
+}
+
+@keyframes arrivalRingSweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 
 .calendar-sheet-backdrop {
   position: fixed;
@@ -2928,4 +3149,333 @@ img, video { max-width: 100%; }
     -webkit-text-fill-color: unset;
     color: #d9a94e;
   }
+}
+
+/* ── Premium date plaque (InvitationMessage) ──────────────────────────── */
+.msg-date-plaque {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin: 1.6rem auto 0;
+  padding: 1.5rem 2rem 1.25rem;
+  width: min(100%, 22rem);
+  border: 1px solid color-mix(in srgb, var(--accent-light) 48%, transparent);
+  border-radius: 10rem 10rem .9rem .9rem / 3.5rem 3.5rem .9rem .9rem;
+  background:
+    radial-gradient(ellipse at 50% 0, color-mix(in srgb, var(--accent-light) 11%, transparent) 0, transparent 72%),
+    color-mix(in srgb, var(--surface-strong) 62%, transparent);
+  box-shadow: inset 0 1px rgba(255,255,255,.45), 0 16px 44px rgba(55,30,5,.08);
+  backdrop-filter: blur(6px);
+  text-align: center;
+}
+
+.msg-date-weekday {
+  display: block;
+  margin-bottom: .65rem;
+  color: var(--accent);
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  opacity: .82;
+}
+
+.msg-date-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .85rem;
+}
+
+.msg-date-day {
+  font-family: var(--font-display);
+  font-size: clamp(3.6rem, 16vw, 5.2rem);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.msg-date-month-year {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .18rem;
+  padding-bottom: .15rem;
+}
+
+.msg-date-month {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 4.5vw, 1.45rem);
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: .04em;
+  line-height: 1;
+}
+
+.msg-date-year {
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.msg-date-time-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  margin-top: .95rem;
+  padding-top: .85rem;
+  width: 100%;
+  border-top: 1px solid color-mix(in srgb, var(--accent-light) 28%, transparent);
+}
+
+.msg-date-time-dot {
+  width: .38rem;
+  height: .38rem;
+  border-radius: 50%;
+  background: var(--accent-light);
+  opacity: .72;
+  flex-shrink: 0;
+}
+
+.msg-date-time {
+  color: var(--accent);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+/* ── Homecoming date plaque — distinct dark-crimson/gold design ────────── */
+/*
+ * Completely different feel from the wedding plaque:
+ * deep ruby background, gold border, bold golden numerals,
+ * no arch — uses a rectangular jewel-card shape instead.
+ */
+.theme-homecoming .msg-date-plaque {
+  /* Jewel-box shape: straight top, gently rounded bottom */
+  border-radius: .6rem 3rem 3rem .6rem / .6rem 4rem 4rem .6rem;
+  border: 1px solid rgba(226, 183, 101, .52);
+  border-top: 2px solid rgba(239, 199, 120, .72);
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(170, 30, 60, .35) 0, transparent 65%),
+    linear-gradient(160deg, rgba(90, 10, 32, .96), rgba(42, 2, 16, .98));
+  box-shadow:
+    inset 0 1px rgba(255, 220, 140, .14),
+    inset 0 0 3rem rgba(150, 20, 50, .2),
+    0 24px 55px rgba(10, 0, 4, .46);
+  padding: 1.6rem 1.85rem 1.35rem;
+}
+
+/* Thin inner frame line */
+.theme-homecoming .msg-date-plaque::before {
+  content: "";
+  position: absolute;
+  inset: .35rem;
+  border-radius: inherit;
+  border: 1px solid rgba(220, 175, 90, .14);
+  pointer-events: none;
+}
+
+.theme-homecoming .msg-date-weekday {
+  color: #d4a047;
+  opacity: 1;
+  letter-spacing: .28em;
+}
+
+.theme-homecoming .msg-date-day {
+  font-size: clamp(4rem, 18vw, 5.8rem);
+  background: linear-gradient(170deg, #f5d989 15%, #c8882e 75%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  filter: drop-shadow(0 0 .6rem rgba(220, 160, 60, .28));
+}
+
+.theme-homecoming .msg-date-month {
+  color: #f5e4c8;
+  font-size: clamp(1.1rem, 5vw, 1.55rem);
+  text-shadow: 0 2px 12px rgba(0,0,0,.38);
+}
+
+.theme-homecoming .msg-date-year {
+  color: rgba(239, 200, 130, .55);
+  letter-spacing: .24em;
+}
+
+.theme-homecoming .msg-date-time-row {
+  border-top: 1px solid rgba(218, 170, 84, .25);
+  margin-top: 1.1rem;
+  padding-top: .95rem;
+}
+
+.theme-homecoming .msg-date-time-dot {
+  background: #c8882e;
+  opacity: 1;
+  box-shadow: 0 0 5px rgba(200, 136, 46, .6);
+}
+
+.theme-homecoming .msg-date-time {
+  color: #d4a047;
+  font-size: .82rem;
+  letter-spacing: .22em;
+}
+
+/* ── Timeline item — fix mobile overlapping ───────────────────────────── */
+/*
+ * The 3-column layout (icon | title | time) works on desktop but on
+ * narrow phones the title wraps and the time badge floats into it.
+ * Switch to a 2-column layout where time sits below the title.
+ */
+@media (max-width: 719px) {
+  .timeline > .timeline-item {
+    grid-template-columns: 2.7rem minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    min-height: 0;
+    gap: .5rem .65rem;
+    padding: 1.05rem 1.1rem;
+    align-items: start;
+  }
+
+  /* Icon spans both rows, left column */
+  .timeline > .timeline-item .timeline-icon {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    align-self: center;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  /* Title: row 1, right column */
+  .timeline > .timeline-item .timeline-copy {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .timeline > .timeline-item .timeline-copy h3 {
+    font-size: clamp(1.15rem, 4.5vw, 1.45rem);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  /* Time: row 2, right column — clear of the title */
+  .timeline > .timeline-item time {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+    margin-top: 0;
+    padding: .22rem .65rem;
+    width: fit-content;
+    border: 1px solid color-mix(in srgb, var(--accent-light) 42%, transparent);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--accent-light) 9%, transparent);
+    color: var(--accent);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    white-space: nowrap;
+  }
+  .theme-homecoming .timeline > .timeline-item time {
+    border-color: rgba(218,170,84,.38);
+    background: rgba(218,153,64,.08);
+    color: #efc876;
+  }
+}
+
+/* ── Countdown section: fade at the bottom into the next section ──────── */
+/*
+ * Adds a smooth gradient at the bottom edge of the countdown card,
+ * preventing the stark colour-break when scrolling into the schedule
+ * section's video backdrop.
+ */
+.countdown-section {
+  position: relative;
+}
+.countdown-section::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: clamp(3.5rem, 10vw, 6rem);
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+}
+.theme-homecoming .countdown-section::before {
+  background: linear-gradient(to bottom, transparent, #1d0009);
+}
+
+/* ── Homecoming: smooth top + bottom fades on all cinematic sections ───── */
+.theme-homecoming .invitation-message,
+.theme-homecoming .arrival-section,
+.theme-homecoming .gallery-section,
+.theme-homecoming .celebration-section,
+.theme-homecoming .location-section,
+.theme-homecoming .rsvp-section {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Top-edge fade — blends in from section above */
+.theme-homecoming .invitation-message::before,
+.theme-homecoming .arrival-section::before,
+.theme-homecoming .gallery-section::before,
+.theme-homecoming .rsvp-section::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: clamp(4rem, 12vw, 7rem);
+  background: linear-gradient(to bottom, #1d0009, transparent);
+  pointer-events: none;
+}
+
+/* Bottom-edge fade — bleeds into section below */
+.theme-homecoming .invitation-message::after,
+.theme-homecoming .arrival-section::after,
+.theme-homecoming .gallery-section::after,
+.theme-homecoming .celebration-section::after,
+.theme-homecoming .location-section::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: clamp(4rem, 12vw, 7rem);
+  background: linear-gradient(to bottom, transparent, #1d0009);
+  pointer-events: none;
+}
+
+/* Arrival section: shallower fades (already has a card-centred layout) */
+.theme-homecoming .arrival-section::before {
+  height: clamp(2.5rem, 7vw, 4.5rem);
+  background: linear-gradient(to bottom, rgba(29, 0, 9, .9), transparent);
+}
+.theme-homecoming .arrival-section::after {
+  height: clamp(2.5rem, 7vw, 4.5rem);
+  background: linear-gradient(to bottom, transparent, rgba(29, 0, 9, .9));
+}
+
+/* Ensure content layers sit above fade overlays */
+.theme-homecoming .invitation-message .message-heading,
+.theme-homecoming .arrival-section .arrival-card,
+.theme-homecoming .gallery-section .gallery-grid,
+.theme-homecoming .rsvp-section .rsvp-card,
+.theme-homecoming .celebration-section .celebration-content,
+.theme-homecoming .location-section .location-card {
+  position: relative;
+  z-index: 2;
+}
+
+/* Reduced motion: stop the ring sweep */
+@media (prefers-reduced-motion: reduce) {
+  .arrival-time-ring::before { animation: none; }
 }

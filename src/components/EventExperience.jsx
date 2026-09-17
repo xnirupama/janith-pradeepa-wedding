@@ -20,6 +20,19 @@ import ClosingSection from "./ClosingSection";
 import SectionNavigator from "./SectionNavigator";
 
 function InvitationMessage({ invitation, active }) {
+  const dp = invitation.dateParts;
+  // Parse the time directly from the countdownTarget ISO string (e.g. "2026-11-26T09:16:00+05:30")
+  // This is deterministic on both server and client — avoids locale hydration mismatch.
+  const timeMatch = invitation.countdownTarget.match(/T(\d{2}):(\d{2})/);
+  let eventTime = "";
+  if (timeMatch) {
+    const h = parseInt(timeMatch[1], 10);
+    const m = timeMatch[2];
+    const ampm = h >= 12 ? "PM" : "AM";
+    const h12 = h % 12 === 0 ? 12 : h % 12;
+    eventTime = `${h12}:${m} ${ampm}`;
+  }
+
   return (
     <section className="invitation-message cinematic-section section-shell" id="invitation-message">
       <VideoBackdrop src={invitation.sectionVideos.invitation} fallbackSrc={invitation.videos.feature} poster={invitation.videoPosters?.invitation} fallbackPoster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
@@ -27,7 +40,23 @@ function InvitationMessage({ invitation, active }) {
         <div className="heritage-section-emblem" aria-hidden="true"><Sparkles size={17} /></div>
         <p className="section-kicker">Together with joyful hearts</p>
         {invitation.intro.map((line) => <p key={line}>{line}</p>)}
-        <h2>{invitation.displayDate}</h2>
+
+        {/* Premium date plaque */}
+        <div className="msg-date-plaque" aria-label={invitation.displayDate}>
+          <span className="msg-date-weekday">{dp?.weekday ?? ""}</span>
+          <div className="msg-date-main">
+            <strong className="msg-date-day">{dp?.day ?? ""}</strong>
+            <div className="msg-date-month-year">
+              <span className="msg-date-month">{dp?.month ?? ""}</span>
+              <span className="msg-date-year">{dp?.year ?? ""}</span>
+            </div>
+          </div>
+          <div className="msg-date-time-row" aria-label={`Ceremony begins at ${eventTime}`}>
+            <span className="msg-date-time-dot" aria-hidden="true" />
+            <time className="msg-date-time">{eventTime}</time>
+          </div>
+        </div>
+
         <span className="ornament"><i /><Heart size={13} fill="currentColor" /><i /></span>
         <div className="sentiment">
           {invitation.sentiment.map((line) => <p key={line}>{line}</p>)}
