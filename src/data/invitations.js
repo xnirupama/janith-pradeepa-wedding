@@ -84,6 +84,7 @@ export const invitations = {
       addressLines: [],
       description: "We look forward to welcoming you there for our wedding celebration.",
       mapsUrl: "https://maps.app.goo.gl/urnjWCBNcUmjTYrZ7",
+      contact: { phone: "+94775339705", display: "077 533 9705" },
     },
     calendar: {
       allDay: false,
@@ -165,6 +166,7 @@ export const invitations = {
       addressLines: ["Pitigala"],
       description: "The Homecoming Celebration will take place at the house in Pitigala.",
       mapsUrl: "",
+      contact: { phone: "+94705525625", display: "0705 525 625" },
     },
     calendar: {
       allDay: true,
