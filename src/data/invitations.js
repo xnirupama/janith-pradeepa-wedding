@@ -48,6 +48,7 @@ export const invitations = {
       feature: "/assets/wedding/videos/wedding-floral-loop.mp4",
       closing: "/assets/wedding/videos/wedding-closing-loop.mp4",
     },
+    heroPlaybackRate: 0.5,
     sectionVideos: {
       invitation: "/assets/wedding/videos/wedding-floral-frame-loop.mp4",
       feature: "/assets/wedding/videos/wedding-floral-frame-loop.mp4",

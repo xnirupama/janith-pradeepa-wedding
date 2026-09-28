@@ -75,7 +75,7 @@ img, video { max-width: 100%; }
 }
 .blessing { margin: 0; font-size: .72rem; font-weight: 700; letter-spacing: .22em; }
 .sinhala-blessing { margin: .55rem 0 0; font-family: sans-serif; font-size: .88rem; letter-spacing: .06em; }
-.couple-signature { font-family: var(--font-signature); font-weight: 400; }
+.couple-signature { font-family: var(--font-display), "Cormorant Garamond", Georgia, serif; font-weight: 600; letter-spacing: .05em; }
 .ornament { display: inline-flex; align-items: center; gap: .75rem; color: var(--accent); }
 .ornament i { display: block; width: 2.75rem; height: 1px; background: currentColor; opacity: .55; }
 
@@ -135,7 +135,7 @@ img, video { max-width: 100%; }
 .gate-frame::before { top: 1rem; left: 1rem; border-top: 1px solid; border-left: 1px solid; }
 .gate-frame::after { right: 1rem; bottom: 1rem; border-right: 1px solid; border-bottom: 1px solid; }
 .gate-card .ornament { margin: 1.45rem 0 .7rem; }
-.gate-card h1 { margin: .2rem 0 .65rem; color: var(--accent); font-size: clamp(3.5rem, 16vw, 6.7rem); line-height: .9; }
+.gate-card h1 { margin: .3rem 0 .65rem; color: var(--accent); font-family: var(--font-display), "Cormorant Garamond", Georgia, serif; font-size: clamp(2.3rem, 8vw, 3.8rem); font-weight: 600; letter-spacing: .05em; line-height: 1.1; }
 .gate-title { margin: 1rem 0 .4rem; font-family: var(--font-display); font-size: clamp(1.3rem, 5vw, 1.85rem); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
 .gate-date { margin: 0; color: var(--muted); font-size: .76rem; letter-spacing: .11em; text-transform: uppercase; }
 .gate-button { margin-top: 2rem; }
@@ -315,7 +315,7 @@ img, video { max-width: 100%; }
 .hero-sinhala { margin: .65rem 0 0; font-family: sans-serif; font-size: .9rem; letter-spacing: .08em; }
 .fine-rule { display: block; width: 1px; height: 4rem; margin: 1.4rem auto; background: linear-gradient(transparent, currentColor, transparent); opacity: .66; }
 .hero-eyebrow { margin: 0 0 .3rem; font-family: var(--font-display); font-size: clamp(1rem, 3vw, 1.4rem); letter-spacing: .14em; text-transform: uppercase; }
-.hero-content h1 { margin: 0; font-family: var(--font-signature); font-size: clamp(4.2rem, 18vw, 10rem); font-weight: 400; line-height: .9; }
+.hero-content h1 { margin: 0; font-family: var(--font-display), "Cormorant Garamond", Georgia, serif; font-size: clamp(3.2rem, 11vw, 6.4rem); font-weight: 600; letter-spacing: .04em; line-height: 1.02; }
 .hero-date { margin: 1.6rem 0 0; font-size: clamp(.72rem, 2vw, .9rem); font-weight: 600; letter-spacing: .15em; text-transform: uppercase; }
 
 /* Invitation message and photo */
@@ -431,7 +431,7 @@ img, video { max-width: 100%; }
 .closing-content { width: min(760px, calc(100% - 2.5rem)); padding: 6rem 1rem max(6rem, env(safe-area-inset-bottom)); color: #fff8ed; text-align: center; }
 .closing-lead { margin: 0 auto 3.5rem; max-width: 590px; font-family: var(--font-display); font-size: clamp(1.25rem, 4vw, 1.7rem); line-height: 1.5; }
 .closing-heart { margin: 1.4rem 0 .5rem; color: var(--accent-light); }
-.closing-content h2 { margin: .5rem 0 2rem; font-family: var(--font-signature); font-size: clamp(4.2rem, 16vw, 8rem); font-weight: 400; line-height: .9; }
+.closing-content h2 { margin: .5rem 0 1.8rem; font-family: var(--font-display), "Cormorant Garamond", Georgia, serif; font-size: clamp(2.8rem, 9.5vw, 5.2rem); font-weight: 600; letter-spacing: .05em; line-height: 1.08; }
 .closing-copy p { margin: .25rem; line-height: 1.6; }
 .back-to-top { display: inline-flex; align-items: center; gap: .5rem; margin-top: 3.2rem; border: 0; border-bottom: 1px solid rgba(255,255,255,.4); background: transparent; color: inherit; padding: .6rem 0; cursor: pointer; font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 
@@ -445,7 +445,7 @@ img, video { max-width: 100%; }
 .root-blessing { margin: 0; color: #9b783f; font-size: .69rem; font-weight: 700; letter-spacing: .25em; }
 .root-sinhala { margin: .65rem 0 0; color: #756248; font-family: sans-serif; font-size: .85rem; }
 .root-heart { margin: 1.4rem 0 .4rem; color: #a37d40; }
-.root-content h1 { margin: 0; color: #8a6233; font-family: var(--font-signature); font-size: clamp(4.3rem, 15vw, 8.5rem); font-weight: 400; line-height: .9; }
+.root-content h1 { margin: 0; color: #8a6233; font-family: var(--font-display), "Cormorant Garamond", Georgia, serif; font-size: clamp(2.8rem, 9.5vw, 5.4rem); font-weight: 600; letter-spacing: .05em; line-height: 1.08; }
 .root-intro { width: min(500px, 100%); margin: 1.5rem auto 3rem; color: #756d63; font-family: var(--font-display); font-size: 1.15rem; line-height: 1.6; }
 .invitation-links { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .invitation-link { position: relative; display: grid; min-height: 15rem; grid-template-columns: auto 1fr auto; align-items: end; gap: 1rem; overflow: hidden; border: 1px solid rgba(151,111,50,.24); border-radius: 1.5rem; padding: 1.4rem; color: #4b3c2c; text-align: left; text-decoration: none; transition: transform .35s ease, box-shadow .35s ease; }
@@ -486,9 +486,9 @@ img, video { max-width: 100%; }
 
 @media (max-width: 380px) {
   .gate-card { width: 92vw; padding-inline: 1rem; }
-  .gate-card h1 { font-size: 3.25rem; }
+  .gate-card h1 { font-size: clamp(2rem, 8.5vw, 2.5rem); }
   .gate-title { font-size: 1.15rem; }
-  .hero-content h1 { font-size: 3.8rem; }
+  .hero-content h1 { font-size: clamp(2.3rem, 11vw, 2.85rem); }
   .countdown-card strong { font-size: 1.85rem; }
   .countdown-card span { font-size: .44rem; }
   .rsvp-card { border-radius: 1.4rem; }
@@ -795,8 +795,8 @@ img, video { max-width: 100%; }
 .hero-content .fine-rule { height: 2.7rem; margin: 1rem auto; }
 .hero-eyebrow { font-family: var(--font-body); font-size: .67rem; font-weight: 700; letter-spacing: .26em; }
 .hero-event-label { margin: .55rem 0 1rem; font-family: var(--font-display); font-size: clamp(1.05rem, 4vw, 1.5rem); letter-spacing: .08em; text-transform: uppercase; }
-.hero-content h1 { display: flex; flex-direction: column; align-items: center; font-size: clamp(4.8rem, 18vw, 8.8rem); line-height: .66; }
-.hero-content h1 i { margin: .25em 0 .12em; color: #d7b65f; font-family: var(--font-display); font-size: .32em; font-style: normal; line-height: 1; }
+.hero-content h1 { display: flex; flex-direction: column; align-items: center; font-family: var(--font-display), "Cormorant Garamond", Georgia, serif; font-size: clamp(3.2rem, 12vw, 6.2rem); font-weight: 600; letter-spacing: .04em; line-height: 1.02; }
+.hero-content h1 i { margin: .18em 0 .1em; color: #d7b65f; font-family: var(--font-display), "Cormorant Garamond", Georgia, serif; font-size: .45em; font-style: italic; line-height: 1; }
 .hero-date-medallion {
   position: relative;
   display: grid;
@@ -1309,32 +1309,34 @@ img, video { max-width: 100%; }
   min-width: 0;
   box-sizing: border-box;
   overflow: visible;
-  gap: clamp(.2rem, 1vw, .55rem);
-  margin-block: -.14em -.12em;
-  padding: .14em .18em .12em;
+  gap: clamp(.3rem, 1.2vw, .65rem);
+  margin-block: .2em .1em;
+  padding: .1em .18em;
   color: #7f2230;
   background: linear-gradient(180deg, #932e3c 0%, #671824 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: clamp(2.35rem, 7.2vw, 4.1rem);
-  font-weight: 400;
-  line-height: 1.05;
+  font-family: var(--font-display), "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.2rem, 6.8vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: .05em;
+  line-height: 1.1;
   white-space: nowrap;
 }
 
 .theme-wedding .wedding-gate-copy .couple-signature span {
   min-width: 0;
-  padding-inline: .08em;
+  padding-inline: .04em;
 }
 
-.theme-wedding .wedding-gate-copy .couple-signature span:first-child { padding-left: .16em; }
-.theme-wedding .wedding-gate-copy .couple-signature span:last-child { padding-right: .2em; }
+.theme-wedding .wedding-gate-copy .couple-signature span:first-child { padding-left: 0; }
+.theme-wedding .wedding-gate-copy .couple-signature span:last-child { padding-right: 0; }
 
 .theme-wedding .wedding-gate-copy .couple-signature i {
   color: #b18a43;
-  font-family: var(--font-display);
-  font-size: .52em;
+  font-family: var(--font-display), "Cormorant Garamond", Georgia, serif;
+  font-size: .65em;
   font-style: italic;
   -webkit-text-fill-color: #b18a43;
 }
@@ -1715,20 +1717,28 @@ img, video { max-width: 100%; }
 }
 
 .hero-content h1 {
-  gap: clamp(.08rem, .8vh, .45rem);
-  font-size: clamp(4.4rem, 16vw, 8.8rem);
-  line-height: .9;
+  gap: clamp(.05rem, .5vh, .25rem);
+  font-family: var(--font-display), "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(3.2rem, 12vw, 6.2rem);
+  font-weight: 600;
+  letter-spacing: .04em;
+  line-height: 1.02;
 }
 
 .hero-content h1 span {
   display: block;
-  line-height: .88;
+  line-height: 1;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, .45);
 }
 
 .hero-content h1 i {
-  margin: .06em 0;
-  font-size: .3em;
-  line-height: 1.1;
+  margin: .1em 0;
+  font-family: var(--font-display), "Cormorant Garamond", Georgia, serif;
+  font-size: .42em;
+  font-style: italic;
+  line-height: 1;
+  color: #d7b65f;
+  -webkit-text-fill-color: #d7b65f;
 }
 
 .hero-date-medallion { margin-top: clamp(1.35rem, 3vh, 2rem); }
@@ -2150,9 +2160,9 @@ img, video { max-width: 100%; }
   .hero-blessing { font-size: .68rem; letter-spacing: .22em; }
   .hero-sinhala { margin-top: .45rem; font-size: 1rem; }
   .hero-event-label { margin: .42rem 0 .72rem; }
-  .hero-content h1 { gap: clamp(.12rem, .8vh, .35rem); font-size: clamp(4rem, 17vw, 6.5rem); line-height: .92; }
-  .hero-content h1 span { line-height: .88; }
-  .hero-content h1 i { margin-block: .08em; }
+  .hero-content h1 { gap: clamp(.08rem, .6vh, .25rem); font-family: var(--font-display), "Cormorant Garamond", Georgia, serif; font-size: clamp(2.8rem, 13vw, 4.4rem); font-weight: 600; letter-spacing: .04em; line-height: 1.02; }
+  .hero-content h1 span { line-height: 1; }
+  .hero-content h1 i { margin-block: .06em; font-size: .42em; }
   .hero-date-medallion { width: 7.7rem; height: 7.7rem; }
   .hero-date-medallion strong { font-size: 2.9rem; }
 
@@ -2220,8 +2230,8 @@ img, video { max-width: 100%; }
 
 @media (max-width: 380px) {
   .hero-content { width: calc(100% - 2rem); min-height: calc(100svh - 2rem); }
-  .hero-content h1 { font-size: 3.9rem; }
-  .hero-content h1 i { font-size: .29em; }
+  .hero-content h1 { font-size: clamp(2.3rem, 11vw, 2.85rem); }
+  .hero-content h1 i { font-size: .42em; }
   .hero-date-medallion { width: 7.3rem; height: 7.3rem; }
   .gallery-tile:first-child { grid-column: 1 / -1; grid-row: span 3; }
 }
@@ -3106,13 +3116,13 @@ img, video { max-width: 100%; }
 /* Mid-range phones (414px–719px) */
 @media (min-width: 414px) and (max-width: 719px) {
   .gallery-grid { grid-auto-rows: 9.5rem; }
-  .hero-content h1 { font-size: clamp(4.55rem, 18vw, 7rem); }
+  .hero-content h1 { font-size: clamp(3rem, 12vw, 4.4rem); }
 }
 
 /* Small phones (≤ 360px) */
 @media (max-width: 360px) {
   .hero-content { padding: 3.2rem .85rem 5.5rem; }
-  .hero-content h1 { font-size: clamp(3.7rem, 18vw, 4.9rem); }
+  .hero-content h1 { font-size: clamp(2.2rem, 10.5vw, 2.6rem); }
   .message-heading { padding: 2.4rem 1rem; }
   .rsvp-card { padding: 2.3rem .9rem 1.9rem; }
   .countdown-card strong { font-size: clamp(2.3rem, 14vw, 3.2rem); }

@@ -13,6 +13,7 @@ export default function VideoBackdrop({
   overlay = "soft",
   position = "center",
   opacity = 1,
+  playbackRate = 1,
 }) {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
@@ -80,12 +81,25 @@ export default function VideoBackdrop({
     else video.pause();
   }, [active, loadProfile, nearby, videoSrc]);
 
+  // Apply playback rate whenever the video element is ready or the rate changes
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.playbackRate = playbackRate;
+  }, [playbackRate, ready]);
+
   const shouldMountVideo = Boolean(videoSrc && active && nearby && !failed && loadProfile !== "static");
 
   const handleVideoError = () => {
     setReady(false);
     if (!useFallback && fallbackSrc && fallbackSrc !== src) setUseFallback(true);
     else setFailed(true);
+  };
+
+  const handleCanPlay = () => {
+    const video = videoRef.current;
+    if (video) video.playbackRate = playbackRate;
+    setReady(true);
   };
 
   return (
@@ -110,7 +124,7 @@ export default function VideoBackdrop({
           playsInline
           preload="metadata"
           className={ready ? "is-ready" : ""}
-          onCanPlay={() => setReady(true)}
+          onCanPlay={handleCanPlay}
           onError={handleVideoError}
         />
       )}
