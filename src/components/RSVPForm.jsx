@@ -54,6 +54,27 @@ export default function RSVPForm({ invitation, active }) {
     return Object.keys(next).length === 0;
   };
 
+  const fireConfetti = async () => {
+    try {
+      const confetti = (await import("canvas-confetti")).default;
+      const burst = (originX) =>
+        confetti({
+          particleCount: 70,
+          spread: 80,
+          startVelocity: 38,
+          decay: 0.92,
+          origin: { x: originX, y: 0.78 },
+          colors: ["#d6a759", "#f1cd8d", "#8f2736", "#fff8e9", "#e8c97a", "#fce4ec"],
+          shapes: ["circle", "square"],
+          scalar: 0.95,
+        });
+      burst(0.28);
+      setTimeout(() => burst(0.72), 180);
+    } catch {
+      // confetti is decorative; silently ignore failures
+    }
+  };
+
   const submit = async (event) => {
     event.preventDefault();
     if (status === "sending" || cooldown > 0) return;
@@ -80,6 +101,7 @@ export default function RSVPForm({ invitation, active }) {
             : "Your response has been received. We truly appreciate you letting us know.",
       );
       setCooldown(SUBMISSION_COOLDOWN);
+      if (form.attending === "yes") fireConfetti();
     } catch (error) {
       setStatus("error");
       setServerMessage(error.message);

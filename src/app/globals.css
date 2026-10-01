@@ -142,21 +142,8 @@ img, video { max-width: 100%; }
 
 /* Atmosphere and music */
 .atmosphere { position: fixed; z-index: 1; inset: 0; overflow: hidden; pointer-events: none; }
-.atmosphere i {
-  --size: calc(3px + (var(--i) % 4) * 2px);
-  position: absolute;
-  bottom: -3rem;
-  left: calc(6% + var(--i) * 9%);
-  width: var(--size);
-  height: var(--size);
-  border-radius: 50%;
-  background: var(--accent-light);
-  box-shadow: 0 0 14px 3px color-mix(in srgb, var(--accent-light) 55%, transparent);
-  opacity: .25;
-  animation: float-light calc(16s + var(--i) * 1.5s) linear infinite;
-  animation-delay: calc(var(--i) * -2.2s);
-}
-@keyframes float-light { to { transform: translate3d(calc((var(--i) % 3 - 1) * 35px), -115vh, 0); } }
+/* Atmosphere particles — see ENHANCEMENTS section at end of file */
+
 .music-control {
   position: fixed;
   z-index: 950;
@@ -354,11 +341,10 @@ img, video { max-width: 100%; }
 /* Countdown */
 .countdown-section { position: relative; z-index: 2; background: var(--bg); }
 .countdown-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(.45rem, 2vw, 1.2rem); width: min(880px, 100%); margin: 0 auto; }
-.countdown-card { position: relative; display: flex; min-width: 0; aspect-ratio: .82; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; border: 1px solid var(--line); border-radius: clamp(1rem, 3vw, 2rem); background: var(--surface); box-shadow: inset 0 1px rgba(255,255,255,.3), 0 18px 45px rgba(43,20,11,.08); backdrop-filter: blur(10px); }
-.countdown-card::before { content: ""; position: absolute; top: 10%; width: 40%; height: 1px; background: var(--accent); opacity: .45; }
-.countdown-card strong { min-width: 2ch; font-family: var(--font-display); font-size: clamp(2rem, 10vw, 5.5rem); font-weight: 500; font-variant-numeric: tabular-nums; line-height: 1; text-align: center; }
-.countdown-card span { margin-top: .8rem; color: var(--accent); font-size: clamp(.48rem, 1.7vw, .7rem); font-weight: 700; letter-spacing: .15em; }
+.countdown-card { position: relative; display: flex; min-width: 0; flex-direction: column; align-items: center; justify-content: flex-start; border: 1px solid var(--line); border-radius: clamp(1rem, 3vw, 2rem); background: var(--surface); box-shadow: inset 0 1px rgba(255,255,255,.3), 0 18px 45px rgba(43,20,11,.08); backdrop-filter: blur(10px); }
+/* countdown-card::before replaced by .flip-container::after crease line */
 .countdown-complete { margin: 2rem auto 0; color: var(--accent); text-align: center; }
+
 
 /* Gallery */
 .gallery-section { position: relative; z-index: 2; padding-top: 3rem; background: var(--bg); }
@@ -3489,3 +3475,351 @@ img, video { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   .arrival-time-ring::before { animation: none; }
 }
+
+/* ============================================================
+   ENHANCEMENTS — Floating Atmosphere, Flip Countdown,
+   Gallery Masonry, Lightbox Extras, Gate Ribbon, Parallax
+   ============================================================ */
+
+/* --- Floating Atmosphere Particles --- */
+.atmosphere i { --size: 0; width: var(--atm-size, 4px); height: var(--atm-size, 4px); left: var(--atm-left, 50%); bottom: -3rem; opacity: var(--atm-opacity, 0.28); animation-duration: var(--atm-dur, 20s); animation-delay: var(--atm-delay, 0s); animation-timing-function: linear; animation-iteration-count: infinite; animation-name: atm-rise; }
+@keyframes atm-rise {
+  0%   { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); opacity: 0; }
+  8%   { opacity: var(--atm-opacity, 0.28); }
+  85%  { opacity: var(--atm-opacity, 0.18); }
+  100% { transform: translate3d(var(--atm-drift, 0px), -115vh, 0) scale(0.7) rotate(180deg); opacity: 0; }
+}
+
+/* Orb — round glowing bead */
+.atm-shape-0 {
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-light), color-mix(in srgb, var(--accent-light) 30%, transparent));
+  box-shadow: 0 0 12px 4px color-mix(in srgb, var(--accent-light) 55%, transparent);
+}
+
+/* Petal — soft oval with a hint of the invite palette */
+.atm-shape-1 {
+  border-radius: 50% 0 50% 0;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-light) 90%, white), color-mix(in srgb, var(--accent) 60%, transparent));
+  box-shadow: 0 0 8px 2px color-mix(in srgb, var(--accent-light) 35%, transparent);
+  transform-origin: center center;
+}
+
+/* Sparkle — 4-pointed star via clip-path */
+.atm-shape-2 {
+  background: var(--accent-light);
+  clip-path: polygon(50% 0%, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0% 50%, 38% 38%);
+  box-shadow: none;
+}
+
+/* --- 3D Flip-Card Countdown --- */
+.countdown-card {
+  perspective: 600px;
+  overflow: visible;
+  padding-bottom: 2.5rem;
+}
+
+.flip-container {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 2.5rem);
+  min-height: 4.5rem;
+}
+
+/* Back faces (new value always behind) */
+.flip-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.flip-half {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Number spans inside faces */
+.flip-half span {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 10vw, 5.2rem);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+  line-height: 1;
+  user-select: none;
+}
+
+/* Back-top: number vertically aligned to bottom (top half shows top of digit) */
+.flip-back-top { align-items: flex-end; }
+.flip-back-top span { transform: translateY(50%); }
+
+/* Back-bottom: number vertically aligned to top */
+.flip-back-bottom { align-items: flex-start; }
+.flip-back-bottom span { transform: translateY(-50%); }
+
+/* Front faces — the visible ones before flip */
+.flip-front-top,
+.flip-front-bottom {
+  position: absolute;
+  left: 0; right: 0;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: inherit;
+  z-index: 2;
+  transform-origin: bottom center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.flip-front-top {
+  top: 0;
+  align-items: flex-end;
+  transform-origin: bottom center;
+  transition: transform 0.34s cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+.flip-front-top span { transform: translateY(50%); }
+
+.flip-front-bottom {
+  bottom: 0;
+  align-items: flex-start;
+  transform-origin: top center;
+}
+.flip-front-bottom span { transform: translateY(-50%); }
+
+/* The actual fold animation */
+.flip-container.is-flipping .flip-front-top {
+  transform: rotateX(-90deg);
+}
+
+/* Fold crease line between the two halves */
+.flip-container::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 4%;
+  right: 4%;
+  height: 1px;
+  background: color-mix(in srgb, var(--line) 80%, transparent);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.countdown-label {
+  position: absolute;
+  bottom: .65rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: var(--accent);
+  font-size: clamp(.48rem, 1.7vw, .7rem);
+  font-weight: 700;
+  letter-spacing: .15em;
+}
+
+/* --- Gallery: improved masonry tile sizing --- */
+.gallery-grid {
+  grid-auto-rows: 8.5rem;
+}
+
+/* Mobile: tighter masonry 2-col */
+@media (max-width: 719px) {
+  .gallery-grid { grid-auto-rows: 7rem; gap: .5rem; }
+  .gallery-tile.tile-1 { grid-row: span 3; }
+  .gallery-tile.tile-2 { grid-row: span 2; }
+  .gallery-tile.tile-3 { grid-row: span 2; }
+  .gallery-tile.tile-4 { grid-row: span 3; }
+  .gallery-tile.tile-5 { grid-row: span 2; }
+}
+
+/* Desktop 3-col masonry */
+@media (min-width: 720px) {
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 8rem; gap: .9rem; }
+  .gallery-tile.tile-1 { grid-row: span 3; }
+  .gallery-tile.tile-2 { grid-row: span 2; }
+  .gallery-tile.tile-3 { grid-row: span 2; }
+  .gallery-tile.tile-4 { grid-row: span 3; }
+  .gallery-tile.tile-5 { grid-row: span 2; }
+}
+
+/* Tile hover shimmer */
+.gallery-tile button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0) 40%, rgba(255,255,255,.12) 60%, rgba(255,255,255,0) 80%);
+  background-size: 200% 200%;
+  opacity: 0;
+  transition: opacity .4s ease, background-position .6s ease;
+  pointer-events: none;
+  border-radius: inherit;
+}
+.gallery-tile button:hover::after,
+.gallery-tile button:focus-visible::after {
+  opacity: 1;
+  background-position: 100% 100%;
+}
+
+/* --- Lightbox: dots, caption, swipe hint --- */
+.lightbox-dots {
+  position: absolute;
+  bottom: max(4.8rem, calc(env(safe-area-inset-bottom) + 4.2rem));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: .42rem;
+  align-items: center;
+  z-index: 3;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 80vw;
+}
+
+.lightbox-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.35);
+  transition: background .22s ease, transform .22s ease, width .22s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.lightbox-dot.is-active {
+  background: rgba(255,255,255,.92);
+  width: 18px;
+  border-radius: 3px;
+}
+
+.lightbox-caption {
+  position: absolute;
+  bottom: max(7.5rem, calc(env(safe-area-inset-bottom) + 6.8rem));
+  left: 1.5rem;
+  right: 1.5rem;
+  margin: 0;
+  color: rgba(255,255,255,.82);
+  font-size: .75rem;
+  font-style: italic;
+  letter-spacing: .04em;
+  line-height: 1.6;
+  text-align: center;
+  text-shadow: 0 2px 12px rgba(0,0,0,.55);
+  z-index: 3;
+}
+
+.lightbox-swipe-hint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .6rem 1.2rem;
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 999px;
+  background: rgba(10,0,5,.45);
+  color: rgba(255,255,255,.88);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  pointer-events: none;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+/* On large screens, hide the swipe hint (use keyboard arrows) */
+@media (min-width: 720px) {
+  .lightbox-swipe-hint { display: none; }
+}
+
+/* --- Gate: styled guest-name ribbon --- */
+.gate-personalization {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .35rem;
+  top: clamp(1.6rem, 4.5vh, 2.8rem);
+  left: 50%;
+  right: auto;
+  width: min(80vw, 22rem);
+  transform: translateX(-50%);
+  padding: .5rem 1.2rem .55rem;
+  border: 1px solid color-mix(in srgb, var(--accent-light) 50%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-strong) 78%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 24px rgba(0,0,0,.12), inset 0 1px rgba(255,255,255,.5);
+  letter-spacing: .16em;
+}
+
+.gate-personalization strong {
+  display: block;
+  margin-top: .15rem;
+  color: var(--accent);
+  font-family: var(--font-signature);
+  font-size: clamp(1.45rem, 5vw, 2rem);
+  font-weight: 400;
+  letter-spacing: .04em;
+  line-height: 1;
+  text-transform: none;
+  overflow-wrap: anywhere;
+}
+
+.theme-wedding .gate-personalization {
+  background: rgba(255, 251, 240, .82);
+  border-color: rgba(186, 148, 66, .55);
+  color: #755f3c;
+}
+.theme-wedding .gate-personalization strong { color: #7b2432; }
+
+.theme-homecoming .gate-personalization {
+  background: rgba(50, 5, 18, .75);
+  border-color: rgba(220, 170, 80, .48);
+  color: #e5c9c5;
+}
+.theme-homecoming .gate-personalization strong { color: var(--accent-light); }
+
+/* --- Celebration parallax content wrapper --- */
+.celebration-content-wrap {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  padding: clamp(3.5rem, 10vw, 6rem) clamp(1.2rem, 5vw, 3.5rem);
+}
+
+.celebration-content-wrap .celebration-content {
+  width: min(720px, calc(100% - 2.5rem));
+  padding: 0;
+  will-change: transform;
+}
+
+/* Ensure homecoming z-index override applies to the new wrapper too */
+.theme-homecoming .celebration-section .celebration-content-wrap,
+.theme-homecoming .celebration-section .celebration-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* canvas-confetti renders a fixed canvas — keep it above content, below dialogs */
+canvas.confetti-canvas { z-index: 1050 !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .atm-shape-0, .atm-shape-1, .atm-shape-2 { animation: none !important; }
+  .flip-front-top, .flip-container.is-flipping .flip-front-top { transition: none !important; transform: none !important; }
+}
+

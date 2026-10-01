@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useReducedMotion, useScroll, useTransform, motion } from "framer-motion";
 import { Heart, Sparkles } from "lucide-react";
 import InvitationGate from "./InvitationGate";
 import OpeningFilm from "./OpeningFilm";
@@ -89,15 +90,21 @@ function Arrival({ arrival, invitation, active }) {
 }
 
 function Celebration({ invitation, active }) {
+  const sectionRef = useRef(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const contentY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [-28, 28]);
   return (
-    <section className="celebration-section cinematic-section" style={{ "--section-image": `url(${invitation.backgrounds.section})` }}>
+    <section ref={sectionRef} className="celebration-section cinematic-section" style={{ "--section-image": `url(${invitation.backgrounds.section})` }}>
       <VideoBackdrop src={invitation.videos.feature} poster={invitation.videoPosters?.feature} fallbackPoster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="none" className="feature-video" />
       <div className="celebration-scrim" />
-      <SectionReveal className="celebration-content">
-        <div className="heritage-section-emblem heritage-section-emblem-light" aria-hidden="true"><Heart size={15} fill="currentColor" /></div>
-        <p className="section-kicker">Together is a beautiful place to be</p>
-        <h2>Celebrate With Us</h2>
-        {invitation.celebration.map((line) => <p key={line}>{line}</p>)}
+      <SectionReveal className="celebration-content-wrap">
+        <motion.div className="celebration-content" style={{ y: contentY }}>
+          <div className="heritage-section-emblem heritage-section-emblem-light" aria-hidden="true"><Heart size={15} fill="currentColor" /></div>
+          <p className="section-kicker">Together is a beautiful place to be</p>
+          <h2>Celebrate With Us</h2>
+          {invitation.celebration.map((line) => <p key={line}>{line}</p>)}
+        </motion.div>
       </SectionReveal>
     </section>
   );

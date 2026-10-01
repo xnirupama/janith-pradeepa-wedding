@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import SectionReveal from "./SectionReveal";
 import VideoBackdrop from "./VideoBackdrop";
 
@@ -19,6 +18,48 @@ function calculate(target) {
   };
 }
 
+function FlipCard({ value, label }) {
+  const padded = String(value).padStart(2, "0");
+  const prevRef = useRef(padded);
+  const [flipping, setFlipping] = useState(false);
+  const [displayPrev, setDisplayPrev] = useState(padded);
+  const [displayNext, setDisplayNext] = useState(padded);
+
+  useEffect(() => {
+    if (padded === prevRef.current) return;
+    const prev = prevRef.current;
+    prevRef.current = padded;
+    setDisplayPrev(prev);
+    setDisplayNext(padded);
+    setFlipping(false);
+    // Tiny rAF pause so state flushes before CSS class triggers transition
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => setFlipping(true));
+    });
+  }, [padded]);
+
+  return (
+    <div className="countdown-card" role="timer">
+      <div className={`flip-container ${flipping ? "is-flipping" : ""}`} aria-label={`${value} ${label}`}>
+        {/* Static back face (new value, revealed after flip) */}
+        <div className="flip-back" aria-hidden="true">
+          <div className="flip-half flip-back-top"><span>{displayNext}</span></div>
+          <div className="flip-half flip-back-bottom"><span>{displayNext}</span></div>
+        </div>
+        {/* Front face top (old value - folds away) */}
+        <div className={`flip-half flip-front-top ${flipping ? "fold-top" : ""}`} aria-hidden="true">
+          <span>{displayPrev}</span>
+        </div>
+        {/* Static front bottom (old value, stays) */}
+        <div className="flip-half flip-front-bottom" aria-hidden="true">
+          <span>{displayPrev}</span>
+        </div>
+      </div>
+      <span className="countdown-label">{label}</span>
+    </div>
+  );
+}
+
 export default function Countdown({ invitation, active }) {
   const [remaining, setRemaining] = useState(null);
 
@@ -31,9 +72,9 @@ export default function Countdown({ invitation, active }) {
 
   const units = [
     ["days", "DAYS"],
-    ["hours", "HOURS"],
-    ["minutes", "MINUTES"],
-    ["seconds", "SECONDS"],
+    ["hours", "HRS"],
+    ["minutes", "MIN"],
+    ["seconds", "SEC"],
   ];
 
   return (
@@ -44,26 +85,10 @@ export default function Countdown({ invitation, active }) {
         <h2 id="countdown-title">{invitation.countdownHeading}</h2>
         <p>{invitation.countdownText}</p>
       </SectionReveal>
-      <SectionReveal className="countdown-grid" aria-live="polite">
-        {units.map(([key, label]) => {
-          const value = remaining ? remaining[key] : 0;
-          return (
-            <div className="countdown-card" key={key}>
-              <AnimatePresence mode="popLayout" initial={false}>
-                <motion.strong
-                  key={value}
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8, position: "absolute" }}
-                  transition={{ duration: 0.25 }}
-                >
-                  {String(value).padStart(2, "0")}
-                </motion.strong>
-              </AnimatePresence>
-              <span>{label}</span>
-            </div>
-          );
-        })}
+      <SectionReveal className="countdown-grid" aria-live="polite" aria-atomic="true">
+        {units.map(([key, label]) => (
+          <FlipCard key={key} value={remaining ? remaining[key] : 0} label={label} />
+        ))}
       </SectionReveal>
       {remaining?.complete && <p className="countdown-complete">{invitation.countdownComplete}</p>}
     </section>

@@ -162,11 +162,11 @@ export const invitations = {
     },
     location: {
       enabled: true,
-      name: "At the House",
-      address: "Pitigala",
-      addressLines: ["Pitigala"],
-      description: "The Homecoming Celebration will take place at the house in Pitigala.",
-      mapsUrl: "",
+      name: "Senwin Mandeer",
+      address: "Thalgaswala",
+      addressLines: ["Thalgaswala"],
+      description: "We look forward to welcoming you there for our Homecoming Celebration.",
+      mapsUrl: "https://share.google/yjhuVkqNNSOrz0HFx",
       contact: { phone: "+94705525625", display: "0705 525 625" },
     },
     calendar: {
@@ -175,7 +175,7 @@ export const invitations = {
       endDate: "20261201",
       title: "Janith & Pradeepa — Homecoming Celebration",
       description: "Arrival of the Newlyweds — 11:08 AM. The celebration continues throughout the day and into the evening.",
-      location: "House in Pitigala",
+      location: "Senwin Mandeer, Thalgaswala",
     },
   },
 };

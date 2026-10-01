@@ -10,6 +10,7 @@ import VideoBackdrop from "./VideoBackdrop";
 export default function Gallery({ images, invitation, contentActive }) {
   const [active, setActive] = useState(null);
   const [loaded, setLoaded] = useState({});
+  const [swipeHinted, setSwipeHinted] = useState(false);
   const touchStart = useRef(null);
 
   const close = useCallback(() => setActive(null), []);
@@ -26,11 +27,17 @@ export default function Gallery({ images, invitation, contentActive }) {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
+
+    // Show swipe hint on first lightbox open (mobile UX)
+    if (!swipeHinted) {
+      setSwipeHinted(true);
+    }
+
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKey);
     };
-  }, [active, close, next, previous]);
+  }, [active, close, next, previous, swipeHinted]);
 
   useEffect(() => {
     if (active === null || images.length < 2) return;
@@ -45,6 +52,9 @@ export default function Gallery({ images, invitation, contentActive }) {
   }, [active, images]);
 
   if (!images.length) return null;
+
+  const activeImage = active !== null ? images[active] : null;
+  const caption = activeImage?.alt && activeImage.alt !== "Gallery photo" ? activeImage.alt : null;
 
   return (
     <section className="gallery-section cinematic-section section-shell" aria-labelledby="gallery-title">
@@ -91,6 +101,52 @@ export default function Gallery({ images, invitation, contentActive }) {
               </motion.div>
             </AnimatePresence>
             <button className="lightbox-nav lightbox-next" type="button" onClick={(e) => { e.stopPropagation(); next(); }} aria-label="Next image"><ChevronRight /></button>
+
+            {/* Dot indicators */}
+            {images.length > 1 && (
+              <div className="lightbox-dots" aria-hidden="true">
+                {images.map((_, i) => (
+                  <span
+                    key={i}
+                    className={`lightbox-dot ${i === active ? "is-active" : ""}`}
+                    onClick={(e) => { e.stopPropagation(); setActive(i); }}
+                  />
+                ))}
+              </div>
+            )}
+
+            {/* Caption */}
+            {caption && (
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={caption}
+                  className="lightbox-caption"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.22 }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {caption}
+                </motion.p>
+              </AnimatePresence>
+            )}
+
+            {/* Swipe hint — shown only on the very first open, mobile */}
+            {swipeHinted && active === 0 && images.length > 1 && (
+              <motion.div
+                className="lightbox-swipe-hint"
+                initial={{ opacity: 0, x: 0 }}
+                animate={{ opacity: [0, 1, 1, 0], x: [0, -18, 18, 0] }}
+                transition={{ duration: 1.6, delay: 0.5, times: [0, 0.25, 0.75, 1] }}
+                aria-hidden="true"
+              >
+                <ChevronLeft size={16} />
+                <span>Swipe</span>
+                <ChevronRight size={16} />
+              </motion.div>
+            )}
+
             <div className="lightbox-progress" aria-hidden="true"><i style={{ transform: `scaleX(${(active + 1) / images.length})` }} /></div>
             <span className="lightbox-count">{String(active + 1).padStart(2, "0")} <i>/</i> {String(images.length).padStart(2, "0")}</span>
           </motion.div>
