@@ -341,9 +341,92 @@ img, video { max-width: 100%; }
 /* Countdown */
 .countdown-section { position: relative; z-index: 2; background: var(--bg); }
 .countdown-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(.45rem, 2vw, 1.2rem); width: min(880px, 100%); margin: 0 auto; }
-.countdown-card { position: relative; display: flex; min-width: 0; flex-direction: column; align-items: center; justify-content: flex-start; border: 1px solid var(--line); border-radius: clamp(1rem, 3vw, 2rem); background: var(--surface); box-shadow: inset 0 1px rgba(255,255,255,.3), 0 18px 45px rgba(43,20,11,.08); backdrop-filter: blur(10px); }
-/* countdown-card::before replaced by .flip-container::after crease line */
+.countdown-card {
+  position: relative; display: flex; min-width: 0; flex-direction: column;
+  align-items: center; justify-content: center; gap: .65rem;
+  padding: clamp(.75rem, 2.5vw, 1.4rem) clamp(.5rem, 2vw, 1rem) clamp(.55rem, 2vw, 1rem);
+  border: 1px solid var(--line); border-radius: clamp(1rem, 3vw, 2rem);
+  background: var(--surface);
+  box-shadow: inset 0 1px rgba(255,255,255,.3), 0 18px 45px rgba(43,20,11,.08);
+  backdrop-filter: blur(10px);
+}
+
+/* ── Flip-clock inner layout ── */
+.flip-container {
+  position: relative;
+  width: 100%; max-width: clamp(3.8rem, 12vw, 7rem);
+  height: clamp(4rem, 14vw, 7.5rem);
+  perspective: 600px;
+}
+
+/* Centre-line crease */
+.flip-container::after {
+  content: "";
+  position: absolute; z-index: 10;
+  left: 0; right: 0; top: 50%;
+  height: 2px;
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Shared half styles */
+.flip-half {
+  position: absolute; left: 0; right: 0;
+  height: 50%; overflow: hidden;
+  display: flex; align-items: flex-end; justify-content: center;
+  background: var(--surface);
+  border-radius: .55rem;
+}
+.flip-half span {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 8vw, 4.2rem);
+  font-weight: 700;
+  line-height: 2;            /* pushes text so it aligns with the crease */
+  letter-spacing: -.02em;
+  color: var(--ink);
+  user-select: none;
+}
+
+/* Top half: number sits at bottom of the box (crease edge) */
+.flip-back-top, .flip-front-top { top: 0; align-items: flex-end; border-radius: .55rem .55rem 0 0; }
+.flip-back-top span, .flip-front-top span { transform: translateY(50%); }
+
+/* Bottom half: number sits at top of the box (crease edge) */
+.flip-back-bottom, .flip-front-bottom { bottom: 0; align-items: flex-start; border-radius: 0 0 .55rem .55rem; }
+.flip-back-bottom span, .flip-front-bottom span { transform: translateY(-50%); }
+
+/* Back face (new value) always visible beneath */
+.flip-back { position: absolute; inset: 0; }
+.flip-back-top  { z-index: 1; }
+.flip-back-bottom { z-index: 1; }
+
+/* Front top (old value, folds away downward) */
+.flip-front-top { z-index: 4; transform-origin: bottom center; }
+.fold-top {
+  animation: flipTopDown .42s cubic-bezier(.45,0,.55,1) forwards;
+}
+@keyframes flipTopDown {
+  0%   { transform: rotateX(0deg); }
+  100% { transform: rotateX(-180deg); }
+}
+
+/* Front bottom stays static while top folds */
+.flip-front-bottom { z-index: 2; }
+
+/* ── Countdown label ── */
+.countdown-label {
+  display: block;
+  font-size: clamp(.5rem, 1.4vw, .72rem);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+}
 .countdown-complete { margin: 2rem auto 0; color: var(--accent); text-align: center; }
+
 
 
 /* Gallery */
@@ -459,8 +542,8 @@ img, video { max-width: 100%; }
 @media (max-width: 719px) {
   .section-shell { padding-inline: max(1.15rem, env(safe-area-inset-left)); }
   .countdown-grid { gap: .4rem; }
-  .countdown-card { border-radius: .9rem; aspect-ratio: .76; }
-  .countdown-card span { letter-spacing: .08em; }
+  .countdown-card { border-radius: .9rem; }
+  .countdown-card .flip-half span { letter-spacing: .08em; }
   .timeline > div { grid-template-columns: 2rem 1fr; gap: .7rem; }
   .timeline > div time, .timeline > div span { grid-column: 2; }
   .photo-caption { right: .3rem; }
@@ -475,8 +558,8 @@ img, video { max-width: 100%; }
   .gate-card h1 { font-size: clamp(2rem, 8.5vw, 2.5rem); }
   .gate-title { font-size: 1.15rem; }
   .hero-content h1 { font-size: clamp(2.3rem, 11vw, 2.85rem); }
-  .countdown-card strong { font-size: 1.85rem; }
-  .countdown-card span { font-size: .44rem; }
+  .countdown-card .flip-half span { font-size: 1.85rem; }
+  .countdown-label { font-size: .44rem; }
   .rsvp-card { border-radius: 1.4rem; }
 }
 
@@ -846,8 +929,9 @@ img, video { max-width: 100%; }
 .timeline { display: grid; gap: .85rem; }
 .timeline > div::before { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-light) 15%, transparent); }
 
-.countdown-card { border-radius: 50% 50% 1.1rem 1.1rem / 2.6rem 2.6rem 1.1rem 1.1rem; background: color-mix(in srgb, var(--surface-strong) 82%, transparent); }
-.countdown-card strong { color: var(--accent); }
+.countdown-card { background: color-mix(in srgb, var(--surface-strong) 82%, transparent); }
+.countdown-card .flip-half { background: color-mix(in srgb, var(--surface-strong) 82%, transparent); }
+.countdown-card .flip-half span { color: var(--accent); }
 
 .celebration-content {
   padding: clamp(3.5rem, 10vw, 6rem) clamp(1.2rem, 5vw, 3.5rem);
@@ -1897,13 +1981,15 @@ img, video { max-width: 100%; }
   background: rgba(255, 251, 240, .82);
   box-shadow: inset 0 1px rgba(255, 255, 255, .6), 0 18px 42px rgba(48, 24, 4, .12);
 }
+.countdown-card .flip-half { background: rgba(255, 251, 240, .82); }
 .theme-homecoming .countdown-card {
   border-color: rgba(224, 177, 91, .34);
   background: rgba(64, 7, 25, .83);
   color: #fff6e9;
   box-shadow: inset 0 1px rgba(255, 255, 255, .07), 0 20px 44px rgba(10, 0, 3, .36);
 }
-.theme-homecoming .countdown-card strong { color: #f3cd82; }
+.theme-homecoming .countdown-card .flip-half { background: rgba(64, 7, 25, .92); }
+.theme-homecoming .countdown-card .flip-half span { color: #f3cd82; }
 
 /* Gallery */
 .gallery-grid { gap: clamp(.65rem, 2vw, 1rem); }
@@ -2181,8 +2267,8 @@ img, video { max-width: 100%; }
 
   .countdown-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; width: min(25rem, 100%); }
   .countdown-card { min-height: 7.25rem; aspect-ratio: auto; border-radius: 1rem; }
-  .countdown-card strong { font-size: clamp(2.45rem, 13vw, 3.7rem); }
-  .countdown-card span { margin-top: .55rem; font-size: .6rem; letter-spacing: .12em; }
+  .countdown-card .flip-half span { font-size: clamp(2.45rem, 13vw, 3.7rem); }
+  .countdown-label { margin-top: .35rem; font-size: .6rem; letter-spacing: .12em; }
 
   .gallery-section { padding-top: var(--section-space-mobile); }
   .gallery-grid { grid-auto-rows: 7.5rem; }
