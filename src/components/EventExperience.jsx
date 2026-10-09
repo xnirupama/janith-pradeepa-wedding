@@ -116,6 +116,11 @@ export default function EventExperience({ invitation, galleryImages, guestName =
   const [replayingOpening, setReplayingOpening] = useState(false);
   const pendingHashRef = useRef("");
   const replayScrollRef = useRef(0);
+  // This ref is forwarded to the <video> element inside OpeningFilm.
+  // Holding a direct reference lets us call .play() synchronously inside the
+  // "Open Invitation" tap handler — iOS Safari only permits autoplay when play()
+  // is called within the same synchronous call stack as the user gesture.
+  const openingVideoRef = useRef(null);
 
   useEffect(() => {
     const hash = window.location.hash.slice(1);
@@ -131,6 +136,18 @@ export default function EventExperience({ invitation, galleryImages, guestName =
       audio.volume = 0;
       audio.play().catch(() => {});
     }
+
+    // ── iOS Safari autoplay fix ───────────────────────────────────────────────
+    // Call play() RIGHT NOW, while we are still inside the tap event handler.
+    // openingVideoRef points to the hidden <video> that OpeningFilm keeps in
+    // the DOM at all times (preloading). This satisfies iOS Safari's requirement
+    // that media play() be triggered synchronously within the gesture.
+    if (openingVideoRef.current) {
+      openingVideoRef.current.currentTime = 0;
+      openingVideoRef.current.play().catch(() => {});
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
     setOpen(true);
     setOpeningFinished(false);
     window.scrollTo({ top: 0, behavior: "auto" });
@@ -185,6 +202,7 @@ export default function EventExperience({ invitation, galleryImages, guestName =
       <InvitationGate invitation={invitation} guestName={guestName} open={open} onOpen={openInvitation} />
       <OpeningFilm
         key={replayingOpening ? "replay" : "initial"}
+        ref={openingVideoRef}
         invitation={invitation}
         visible={(open && !openingFinished) || replayingOpening}
         onComplete={replayingOpening ? finishReplay : finishOpening}

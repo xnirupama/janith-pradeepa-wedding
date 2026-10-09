@@ -1,4 +1,4 @@
-import { Cormorant_Garamond, Great_Vibes, Manrope, Noto_Serif_Sinhala } from "next/font/google";
+import { Cormorant_Garamond, Great_Vibes, Manrope, Noto_Serif_Sinhala, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const display = Cormorant_Garamond({
@@ -29,6 +29,17 @@ const sinhala = Noto_Serif_Sinhala({
   weight: ["400", "600"],
 });
 
+// Dedicated countdown-digit font: Playfair Display has wide, high-contrast
+// numerals that look striking at large flip-card sizes without the fragility
+// of Cormorant Garamond. We request only the weights we need.
+const countdown = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-countdown",
+  display: "swap",
+  weight: ["700"],
+});
+
+
 export const metadata = {
   metadataBase: new URL("https://janith-pradeepa.vercel.app"),
   title: "Janith & Pradeepa",
@@ -43,7 +54,7 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
-      <body className={`${display.variable} ${signature.variable} ${body.variable} ${sinhala.variable}`}>
+      <body className={`${display.variable} ${signature.variable} ${body.variable} ${sinhala.variable} ${countdown.variable}`}>
         {children}
       </body>
     </html>

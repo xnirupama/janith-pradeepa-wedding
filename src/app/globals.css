@@ -2,6 +2,7 @@
   --font-display: Georgia, serif;
   --font-signature: cursive;
   --font-body: Arial, sans-serif;
+  --font-countdown: "Playfair Display", Georgia, serif;
   --page-gutter: clamp(1.25rem, 5vw, 4.5rem);
   --section-space: clamp(5.5rem, 13vw, 10rem);
 }
@@ -354,9 +355,11 @@ img, video { max-width: 100%; }
 /* ── Flip-clock inner layout ── */
 .flip-container {
   position: relative;
-  width: 100%; max-width: clamp(3.8rem, 12vw, 7rem);
-  height: clamp(4rem, 14vw, 7.5rem);
-  perspective: 600px;
+  width: 100%;
+  /* Min width stops cards from collapsing on very narrow screens */
+  max-width: clamp(4.5rem, 14vw, 7.5rem);
+  height: clamp(4.8rem, 16vw, 8rem);
+  perspective: 700px;
 }
 
 /* Centre-line crease */
@@ -380,11 +383,15 @@ img, video { max-width: 100%; }
 }
 .flip-half span {
   display: block;
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 8vw, 4.2rem);
+  /* Playfair Display: wide, high-contrast serifs that read beautifully at
+     large sizes. Tabular figures prevent digit-width shifts on each tick. */
+  font-family: var(--font-countdown);
+  font-size: clamp(2.4rem, 9vw, 4.8rem);
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
   line-height: 2;            /* pushes text so it aligns with the crease */
-  letter-spacing: -.02em;
+  letter-spacing: -.01em;
   color: var(--ink);
   user-select: none;
 }
@@ -418,7 +425,7 @@ img, video { max-width: 100%; }
 /* ── Countdown label ── */
 .countdown-label {
   display: block;
-  font-size: clamp(.5rem, 1.4vw, .72rem);
+  font-size: clamp(.52rem, 1.5vw, .72rem);
   font-weight: 700;
   letter-spacing: .18em;
   text-transform: uppercase;
@@ -541,9 +548,22 @@ img, video { max-width: 100%; }
 
 @media (max-width: 719px) {
   .section-shell { padding-inline: max(1.15rem, env(safe-area-inset-left)); }
-  .countdown-grid { gap: .4rem; }
-  .countdown-card { border-radius: .9rem; }
-  .countdown-card .flip-half span { letter-spacing: .08em; }
+  /* Countdown: switch to 2×2 grid on mobile for legible card sizes */
+  .countdown-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(.5rem, 2.5vw, .75rem);
+    width: min(24rem, 100%);
+  }
+  .countdown-card { border-radius: 1rem; }
+  .flip-container {
+    max-width: clamp(4.8rem, 17vw, 7rem);
+    height: clamp(5.2rem, 18vw, 7.5rem);
+  }
+  .countdown-card .flip-half span {
+    font-size: clamp(2.7rem, 13vw, 4.2rem);
+    letter-spacing: -.01em;
+  }
+  .countdown-label { font-size: clamp(.52rem, 1.8vw, .65rem); letter-spacing: .15em; }
   .timeline > div { grid-template-columns: 2rem 1fr; gap: .7rem; }
   .timeline > div time, .timeline > div span { grid-column: 2; }
   .photo-caption { right: .3rem; }
@@ -558,8 +578,9 @@ img, video { max-width: 100%; }
   .gate-card h1 { font-size: clamp(2rem, 8.5vw, 2.5rem); }
   .gate-title { font-size: 1.15rem; }
   .hero-content h1 { font-size: clamp(2.3rem, 11vw, 2.85rem); }
-  .countdown-card .flip-half span { font-size: 1.85rem; }
-  .countdown-label { font-size: .44rem; }
+  .flip-container { max-width: clamp(4.4rem, 18vw, 6rem); height: clamp(4.8rem, 19vw, 6.5rem); }
+  .countdown-card .flip-half span { font-size: clamp(2.4rem, 12vw, 3.4rem); }
+  .countdown-label { font-size: clamp(.48rem, 1.9vw, .6rem); }
   .rsvp-card { border-radius: 1.4rem; }
 }
 
@@ -2265,10 +2286,11 @@ img, video { max-width: 100%; }
   .arrival-card { padding: 2.8rem 1.25rem; }
   .arrival-card strong { font-size: clamp(3.4rem, 16vw, 5rem); }
 
-  .countdown-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; width: min(25rem, 100%); }
-  .countdown-card { min-height: 7.25rem; aspect-ratio: auto; border-radius: 1rem; }
-  .countdown-card .flip-half span { font-size: clamp(2.45rem, 13vw, 3.7rem); }
-  .countdown-label { margin-top: .35rem; font-size: .6rem; letter-spacing: .12em; }
+  .countdown-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.5rem, 2.5vw, .75rem); width: min(25rem, 100%); }
+  .countdown-card { min-height: 7.5rem; aspect-ratio: auto; border-radius: 1rem; }
+  .flip-container { max-width: clamp(4.8rem, 14vw, 7rem); height: clamp(5.2rem, 15vw, 7.5rem); }
+  .countdown-card .flip-half span { font-size: clamp(2.7rem, 13vw, 4.2rem); letter-spacing: -.01em; }
+  .countdown-label { margin-top: .35rem; font-size: clamp(.52rem, 1.8vw, .65rem); letter-spacing: .14em; }
 
   .gallery-section { padding-top: var(--section-space-mobile); }
   .gallery-grid { grid-auto-rows: 7.5rem; }
@@ -3151,9 +3173,10 @@ img, video { max-width: 100%; }
   .gallery-tile button { border-radius: .9rem; }
 
   /* Countdown 2×2 grid — taller cards for legibility */
-  .countdown-grid { width: min(22rem, 100%); }
+  .countdown-grid { width: min(24rem, 100%); }
   .countdown-card { min-height: 8rem; }
-  .countdown-card strong { font-size: clamp(2.55rem, 14vw, 3.75rem); }
+  .flip-container { max-width: clamp(4.8rem, 17vw, 7rem); height: clamp(5.2rem, 18vw, 7.5rem); }
+  .countdown-card .flip-half span { font-size: clamp(2.7rem, 13vw, 4.2rem); }
 
   /* RSVP submit — generously tall for thumbs */
   .rsvp-card .submit-button { min-height: 3.6rem; font-size: .86rem; }
@@ -3197,7 +3220,8 @@ img, video { max-width: 100%; }
   .hero-content h1 { font-size: clamp(2.2rem, 10.5vw, 2.6rem); }
   .message-heading { padding: 2.4rem 1rem; }
   .rsvp-card { padding: 2.3rem .9rem 1.9rem; }
-  .countdown-card strong { font-size: clamp(2.3rem, 14vw, 3.2rem); }
+  .flip-container { max-width: clamp(4.4rem, 18vw, 6rem); height: clamp(4.8rem, 19vw, 6.5rem); }
+  .countdown-card .flip-half span { font-size: clamp(2.4rem, 12vw, 3.4rem); }
   .gallery-grid { grid-auto-rows: 7.8rem; }
 }
 
