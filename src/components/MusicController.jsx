@@ -5,9 +5,10 @@ import { Music2, Pause, Play } from "lucide-react";
 import { useLanguage } from "./InvitationLanguage";
 import { DottedRing } from "./InvitationOrnaments";
 import { RotatingDecoration, useInvitationMotion } from "./InvitationMotion";
+import { readPreference, savePreference } from "@/lib/preferences";
 
 const TARGET_VOLUME = 0.35;
-const FADE_IN_MS = 1750;
+const FADE_IN_MS = 2000;
 const FADE_OUT_MS = 650;
 
 export default function MusicController({ src, invitationOpen, controlsVisible = invitationOpen }) {
@@ -51,6 +52,7 @@ export default function MusicController({ src, invitationOpen, controlsVisible =
 
   useEffect(() => {
     if (!invitationOpen || !audioRef.current) return;
+    if (readPreference("music-muted") === "true") return;
     const audio = audioRef.current;
     intendedPlayingRef.current = true;
     if (audio.paused) audio.volume = 0;
@@ -85,6 +87,7 @@ export default function MusicController({ src, invitationOpen, controlsVisible =
     const audio = audioRef.current;
     if (!audio || unavailable) return;
     if (!intendedPlayingRef.current) {
+      savePreference("music-muted", false);
       intendedPlayingRef.current = true;
       if (audio.paused) audio.volume = 0;
       try {
@@ -95,6 +98,7 @@ export default function MusicController({ src, invitationOpen, controlsVisible =
         setPlaying(false);
       }
     } else {
+      savePreference("music-muted", true);
       intendedPlayingRef.current = false;
       fadeTo(0, FADE_OUT_MS, true);
     }

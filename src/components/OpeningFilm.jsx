@@ -1,33 +1,25 @@
-"use client";
-
-import { forwardRef, useEffect, useRef } from "react";
+﻿"use client";
+import { useEffect, useMemo, useRef } from "react";
 import { SkipForward } from "lucide-react";
 import { useLanguage } from "./InvitationLanguage";
-import { useInvitationMotion } from "./InvitationMotion";
+import { Lotus } from "./InvitationOrnaments";
+import BackgroundVideo, { clipSources } from "./BackgroundVideo";
 
-const OpeningFilm = forwardRef(function OpeningFilm({ invitation, visible, onComplete }, ref) {
-  const localRef = useRef(null);
+export default function OpeningFilm({ invitation, duration = 2500, onComplete }) {
   const dialogRef = useRef(null);
-  const videoRef = ref ?? localRef;
   const { t } = useLanguage();
-  const { backgroundVideo, pageVisible } = useInvitationMotion();
+  const sources = useMemo(() => clipSources(invitation.openingClip), [invitation.openingClip]);
   useEffect(() => {
-    const video = videoRef.current;
     const dialog = dialogRef.current;
-    if (!visible) { video?.pause(); if (dialog?.open) dialog.close(); return; }
-    if (!pageVisible) { video?.pause(); return; }
-    if (dialog && !dialog.open) dialog.showModal();
-    if (!backgroundVideo) {
-      const timer = window.setTimeout(onComplete, 0);
-      return () => window.clearTimeout(timer);
-    }
-    const timeout = window.setTimeout(onComplete, 20000);
-    video?.play().catch(onComplete);
-    return () => { window.clearTimeout(timeout); video?.pause(); if (dialog?.open) dialog.close(); };
-  }, [visible, onComplete, videoRef, backgroundVideo, pageVisible]);
-  return <dialog ref={dialogRef} className={"opening-film " + (visible ? "is-visible" : "")} hidden={!visible} aria-modal={visible ? "true" : undefined} aria-label={invitation.gateTitle} onCancel={(event) => { event.preventDefault(); onComplete(); }} onKeyDown={(event) => { if (event.key === "Tab") { event.preventDefault(); event.currentTarget.querySelector("button")?.focus(); } }}>
-    <video ref={videoRef} data-opening-src={invitation.videos.opening} data-opening-poster={invitation.videoPosters.opening} muted playsInline preload="none" disablePictureInPicture onEnded={() => visible && onComplete()} onError={() => visible && onComplete()} />
-    {visible && <><div className="opening-film-caption"><p>{invitation.blessing}</p><span>{invitation.couple}</span></div><button type="button" className="opening-film-skip" onClick={onComplete} autoFocus>{t("skipOpening")}<SkipForward size={17} aria-hidden="true" /></button></>}
+    dialog.showModal();
+    const timer = setTimeout(onComplete, duration);
+    return () => { clearTimeout(timer); dialog.close(); };
+  }, [duration, onComplete]);
+  return <dialog ref={dialogRef} className={`opening-film is-visible ${duration < 1000 ? "is-short" : ""}`} style={{ "--opening-duration": `${duration}ms` }} aria-modal="true" aria-label={invitation.gateTitle} onCancel={event => { event.preventDefault(); onComplete(); }}>
+    <div className="opening-curtain curtain-left" aria-hidden="true" />
+    <div className="opening-curtain curtain-right" aria-hidden="true" />
+    <div className="opening-memory"><BackgroundVideo sources={sources} poster={invitation.openingClip.poster} priority="opening" /><div className="opening-film-caption"><p>{invitation.blessing}</p><span>{invitation.couple}</span></div></div>
+    <div className="opening-lotus" aria-hidden="true"><Lotus decorative />{Array.from({ length: 18 }, (_, i) => <i key={i} className="opening-petal" style={{ "--petal-x": `${Math.sin(i * 2.4) * 150}px`, "--petal-y": `${-60 - (i % 6) * 30}px`, "--petal-turn": `${i * 37}deg`, "--petal-delay": `${(i % 5) * 35}ms` }} />)}</div>
+    <button type="button" className="opening-film-skip" onClick={onComplete} autoFocus>{t("skipOpening")}<SkipForward size={17} aria-hidden="true" /></button>
   </dialog>;
-});
-export default OpeningFilm;
+}

@@ -19,13 +19,13 @@ try {
     await page.goto(baseURL+"/"+event+"?to="+encodeURIComponent("Amali $&"),{waitUntil:"domcontentloaded"});
     await page.waitForFunction(()=>!document.querySelector(".gate-button")?.disabled);
     await page.evaluate(()=>document.fonts.ready);
-    assert.ok(requests.every(url=>!url.endsWith(".mp3") && !url.includes("opening-mobile")),"Opening media or music loaded before tap");
+    assert.ok(requests.every(url=>!url.endsWith(".mp3") && !url.includes("opening-couple")),"Opening media or music loaded before tap");
     assert.ok((await page.locator('meta[name="viewport"]').getAttribute("content")).includes("viewport-fit=cover"));
     assert.ok((await page.locator('.guest-line').innerText()).includes("Amali $&"));
     await page.locator(".gate-button").click();
     await page.waitForTimeout(750);
-    const video=await page.locator(".opening-film video").evaluate(el=>({src:el.getAttribute("src"),muted:el.muted,inline:el.playsInline,preload:el.preload,ready:el.readyState,paused:el.paused,duration:el.duration}));
-    assert.ok(video.src.endsWith(".mp4"));assert.equal(video.muted,true);assert.equal(video.inline,true);assert.equal(video.preload,"none");
+    const video=await page.locator(".opening-film video").evaluate(el=>({src:el.currentSrc || el.querySelector("source[type=\"video/mp4\"]")?.src,muted:el.muted,inline:el.playsInline,preload:el.preload,ready:el.readyState,paused:el.paused,duration:el.duration}));
+    assert.ok(/\.(mp4|webm)$/.test(video.src));assert.equal(video.muted,true);assert.equal(video.inline,true);assert.equal(video.preload,"auto");
     if(await page.locator(".opening-film-skip").isVisible()) {
       await page.screenshot({path:path.join(output,event+"-opening.png")});
       await page.locator(".opening-film-skip").click();

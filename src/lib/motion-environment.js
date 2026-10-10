@@ -2,7 +2,7 @@
 
 import { allowsBackgroundVideo } from "./motion-policy";
 
-const serverSnapshot = { pageVisible: true, reducedMotion: true, backgroundVideo: false };
+const serverSnapshot = { pageVisible: true, reducedMotion: true, backgroundVideo: false, lowEnd: false };
 let snapshot = serverSnapshot;
 const subscribers = new Set();
 let teardown;
@@ -14,6 +14,7 @@ export function readMotionEnvironment() {
   return {
     pageVisible: document.visibilityState === "visible",
     reducedMotion,
+    lowEnd: (navigator.deviceMemory > 0 && navigator.deviceMemory <= 2) || (navigator.hardwareConcurrency > 0 && navigator.hardwareConcurrency <= 4),
     backgroundVideo: allowsBackgroundVideo({ reducedMotion, saveData: connection?.saveData, effectiveType: connection?.effectiveType, downlink: connection?.downlink }),
   };
 }
@@ -31,10 +32,14 @@ export function subscribeMotion(callback) {
     media.addEventListener?.("change", refresh);
     connection?.addEventListener?.("change", refresh);
     document.addEventListener("visibilitychange", refresh);
+    window.addEventListener("online", refresh);
+    window.addEventListener("offline", refresh);
     teardown = () => {
       media.removeEventListener?.("change", refresh);
       connection?.removeEventListener?.("change", refresh);
       document.removeEventListener("visibilitychange", refresh);
+      window.removeEventListener("online", refresh);
+      window.removeEventListener("offline", refresh);
       teardown = undefined;
     };
     refresh();

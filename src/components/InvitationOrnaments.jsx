@@ -1,9 +1,12 @@
 import { Phone } from "lucide-react";
+import { useState } from "react";
 import { useLanguage } from "./InvitationLanguage";
 import { RotatingDecoration } from "./InvitationMotion";
 
-export function Lotus({ className = "" }) {
-  return <svg className={`lotus-ornament ${className}`} viewBox="0 0 240 70" fill="none" aria-hidden="true">
+export function Lotus({ className = "", decorative = false }) {
+  const [bloom, setBloom] = useState(false);
+  const { t } = useLanguage();
+  const art = <svg className={`lotus-ornament ${className}`} viewBox="0 0 240 70" fill="none" aria-hidden="true">
     <g stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" strokeLinejoin="round">
       <path d="M120 50C103 39 108 22 120 7c12 15 17 32 0 43Z" />
       <path d="M120 50C96 49 91 32 91 20c16 4 28 15 29 30Zm0 0c24-1 29-18 29-30-16 4-28 15-29 30Z" />
@@ -13,6 +16,8 @@ export function Lotus({ className = "" }) {
     </g>
     <circle cx="8" cy="43" r="1.5" fill="currentColor" /><circle cx="232" cy="43" r="1.5" fill="currentColor" />
   </svg>;
+  if (decorative) return art;
+  return <button type="button" className={"lotus-touch " + (bloom ? "is-blooming" : "")} aria-label={t("bloomLotus")} onClick={() => setBloom(true)} onAnimationEnd={() => setBloom(false)}>{art}{[0, 1, 2, 3].map(i => <i key={i} className="bloom-petal" aria-hidden="true" style={{ "--bloom-x": `${(i - 1.5) * 25}px`, "--bloom-rotation": `${i * 60}deg` }} />)}</button>;
 }
 export function Mandala({ className = "" }) {
   return <svg className={`mandala-ornament ${className}`} viewBox="0 0 400 400" fill="none" aria-hidden="true">

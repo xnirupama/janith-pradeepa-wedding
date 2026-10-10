@@ -20,6 +20,8 @@ import ClosingSection from "./ClosingSection";
 import SectionNavigator from "./SectionNavigator";
 import { InvitationMotionProvider } from "./InvitationMotion";
 import { pauseBackgroundVideos, readMotionEnvironment } from "@/lib/motion-environment";
+import { readPreference, savePreference } from "@/lib/preferences";
+import MicroInteractions from "./MicroInteractions";
 
 function Experience({ invitation: original, galleryImages, guestName, coupleArtwork }) {
   const { language, t } = useLanguage();
@@ -27,7 +29,7 @@ function Experience({ invitation: original, galleryImages, guestName, coupleArtw
   const [open, setOpen] = useState(false);
   const [openingFinished, setOpeningFinished] = useState(false);
   const [replaying, setReplaying] = useState(false);
-  const openingVideoRef = useRef(null);
+  const [openingDuration, setOpeningDuration] = useState(2500);
   const pendingHash = useRef("");
   const savedScroll = useRef(0);
   const contentActive = open && openingFinished;
@@ -47,38 +49,27 @@ function Experience({ invitation: original, galleryImages, guestName, coupleArtw
     const frame = requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: "instant" }));
     return () => cancelAnimationFrame(frame);
   }, [contentActive]);
-  const playOpening = () => {
-    if (!readMotionEnvironment().backgroundVideo) return;
-    const video = openingVideoRef.current;
-    if (!video) return;
-    if (!video.getAttribute("src")) {
-      video.src = video.dataset.openingSrc;
-      video.poster = video.dataset.openingPoster;
-      video.load();
-    }
-    video.currentTime = 0;
-    video.play().catch(() => {});
-  };
   const openInvitation = () => {
     pauseBackgroundVideos();
     const audio = document.getElementById("invitation-music");
-    if (audio) { audio.volume = 0; audio.play().catch(() => {}); }
-    playOpening();
+    if (audio && readPreference("music-muted") !== "true") { audio.volume = 0; audio.play().catch(() => {}); }
+    setOpeningDuration(readMotionEnvironment().reducedMotion ? 400 : readPreference("opening-seen") === "true" ? 900 : 2500);
     setOpen(true);
   };
-  const finishOpening = useCallback(() => setOpeningFinished(true), []);
-  const replayOpening = () => { savedScroll.current = window.scrollY; pauseBackgroundVideos(); playOpening(); setReplaying(true); };
+  const finishOpening = useCallback(() => { savePreference("opening-seen", true); setOpeningFinished(true); }, []);
+  const replayOpening = () => { savedScroll.current = window.scrollY; pauseBackgroundVideos(); setOpeningDuration(readMotionEnvironment().reducedMotion ? 400 : 2500); setReplaying(true); };
   const finishReplay = useCallback(() => {
     setReplaying(false);
     requestAnimationFrame(() => window.scrollTo({ top: savedScroll.current, behavior: "instant" }));
   }, []);
-  return <InvitationMotionProvider suspended={(open && !openingFinished) || replaying}><main className={"event-page theme-" + original.theme + (contentActive ? " has-section-nav" : "")} style={invitationThemes[original.theme]} lang={language}>
+  return <InvitationMotionProvider suspended={replaying}><main className={"event-page theme-" + original.theme + (contentActive ? " has-section-nav" : "")} style={invitationThemes[original.theme]} lang={language}>
+    <MicroInteractions active={open} />
     <LanguageToggle floating />
     <InvitationGate invitation={invitation} guestName={guestName} open={open} onOpen={openInvitation} />
-    <OpeningFilm ref={openingVideoRef} invitation={invitation} visible={(open && !openingFinished) || replaying} onComplete={replaying ? finishReplay : finishOpening} />
+    {((open && !openingFinished) || replaying) && <OpeningFilm invitation={invitation} duration={openingDuration} onComplete={replaying ? finishReplay : finishOpening} />}
     <MusicController src={original.music} invitationOpen={open} controlsVisible={contentActive && !replaying} />
-    {contentActive && <>
-      <div className="invitation-content" inert={replaying}>
+    {open && <>
+      <div className="invitation-content" inert={!contentActive || replaying}>
         <FloatingAtmosphere />
         <HeroSection invitation={invitation} guestName={guestName} coupleArtwork={coupleArtwork} />
         <section className="invitation-message section-shell" id="invitation-message">
@@ -92,7 +83,7 @@ function Experience({ invitation: original, galleryImages, guestName, coupleArtw
         <LocationSection location={invitation.location} invitation={invitation} active />
         <ClosingSection invitation={invitation} active onReplayOpening={replayOpening} />
       </div>
-      {!replaying && <SectionNavigator invitation={invitation} />}
+      {contentActive && !replaying && <SectionNavigator invitation={invitation} />}
     </>}
   </main></InvitationMotionProvider>;
 }

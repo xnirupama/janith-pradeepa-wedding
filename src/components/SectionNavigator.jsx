@@ -37,6 +37,7 @@ export default function SectionNavigator() {
     if (!target) return;
     event.preventDefault();
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduceMotion) { try { navigator.vibrate?.(8); } catch { /* Unsupported browser policy. */ } }
     navigatingRef.current = true;
     setActiveSection(id);
     target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
@@ -71,7 +72,8 @@ export default function SectionNavigator() {
 
   return (
     <nav className="section-navigator" aria-label={t("navLabel")}>
-      <div className="section-navigator-inner">
+      <div className="section-navigator-inner" style={{ "--active-index": SECTION_IDS.indexOf(activeSection) }}>
+        <span className="nav-active-indicator" aria-hidden="true" />
         {links.map(({ id, label, icon: Icon }) => (
           <a
             key={id}

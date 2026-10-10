@@ -90,6 +90,7 @@ export function getInvitation(slug) {
   return {
     ...localized,
     videos: { opening: videoAssets[slug].src },
+    openingClip: videoAssets[slug],
     motionVideos: backgroundVideos[slug],
     videoPosters: { opening: videoAssets[slug].poster.src },
   };
