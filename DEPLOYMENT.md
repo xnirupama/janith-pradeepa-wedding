@@ -10,4 +10,4 @@
 
 Optimize large media before committing so the invitation stays fast on mobile data.
 
-Original videos live in `media-sources/`, outside the published assets. The published MP4/WebM files and posters live in `public/assets/*/optimized/`; preparation and verification commands are documented in [ASSETS.md](./ASSETS.md) and [INVITATION-UPGRADE.md](./INVITATION-UPGRADE.md).
+Original videos live in `media-sources/`, outside the published assets. The published MP4/WebM files and posters live in `public/assets/*/media/`; preparation and verification commands are documented in [ASSETS.md](./ASSETS.md) and [ADDON-UPGRADE.md](./ADDON-UPGRADE.md).

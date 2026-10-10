@@ -1,5 +1,7 @@
 # Invitation motion upgrade
 
+Historical report. The current add-on supersedes playback, asset paths and previews; see [ADDON-UPGRADE.md](./ADDON-UPGRADE.md).
+
 Implemented on 10 October 2026 for /wedding and /homecoming. The shared portrait invitation is centred at a maximum 480px width on desktop, with each theme filling the canvas.
 
 ## Plan implemented
