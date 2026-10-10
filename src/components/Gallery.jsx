@@ -34,6 +34,8 @@ export default function Gallery({ images = [] }) {
               aria-label={`${t("galleryOpen")} ${index + 1}: ${t("photoAlt")}`}
               aria-haspopup="dialog"
             >
+              <picture>
+              {image.avif && <source srcSet={image.avif} type="image/avif" />}
               <Image
                 className="gallery-image"
                 src={image.src}
@@ -43,7 +45,10 @@ export default function Gallery({ images = [] }) {
                 placeholder={image.blurDataURL ? "blur" : "empty"}
                 blurDataURL={image.blurDataURL}
                 loading="lazy"
+                unoptimized={Boolean(image.avif)}
+                style={{ objectPosition: image.objectPosition ?? "50% 30%" }}
               />
+              </picture>
               <span className="gallery-open-hint" aria-hidden="true"><Expand size={16} /></span>
               <span className="gallery-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
             </button>

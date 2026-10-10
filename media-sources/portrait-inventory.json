@@ -1,0 +1,95 @@
+[
+  {
+    "event": "wedding",
+    "source": "media-sources/wedding/photos/wedding-couple-feature.jpeg",
+    "originalBytes": 2285731,
+    "originalFormat": "png",
+    "originalWidth": 1071,
+    "originalHeight": 1469,
+    "variants": {
+      "640": {
+        "webp": {
+          "src": "/assets/wedding/media/portrait-1-640.ad2312d26bf7.webp",
+          "bytes": 74050
+        },
+        "avif": {
+          "src": "/assets/wedding/media/portrait-1-640.e8a5d9f50b2e.avif",
+          "bytes": 44293
+        }
+      },
+      "1080": {
+        "webp": {
+          "src": "/assets/wedding/media/portrait-1-1080.bc6b009cb975.webp",
+          "bytes": 150560
+        },
+        "avif": {
+          "src": "/assets/wedding/media/portrait-1-1080.960e7a2ea54d.avif",
+          "bytes": 93036
+        }
+      }
+    },
+    "use": "gallery; large variant only in lightbox"
+  },
+  {
+    "event": "wedding",
+    "source": "media-sources/wedding/photos/wedding-couple-feature 2.jpeg",
+    "originalBytes": 62662,
+    "originalFormat": "jpeg",
+    "originalWidth": 788,
+    "originalHeight": 1080,
+    "variants": {
+      "640": {
+        "webp": {
+          "src": "/assets/wedding/media/portrait-2-640.b08fa2369896.webp",
+          "bytes": 32798
+        },
+        "avif": {
+          "src": "/assets/wedding/media/portrait-2-640.ea192710107f.avif",
+          "bytes": 23433
+        }
+      },
+      "1080": {
+        "webp": {
+          "src": "/assets/wedding/media/portrait-2-1080.5a45a34000be.webp",
+          "bytes": 46650
+        },
+        "avif": {
+          "src": "/assets/wedding/media/portrait-2-1080.427b12182b2b.avif",
+          "bytes": 36292
+        }
+      }
+    },
+    "use": "gallery; large variant only in lightbox"
+  },
+  {
+    "event": "homecoming",
+    "source": "media-sources/homecoming/photos/homecoming-couple-feature.jpeg",
+    "originalBytes": 52318,
+    "originalFormat": "jpeg",
+    "originalWidth": 788,
+    "originalHeight": 1080,
+    "variants": {
+      "640": {
+        "webp": {
+          "src": "/assets/homecoming/media/portrait-1-640.2ed3fd11d1f6.webp",
+          "bytes": 25480
+        },
+        "avif": {
+          "src": "/assets/homecoming/media/portrait-1-640.6e7168349e50.avif",
+          "bytes": 18021
+        }
+      },
+      "1080": {
+        "webp": {
+          "src": "/assets/homecoming/media/portrait-1-1080.55b3a1440e8d.webp",
+          "bytes": 34704
+        },
+        "avif": {
+          "src": "/assets/homecoming/media/portrait-1-1080.6804e8a9ebfb.avif",
+          "bytes": 26072
+        }
+      }
+    },
+    "use": "gallery; large variant only in lightbox"
+  }
+]

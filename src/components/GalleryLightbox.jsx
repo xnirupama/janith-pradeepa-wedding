@@ -29,6 +29,20 @@ export default function GalleryLightbox({ images, initialIndex, onClose, restore
   useEffect(() => {
     imageRef.current = images[active];
   }, [active, images]);
+  useEffect(() => {
+    const links = [];
+    const timer = setTimeout(() => {
+      const format = document.querySelector(".lightbox img")?.currentSrc.includes(".avif") ? "avif" : "webp";
+      const neighbors = new Set([(active + 1) % images.length, (active - 1 + images.length) % images.length]);
+      for (const index of neighbors) {
+        if (index === active || !images[index].large) continue;
+        const link = document.createElement("link");
+        link.rel = "prefetch"; link.as = "image"; link.href = images[index].large[format].src;
+        document.head.appendChild(link); links.push(link);
+      }
+    }, 250);
+    return () => { clearTimeout(timer); links.forEach(link => link.remove()); };
+  }, [active, images]);
 
   const updateView = useCallback((nextView) => {
     const stage = stageRef.current;
@@ -233,18 +247,22 @@ export default function GalleryLightbox({ images, initialIndex, onClose, restore
           }}
         >
           <div className="lightbox-image" style={{ transform: `translate3d(${view.x}px, ${view.y}px, 0) scale(${view.scale})` }}>
+            <picture>
+            {image.large?.avif && <source srcSet={image.large.avif.src} type="image/avif" />}
             <Image
               key={image.src}
-              src={image.src}
+              src={image.large?.webp.src ?? image.src}
               alt={t("photoAlt")}
               fill
               sizes="(max-width: 950px) 100vw, 900px"
               placeholder={image.blurDataURL ? "blur" : "empty"}
               blurDataURL={image.blurDataURL}
               loading="eager"
+              unoptimized={Boolean(image.large)}
               draggable={false}
               style={{ objectFit: "contain", pointerEvents: "none" }}
             />
+            </picture>
           </div>
         </div>
         {images.length > 1 && <>

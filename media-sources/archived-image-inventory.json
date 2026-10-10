@@ -1,0 +1,162 @@
+[
+  {
+    "file": "public/assets/homecoming/backgrounds/homecoming-hero-bg.jpeg",
+    "bytes": 565454,
+    "format": "jpeg",
+    "width": 768,
+    "height": 1376,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/homecoming/backgrounds/homecoming-section-bg.jpeg",
+    "bytes": 573079,
+    "format": "jpeg",
+    "width": 768,
+    "height": 1376,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/homecoming/optimized/couple-feature.webp",
+    "bytes": 30880,
+    "format": "webp",
+    "width": 788,
+    "height": 1080,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/homecoming/optimized/hero-background.webp",
+    "bytes": 32682,
+    "format": "webp",
+    "width": 768,
+    "height": 1376,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/homecoming/optimized/section-background.webp",
+    "bytes": 14596,
+    "format": "webp",
+    "width": 768,
+    "height": 1376,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/homecoming/photos/homecoming-couple-feature.jpeg",
+    "bytes": 52318,
+    "format": "jpeg",
+    "width": 788,
+    "height": 1080,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/homecoming/photos/homecoming-couple-feature.png",
+    "bytes": 1838747,
+    "format": "png",
+    "width": 1071,
+    "height": 1469,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/shared/placeholders/share-fallback.svg",
+    "bytes": 1447,
+    "format": "svg",
+    "width": 1200,
+    "height": 630,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/wedding/backgrounds/wedding-hero-bg.jpeg",
+    "bytes": 772483,
+    "format": "jpeg",
+    "width": 768,
+    "height": 1376,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/wedding/backgrounds/wedding-section-bg.jpeg",
+    "bytes": 688521,
+    "format": "jpeg",
+    "width": 768,
+    "height": 1376,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/wedding/decor/wedding-gate-lotus.webp",
+    "bytes": 85376,
+    "format": "webp",
+    "width": 560,
+    "height": 840,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/wedding/decor/wedding-gate-mandala.webp",
+    "bytes": 206714,
+    "format": "webp",
+    "width": 900,
+    "height": 900,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/wedding/decor/wedding-gate-procession.webp",
+    "bytes": 208442,
+    "format": "webp",
+    "width": 1500,
+    "height": 500,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/wedding/optimized/couple-feature-02.webp",
+    "bytes": 41732,
+    "format": "webp",
+    "width": 788,
+    "height": 1080,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/wedding/optimized/couple-feature.webp",
+    "bytes": 136494,
+    "format": "webp",
+    "width": 1071,
+    "height": 1469,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/wedding/optimized/hero-background.webp",
+    "bytes": 84298,
+    "format": "webp",
+    "width": 768,
+    "height": 1376,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/wedding/optimized/section-background.webp",
+    "bytes": 35946,
+    "format": "webp",
+    "width": 768,
+    "height": 1376,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/wedding/photos/wedding-couple-feature 2.jpeg",
+    "bytes": 62662,
+    "format": "jpeg",
+    "width": 788,
+    "height": 1080,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/wedding/photos/wedding-couple-feature.jpeg",
+    "bytes": 2285731,
+    "format": "png",
+    "width": 1071,
+    "height": 1469,
+    "use": "superseded source or decoration; archived outside deployment"
+  },
+  {
+    "file": "public/assets/wedding/photos/wedding-couple-feature.png",
+    "bytes": 1917118,
+    "format": "png",
+    "width": 1254,
+    "height": 1254,
+    "use": "superseded source or decoration; archived outside deployment"
+  }
+]

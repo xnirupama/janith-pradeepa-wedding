@@ -1,0 +1,70 @@
+{
+  "wedding": {
+    "wide": {
+      "src": "/assets/wedding/share/preview-1200x630.1debba60c77b.jpg",
+      "bytes": 36115
+    },
+    "square": {
+      "src": "/assets/wedding/share/preview-600x600.5b724c05f4eb.jpg",
+      "bytes": 24066
+    },
+    "icon": {
+      "src": "/assets/wedding/share/lotus.581bf49eaf56.svg",
+      "bytes": 424
+    },
+    "ico": {
+      "src": "/assets/wedding/share/lotus.905bf675846d.ico",
+      "bytes": 956
+    },
+    "apple": {
+      "src": "/assets/wedding/share/apple-touch.1252adf238b5.png",
+      "bytes": 7102
+    },
+    "pwa": {
+      "src": "/assets/wedding/share/lotus-192.69cac180c465.png",
+      "bytes": 7704
+    },
+    "pwa512": {
+      "src": "/assets/wedding/share/lotus-512.5b5d108eca0a.png",
+      "bytes": 26583
+    },
+    "manifest": {
+      "src": "/assets/wedding/share/invitation.dbee206c3ceb.webmanifest",
+      "bytes": 399
+    }
+  },
+  "homecoming": {
+    "wide": {
+      "src": "/assets/homecoming/share/preview-1200x630.c66a3f7c95c6.jpg",
+      "bytes": 40902
+    },
+    "square": {
+      "src": "/assets/homecoming/share/preview-600x600.fdb6822071ab.jpg",
+      "bytes": 27701
+    },
+    "icon": {
+      "src": "/assets/homecoming/share/lotus.acb72c87b883.svg",
+      "bytes": 424
+    },
+    "ico": {
+      "src": "/assets/homecoming/share/lotus.c08e5a3ca099.ico",
+      "bytes": 978
+    },
+    "apple": {
+      "src": "/assets/homecoming/share/apple-touch.e624abe55e90.png",
+      "bytes": 7067
+    },
+    "pwa": {
+      "src": "/assets/homecoming/share/lotus-192.b3e3553cd2b0.png",
+      "bytes": 7676
+    },
+    "pwa512": {
+      "src": "/assets/homecoming/share/lotus-512.bdc36fe92914.png",
+      "bytes": 26515
+    },
+    "manifest": {
+      "src": "/assets/homecoming/share/invitation.d9cbcad6517f.webmanifest",
+      "bytes": 425
+    }
+  }
+}

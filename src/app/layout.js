@@ -1,5 +1,6 @@
 import { Cormorant_Garamond, Great_Vibes, Manrope, Noto_Serif_Sinhala } from "next/font/google";
 import "./globals.css";
+import { invitationMetadata } from "@/lib/invitation-metadata";
 
 const display = Cormorant_Garamond({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ const sinhala = Noto_Serif_Sinhala({
 });
 
 export const metadata = {
+  icons: invitationMetadata("wedding").icons,
   metadataBase: new URL("https://janith-pradeepa.vercel.app"),
   title: "Janith & Pradeepa",
   description: "Wedding and Homecoming invitations for Janith & Pradeepa.",
