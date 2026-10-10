@@ -1,0 +1,67 @@
+{
+  "checkedAt": "2026-10-10T17:25:28.200Z",
+  "sourceCommit": "a5d985a",
+  "origin": "https://janith-pradeepa.vercel.app",
+  "results": [
+    {
+      "engine": "chromium",
+      "route": "wedding",
+      "mode": "normal",
+      "first": {
+        "time": 0.268912,
+        "src": "https://janith-pradeepa.vercel.app/assets/wedding/media/wedding-opening-couple.752c6ab65ba9.mp4",
+        "muted": true,
+        "inline": true,
+        "loop": false,
+        "display": "block"
+      },
+      "directGesture": true,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "route": "homecoming",
+      "mode": "normal",
+      "first": {
+        "time": 0.273332,
+        "src": "https://janith-pradeepa.vercel.app/assets/homecoming/media/homecoming-opening-couple.fb07dd087000.mp4",
+        "muted": true,
+        "inline": true,
+        "loop": false,
+        "display": "block"
+      },
+      "directGesture": true,
+      "passed": true
+    },
+    {
+      "engine": "webkit",
+      "route": "wedding",
+      "mode": "normal",
+      "first": {
+        "time": 0.2811353,
+        "src": "https://janith-pradeepa.vercel.app/assets/wedding/media/wedding-opening-couple.752c6ab65ba9.mp4",
+        "muted": true,
+        "inline": true,
+        "loop": false,
+        "display": "block"
+      },
+      "directGesture": true,
+      "passed": true
+    },
+    {
+      "engine": "webkit",
+      "route": "homecoming",
+      "mode": "normal",
+      "first": {
+        "time": 0.2754211,
+        "src": "https://janith-pradeepa.vercel.app/assets/homecoming/media/homecoming-opening-couple.fb07dd087000.mp4",
+        "muted": true,
+        "inline": true,
+        "loop": false,
+        "display": "block"
+      },
+      "directGesture": true,
+      "passed": true
+    }
+  ]
+}

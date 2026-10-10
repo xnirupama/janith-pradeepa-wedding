@@ -22,4 +22,6 @@ A blocked play or network failure stays in the opening with a translated Play bu
 - 24 background-policy/visibility/two-player-limit cases pass, along with 16 small-phone EN/SI layout/navigation/replay cases. Existing audio, language persistence, calendar, share and countdown action checks pass. Eight final retry/visibility regression cases also pass in both engines.
 - No opening video is requested before the Open tap. Browser-level playback restrictions and absent/offline media cannot be overridden by JavaScript; the direct Play action remains available instead of silently skipping. Physical phone and in-app tests remain unperformed.
 
+The deployed HTTPS pages also passed all four full-length Chromium/WebKit route cases. Actual MP4 frames advanced and the native ten-second film completed before the reveal. Results are recorded in [opening-playback-verification.json](./media-sources/opening-playback-verification.json).
+
 Run `npm run verify:opening` with a Playwright installation configured through `INVITATION_PLAYWRIGHT_MODULE`. Reports and screenshots are local QA artifacts under `artifacts/qa/opening-fix*` and are not deployed.
