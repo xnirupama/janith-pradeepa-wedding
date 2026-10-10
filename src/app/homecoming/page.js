@@ -2,6 +2,7 @@ import EventExperience from "@/components/EventExperience";
 import { getInvitation } from "@/data/invitations";
 import { getCoupleArtwork, getGalleryImages } from "@/lib/gallery";
 import { sanitizeGuestName } from "@/lib/personalization";
+import { cookies } from "next/headers";
 
 export const metadata = {
   title: "Janith & Pradeepa | Homecoming Celebration",
@@ -25,6 +26,7 @@ export const viewport = {
 
 export default async function HomecomingPage({ searchParams }) {
   const invitation = getInvitation("homecoming");
-  const params = await searchParams;
-  return <EventExperience invitation={invitation} galleryImages={await getGalleryImages("homecoming")} coupleArtwork={getCoupleArtwork("homecoming")} guestName={sanitizeGuestName(params?.guest ?? params?.to)} />;
+  const [params, cookieStore] = await Promise.all([searchParams, cookies()]);
+  const initialLanguage = cookieStore.get("invitation-language")?.value === "si" ? "si" : "en";
+  return <EventExperience invitation={invitation} initialLanguage={initialLanguage} galleryImages={await getGalleryImages("homecoming")} coupleArtwork={getCoupleArtwork("homecoming")} guestName={sanitizeGuestName(params?.guest ?? params?.to)} />;
 }

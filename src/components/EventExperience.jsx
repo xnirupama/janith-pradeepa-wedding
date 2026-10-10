@@ -97,6 +97,6 @@ function Experience({ invitation: original, galleryImages, guestName, coupleArtw
     </>}
   </main>;
 }
-export default function EventExperience(props) {
-  return <InvitationLanguageProvider><Experience {...props} /></InvitationLanguageProvider>;
+export default function EventExperience({ initialLanguage = "en", ...props }) {
+  return <InvitationLanguageProvider initialLanguage={initialLanguage}><Experience {...props} /></InvitationLanguageProvider>;
 }

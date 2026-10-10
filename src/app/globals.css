@@ -328,4 +328,8 @@ button:disabled { cursor: default; opacity: .65; }
 .event-page[lang="si"] .hero-eyebrow { font-size: clamp(1.4rem, 5vw, 1.8rem); }
 .event-page[lang="si"] .section-heading h2 { font-size: clamp(1.7rem, 6vw, 2.4rem); }
 .section-shell[id] { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 4.5rem); }
-.section-nav-label { font-size: .62rem; }.hero-couple-art { overflow: hidden; border-radius: 50% 50% 1rem 1rem / 25% 25% 1rem 1rem; }
+.section-nav-label { font-size: .62rem; }.hero-couple-art { overflow: hidden; border-radius: 50% 50% 1rem 1rem / 25% 25% 1rem 1rem; }.guest-line { font-family: var(--font-display), var(--font-sinhala), serif; }
+.hero-date-row > span { overflow-wrap: anywhere; }
+.event-page[lang="si"] p, .event-page[lang="si"] .hero-date-row > span,
+.event-page[lang="si"] .sentiment, .event-page[lang="si"] .featured-couple-sentiment { font-family: var(--font-sinhala), serif; }
+.event-page[lang="si"] .closing-content h2 { font-family: var(--font-signature); line-height: 1.4; }
