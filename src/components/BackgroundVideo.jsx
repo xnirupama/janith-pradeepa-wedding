@@ -12,29 +12,38 @@ export function clipSources(clip) {
 }
 
 export default function BackgroundVideo({ sources, poster, priority = "ambient", objectPosition = "50% 50%", className = "" }) {
-  const containerRef = useRef(null), videoRef = useRef(null), retryUsed = useRef(false);
+  const containerRef = useRef(null), videoRef = useRef(null), retryUsed = useRef(false), lastError = useRef("");
   const [nearby, setNearby] = useState(false), [inView, setInView] = useState(false);
   const [status, setStatus] = useState("loading"), [progress, setProgress] = useState(0);
   const [attempt, setAttempt] = useState(0), [failure, setFailure] = useState("");
   const [debug, setDebug] = useState(null);
+  const [loaderExpired, setLoaderExpired] = useState(false);
+  const [posterPainted, setPosterPainted] = useState(false);
   const { backgroundVideo, pageVisible, suspended, lowEnd } = useInvitationMotion();
   const { t } = useLanguage();
   const important = priority !== "ambient";
   const allowed = backgroundVideo && (!lowEnd || priority === "cover");
-  const eligible = allowed && pageVisible && nearby && inView && (!suspended || priority === "opening");
+  const eligible = allowed && pageVisible && nearby && inView && (priority !== "cover" || posterPainted) && (!suspended || priority === "opening");
 
   useEffect(() => {
-    if (priority !== "cover" || !allowed || failure) return;
+    if (priority !== "cover") return;
+    const timer = setTimeout(() => setLoaderExpired(true), 6000);
+    return () => clearTimeout(timer);
+  }, [priority]);
+
+  useEffect(() => {
+    if (priority !== "cover" || !allowed || failure || !posterPainted) return;
     const candidate = sources.find(source => source.type.startsWith("video/webm") && videoRef.current.canPlayType(source.type)) ?? sources.find(source => source.type === "video/mp4");
     const link = document.createElement("link");
-    link.rel = "preload"; link.as = "fetch"; link.type = candidate.type.split(";")[0]; link.href = candidate.src; link.crossOrigin = "anonymous";
+    const mediaHint = /AppleWebKit/.test(navigator.userAgent) && !/Chrome|Chromium|Edg|OPR|Android/.test(navigator.userAgent);
+    link.rel = "preload"; link.as = mediaHint ? "video" : "fetch"; link.type = candidate.type.split(";")[0]; link.href = candidate.src; link.crossOrigin = "anonymous";
     document.head.appendChild(link);
     // Consume the fetch preload explicitly: media preload is unsupported by
     // Chromium, and WebKit otherwise treats a fetch hint as unused by <video>.
     const controller = new AbortController();
-    fetch(candidate.src, { mode: "cors", credentials: "same-origin", signal: controller.signal }).then(response => response.arrayBuffer()).catch(() => {});
+    if (!mediaHint) fetch(candidate.src, { mode: "cors", credentials: "same-origin", signal: controller.signal }).then(response => response.arrayBuffer()).catch(() => {});
     return () => { controller.abort(); link.remove(); };
-  }, [priority, allowed, sources, failure]);
+  }, [priority, allowed, sources, failure, posterPainted]);
 
   useEffect(() => {
     const node = containerRef.current;
@@ -67,7 +76,7 @@ export default function BackgroundVideo({ sources, poster, priority = "ambient",
     const clearTimers = () => [startTimer, stallTimer, bufferTimer, decoderTimer].forEach(clearTimeout);
     const fail = reason => {
       if (cancelled) return;
-      clearTimers(); setFailure(reason); setStatus("fallback"); setProgress(1); reset();
+      clearTimers(); lastError.current = reason; setFailure(reason); setStatus("fallback"); setProgress(1); reset();
     };
     const reveal = () => {
       if (cancelled || !started || !bufferReady) return;
@@ -147,17 +156,20 @@ export default function BackgroundVideo({ sources, poster, priority = "ambient",
     const timer = setInterval(() => {
       const v = videoRef.current;
       const ranges = Array.from({ length: v.buffered.length }, (_, i) => `${v.buffered.start(i).toFixed(1)}-${v.buffered.end(i).toFixed(1)}`).join(",");
-      setDebug(`${priority}: ${status}\nready ${v.readyState} / network ${v.networkState}\ntime ${v.currentTime.toFixed(2)} / buffered ${ranges || "none"}\ndropped ${v.getVideoPlaybackQuality?.().droppedVideoFrames ?? "n/a"}\nerror ${failure || "none"}`);
+      setDebug(`${priority}: ${status}\nready ${v.readyState} / network ${v.networkState}\ntime ${v.currentTime.toFixed(2)} / buffered ${ranges || "none"}\ndropped ${v.getVideoPlaybackQuality?.().droppedVideoFrames ?? "n/a"}\nerror ${lastError.current || "none"}`);
     }, 500);
     return () => clearInterval(timer);
   }, [status, failure, priority]);
 
   return <div ref={containerRef} className={`video-backdrop ${className}`} data-video-state={status} style={{ "--video-position": objectPosition }}>
-    <Image className="video-poster" src={poster.src} alt="" fill unoptimized sizes="(max-width: 480px) 100vw, 480px" preload={priority === "cover"} loading={priority === "cover" ? undefined : "lazy"} placeholder={poster.blurDataURL ? "blur" : "empty"} blurDataURL={poster.blurDataURL} />
+    <Image className="video-poster" src={poster.src} alt="" fill unoptimized sizes="(max-width: 480px) 100vw, 480px" preload={priority === "cover"} loading={priority === "cover" ? undefined : "lazy"} placeholder={poster.blurDataURL ? "blur" : "empty"} blurDataURL={poster.blurDataURL} onLoad={() => {
+      if (priority !== "cover") return;
+      Promise.race([document.fonts.ready, new Promise(resolve => setTimeout(resolve, 1200))]).then(() => requestAnimationFrame(() => requestAnimationFrame(() => setPosterPainted(true))));
+    }} />
     <video ref={videoRef} data-background-video data-priority={priority} className={status === "playing" && eligible ? "is-playing" : ""} poster={poster.src} crossOrigin="anonymous" muted loop={priority !== "opening"} playsInline webkit-playsinline="true" autoPlay preload={important ? "auto" : "metadata"} disablePictureInPicture disableRemotePlayback aria-hidden="true" tabIndex={-1} />
     <span className="video-scrim" aria-hidden="true" />
-    {priority === "cover" && status !== "playing" && status !== "fallback" && <LotusLoader progress={progress} label={t("preparingInvitation")} />}
-    {!important && (status === "loading" || status === "ready") && <span className="poster-shimmer" aria-hidden="true" />}
+    {priority === "cover" && !loaderExpired && status !== "playing" && status !== "fallback" && <LotusLoader progress={progress} label={t("preparingInvitation")} />}
+    {!important && inView && pageVisible && !suspended && (status === "loading" || status === "ready") && <span className="poster-shimmer" aria-hidden="true" />}
     {debug && <output className="video-debug">{debug}</output>}
   </div>;
 }

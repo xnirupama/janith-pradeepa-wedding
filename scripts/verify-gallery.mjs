@@ -48,6 +48,8 @@ for (const engine of (process.env.QA_ENGINES || "chromium,webkit").split(",")) {
       await context.addCookies([{name:"invitation-language",value:language,url:baseURL}]);
       await context.addInitScript(lang=>localStorage.setItem("invitation-language",lang),language);
       const page = await context.newPage();
+      const largeRequests = [];
+      page.on("request", request => { if (/portrait-\d+-1080/.test(request.url())) largeRequests.push(request.url()); });
       page.setDefaultTimeout(30000);
       page.on("pageerror", (error) => result.errors.push(error.message));
       try {
@@ -58,12 +60,14 @@ for (const engine of (process.env.QA_ENGINES || "chromium,webkit").split(",")) {
         });
         await page.evaluate(() => document.fonts.ready);
         await page.locator(".gate-button").click();
+        await page.locator(".opening-film").waitFor({state:"detached"});
         await page.locator(".gallery-photo").first().waitFor();
         const count = await page.locator(".gallery-photo").count();
         assert.equal(count, route === "wedding" ? 2 : 1, "Only distinct supplied couple portraits appear");
         const trigger = page.locator(".gallery-photo").first();
         await trigger.scrollIntoViewIfNeeded();
         const originalScroll = await page.evaluate(() => scrollY);
+        assert.equal(largeRequests.length, 0, "Large portraits must remain deferred until the viewer opens");
         await trigger.click();
         await page.locator("dialog.lightbox[open]").waitFor();
         await page.waitForFunction(() => {
@@ -71,6 +75,12 @@ for (const engine of (process.env.QA_ENGINES || "chromium,webkit").split(",")) {
           return image?.complete && image.naturalWidth > 0;
         });
         result.checks.push("Photo loads inside full-screen native modal");
+        assert.ok((await page.locator(".lightbox-image img").evaluate(image => image.currentSrc)).includes("1080"), "Viewer uses the larger portrait");
+        if (count > 1) {
+          await page.waitForTimeout(600);
+          assert.ok(largeRequests.some(url => url.includes("portrait-2-1080")), "Next/previous portrait is preloaded after opening");
+        }
+        result.checks.push("Large variants are deferred and neighboring portraits preload on open");
         assert.equal(await page.locator(".lightbox-close").evaluate((element) => element === document.activeElement), true);
         const controlCount = await page.locator(".lightbox").evaluate((element) => element.querySelectorAll("button:not([disabled]), [tabindex='0']").length);
         for (let index = 0; index < controlCount; index++) await page.keyboard.press("Tab");

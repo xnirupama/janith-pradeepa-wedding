@@ -30,18 +30,19 @@ export default function GalleryLightbox({ images, initialIndex, onClose, restore
     imageRef.current = images[active];
   }, [active, images]);
   useEffect(() => {
-    const links = [];
+    const neighborsToLoad = [];
     const timer = setTimeout(() => {
       const format = document.querySelector(".lightbox img")?.currentSrc.includes(".avif") ? "avif" : "webp";
       const neighbors = new Set([(active + 1) % images.length, (active - 1 + images.length) % images.length]);
       for (const index of neighbors) {
         if (index === active || !images[index].large) continue;
-        const link = document.createElement("link");
-        link.rel = "prefetch"; link.as = "image"; link.href = images[index].large[format].src;
-        document.head.appendChild(link); links.push(link);
+        const neighbor = new window.Image();
+        neighbor.decoding = "async";
+        neighbor.src = images[index].large[format].src;
+        neighborsToLoad.push(neighbor);
       }
     }, 250);
-    return () => { clearTimeout(timer); links.forEach(link => link.remove()); };
+    return () => { clearTimeout(timer); neighborsToLoad.forEach(image => { image.src = ""; }); };
   }, [active, images]);
 
   const updateView = useCallback((nextView) => {

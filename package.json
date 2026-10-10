@@ -15,7 +15,9 @@
     "verify:motion": "node scripts/verify-motion.mjs",
     "prepare:videos": "node scripts/prepare-universal-media.mjs",
     "prepare:portraits": "node scripts/prepare-portrait-variants.mjs",
-    "prepare:brand": "node scripts/prepare-brand-assets.mjs"
+    "prepare:brand": "node scripts/prepare-brand-assets.mjs",
+    "verify:resilience": "node scripts/verify-resilience.mjs",
+    "dev:webpack": "next dev --webpack"
   },
   "dependencies": {
     "lucide-react": "latest",

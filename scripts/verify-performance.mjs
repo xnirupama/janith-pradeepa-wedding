@@ -18,7 +18,7 @@ try {
     page.on("request",request=>{if(/\.(mp4|webm|mp3)(\?|$)/.test(request.url()))mediaRequests.push(request.url());});
     await page.addInitScript(()=>{
       window.invitationMetrics={lcp:0,cls:0,shifts:[]};
-      new PerformanceObserver(list=>{for(const item of list.getEntries())window.invitationMetrics.lcp=item.startTime;}).observe({type:"largest-contentful-paint",buffered:true});
+      new PerformanceObserver(list=>{for(const item of list.getEntries()){window.invitationMetrics.lcp=item.startTime;window.invitationMetrics.lcpElement=item.element?.className;window.invitationMetrics.lcpURL=item.url;}}).observe({type:"largest-contentful-paint",buffered:true});
       new PerformanceObserver(list=>{for(const item of list.getEntries())if(!item.hadRecentInput){window.invitationMetrics.cls+=item.value;window.invitationMetrics.shifts.push({value:item.value,time:item.startTime,sources:item.sources.map(source=>({node:source.node?.className,previous:{x:source.previousRect.x,y:source.previousRect.y,width:source.previousRect.width,height:source.previousRect.height},current:{x:source.currentRect.x,y:source.currentRect.y,width:source.currentRect.width,height:source.currentRect.height}}))});}}).observe({type:"layout-shift",buffered:true});
     });
     const cdp=await context.newCDPSession(page);
@@ -36,7 +36,7 @@ try {
     }));
     const jsBytes=metric.resources.filter(item=>item.name.endsWith(".js")).reduce((sum,item)=>sum+item.bytes,0);
     const media=metric.resources.filter(item=>/\.(mp4|webm)$/.test(item.name));
-    results.push({event,language,reducedMotion,shifts:metric.shifts,lcpMs:Math.round(metric.lcp),cls:Number(metric.cls.toFixed(4)),encodedJSBytes:jsBytes,videoRequestsBeforeTap:mediaRequests.filter(url=>/\.(mp4|webm)(\?|$)/.test(url)).length,encodedVideoBytesBeforeTap:media.reduce((sum,item)=>sum+item.bytes,0),audioRequestsBeforeTap:mediaRequests.filter(url=>/\.mp3(\?|$)/.test(url)).length,profile:"Cold cache, 150ms latency, 1.6Mbps download, 4x CPU throttle; seven-second observation after fonts",lcpTargetMet:metric.lcp<2500});
+    results.push({event,language,reducedMotion,shifts:metric.shifts,lcpMs:Math.round(metric.lcp),lcpElement:metric.lcpElement,lcpURL:metric.lcpURL,cls:Number(metric.cls.toFixed(4)),encodedJSBytes:jsBytes,videoRequestsBeforeTap:mediaRequests.filter(url=>/\.(mp4|webm)(\?|$)/.test(url)).length,encodedVideoBytesBeforeTap:media.reduce((sum,item)=>sum+item.bytes,0),audioRequestsBeforeTap:mediaRequests.filter(url=>/\.mp3(\?|$)/.test(url)).length,profile:"Cold cache, 150ms latency, 1.6Mbps download, 4x CPU throttle; seven-second observation after fonts",lcpTargetMet:metric.lcp<2500});
     console.log(JSON.stringify(results.at(-1)));
     await context.close();
   }

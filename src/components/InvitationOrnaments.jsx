@@ -17,7 +17,7 @@ export function Lotus({ className = "", decorative = false }) {
     <circle cx="8" cy="43" r="1.5" fill="currentColor" /><circle cx="232" cy="43" r="1.5" fill="currentColor" />
   </svg>;
   if (decorative) return art;
-  return <button type="button" className={"lotus-touch " + (bloom ? "is-blooming" : "")} aria-label={t("bloomLotus")} onClick={() => setBloom(true)} onAnimationEnd={() => setBloom(false)}>{art}{[0, 1, 2, 3].map(i => <i key={i} className="bloom-petal" aria-hidden="true" style={{ "--bloom-x": `${(i - 1.5) * 25}px`, "--bloom-rotation": `${i * 60}deg` }} />)}</button>;
+  return <button type="button" className={"lotus-touch " + (bloom ? "is-blooming" : "")} aria-label={t("bloomLotus")} onClick={() => { if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) setBloom(true); }} onAnimationEnd={() => setBloom(false)}>{art}{[0, 1, 2, 3].map(i => <i key={i} className="bloom-petal" aria-hidden="true" style={{ "--bloom-x": `${(i - 1.5) * 25}px`, "--bloom-rotation": `${i * 60}deg` }} />)}</button>;
 }
 export function Mandala({ className = "" }) {
   return <svg className={`mandala-ornament ${className}`} viewBox="0 0 400 400" fill="none" aria-hidden="true">

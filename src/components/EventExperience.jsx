@@ -63,14 +63,14 @@ function Experience({ invitation: original, galleryImages, guestName, coupleArtw
     requestAnimationFrame(() => window.scrollTo({ top: savedScroll.current, behavior: "instant" }));
   }, []);
   return <InvitationMotionProvider suspended={replaying}><main className={"event-page theme-" + original.theme + (contentActive ? " has-section-nav" : "")} style={invitationThemes[original.theme]} lang={language}>
-    <MicroInteractions active={open} />
+    <MicroInteractions active={contentActive} />
     <LanguageToggle floating />
     <InvitationGate invitation={invitation} guestName={guestName} open={open} onOpen={openInvitation} />
     {((open && !openingFinished) || replaying) && <OpeningFilm invitation={invitation} duration={openingDuration} onComplete={replaying ? finishReplay : finishOpening} />}
     <MusicController src={original.music} invitationOpen={open} controlsVisible={contentActive && !replaying} />
     {open && <>
       <div className="invitation-content" inert={!contentActive || replaying}>
-        <FloatingAtmosphere />
+        {contentActive && <FloatingAtmosphere />}
         <HeroSection invitation={invitation} guestName={guestName} coupleArtwork={coupleArtwork} />
         <section className="invitation-message section-shell" id="invitation-message">
           <SectionReveal className="message-card"><p className="section-kicker">{t("invitationKicker")}</p>{invitation.intro.map(line => <p key={line}>{line}</p>)}<Lotus /><div className="sentiment">{invitation.sentiment.map(line => <p key={line}>{line}</p>)}</div>{invitation.presence && <p>{invitation.presence}</p>}</SectionReveal>

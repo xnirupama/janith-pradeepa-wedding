@@ -81,6 +81,7 @@ for (const [name, engine] of [["chromium", chromium], ["webkit", webkit]].filter
     }
   } finally { await browser.close(); }
 }
+assert.ok(reports.length, "No browser scenarios selected");
 assert.deepEqual(errors, [], "Browser console errors");
 await fs.writeFile(path.join(output,process.env.QA_LANGUAGES ? "results-"+process.env.QA_LANGUAGES.replaceAll(",","-")+".json" : "results.json"),JSON.stringify({baseURL,scenarios:reports.length,reports,errors},null,2));
 console.log("PASS "+reports.length+" browser/route/language/viewport scenarios; no JS errors; Contact nav and footer passed.");

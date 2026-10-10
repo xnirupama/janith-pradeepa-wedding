@@ -412,3 +412,16 @@ button:active, a.primary-button:active, a.secondary-button:active, a.contact-pil
   .hero-date-row strong::after, .primary-button::after { display: none; }
 }
 .gallery-photo::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse, transparent 50%, #30130b12 100%); }
+.cover-backdrop .lotus-loader { top: max(.4rem, env(safe-area-inset-top, 0px)); bottom: auto; width: 180px; }
+@keyframes opening-crossfade { from { opacity: 1; } to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .opening-film { animation: opening-crossfade 400ms linear both !important; } }
+.section-navigator a { transition: transform var(--motion-fast) var(--motion-ease); }
+.section-navigator a:active { transform: scale(.97); }
+.lightbox-nav:active { transform: translateY(-50%) scale(.97); }
+@media (prefers-reduced-motion: reduce) {
+  .section-navigator a:active { transform: none; }
+  .lightbox-nav:active { transform: translateY(-50%); }
+}
+.opening-loader-ring { position: absolute; width: 70px; height: 70px; left: calc(50% - 35px); top: calc(50% - 35px); color: var(--accent); animation: opening-ring-fade 300ms linear both; }
+@keyframes opening-ring-fade { from { opacity: .65; } to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .opening-loader-ring { display: none; } }

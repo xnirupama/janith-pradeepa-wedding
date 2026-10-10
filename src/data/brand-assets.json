@@ -1,12 +1,12 @@
 {
   "wedding": {
     "wide": {
-      "src": "/assets/wedding/share/preview-1200x630.1debba60c77b.jpg",
-      "bytes": 36115
+      "src": "/assets/wedding/share/preview-1200x630.5cbd87a6a101.jpg",
+      "bytes": 31495
     },
     "square": {
-      "src": "/assets/wedding/share/preview-600x600.5b724c05f4eb.jpg",
-      "bytes": 24066
+      "src": "/assets/wedding/share/preview-600x600.b42ad5090139.jpg",
+      "bytes": 20935
     },
     "icon": {
       "src": "/assets/wedding/share/lotus.581bf49eaf56.svg",
@@ -35,12 +35,12 @@
   },
   "homecoming": {
     "wide": {
-      "src": "/assets/homecoming/share/preview-1200x630.c66a3f7c95c6.jpg",
-      "bytes": 40902
+      "src": "/assets/homecoming/share/preview-1200x630.bd0b52bcd022.jpg",
+      "bytes": 36051
     },
     "square": {
-      "src": "/assets/homecoming/share/preview-600x600.fdb6822071ab.jpg",
-      "bytes": 27701
+      "src": "/assets/homecoming/share/preview-600x600.55adee7df86b.jpg",
+      "bytes": 24428
     },
     "icon": {
       "src": "/assets/homecoming/share/lotus.acb72c87b883.svg",

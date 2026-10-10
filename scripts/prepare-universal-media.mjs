@@ -5,8 +5,8 @@ import { execFileSync } from "node:child_process";
 import sharp from "sharp";
 
 const root = process.cwd();
-const ffmpeg = path.join(root, ".task-tools/ffmpeg/bin/ffmpeg.exe");
-const ffprobe = path.join(root, ".task-tools/ffmpeg/bin/ffprobe.exe");
+const ffmpeg = process.env.FFMPEG_PATH || path.join(root, ".task-tools/ffmpeg/bin/ffmpeg.exe");
+const ffprobe = process.env.FFPROBE_PATH || path.join(root, ".task-tools/ffmpeg/bin/ffprobe.exe");
 const selected = {
   "wedding-floral-frame-loop.mp4": ["wedding", "cover"],
   "wedding-hero-loop.mp4": ["wedding", "hero"],
