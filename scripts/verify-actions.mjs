@@ -1,0 +1,93 @@
+import assert from "node:assert/strict";
+import fs from "node:fs/promises";
+import path from "node:path";
+import { pathToFileURL } from "node:url";
+const modulePath = process.env.INVITATION_PLAYWRIGHT_MODULE;
+const { chromium } = await import(modulePath ? pathToFileURL(modulePath).href : "playwright");
+const baseURL = process.env.INVITATION_TEST_URL || "http://127.0.0.1:3101";
+const output = path.resolve("artifacts/qa/actions");
+await fs.mkdir(output,{recursive:true});
+const browser=await chromium.launch({headless:true});
+const results=[];
+try {
+  for(const event of ["wedding","homecoming"]) {
+    const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,acceptDownloads:true});
+    await context.addInitScript(()=>{ Object.defineProperty(navigator,"share",{value: async data=>{window.lastSharedInvitation=data;},configurable:true}); });
+    const page=await context.newPage();
+    const requests=[];
+    page.on("request",request=>{if(/\.(mp4|mp3)(\?|$)/.test(request.url())) requests.push(request.url());});
+    await page.goto(baseURL+"/"+event+"?to="+encodeURIComponent("Amali $&"),{waitUntil:"domcontentloaded"});
+    await page.waitForFunction(()=>!document.querySelector(".gate-button")?.disabled);
+    await page.evaluate(()=>document.fonts.ready);
+    assert.equal(requests.length,0);
+    assert.ok((await page.locator('meta[name="viewport"]').getAttribute("content")).includes("viewport-fit=cover"));
+    assert.ok((await page.locator('.guest-line').innerText()).includes("Amali $&"));
+    await page.locator(".gate-button").click();
+    await page.waitForTimeout(750);
+    const video=await page.locator("video").evaluate(el=>({src:el.getAttribute("src"),muted:el.muted,inline:el.playsInline,preload:el.preload,ready:el.readyState,paused:el.paused,duration:el.duration}));
+    assert.ok(video.src.endsWith(".mp4"));assert.equal(video.muted,true);assert.equal(video.inline,true);assert.equal(video.preload,"none");
+    if(await page.locator(".opening-film-skip").isVisible()) {
+      await page.screenshot({path:path.join(output,event+"-opening.png")});
+      await page.locator(".opening-film-skip").click();
+    }
+    await page.locator("#top").waitFor();
+    await page.waitForTimeout(500);
+    assert.equal(await page.locator("#invitation-music").evaluate(el=>el.paused),false,"Audio did not start from opening tap");
+    await page.locator(".music-control").click();await page.waitForTimeout(800);
+    assert.equal(await page.locator("#invitation-music").evaluate(el=>el.paused),true);
+    await page.locator(".music-control").click();await page.waitForTimeout(500);
+    assert.equal(await page.locator("#invitation-music").evaluate(el=>el.paused),false);
+    await page.emulateMedia({reducedMotion:"reduce"});
+    const initialMapHeight=(await page.locator(".venue-map-shell").boundingBox()).height;
+    await page.evaluate(()=>document.getElementById("location").scrollIntoView({behavior:"instant",block:"start"}));
+    await page.locator(".venue-map-frame").waitFor();
+    const loadedMapHeight=(await page.locator(".venue-map-shell").boundingBox()).height;
+    assert.ok(Math.abs(initialMapHeight-loadedMapHeight)<1,"Lazy map shifted its card height");
+    await page.waitForFunction(()=>document.querySelector(".section-navigator a[aria-current=location]")?.getAttribute("href")==="#location");
+    await page.locator(".calendar-trigger").scrollIntoViewIfNeeded();
+    await page.locator(".calendar-trigger").click();
+    assert.equal(await page.locator(".calendar-sheet").evaluate(el=>el.open),true);
+    const google=await page.locator('.calendar-sheet a').getAttribute("href");
+    assert.ok(google.startsWith("https://calendar.google.com/calendar/render?"));
+    const downloadEvent=page.waitForEvent("download");
+    await page.locator(".calendar-sheet > button:not(.calendar-sheet-close)").click();
+    const download=await downloadEvent;
+    assert.equal(download.suggestedFilename(),"janith-pradeepa-"+event+".ics");
+    await download.saveAs(path.join(output,event+".ics"));
+    await page.locator(".calendar-trigger").click();await page.keyboard.press("Escape");
+    assert.equal(await page.locator(".calendar-sheet").evaluate(el=>el.open),false);
+    assert.equal(await page.evaluate(()=>document.activeElement.classList.contains("calendar-trigger")),true);
+    await page.locator(".share-button").scrollIntoViewIfNeeded();await page.locator(".share-button").click();
+    assert.ok((await page.evaluate(()=>window.lastSharedInvitation.url)).includes("?to=Amali"));
+    await page.locator(".language-toggle--floating button[lang=si]").click();
+    assert.equal(await page.locator("main").getAttribute("lang"),"si");
+    assert.equal(await page.evaluate(()=>localStorage.getItem("invitation-language")),"si");
+    const preferenceCookie=(await context.cookies(baseURL)).find(cookie=>cookie.name==="invitation-language");
+    assert.equal(preferenceCookie?.value,"si","Language preference cookie was not mirrored");
+    assert.equal(preferenceCookie.path,"/");
+    assert.equal(preferenceCookie.sameSite,"Lax");
+    const reloadResponse=await page.reload({waitUntil:"domcontentloaded"});
+    assert.match(await reloadResponse.text(),/<main\b[^>]*\blang="si"/u,"Sinhala preference did not render on the server");
+    await page.waitForFunction(()=>document.querySelector("main").lang==="si");
+    const theme=await page.locator('meta[name="theme-color"]').getAttribute("content");
+    assert.equal(theme,event==="wedding"?"#f5eddc":"#3b0715");
+    results.push({event,video,music:true,calendarDownload:true,calendarFocus:true,shareMock:true,languagePersistence:true,languageCookie:true,languageSSR:true,legacyGuest:true});
+    await context.close();
+
+    const arrivedContext=await browser.newContext({viewport:{width:360,height:740},reducedMotion:"reduce"});
+    await arrivedContext.addInitScript(()=>{
+      const ActualDate=Date;
+      window.Date=class extends ActualDate { constructor(...args){super(...(args.length?args:["2026-12-01T12:00:00+05:30"]));} static now(){return new ActualDate("2026-12-01T12:00:00+05:30").getTime();} };
+    });
+    const arrivedPage=await arrivedContext.newPage();
+    await arrivedPage.goto(baseURL+"/"+event,{waitUntil:"domcontentloaded"});
+    await arrivedPage.waitForFunction(()=>!document.querySelector(".gate-button")?.disabled);
+    assert.equal(await arrivedPage.locator(".guest-line").count(),0,"Missing guest produced an empty greeting");
+    await arrivedPage.locator(".gate-button").click();
+    await arrivedPage.locator(".countdown-arrived").waitFor();
+    assert.equal(await arrivedPage.locator(".countdown-grid").count(),0);
+    await arrivedContext.close();
+  }
+} finally {await browser.close();}
+await fs.writeFile(path.join(output,"results.json"),JSON.stringify({results,countdownComplete:true},null,2));
+console.log("PASS opening gesture/media controls, saved language, guest alias/fallback, calendar download, share mock, and countdown arrival on both routes.");

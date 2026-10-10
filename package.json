@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "verify": "node scripts/verify-invitations.mjs",
+    "verify:mobile": "node scripts/verify-mobile.mjs",
+    "verify:gallery": "node scripts/verify-gallery.mjs",
+    "verify:actions": "node scripts/verify-actions.mjs",
+    "verify:performance": "node scripts/verify-performance.mjs"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",
