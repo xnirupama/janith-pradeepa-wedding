@@ -18,6 +18,8 @@ import Gallery from "./Gallery";
 import LocationSection from "./LocationSection";
 import ClosingSection from "./ClosingSection";
 import SectionNavigator from "./SectionNavigator";
+import { InvitationMotionProvider } from "./InvitationMotion";
+import { pauseBackgroundVideos, readMotionEnvironment } from "@/lib/motion-environment";
 
 function Experience({ invitation: original, galleryImages, guestName, coupleArtwork }) {
   const { language, t } = useLanguage();
@@ -46,7 +48,7 @@ function Experience({ invitation: original, galleryImages, guestName, coupleArtw
     return () => cancelAnimationFrame(frame);
   }, [contentActive]);
   const playOpening = () => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!readMotionEnvironment().backgroundVideo) return;
     const video = openingVideoRef.current;
     if (!video) return;
     if (!video.getAttribute("src")) {
@@ -58,18 +60,19 @@ function Experience({ invitation: original, galleryImages, guestName, coupleArtw
     video.play().catch(() => {});
   };
   const openInvitation = () => {
+    pauseBackgroundVideos();
     const audio = document.getElementById("invitation-music");
     if (audio) { audio.volume = 0; audio.play().catch(() => {}); }
     playOpening();
     setOpen(true);
   };
   const finishOpening = useCallback(() => setOpeningFinished(true), []);
-  const replayOpening = () => { savedScroll.current = window.scrollY; playOpening(); setReplaying(true); };
+  const replayOpening = () => { savedScroll.current = window.scrollY; pauseBackgroundVideos(); playOpening(); setReplaying(true); };
   const finishReplay = useCallback(() => {
     setReplaying(false);
     requestAnimationFrame(() => window.scrollTo({ top: savedScroll.current, behavior: "instant" }));
   }, []);
-  return <main className={"event-page theme-" + original.theme + (contentActive ? " has-section-nav" : "")} style={invitationThemes[original.theme]} lang={language}>
+  return <InvitationMotionProvider suspended={(open && !openingFinished) || replaying}><main className={"event-page theme-" + original.theme + (contentActive ? " has-section-nav" : "")} style={invitationThemes[original.theme]} lang={language}>
     <LanguageToggle floating />
     <InvitationGate invitation={invitation} guestName={guestName} open={open} onOpen={openInvitation} />
     <OpeningFilm ref={openingVideoRef} invitation={invitation} visible={(open && !openingFinished) || replaying} onComplete={replaying ? finishReplay : finishOpening} />
@@ -91,7 +94,7 @@ function Experience({ invitation: original, galleryImages, guestName, coupleArtw
       </div>
       {!replaying && <SectionNavigator invitation={invitation} />}
     </>}
-  </main>;
+  </main></InvitationMotionProvider>;
 }
 export default function EventExperience({ initialLanguage = "en", ...props }) {
   return <InvitationLanguageProvider initialLanguage={initialLanguage}><Experience {...props} /></InvitationLanguageProvider>;

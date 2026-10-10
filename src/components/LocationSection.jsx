@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { ExternalLink, MapPin, Navigation } from "lucide-react";
 import SectionReveal from "./SectionReveal";
-import { SectionHeading } from "./InvitationOrnaments";
+import { SectionHeading, SunburstRing } from "./InvitationOrnaments";
+import { RotatingDecoration } from "./InvitationMotion";
 import { useLanguage } from "./InvitationLanguage";
 
 const VenueMap = dynamic(() => import("./VenueMap"), { ssr: false });
@@ -36,7 +37,7 @@ export default function LocationSection({ location, active = true }) {
         <SectionHeading kicker={t("locationKicker")} title={t("locationTitle")} id="location-title" />
       </SectionReveal>
       <SectionReveal className="location-card">
-        <div className="location-icon" aria-hidden="true"><MapPin size={28} strokeWidth={1.4} /></div>
+        <div className="location-icon" aria-hidden="true"><RotatingDecoration className="medallion-halo" duration={54} reverse><SunburstRing /></RotatingDecoration><MapPin size={28} strokeWidth={1.4} /></div>
         <p className="section-kicker">{t("joinUsAt")}</p>
         <h3 className="location-venue">{location.name}</h3>
         {addressLines.length > 0 && <address>{addressLines.map((line) => <span key={line}>{line}</span>)}</address>}

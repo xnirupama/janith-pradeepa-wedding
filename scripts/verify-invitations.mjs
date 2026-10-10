@@ -17,7 +17,7 @@ const { createCalendarFile, createGoogleCalendarUrl } = await import(moduleUrl(a
 // Next.js resolves extensionless imports and JSON through its bundler. Adapt
 // those imports for plain Node without modifying production files or adding deps.
 const invitationSource = (await read("src/data/invitations.js"))
-  .replace('import photoAssets from "./photo-assets.json";', `const photoAssets = ${await read("src/data/photo-assets.json")};`)
+  .replace('import backgroundVideos from "./background-videos.json";', `const backgroundVideos = ${await read("src/data/background-videos.json")};`)
   .replace('import videoAssets from "./video-assets.json";', `const videoAssets = ${await read("src/data/video-assets.json")};`)
   .replace('"./translations"', JSON.stringify(translationUrl));
 const { getInvitation } = await import(moduleUrl(invitationSource));
@@ -69,7 +69,7 @@ test("both invitations retain their factual dates, event times, contacts and lin
     }
     assert.equal(invitation.location.mapsUrl, expected.mapsUrl);
     assert.deepEqual(invitation.location.contact, expected.contact);
-    assert.equal(invitation.videos.opening, `/assets/${slug}/videos/${slug}-opening-couple.mp4`);
+    assert.equal(invitation.videos.opening, `/assets/${slug}/optimized/opening-mobile.mp4`);
     assert.equal(invitation.music, `/assets/${slug}/music/${slug}-theme.mp3`);
     assert.ok(invitation.videoPosters.opening);
   }
@@ -82,6 +82,7 @@ test("English and Sinhala dictionaries have complete matching UI keys and templa
     if (typeof value !== "string") continue;
     assert.ok(value.trim(), `English ${key}`);
     assert.ok(translations.si[key].trim(), `Sinhala ${key}`);
+    assert.ok(!/\?{3,}/.test(translations.si[key]), `Sinhala encoding for ${key}`);
     const variables = (text) => (text.match(/\{\w+\}/g) || []).sort();
     assert.deepEqual(variables(value), variables(translations.si[key]), `Template variables for ${key}`);
   }
@@ -112,7 +113,7 @@ test("localizing narrative keeps media, canonical calendar data, phone numbers a
     for (const key of ["slug", "theme", "couple", "groom", "bride", "countdownTarget", "music", "heroPhoto", "featurePhoto", "stickerPhoto"]) {
       assert.equal(localized[key], original[key], `${slug}.${key}`);
     }
-    for (const key of ["calendar", "videos", "sectionVideos", "backgrounds", "videoPosters", "gateArtwork"]) {
+    for (const key of ["calendar", "videos", "motionVideos", "backgrounds", "videoPosters", "gateArtwork"]) {
       assert.equal(localized[key], original[key], `${slug}.${key}`);
     }
     assert.equal(localized.location.mapsUrl, original.location.mapsUrl);
@@ -172,6 +173,28 @@ test("calendar actions retain the Colombo ceremony time and exclusive homecoming
 
 const { invitationThemes } = await import(moduleUrl(await read("src/data/themes.js")));
 const stylesheet = await read("src/app/globals.css");
+
+test("background derivatives are small, silent, portrait, and backed by archived sources", async () => {
+  const clips = JSON.parse(await read("src/data/background-videos.json"));
+  for (const sections of Object.values(clips)) {
+    assert.deepEqual(Object.keys(sections).sort(), ["closing", "cover", "hero"]);
+    for (const clip of Object.values(sections)) {
+      assert.ok(clip.bytes <= 1_500_000);
+      assert.equal(clip.hasAudio, false);
+      assert.equal(clip.width, 540);
+      assert.equal(clip.height, 960);
+      assert.equal(clip.duration, 10);
+      assert.equal(clip.fps, 24);
+      assert.equal(clip.fastStart, true);
+      assert.equal((await fs.stat(path.join(root, "public", clip.src))).size, clip.bytes);
+      assert.equal((await fs.stat(path.join(root, clip.sourcePath))).size, clip.originalBytes);
+      assert.ok(!clip.sourcePath.startsWith("public/"));
+      assert.ok(clip.webm.bytes < clip.bytes);
+      assert.equal((await fs.stat(path.join(root, "public", clip.webm.src))).size, clip.webm.bytes);
+    }
+  }
+  assert.equal(clips.homecoming.cover.src, clips.homecoming.hero.src);
+});
 test("theme text and gold surfaces meet WCAG AA contrast", () => {
   const luminance = (color) => {
     const channels = color.slice(1).match(/.{2}/g).map((part) => parseInt(part, 16) / 255).map((value) => value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4);
@@ -192,5 +215,17 @@ test("theme text and gold surfaces meet WCAG AA contrast", () => {
   for (const stop of goldStops) {
     assert.ok(ratio(goldInk, stop) >= 4.5, "Gold action text");
     assert.ok(ratio(footerMuted, stop) >= 4.5, "Gold footer text");
+  }
+  const blend = (rgb, backdrop, alpha) => "#" + rgb.split(",").map(channel => Math.round(Number(channel) * alpha + backdrop * (1 - alpha)).toString(16).padStart(2, "0")).join("");
+  const minAlpha = Number(stylesheet.match(/--video-scrim-min:\s*([.\d]+)/)[1]);
+  for (const theme of Object.values(invitationThemes)) {
+    for (const backdrop of [0, 255]) {
+      for (const key of ["--ink", "--muted", "--accent"]) assert.ok(ratio(theme[key], blend(theme["--video-scrim-rgb"], backdrop, minAlpha)) >= 4.5, key + " over brightest/darkest video frame");
+    }
+  }
+  const footerStops = stylesheet.match(/--closing-gradient: ([^;]+)/)[1].match(/#[a-f\d]{6}/gi);
+  for (const stop of footerStops) {
+    const rgb = stop.slice(1).match(/.{2}/g).map(channel => parseInt(channel, 16)).join(",");
+    for (const backdrop of [0, 255]) assert.ok(ratio(footerMuted, blend(rgb, backdrop, .96)) >= 4.5, "Footer text over video");
   }
 });

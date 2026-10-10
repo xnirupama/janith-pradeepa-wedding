@@ -226,7 +226,7 @@ const si = {
   navEvents: "වැඩසටහන",
   navGallery: "ඡායාරූප",
   navLocation: "ස්ථානය",
-  navContact: "??????",
+  navContact: "අමතන්න",
   countdownKicker: "ආසාවෙන් බලා සිටින මොහොතක්",
   days: "දින",
   hours: "පැය",

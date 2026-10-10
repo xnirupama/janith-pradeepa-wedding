@@ -3,7 +3,8 @@
 import { ArrowRight } from "lucide-react";
 import { useSyncExternalStore } from "react";
 import { LanguageToggle, useLanguage } from "./InvitationLanguage";
-import { Lotus, Mandala } from "./InvitationOrnaments";
+import { Lotus, MandalaLayers } from "./InvitationOrnaments";
+import VideoBackdrop from "./VideoBackdrop";
 
 const subscribe = () => () => {};
 const getSnapshot = () => true;
@@ -15,7 +16,8 @@ export default function InvitationGate({ invitation, guestName, open, onOpen }) 
   if (open) return null;
   return (
     <div className="invitation-gate" aria-labelledby="cover-names">
-      <Mandala className="gate-mandala" />
+      <VideoBackdrop clip={invitation.motionVideos.cover} cover className="cover-backdrop" />
+      <MandalaLayers className="gate-mandalas" />
       <div className="gate-card">
         <Lotus className="gate-lotus" />
         <p className="blessing">{invitation.blessing}</p>

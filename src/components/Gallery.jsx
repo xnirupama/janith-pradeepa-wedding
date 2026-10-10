@@ -39,7 +39,7 @@ export default function Gallery({ images = [] }) {
                 src={image.src}
                 alt={t("photoAlt")}
                 fill
-                sizes={images.length === 1 || (index === 0 && images.length > 2) ? "(max-width: 700px) 88vw, (max-width: 1100px) 84vw, 880px" : "(max-width: 700px) 43vw, (max-width: 1100px) 40vw, 430px"}
+                sizes={images.length === 1 ? "(max-width: 480px) 88vw, 430px" : "(max-width: 480px) 43vw, 210px"}
                 placeholder={image.blurDataURL ? "blur" : "empty"}
                 blurDataURL={image.blurDataURL}
                 loading="lazy"

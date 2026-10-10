@@ -11,7 +11,9 @@
     "verify:mobile": "node scripts/verify-mobile.mjs",
     "verify:gallery": "node scripts/verify-gallery.mjs",
     "verify:actions": "node scripts/verify-actions.mjs",
-    "verify:performance": "node scripts/verify-performance.mjs"
+    "verify:performance": "node scripts/verify-performance.mjs",
+    "verify:motion": "node scripts/verify-motion.mjs",
+    "prepare:videos": "node scripts/prepare-background-videos.mjs"
   },
   "dependencies": {
     "lucide-react": "latest",

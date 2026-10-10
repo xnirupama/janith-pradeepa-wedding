@@ -1,4 +1,4 @@
-import photoAssets from "./photo-assets.json";
+import backgroundVideos from "./background-videos.json";
 import videoAssets from "./video-assets.json";
 import { applyInvitationCopy, translations } from "./translations";
 
@@ -26,39 +26,9 @@ export const invitations = {
     featurePhoto: "/assets/wedding/photos/wedding-couple-feature.jpeg",
     stickerPhoto: "/assets/wedding/photos/wedding-couple-feature.png",
     music: "/assets/wedding/music/wedding-theme.mp3",
-    videos: {
-      opening: "/assets/wedding/videos/wedding-opening-couple.mp4",
-      hero: "/assets/wedding/videos/wedding-hero-loop.mp4",
-      feature: "/assets/wedding/videos/wedding-floral-loop.mp4",
-      closing: "/assets/wedding/videos/wedding-closing-loop.mp4",
-    },
-    heroPlaybackRate: 0.5,
-    sectionVideos: {
-      invitation: "/assets/wedding/videos/wedding-floral-frame-loop.mp4",
-      feature: "/assets/wedding/videos/wedding-floral-frame-loop.mp4",
-      schedule: "/assets/wedding/videos/wedding-soft-light-loop.mp4",
-      countdown: "/assets/wedding/videos/wedding-petals-loop.mp4",
-      gallery: "/assets/wedding/videos/wedding-floral-frame-loop.mp4",
-      location: "/assets/wedding/videos/wedding-soft-light-loop.mp4",
-    },
     backgrounds: {
       hero: "/assets/wedding/backgrounds/wedding-hero-bg.jpeg",
       section: "/assets/wedding/backgrounds/wedding-section-bg.jpeg",
-    },
-    videoPosters: {
-      hero: "/assets/wedding/posters/wedding-hero-poster.webp",
-      invitation: "/assets/wedding/posters/wedding-invitation-poster.webp",
-      feature: "/assets/wedding/posters/wedding-feature-poster.webp",
-      schedule: "/assets/wedding/posters/wedding-schedule-poster.webp",
-      countdown: "/assets/wedding/posters/wedding-countdown-poster.webp",
-      gallery: "/assets/wedding/posters/wedding-gallery-poster.webp",
-      location: "/assets/wedding/posters/wedding-location-poster.webp",
-      closing: "/assets/wedding/posters/wedding-closing-poster.webp",
-    },
-    gateArtwork: {
-      mandala: "/assets/wedding/decor/wedding-gate-mandala.webp",
-      lotus: "/assets/wedding/decor/wedding-gate-lotus.webp",
-      procession: "/assets/wedding/decor/wedding-gate-procession.webp",
     },
     location: {
       enabled: true,
@@ -90,33 +60,9 @@ export const invitations = {
     featurePhoto: "/assets/homecoming/photos/homecoming-couple-feature.jpeg",
     stickerPhoto: "/assets/homecoming/photos/homecoming-couple-feature.png",
     music: "/assets/homecoming/music/homecoming-theme.mp3",
-    videos: {
-      opening: "/assets/homecoming/videos/homecoming-opening-couple.mp4",
-      hero: "/assets/homecoming/videos/homecoming-hero-loop.mp4",
-      feature: "/assets/homecoming/videos/homecoming-glow-loop.mp4",
-      closing: "/assets/homecoming/videos/homecoming-closing-loop.mp4",
-    },
-    sectionVideos: {
-      invitation: "/assets/homecoming/videos/homecoming-floral-frame-loop.mp4",
-      feature: "/assets/homecoming/videos/homecoming-floral-frame-loop.mp4",
-      arrival: "/assets/homecoming/videos/homecoming-floral-frame-loop.mp4",
-      countdown: "/assets/homecoming/videos/homecoming-countdown-butterfly-loop.mp4",
-      gallery: "/assets/homecoming/videos/homecoming-floral-frame-loop.mp4",
-      location: "/assets/homecoming/videos/homecoming-petals-loop.mp4",
-    },
     backgrounds: {
       hero: "/assets/homecoming/backgrounds/homecoming-hero-bg.jpeg",
       section: "/assets/homecoming/backgrounds/homecoming-section-bg.jpeg",
-    },
-    videoPosters: {
-      hero: "/assets/homecoming/posters/homecoming-hero-poster.webp",
-      invitation: "/assets/homecoming/posters/homecoming-invitation-poster.webp",
-      feature: "/assets/homecoming/posters/homecoming-feature-poster.webp",
-      arrival: "/assets/homecoming/posters/homecoming-arrival-poster.webp",
-      countdown: "/assets/homecoming/posters/homecoming-countdown-poster.webp",
-      gallery: "/assets/homecoming/posters/homecoming-gallery-poster.webp",
-      location: "/assets/homecoming/posters/homecoming-location-poster.webp",
-      closing: "/assets/homecoming/posters/homecoming-closing-poster.webp",
     },
     location: {
       enabled: true,
@@ -143,7 +89,8 @@ export function getInvitation(slug) {
   const localized = applyInvitationCopy(invitation, translations.en.invitationCopy[slug]);
   return {
     ...localized,
-    videos: { ...localized.videos, openingMobile: videoAssets[slug]?.src },
-    videoPosters: { ...localized.videoPosters, opening: videoAssets[slug]?.poster.src ?? photoAssets[slug].backgrounds.hero.src },
+    videos: { opening: videoAssets[slug].src },
+    motionVideos: backgroundVideos[slug],
+    videoPosters: { opening: videoAssets[slug].poster.src },
   };
 }

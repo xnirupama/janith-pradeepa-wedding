@@ -39,7 +39,7 @@ export default function Countdown({ invitation, active = true }) {
   return (
     <section className="countdown-section section-shell" aria-labelledby="countdown-title">
       <SectionReveal>
-        <SectionHeading kicker={t("countdownKicker")} title={invitation.countdownHeading} id="countdown-title" />
+        <SectionHeading kicker={t("countdownKicker")} title={invitation.countdownHeading} id="countdown-title" ringed />
         <p className="section-intro">{invitation.countdownText}</p>
       </SectionReveal>
       {remaining?.complete ? (

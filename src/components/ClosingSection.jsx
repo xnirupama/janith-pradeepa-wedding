@@ -3,7 +3,8 @@
 import { ArrowUp, RotateCcw } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 import ShareInvitation from "./ShareInvitation";
-import { ContactPill, Lotus, Mandala } from "./InvitationOrnaments";
+import { ContactPill, MandalaLayers, RingedLotus } from "./InvitationOrnaments";
+import VideoBackdrop from "./VideoBackdrop";
 import { useLanguage } from "./InvitationLanguage";
 
 export default function ClosingSection({ invitation, onReplayOpening }) {
@@ -17,11 +18,12 @@ export default function ClosingSection({ invitation, onReplayOpening }) {
 
   return (
     <footer className="closing-section" id="contact" aria-labelledby="closing-title">
-      <Mandala className="closing-mandala" />
+      <VideoBackdrop clip={invitation.motionVideos.closing} className="footer-backdrop" />
+      <MandalaLayers className="closing-mandalas" />
       <SectionReveal className="closing-content">
         <p className="closing-save-date section-kicker">{t("saveDate")}</p>
         <time className="closing-date" dateTime={invitation.countdownTarget.slice(0, 10)}>{day} . {month} . {year.slice(-2)}</time>
-        <Lotus className="closing-lotus" />
+        <RingedLotus className="closing-lotus" />
         <p className="blessing">{invitation.blessing}</p>
         <p className="sinhala-blessing" lang="si">{invitation.sinhalaBlessing}</p>
         <h2 id="closing-title">{invitation.couple}</h2>

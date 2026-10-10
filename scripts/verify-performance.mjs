@@ -7,12 +7,15 @@ const baseURL=process.env.INVITATION_TEST_URL||"http://127.0.0.1:3101";
 const browser=await chromium.launch({headless:true});
 const results=[];
 const language=process.env.QA_LANGUAGE || "en";
+const reducedMotion=process.env.QA_REDUCED_MOTION === "1";
 try {
   for(const event of (process.env.QA_ROUTES || "wedding,homecoming").split(",")) {
-    const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+    const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,reducedMotion:reducedMotion ? "reduce" : "no-preference"});
     await context.addCookies([{name:"invitation-language",value:language,url:baseURL}]);
     await context.addInitScript(lang=>localStorage.setItem("invitation-language",lang),language);
     const page=await context.newPage();
+    const mediaRequests=[];
+    page.on("request",request=>{if(/\.(mp4|webm|mp3)(\?|$)/.test(request.url()))mediaRequests.push(request.url());});
     await page.addInitScript(()=>{
       window.invitationMetrics={lcp:0,cls:0,shifts:[]};
       new PerformanceObserver(list=>{for(const item of list.getEntries())window.invitationMetrics.lcp=item.startTime;}).observe({type:"largest-contentful-paint",buffered:true});
@@ -26,17 +29,17 @@ try {
     await page.goto(baseURL+"/"+event,{waitUntil:"domcontentloaded"});
     await page.waitForFunction(()=>!document.querySelector(".gate-button")?.disabled);
     await page.evaluate(()=>document.fonts.ready);
-    await page.waitForTimeout(1500);
+    await page.waitForTimeout(7000);
     const metric=await page.evaluate(()=>({
       ...window.invitationMetrics,
       resources:performance.getEntriesByType("resource").map(item=>({name:new URL(item.name).pathname,bytes:item.encodedBodySize,transfer:item.transferSize})),
     }));
     const jsBytes=metric.resources.filter(item=>item.name.endsWith(".js")).reduce((sum,item)=>sum+item.bytes,0);
-    const media=metric.resources.filter(item=>/\.(mp4|mp3)$/.test(item.name));
-    results.push({event,language,shifts:metric.shifts,lcpMs:Math.round(metric.lcp),cls:Number(metric.cls.toFixed(4)),encodedJSBytes:jsBytes,mediaBeforeTap:media.length,profile:"Cold cache, 150ms latency, 1.6Mbps download, 4x CPU throttle",lcpTargetMet:metric.lcp<2500});
+    const media=metric.resources.filter(item=>/\.(mp4|webm)$/.test(item.name));
+    results.push({event,language,reducedMotion,shifts:metric.shifts,lcpMs:Math.round(metric.lcp),cls:Number(metric.cls.toFixed(4)),encodedJSBytes:jsBytes,videoRequestsBeforeTap:mediaRequests.filter(url=>/\.(mp4|webm)(\?|$)/.test(url)).length,encodedVideoBytesBeforeTap:media.reduce((sum,item)=>sum+item.bytes,0),audioRequestsBeforeTap:mediaRequests.filter(url=>/\.mp3(\?|$)/.test(url)).length,profile:"Cold cache, 150ms latency, 1.6Mbps download, 4x CPU throttle; seven-second observation after fonts",lcpTargetMet:metric.lcp<2500});
     console.log(JSON.stringify(results.at(-1)));
     await context.close();
   }
 } finally{await browser.close();}
 const output=path.resolve("artifacts/qa/performance");
-await fs.mkdir(output,{recursive:true});await fs.writeFile(path.join(output,language === "en" ? "results.json" : "results-"+language+".json"),JSON.stringify(results,null,2));
+await fs.mkdir(output,{recursive:true});await fs.writeFile(path.join(output,"results"+(language === "en" ? "" : "-"+language)+(reducedMotion?"-reduced":"")+".json"),JSON.stringify(results,null,2));

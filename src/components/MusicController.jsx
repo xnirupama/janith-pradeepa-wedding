@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Music2, Pause, Play } from "lucide-react";
 import { useLanguage } from "./InvitationLanguage";
+import { DottedRing } from "./InvitationOrnaments";
+import { RotatingDecoration, useInvitationMotion } from "./InvitationMotion";
 
 const TARGET_VOLUME = 0.35;
 const FADE_IN_MS = 1750;
@@ -13,6 +15,8 @@ export default function MusicController({ src, invitationOpen, controlsVisible =
   const audioRef = useRef(null);
   const fadeFrameRef = useRef(null);
   const intendedPlayingRef = useRef(false);
+  const visibilityPausedRef = useRef(false);
+  const { pageVisible } = useInvitationMotion();
   const [playing, setPlaying] = useState(false);
   const [unavailable, setUnavailable] = useState(false);
 
@@ -62,6 +66,21 @@ export default function MusicController({ src, invitationOpen, controlsVisible =
 
   useEffect(() => () => cancelFade(), []);
 
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio || !invitationOpen) return;
+    if (!pageVisible && intendedPlayingRef.current && !audio.paused) {
+      visibilityPausedRef.current = true;
+      cancelFade();
+      audio.pause();
+    } else if (pageVisible && visibilityPausedRef.current) {
+      visibilityPausedRef.current = false;
+      if (intendedPlayingRef.current) audio.play().then(() => fadeTo(TARGET_VOLUME, FADE_IN_MS)).catch(() => { intendedPlayingRef.current = false; setPlaying(false); });
+    }
+    // The fade operates on the live audio ref, just like the opening gesture.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageVisible, invitationOpen]);
+
   const toggle = async () => {
     const audio = audioRef.current;
     if (!audio || unavailable) return;
@@ -89,7 +108,11 @@ export default function MusicController({ src, invitationOpen, controlsVisible =
         src={src}
         loop
         preload="none"
-        onPause={() => { intendedPlayingRef.current = false; setPlaying(false); }}
+        onPause={() => {
+          const paused = audioRef.current?.paused ?? true;
+          if (paused && !visibilityPausedRef.current && document.visibilityState === "visible") intendedPlayingRef.current = false;
+          setPlaying(!paused);
+        }}
         onPlay={() => setPlaying(true)}
         onError={() => { intendedPlayingRef.current = false; cancelFade(); setUnavailable(true); setPlaying(false); }}
       />
@@ -102,7 +125,7 @@ export default function MusicController({ src, invitationOpen, controlsVisible =
           aria-label={t(unavailable ? "musicUnavailable" : playing ? "musicPause" : "musicPlay")}
           aria-pressed={playing}
         >
-          <span className="music-ring" aria-hidden="true" />
+          {playing && <RotatingDecoration className="music-ring" duration={20}><DottedRing /></RotatingDecoration>}
           {unavailable ? <Music2 size={20} /> : playing ? <Pause size={19} /> : <Play size={19} fill="currentColor" />}
         </button>
       )}

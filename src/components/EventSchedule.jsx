@@ -3,7 +3,8 @@
 import { CarFront, FileSignature, Gem } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 import AddToCalendar from "./AddToCalendar";
-import { SectionHeading } from "./InvitationOrnaments";
+import { MandalaLayers, SectionHeading, SunburstRing } from "./InvitationOrnaments";
+import { RotatingDecoration } from "./InvitationMotion";
 import { useLanguage } from "./InvitationLanguage";
 
 export default function EventSchedule({ items, invitation }) {
@@ -13,6 +14,7 @@ export default function EventSchedule({ items, invitation }) {
 
   return (
     <section className="schedule-section section-shell" id="event-details" aria-labelledby="schedule-title">
+      <MandalaLayers className="section-mandalas" />
       <SectionReveal>
         <SectionHeading kicker={t("scheduleKicker")} title={t(invitation.arrival ? "homecomingDay" : "weddingDay")} id="schedule-title" />
       </SectionReveal>
@@ -21,7 +23,7 @@ export default function EventSchedule({ items, invitation }) {
           const Icon = icons[index] || Gem;
           return (
             <SectionReveal key={item.title + "-" + item.time} className="arch-event-card" delay={index * 0.08}>
-              <span className="arch-card-medallion" aria-hidden="true"><Icon size={24} strokeWidth={1.4} /></span>
+              <span className="arch-card-medallion" aria-hidden="true"><RotatingDecoration className="medallion-halo" duration={48 + index * 4} reverse={index % 2 === 1}><SunburstRing /></RotatingDecoration><Icon size={24} strokeWidth={1.4} /></span>
               <h3>{item.title}</h3>
               <p className="arch-card-venue">{invitation.location.name}</p>
               <time className="arch-card-time">{item.time}</time>

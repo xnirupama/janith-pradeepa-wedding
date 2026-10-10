@@ -1,5 +1,6 @@
 import { Phone } from "lucide-react";
 import { useLanguage } from "./InvitationLanguage";
+import { RotatingDecoration } from "./InvitationMotion";
 
 export function Lotus({ className = "" }) {
   return <svg className={`lotus-ornament ${className}`} viewBox="0 0 240 70" fill="none" aria-hidden="true">
@@ -25,8 +26,20 @@ export function Mandala({ className = "" }) {
     </g>
   </svg>;
 }
-export function SectionHeading({ kicker, title, id }) {
-  return <header className="section-heading"><p className="section-kicker">{kicker}</p><h2 id={id}>{title}</h2><Lotus /></header>;
+export function DottedRing() {
+  return <svg viewBox="0 0 100 100" fill="none" aria-hidden="true"><circle cx="50" cy="50" r="46" stroke="currentColor" strokeWidth="1" strokeDasharray="1 5" strokeLinecap="round" /><path d="M50 2v5M50 93v5M2 50h5M93 50h5" stroke="currentColor" strokeWidth="1" /></svg>;
+}
+export function SunburstRing() {
+  return <svg viewBox="0 0 100 100" fill="none" aria-hidden="true"><circle cx="50" cy="50" r="38" stroke="currentColor" strokeWidth=".6" />{Array.from({ length: 36 }, (_, index) => <path key={index} d={index % 3 === 0 ? "M50 2v9" : "M50 5v5"} transform={`rotate(${index * 10} 50 50)`} stroke="currentColor" strokeWidth=".85" />)}</svg>;
+}
+export function MandalaLayers({ className = "" }) {
+  return <div className={"mandala-layers " + className} aria-hidden="true"><RotatingDecoration className="mandala-primary" duration={112} large><Mandala /></RotatingDecoration><RotatingDecoration className="mandala-secondary" duration={136} reverse large><Mandala /></RotatingDecoration></div>;
+}
+export function RingedLotus({ className = "" }) {
+  return <div className={"lotus-seal " + className}><RotatingDecoration className="lotus-ring" duration={58} reverse><DottedRing /></RotatingDecoration><Lotus /></div>;
+}
+export function SectionHeading({ kicker, title, id, ringed = false }) {
+  return <header className="section-heading"><p className="section-kicker">{kicker}</p><h2 id={id}>{title}</h2>{ringed ? <RingedLotus /> : <Lotus />}</header>;
 }
 export function ContactPill({ contact }) {
   const { t } = useLanguage();
