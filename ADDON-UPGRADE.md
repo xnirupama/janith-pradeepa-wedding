@@ -1,5 +1,7 @@
 ﻿# Add-on upgrade and verification
 
+The opening-film behavior below is superseded by the latest requested playback fix: [OPENING-VIDEO-FIX.md](./OPENING-VIDEO-FIX.md). The actual ten-second film now plays before the short reveal.
+
 Implemented for both `/wedding` and `/homecoming` on 10 October 2026. The factual invitation content, routes, original telephone/map/calendar links, removed RSVP and existing rotating SVG circles are preserved. The pre-change findings were reported and committed first in [ADDON-DIAGNOSIS.md](./ADDON-DIAGNOSIS.md). Every source, derivative and image is listed in [ADDON-ASSETS.md](./ADDON-ASSETS.md).
 
 ## Shared video reliability

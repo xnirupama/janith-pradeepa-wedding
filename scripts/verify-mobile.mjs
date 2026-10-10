@@ -42,8 +42,9 @@ for (const [name, engine] of [["chromium", chromium], ["webkit", webkit]].filter
           assert.ok(coverMetrics.tap.every(target => target.w >= 44 && target.h >= 44), "Cover tap target smaller than 44px");
           if (viewport.width === 390) await page.screenshot({path:path.join(output,name+"-"+event+"-"+language+"-cover.png")});
           await page.locator(".gate-button").click();
+          await page.locator(".opening-film-skip").click();
           await page.locator("#top").waitFor();
-          await page.locator(".opening-film").waitFor({state:"detached"});
+          await page.locator(".opening-film").waitFor({state:"hidden"});
           assert.equal(await page.locator(".section-navigator a").count(), 5);
           const contentMetrics = await page.evaluate(() => ({
             width:innerWidth,scrollWidth:document.documentElement.scrollWidth,
@@ -69,7 +70,8 @@ for (const [name, engine] of [["chromium", chromium], ["webkit", webkit]].filter
           await page.locator(".replay-opening").scrollIntoViewIfNeeded();
           const beforeReplay=await page.evaluate(()=>scrollY);
           await page.locator(".replay-opening").click();
-          await page.locator(".opening-film").waitFor({state:"detached"});
+          await page.locator(".opening-film-skip").click();
+          await page.locator(".opening-film").waitFor({state:"hidden"});
           assert.ok(Math.abs((await page.evaluate(()=>scrollY))-beforeReplay)<5,"Replay lost scroll position");
           reports.push({engine:name,event,language,...viewport,coverOverflow:false,contentOverflow:false,tapTargets:true,nav:true,contact:true,noForms:true});
           await page.evaluate(()=>document.querySelectorAll("audio,video").forEach(media=>media.pause()));

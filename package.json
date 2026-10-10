@@ -17,7 +17,8 @@
     "prepare:portraits": "node scripts/prepare-portrait-variants.mjs",
     "prepare:brand": "node scripts/prepare-brand-assets.mjs",
     "verify:resilience": "node scripts/verify-resilience.mjs",
-    "dev:webpack": "next dev --webpack"
+    "dev:webpack": "next dev --webpack",
+    "verify:opening": "node scripts/verify-opening.mjs"
   },
   "dependencies": {
     "lucide-react": "latest",

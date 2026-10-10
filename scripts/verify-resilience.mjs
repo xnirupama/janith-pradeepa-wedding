@@ -41,11 +41,11 @@ for(const engine of (process.env.QA_ENGINES||'chromium,webkit').split(',')){
    assert.equal(await page.locator('link[rel="apple-touch-icon"]').count(),1);assert.equal(await page.locator('link[rel="manifest"]').count(),1);
    await page.locator('.gate-button').click();await page.locator('.opening-film[open]').waitFor();
    const duration=await page.locator('.opening-film').evaluate(v=>parseInt(v.style.getPropertyValue('--opening-duration')));assert.equal(duration,scenario==='preferences'?900:2500);
-   await page.locator('.opening-film').waitFor({state:'detached',timeout:4000});await page.locator('.section-navigator').waitFor();
+   await page.locator('.opening-film-skip').click();await page.locator('.opening-film').waitFor({state:'hidden',timeout:4000});await page.locator('.section-navigator').waitFor();
    if(scenario==='preferences'){
     assert.equal(await page.locator('#invitation-music').evaluate(v=>v.paused),true);await page.locator('.music-control').click();await page.waitForTimeout(300);assert.equal(await page.evaluate(()=>localStorage.getItem('invitation-music-muted')),'false');
-    await page.reload({waitUntil:'domcontentloaded'});await page.waitForFunction(()=>!document.querySelector('.gate-button')?.disabled);assert.equal(await page.locator('#invitation-music').evaluate(v=>v.paused),true);await page.locator('.gate-button').click();await page.locator('.opening-film').waitFor({state:'detached'});assert.equal(await page.locator('#invitation-music').evaluate(v=>v.paused),false);
-    await page.locator('.replay-opening').scrollIntoViewIfNeeded();await page.locator('.replay-opening').click();assert.equal(await page.locator('.opening-film').evaluate(v=>parseInt(v.style.getPropertyValue('--opening-duration'))),2500);await page.locator('.opening-film').waitFor({state:'detached'});
+    await page.reload({waitUntil:'domcontentloaded'});await page.waitForFunction(()=>!document.querySelector('.gate-button')?.disabled);assert.equal(await page.locator('#invitation-music').evaluate(v=>v.paused),true);await page.locator('.gate-button').click();await page.locator('.opening-film-skip').click();await page.locator('.opening-film').waitFor({state:'hidden'});assert.equal(await page.locator('#invitation-music').evaluate(v=>v.paused),false);
+    await page.locator('.replay-opening').scrollIntoViewIfNeeded();await page.locator('.replay-opening').click();assert.equal(await page.locator('.opening-film').evaluate(v=>parseInt(v.style.getPropertyValue('--opening-duration'))),2500);await page.locator('.opening-film-skip').click();await page.locator('.opening-film').waitFor({state:'hidden'});
    }
    assert.deepEqual(errors,[]);results.push({engine,route,scenario,coverState,duration,passed:true});console.log('PASS',engine,route,scenario,coverState);
   }finally{await context.close();}

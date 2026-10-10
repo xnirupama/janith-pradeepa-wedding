@@ -383,8 +383,9 @@ button:active, a.primary-button:active, a.secondary-button:active, a.contact-pil
 .section-navigator a.is-active .section-nav-icon { background: transparent; }
 .nav-active-indicator { position: absolute; top: 2px; left: 0; width: 20%; height: 34px; transform: translateX(calc(var(--active-index) * 100%)); transition: transform 350ms var(--motion-ease); pointer-events: none; }
 .nav-active-indicator::before { content: ""; display: block; width: 34px; height: 34px; margin: auto; border-radius: 50%; background: var(--gold-gradient); }
-/* The reveal clock is independent of media readiness. */
-.opening-film { background: transparent; color: var(--ink); animation: opening-exit var(--opening-duration) linear both; pointer-events: none; }
+/* The requested film stays visible until ended; then the short reveal runs. */
+.opening-film { background: var(--bg); color: var(--ink); animation: none; pointer-events: auto; }
+.opening-film.is-revealing { background: transparent; animation: opening-exit var(--opening-duration) linear both; pointer-events: none; }
 .opening-film::backdrop { background: transparent; }
 .opening-film-skip { pointer-events: auto; z-index: 5; }
 .opening-curtain { position: absolute; inset-block: 0; width: 50.1%; background: var(--bg); z-index: 2; border-inline: 1px solid var(--line); }
@@ -395,8 +396,9 @@ button:active, a.primary-button:active, a.secondary-button:active, a.contact-pil
 @keyframes curtain-left { 0%,15% { transform: translateX(0); } 85%,100% { transform: translateX(-100%); } }
 @keyframes curtain-right { 0%,15% { transform: translateX(0); } 85%,100% { transform: translateX(100%); } }
 @keyframes opening-exit { 0%,88% { opacity: 1; } to { opacity: 0; } }
-.opening-memory { position: absolute; width: min(100%, 480px); inset-block: 0; left: 50%; transform: translateX(-50%); animation: opening-memory var(--opening-duration) linear both; }
-.opening-memory .video-scrim { background: rgba(var(--video-scrim-rgb), .35); }
+.opening-memory { position: absolute; width: min(100%, 480px); inset-block: 0; left: 50%; transform: translateX(-50%); }
+.is-revealing .opening-memory { animation: opening-memory var(--opening-duration) linear both; }
+.opening-memory .video-scrim { background: rgba(var(--video-scrim-rgb), .12); pointer-events: none; }
 .opening-memory .video-poster, .opening-memory video { object-fit: contain; }
 @keyframes opening-memory { 0%,12% { opacity: 1; } 80%,100% { opacity: 0; } }
 .opening-lotus { position: absolute; z-index: 3; top: 47%; left: 50%; transform: translate(-50%, -50%); animation: opening-exit var(--opening-duration) linear both; }
@@ -405,7 +407,7 @@ button:active, a.primary-button:active, a.secondary-button:active, a.contact-pil
 @keyframes opening-petals { 15% { opacity: .5; } to { transform: translate3d(var(--petal-x), var(--petal-y), 0) rotate(var(--petal-turn)); opacity: 0; } }
 .opening-film.is-short .opening-petal { display: none; }
 @media (prefers-reduced-motion: reduce) {
-  .opening-film { animation: opening-exit 400ms linear both !important; }
+  .opening-film.is-revealing { animation: opening-exit 400ms linear both !important; }
   .opening-curtain, .opening-memory, .opening-lotus { animation: none !important; }
   .opening-petal, .bloom-petal { display: none; }
   button:active, a.primary-button:active, a.secondary-button:active, a.contact-pill:active { transform: none; }
@@ -414,7 +416,7 @@ button:active, a.primary-button:active, a.secondary-button:active, a.contact-pil
 .gallery-photo::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse, transparent 50%, #30130b12 100%); }
 .cover-backdrop .lotus-loader { top: max(.4rem, env(safe-area-inset-top, 0px)); bottom: auto; width: 180px; }
 @keyframes opening-crossfade { from { opacity: 1; } to { opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .opening-film { animation: opening-crossfade 400ms linear both !important; } }
+@media (prefers-reduced-motion: reduce) { .opening-film.is-revealing { animation: opening-crossfade 400ms linear both !important; } }
 .section-navigator a { transition: transform var(--motion-fast) var(--motion-ease); }
 .section-navigator a:active { transform: scale(.97); }
 .lightbox-nav:active { transform: translateY(-50%) scale(.97); }
@@ -425,3 +427,11 @@ button:active, a.primary-button:active, a.secondary-button:active, a.contact-pil
 .opening-loader-ring { position: absolute; width: 70px; height: 70px; left: calc(50% - 35px); top: calc(50% - 35px); color: var(--accent); animation: opening-ring-fade 300ms linear both; }
 @keyframes opening-ring-fade { from { opacity: .65; } to { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .opening-loader-ring { display: none; } }
+.opening-film.is-playing-film { animation: none !important; opacity: 1; }
+.opening-video { pointer-events: auto; }
+.opening-video video { display: block; }
+.opening-video video.has-playback-controls { opacity: 1; pointer-events: auto; }
+.opening-playback-status { position: absolute; z-index: 4; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4rem 1.5rem 7rem; text-align: center; pointer-events: none; }
+.opening-playback-status > p, .opening-playback-status > .lotus-loader { width: min(100%, 310px); border: 1px solid var(--line); padding: 1rem; border-radius: 1rem; background: var(--surface); color: var(--ink); }
+.opening-playback-status .opening-play-button { pointer-events: auto; }
+@media (prefers-reduced-motion: reduce) { .opening-video video { display: block; } }

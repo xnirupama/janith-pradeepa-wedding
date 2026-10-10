@@ -24,7 +24,7 @@ for(const engine of (process.env.QA_ENGINES||'chromium,webkit').split(',')){
   await context.route('https://maps.google.com/**',r=>r.fulfill({contentType:'text/html',body:'<!doctype html><p>Map fixture</p>'}));
   try{
    await page.goto(base+'/'+route,{waitUntil:'domcontentloaded'});await page.waitForFunction(()=>!document.querySelector('.gate-button')?.disabled);await page.evaluate(()=>document.fonts.ready);
-   assert.equal(await page.locator('.opening-film').count(),0);assert.equal(await page.locator('#invitation-music').evaluate(v=>v.paused),true);
+   assert.equal(await page.locator('.opening-film').getAttribute('open'),null);assert.equal(await page.locator('#invitation-music').evaluate(v=>v.paused),true);
    if(['normal','low-end'].includes(profile))await page.waitForFunction(()=>document.querySelector('.cover-backdrop').dataset.videoState==='playing',null,{timeout:9000});
    else if(profile==='autoplay-blocked'){
     await page.waitForFunction(()=>document.querySelector('.cover-backdrop').dataset.videoState==='fallback',null,{timeout:9000});
@@ -46,13 +46,13 @@ for(const engine of (process.env.QA_ENGINES||'chromium,webkit').split(',')){
    const tapped=Date.now();await page.locator('.gate-button').click();await page.locator('.opening-film[open]').waitFor();
    const duration=await page.locator('.opening-film').evaluate(v=>parseInt(v.style.getPropertyValue('--opening-duration')));
    assert.equal(duration,profile==='reduced-motion'?400:2500);
-   assert.equal(await page.locator('.opening-petal').count(),18);
+   assert.ok((await page.locator('.opening-film video').getAttribute('src')).endsWith('.mp4'));
    if(profile!=='reduced-motion'){await page.waitForTimeout(200);assert.equal(await page.locator('.opening-film[open]').count(),1,'Opening skipped after media failure');}
-   await page.locator('.opening-film').waitFor({state:'detached',timeout:4000});assert.ok(Date.now()-tapped<4000);
+   await page.locator('.opening-film-skip').click();await page.locator('.opening-film').waitFor({state:'hidden',timeout:4000});assert.ok(Date.now()-tapped<4000);
    await page.locator('.section-navigator').waitFor();assert.equal(await page.evaluate(()=>localStorage.getItem('invitation-opening-seen')),'true');
    await page.locator('.section-navigator a[href="#gallery"]').click();await page.waitForTimeout(1700);
    assert.equal(await page.locator('.hero-backdrop source').count(),0,'Far video retained decoder');
-   if(profile==='low-end')assert.equal(requests.some(x=>/opening-couple|closing-loop/.test(x)),false);
+   if(profile==='low-end')assert.equal(requests.some(x=>/closing-loop/.test(x)),false);
    assert.equal(await page.locator('form,#rsvp').count(),0);assert.equal(await page.locator('footer#contact a[href^=tel]').count(),1);
    const audit=await page.evaluate(()=>window.audit);assert.ok(audit.maxVideos<=2);assert.equal(audit.audioBeforeTap,false);
    assert.deepEqual(errors,[]);assert.deepEqual(consoleErrors,[]);

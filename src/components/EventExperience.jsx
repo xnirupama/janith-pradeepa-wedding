@@ -30,6 +30,8 @@ function Experience({ invitation: original, galleryImages, guestName, coupleArtw
   const [openingFinished, setOpeningFinished] = useState(false);
   const [replaying, setReplaying] = useState(false);
   const [openingDuration, setOpeningDuration] = useState(2500);
+  const [openingRevealing, setOpeningRevealing] = useState(false);
+  const openingRef = useRef(null);
   const pendingHash = useRef("");
   const savedScroll = useRef(0);
   const contentActive = open && openingFinished;
@@ -54,19 +56,22 @@ function Experience({ invitation: original, galleryImages, guestName, coupleArtw
     const audio = document.getElementById("invitation-music");
     if (audio && readPreference("music-muted") !== "true") { audio.volume = 0; audio.play().catch(() => {}); }
     setOpeningDuration(readMotionEnvironment().reducedMotion ? 400 : readPreference("opening-seen") === "true" ? 900 : 2500);
+    setOpeningRevealing(false);
+    openingRef.current?.play();
     setOpen(true);
   };
   const finishOpening = useCallback(() => { savePreference("opening-seen", true); setOpeningFinished(true); }, []);
-  const replayOpening = () => { savedScroll.current = window.scrollY; pauseBackgroundVideos(); setOpeningDuration(readMotionEnvironment().reducedMotion ? 400 : 2500); setReplaying(true); };
+  const revealOpening = useCallback(() => setOpeningRevealing(true), []);
+  const replayOpening = () => { savedScroll.current = window.scrollY; pauseBackgroundVideos(); setOpeningDuration(readMotionEnvironment().reducedMotion ? 400 : 2500); setOpeningRevealing(false); openingRef.current?.play(); setReplaying(true); };
   const finishReplay = useCallback(() => {
     setReplaying(false);
     requestAnimationFrame(() => window.scrollTo({ top: savedScroll.current, behavior: "instant" }));
   }, []);
-  return <InvitationMotionProvider suspended={replaying}><main className={"event-page theme-" + original.theme + (contentActive ? " has-section-nav" : "")} style={invitationThemes[original.theme]} lang={language}>
+  return <InvitationMotionProvider suspended={((open && !openingFinished) || replaying) && !openingRevealing}><main className={"event-page theme-" + original.theme + (contentActive ? " has-section-nav" : "")} style={invitationThemes[original.theme]} lang={language}>
     <MicroInteractions active={contentActive} />
     <LanguageToggle floating />
     <InvitationGate invitation={invitation} guestName={guestName} open={open} onOpen={openInvitation} />
-    {((open && !openingFinished) || replaying) && <OpeningFilm invitation={invitation} duration={openingDuration} onComplete={replaying ? finishReplay : finishOpening} />}
+    <OpeningFilm ref={openingRef} invitation={invitation} visible={(open && !openingFinished) || replaying} duration={openingDuration} onReveal={revealOpening} onComplete={replaying ? finishReplay : finishOpening} />
     <MusicController src={original.music} invitationOpen={open} controlsVisible={contentActive && !replaying} />
     {open && <>
       <div className="invitation-content" inert={!contentActive || replaying}>

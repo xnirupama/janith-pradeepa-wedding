@@ -60,7 +60,8 @@ for (const engine of (process.env.QA_ENGINES || "chromium,webkit").split(",")) {
         });
         await page.evaluate(() => document.fonts.ready);
         await page.locator(".gate-button").click();
-        await page.locator(".opening-film").waitFor({state:"detached"});
+          await page.locator(".opening-film-skip").click();
+        await page.locator(".opening-film").waitFor({state:"hidden"});
         await page.locator(".gallery-photo").first().waitFor();
         const count = await page.locator(".gallery-photo").count();
         assert.equal(count, route === "wedding" ? 2 : 1, "Only distinct supplied couple portraits appear");

@@ -6,12 +6,13 @@ import { claimBackgroundVideo, hasBackgroundVideoSlot, releaseBackgroundVideo } 
 import { useInvitationMotion } from "./InvitationMotion";
 import { useLanguage } from "./InvitationLanguage";
 import LotusLoader from "./LotusLoader";
+import useOpeningVideo from "./useOpeningVideo";
 
 export function clipSources(clip) {
   return [...(clip.webm ? [{ src: clip.webm.src, type: 'video/webm; codecs="vp9"' }] : []), { src: clip.src, type: "video/mp4" }];
 }
 
-export default function BackgroundVideo({ sources, poster, priority = "ambient", objectPosition = "50% 50%", className = "" }) {
+export default function BackgroundVideo({ ref, sources, poster, priority = "ambient", active = true, onPlaybackState, onEnded, objectPosition = "50% 50%", className = "" }) {
   const containerRef = useRef(null), videoRef = useRef(null), retryUsed = useRef(false), lastError = useRef("");
   const [nearby, setNearby] = useState(false), [inView, setInView] = useState(false);
   const [status, setStatus] = useState("loading"), [progress, setProgress] = useState(0);
@@ -22,8 +23,11 @@ export default function BackgroundVideo({ sources, poster, priority = "ambient",
   const { backgroundVideo, pageVisible, suspended, lowEnd } = useInvitationMotion();
   const { t } = useLanguage();
   const important = priority !== "ambient";
-  const allowed = backgroundVideo && (!lowEnd || priority === "cover");
-  const eligible = allowed && pageVisible && nearby && inView && (priority !== "cover" || posterPainted) && (!suspended || priority === "opening");
+  const opening = priority === "opening";
+  const allowed = opening || (backgroundVideo && (!lowEnd || priority === "cover"));
+  const eligible = opening ? active && pageVisible : allowed && pageVisible && nearby && inView && (priority !== "cover" || posterPainted) && !suspended;
+  const showPlaybackControls = opening && status === "fallback" && !failure.startsWith("Opening media error");
+  useOpeningVideo({ enabled: opening, ref, videoRef, sources, poster, setStatus, setProgress, setFailure, lastError, onPlaybackState, onEnded });
 
   useEffect(() => {
     if (priority !== "cover") return;
@@ -46,6 +50,7 @@ export default function BackgroundVideo({ sources, poster, priority = "ambient",
   }, [priority, allowed, sources, failure, posterPainted]);
 
   useEffect(() => {
+    if (opening) return;
     const node = containerRef.current;
     if (!("IntersectionObserver" in window)) {
       const timer = setTimeout(() => { setNearby(true); setInView(true); }, 0);
@@ -55,9 +60,10 @@ export default function BackgroundVideo({ sources, poster, priority = "ambient",
     const visible = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: .01 });
     near.observe(node); visible.observe(node);
     return () => { near.disconnect(); visible.disconnect(); };
-  }, []);
+  }, [opening]);
 
   useEffect(() => {
+    if (opening) return;
     const video = videoRef.current;
     const reset = () => {
       releaseBackgroundVideo(video); video.removeAttribute("src");
@@ -140,16 +146,16 @@ export default function BackgroundVideo({ sources, poster, priority = "ambient",
       for (const [event, handler] of Object.entries(events)) video.removeEventListener(event, handler);
       reset();
     };
-  }, [eligible, nearby, allowed, sources, attempt, failure, important]);
+  }, [eligible, nearby, allowed, sources, attempt, failure, important, opening]);
 
   useEffect(() => {
-    if (!failure || retryUsed.current || !allowed) return;
+    if (opening || !failure || retryUsed.current || !allowed) return;
     const events = ["touchstart", "pointerdown", "scroll", "click"];
     const remove = () => events.forEach(event => window.removeEventListener(event, retry, true));
     const retry = () => { retryUsed.current = true; setFailure(""); setAttempt(current => current + 1); remove(); };
     events.forEach(event => window.addEventListener(event, retry, { capture: true, passive: true }));
     return remove;
-  }, [failure, allowed]);
+  }, [failure, allowed, opening]);
 
   useEffect(() => {
     if (process.env.NODE_ENV !== "development" || new URLSearchParams(window.location.search).get("debug") !== "1") return;
@@ -166,7 +172,7 @@ export default function BackgroundVideo({ sources, poster, priority = "ambient",
       if (priority !== "cover") return;
       Promise.race([document.fonts.ready, new Promise(resolve => setTimeout(resolve, 1200))]).then(() => requestAnimationFrame(() => requestAnimationFrame(() => setPosterPainted(true))));
     }} />
-    <video ref={videoRef} data-background-video data-priority={priority} className={status === "playing" && eligible ? "is-playing" : ""} poster={poster.src} crossOrigin="anonymous" muted loop={priority !== "opening"} playsInline webkit-playsinline="true" autoPlay preload={important ? "auto" : "metadata"} disablePictureInPicture disableRemotePlayback aria-hidden="true" tabIndex={-1} />
+    <video ref={videoRef} data-background-video data-priority={priority} className={(status === "playing" && eligible ? "is-playing " : "") + (showPlaybackControls ? "has-playback-controls" : "")} poster={opening ? undefined : poster.src} crossOrigin="anonymous" muted loop={!opening} playsInline webkit-playsinline="true" autoPlay={!opening} preload={opening ? "none" : important ? "auto" : "metadata"} controls={showPlaybackControls} disablePictureInPicture disableRemotePlayback aria-hidden={opening ? undefined : "true"} aria-label={opening ? t("openingFilm") : undefined} tabIndex={showPlaybackControls ? 0 : -1} />
     <span className="video-scrim" aria-hidden="true" />
     {priority === "cover" && !loaderExpired && status !== "playing" && status !== "fallback" && <LotusLoader progress={progress} label={t("preparingInvitation")} />}
     {!important && inView && pageVisible && !suspended && (status === "loading" || status === "ready") && <span className="poster-shimmer" aria-hidden="true" />}
