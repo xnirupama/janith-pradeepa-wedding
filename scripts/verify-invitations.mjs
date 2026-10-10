@@ -69,7 +69,7 @@ test("both invitations retain their factual dates, event times, contacts and lin
     }
     assert.equal(invitation.location.mapsUrl, expected.mapsUrl);
     assert.deepEqual(invitation.location.contact, expected.contact);
-    assert.equal(invitation.videos.opening, `/assets/${slug}/optimized/opening-mobile.mp4`);
+    assert.ok(invitation.videos.opening.startsWith(`/assets/${slug}/media/`) && /\.[a-f0-9]{12}\.mp4$/.test(invitation.videos.opening));
     assert.equal(invitation.music, `/assets/${slug}/music/${slug}-theme.mp3`);
     assert.ok(invitation.videoPosters.opening);
   }

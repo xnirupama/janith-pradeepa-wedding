@@ -1,149 +1,185 @@
 {
   "wedding": {
-    "cover": {
-      "src": "/assets/wedding/optimized/cover-mobile.mp4",
-      "sourcePath": "media-sources/wedding/videos/wedding-floral-frame-loop.mp4",
-      "description": "Ivory roses framing a clear paper centre",
+    "closing": {
+      "src": "/assets/wedding/media/wedding-closing-loop.ac32ec3a22c1.mp4",
+      "sourcePath": "media-sources/wedding/videos/wedding-closing-loop.mp4",
+      "description": "wedding closing loop",
       "position": "50% 50%",
       "width": 540,
       "height": 960,
       "duration": 10,
       "fps": 24,
-      "bytes": 503917,
-      "originalBytes": 4680198,
+      "bytes": 627534,
+      "originalBytes": 4159458,
+      "codec": "h264",
+      "profile": "Main",
+      "level": 31,
+      "pixelFormat": "yuv420p",
       "hasAudio": false,
       "fastStart": true,
+      "keyframeSeconds": 2,
       "poster": {
-        "src": "/assets/wedding/optimized/cover-poster.webp",
+        "src": "/assets/wedding/media/wedding-closing-loop-poster.0937bbb116e5.webp",
         "width": 540,
         "height": 960,
-        "bytes": 36488
+        "bytes": 12588,
+        "blurDataURL": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAAAQAgCdASoIAA4ABIByJYgCdADdKIx/r80AAP7nL3LREgB9pLrAKf2eEx2vHB2AAAA="
       },
       "webm": {
-        "src": "/assets/wedding/optimized/cover-mobile.webm",
-        "bytes": 384302
+        "src": "/assets/wedding/media/wedding-closing-loop.5427a4af35a6.webm",
+        "bytes": 465264
+      }
+    },
+    "cover": {
+      "src": "/assets/wedding/media/wedding-floral-frame-loop.c361d35c3681.mp4",
+      "sourcePath": "media-sources/wedding/videos/wedding-floral-frame-loop.mp4",
+      "description": "wedding floral frame loop",
+      "position": "50% 50%",
+      "width": 540,
+      "height": 960,
+      "duration": 10,
+      "fps": 24,
+      "bytes": 591676,
+      "originalBytes": 4680198,
+      "codec": "h264",
+      "profile": "Main",
+      "level": 31,
+      "pixelFormat": "yuv420p",
+      "hasAudio": false,
+      "fastStart": true,
+      "keyframeSeconds": 2,
+      "poster": {
+        "src": "/assets/wedding/media/wedding-floral-frame-loop-poster.5bb1020ab120.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 37710,
+        "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADwAQCdASoIAA4ABIByJQBOgB8x5g6FOAAA/texR3tGnQrbydNIQ/XhWlAzAQAA"
+      },
+      "webm": {
+        "src": "/assets/wedding/media/wedding-floral-frame-loop.cf58f4fa24d2.webm",
+        "bytes": 478739
       }
     },
     "hero": {
-      "src": "/assets/wedding/optimized/hero-mobile.mp4",
+      "src": "/assets/wedding/media/wedding-hero-loop.95bab1605f3d.mp4",
       "sourcePath": "media-sources/wedding/videos/wedding-hero-loop.mp4",
-      "description": "Ivory silk, soft bokeh and white florals",
+      "description": "wedding hero loop",
       "position": "50% 50%",
       "width": 540,
       "height": 960,
       "duration": 10,
       "fps": 24,
-      "bytes": 573714,
+      "bytes": 596195,
       "originalBytes": 4066580,
+      "codec": "h264",
+      "profile": "Main",
+      "level": 31,
+      "pixelFormat": "yuv420p",
       "hasAudio": false,
       "fastStart": true,
+      "keyframeSeconds": 2,
       "poster": {
-        "src": "/assets/wedding/optimized/hero-poster.webp",
+        "src": "/assets/wedding/media/wedding-hero-loop-poster.f7aa2df02de1.webp",
         "width": 540,
         "height": 960,
-        "bytes": 14486
+        "bytes": 16072,
+        "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoIAA4ABIByJQBOgBuwVnVj4AD+xej/3WgJZ7ZApbqcBH4o4Yg7WKZiZuATk6mmgAA="
       },
       "webm": {
-        "src": "/assets/wedding/optimized/hero-mobile.webm",
-        "bytes": 389442
-      }
-    },
-    "closing": {
-      "src": "/assets/wedding/optimized/closing-mobile.mp4",
-      "sourcePath": "media-sources/wedding/videos/wedding-closing-loop.mp4",
-      "description": "Ivory petals drifting between soft drapes",
-      "position": "50% 50%",
-      "width": 540,
-      "height": 960,
-      "duration": 10,
-      "fps": 24,
-      "bytes": 601223,
-      "originalBytes": 4159458,
-      "hasAudio": false,
-      "fastStart": true,
-      "poster": {
-        "src": "/assets/wedding/optimized/closing-poster.webp",
-        "width": 540,
-        "height": 960,
-        "bytes": 11260
-      },
-      "webm": {
-        "src": "/assets/wedding/optimized/closing-mobile.webm",
-        "bytes": 438400
+        "src": "/assets/wedding/media/wedding-hero-loop.41de145487c3.webm",
+        "bytes": 417424
       }
     }
   },
   "homecoming": {
-    "cover": {
-      "src": "/assets/homecoming/optimized/silk-mobile.mp4",
-      "sourcePath": "media-sources/homecoming/videos/homecoming-hero-loop.mp4",
-      "description": "Maroon silk and slow gold particles; shared cover and hero",
+    "closing": {
+      "src": "/assets/homecoming/media/homecoming-closing-loop.6bf2faad49a0.mp4",
+      "sourcePath": "media-sources/homecoming/videos/homecoming-closing-loop.mp4",
+      "description": "homecoming closing loop",
       "position": "50% 50%",
       "width": 540,
       "height": 960,
       "duration": 10,
       "fps": 24,
-      "bytes": 944991,
-      "originalBytes": 6050943,
+      "bytes": 694729,
+      "originalBytes": 4585683,
+      "codec": "h264",
+      "profile": "Main",
+      "level": 31,
+      "pixelFormat": "yuv420p",
       "hasAudio": false,
       "fastStart": true,
+      "keyframeSeconds": 2,
       "poster": {
-        "src": "/assets/homecoming/optimized/silk-poster.webp",
+        "src": "/assets/homecoming/media/homecoming-closing-loop-poster.1628c8b62297.webp",
         "width": 540,
         "height": 960,
-        "bytes": 14562
+        "bytes": 10146,
+        "blurDataURL": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAACwAQCdASoIAA4ABIByJZACdADyfWUAAP6FBXZYeF0Bf1/ZdYhXawptzhgAAA=="
       },
       "webm": {
-        "src": "/assets/homecoming/optimized/silk-mobile.webm",
-        "bytes": 859578
+        "src": "/assets/homecoming/media/homecoming-closing-loop.a7b8f8bd42ce.webm",
+        "bytes": 492150
+      }
+    },
+    "cover": {
+      "src": "/assets/homecoming/media/homecoming-hero-loop.fb536d132e83.mp4",
+      "sourcePath": "media-sources/homecoming/videos/homecoming-hero-loop.mp4",
+      "description": "homecoming hero loop",
+      "position": "50% 50%",
+      "width": 540,
+      "height": 960,
+      "duration": 10,
+      "fps": 24,
+      "bytes": 973458,
+      "originalBytes": 6050943,
+      "codec": "h264",
+      "profile": "Main",
+      "level": 31,
+      "pixelFormat": "yuv420p",
+      "hasAudio": false,
+      "fastStart": true,
+      "keyframeSeconds": 2,
+      "poster": {
+        "src": "/assets/homecoming/media/homecoming-hero-loop-poster.3286326375d1.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 16000,
+        "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAACwAQCdASoIAA4ABIByJZgCdAELKQJwAP7mBF2Mt85hZrPw9RmXvrh3jsBOKV/TY2DFLwCMq9XlcAAA"
+      },
+      "webm": {
+        "src": "/assets/homecoming/media/homecoming-hero-loop.5a36f6087913.webm",
+        "bytes": 890873
       }
     },
     "hero": {
-      "src": "/assets/homecoming/optimized/silk-mobile.mp4",
+      "src": "/assets/homecoming/media/homecoming-hero-loop.fb536d132e83.mp4",
       "sourcePath": "media-sources/homecoming/videos/homecoming-hero-loop.mp4",
-      "description": "Maroon silk and slow gold particles; shared cover and hero",
+      "description": "homecoming hero loop",
       "position": "50% 50%",
       "width": 540,
       "height": 960,
       "duration": 10,
       "fps": 24,
-      "bytes": 944991,
+      "bytes": 973458,
       "originalBytes": 6050943,
+      "codec": "h264",
+      "profile": "Main",
+      "level": 31,
+      "pixelFormat": "yuv420p",
       "hasAudio": false,
       "fastStart": true,
+      "keyframeSeconds": 2,
       "poster": {
-        "src": "/assets/homecoming/optimized/silk-poster.webp",
+        "src": "/assets/homecoming/media/homecoming-hero-loop-poster.3286326375d1.webp",
         "width": 540,
         "height": 960,
-        "bytes": 14562
+        "bytes": 16000,
+        "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAACwAQCdASoIAA4ABIByJZgCdAELKQJwAP7mBF2Mt85hZrPw9RmXvrh3jsBOKV/TY2DFLwCMq9XlcAAA"
       },
       "webm": {
-        "src": "/assets/homecoming/optimized/silk-mobile.webm",
-        "bytes": 859578
-      }
-    },
-    "closing": {
-      "src": "/assets/homecoming/optimized/closing-mobile.mp4",
-      "sourcePath": "media-sources/homecoming/videos/homecoming-closing-loop.mp4",
-      "description": "Gold bokeh and a few rose petals on maroon",
-      "position": "50% 50%",
-      "width": 540,
-      "height": 960,
-      "duration": 10,
-      "fps": 24,
-      "bytes": 676357,
-      "originalBytes": 4585683,
-      "hasAudio": false,
-      "fastStart": true,
-      "poster": {
-        "src": "/assets/homecoming/optimized/closing-poster.webp",
-        "width": 540,
-        "height": 960,
-        "bytes": 9046
-      },
-      "webm": {
-        "src": "/assets/homecoming/optimized/closing-mobile.webm",
-        "bytes": 467861
+        "src": "/assets/homecoming/media/homecoming-hero-loop.5a36f6087913.webm",
+        "bytes": 890873
       }
     }
   }

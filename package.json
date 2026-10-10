@@ -13,7 +13,9 @@
     "verify:actions": "node scripts/verify-actions.mjs",
     "verify:performance": "node scripts/verify-performance.mjs",
     "verify:motion": "node scripts/verify-motion.mjs",
-    "prepare:videos": "node scripts/prepare-background-videos.mjs"
+    "prepare:videos": "node scripts/prepare-universal-media.mjs",
+    "prepare:portraits": "node scripts/prepare-portrait-variants.mjs",
+    "prepare:brand": "node scripts/prepare-brand-assets.mjs"
   },
   "dependencies": {
     "lucide-react": "latest",
