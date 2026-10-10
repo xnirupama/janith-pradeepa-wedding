@@ -23,7 +23,6 @@ All media is optional during development. Replace files without changing their p
 | Wedding | Optional countdown-section video | `public/assets/wedding/videos/wedding-countdown-loop.mp4` |
 | Wedding | Optional gallery-section video | `public/assets/wedding/videos/wedding-gallery-loop.mp4` |
 | Wedding | Optional location-section video | `public/assets/wedding/videos/wedding-location-loop.mp4` |
-| Wedding | Optional RSVP-section video | `public/assets/wedding/videos/wedding-rsvp-loop.mp4` |
 | Wedding | Hero background | `public/assets/wedding/backgrounds/wedding-hero-bg.jpeg` |
 | Wedding | Section background | `public/assets/wedding/backgrounds/wedding-section-bg.jpeg` |
 | Wedding | Background music | `public/assets/wedding/music/wedding-theme.mp3` |
@@ -44,7 +43,6 @@ All media is optional during development. Replace files without changing their p
 | Homecoming | Optional countdown-section video | `public/assets/homecoming/videos/homecoming-countdown-loop.mp4` |
 | Homecoming | Optional gallery-section video | `public/assets/homecoming/videos/homecoming-gallery-loop.mp4` |
 | Homecoming | Optional location-section video | `public/assets/homecoming/videos/homecoming-location-loop.mp4` |
-| Homecoming | Optional RSVP-section video | `public/assets/homecoming/videos/homecoming-rsvp-loop.mp4` |
 | Homecoming | Hero background | `public/assets/homecoming/backgrounds/homecoming-hero-bg.jpeg` |
 | Homecoming | Section background | `public/assets/homecoming/backgrounds/homecoming-section-bg.jpeg` |
 | Homecoming | Background music | `public/assets/homecoming/music/homecoming-theme.mp3` |
@@ -56,7 +54,6 @@ All media is optional during development. Replace files without changing their p
 | Wedding | Countdown video poster | `public/assets/wedding/posters/wedding-countdown-poster.webp` |
 | Wedding | Gallery video poster | `public/assets/wedding/posters/wedding-gallery-poster.webp` |
 | Wedding | Location video poster | `public/assets/wedding/posters/wedding-location-poster.webp` |
-| Wedding | RSVP video poster | `public/assets/wedding/posters/wedding-rsvp-poster.webp` |
 | Wedding | Closing video poster | `public/assets/wedding/posters/wedding-closing-poster.webp` |
 | Homecoming | Hero video poster | `public/assets/homecoming/posters/homecoming-hero-poster.webp` |
 | Homecoming | Invitation video poster | `public/assets/homecoming/posters/homecoming-invitation-poster.webp` |
@@ -65,7 +62,6 @@ All media is optional during development. Replace files without changing their p
 | Homecoming | Countdown video poster | `public/assets/homecoming/posters/homecoming-countdown-poster.webp` |
 | Homecoming | Gallery video poster | `public/assets/homecoming/posters/homecoming-gallery-poster.webp` |
 | Homecoming | Location video poster | `public/assets/homecoming/posters/homecoming-location-poster.webp` |
-| Homecoming | RSVP video poster | `public/assets/homecoming/posters/homecoming-rsvp-poster.webp` |
 | Homecoming | Closing video poster | `public/assets/homecoming/posters/homecoming-closing-poster.webp` |
 | Shared | Optional placeholders | `public/assets/shared/placeholders/` |
 | Shared | Optional icons | `public/assets/shared/icons/` |
