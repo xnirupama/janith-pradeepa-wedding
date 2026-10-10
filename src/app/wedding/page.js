@@ -1,6 +1,6 @@
 import EventExperience from "@/components/EventExperience";
 import { getInvitation } from "@/data/invitations";
-import { getGalleryImages } from "@/lib/gallery";
+import { getCoupleArtwork, getGalleryImages } from "@/lib/gallery";
 import { sanitizeGuestName } from "@/lib/personalization";
 
 export const metadata = {
@@ -26,5 +26,5 @@ export const viewport = {
 export default async function WeddingPage({ searchParams }) {
   const invitation = getInvitation("wedding");
   const params = await searchParams;
-  return <EventExperience invitation={invitation} galleryImages={getGalleryImages("wedding")} guestName={sanitizeGuestName(params?.to)} />;
+  return <EventExperience invitation={invitation} galleryImages={await getGalleryImages("wedding")} coupleArtwork={getCoupleArtwork("wedding")} guestName={sanitizeGuestName(params?.guest ?? params?.to)} />;
 }

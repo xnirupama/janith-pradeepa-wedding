@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { ArrowRight, Heart, Sparkles } from "lucide-react";
+import { getInvitation } from "@/data/invitations";
 
 export default function HomePage() {
+  const homecoming = getInvitation("homecoming");
   return (
     <main className="root-page">
       <div className="root-glow root-glow-one" />
@@ -22,7 +24,7 @@ export default function HomePage() {
           </Link>
           <Link href="/homecoming" className="invitation-link homecoming-link">
             <span className="link-number">02</span>
-            <div><span>Welcome Home</span><strong>Homecoming Celebration</strong><time dateTime="2026-11-30">Monday · 30 November 2026</time><em>At the house in Pitigala</em></div>
+            <div><span>Welcome Home</span><strong>Homecoming Celebration</strong><time dateTime="2026-11-30">Monday · 30 November 2026</time><em>{homecoming.location.name}, {homecoming.location.address}</em></div>
             <span className="root-card-action">Open Homecoming Invitation <ArrowRight size={16} aria-hidden="true" /></span>
           </Link>
         </div>
