@@ -44,8 +44,8 @@ function atoms(buffer) {
 }
 
 for (const event of ["wedding", "homecoming"]) {
-  const originalSrc = `/assets/${event}/videos/${event}-opening-couple.mp4`;
-  const source = path.join(root, "public", originalSrc);
+  const sourcePath = `media-sources/${event}/videos/${event}-opening-couple.mp4`;
+  const source = path.join(root, sourcePath);
   const directory = path.join(root, "public", "assets", event, "optimized");
   const destination = path.join(directory, "opening-mobile.mp4");
   const frame = path.join(frames, `${event}-opening-frame.png`);
@@ -75,7 +75,7 @@ for (const event of ["wedding", "homecoming"]) {
   assert.ok(atomList.indexOf("moov") >= 0 && atomList.indexOf("moov") < atomList.indexOf("mdat"), "MP4 is ready to play before the complete download");
   manifest[event] = {
     src: `/assets/${event}/optimized/opening-mobile.mp4`,
-    originalSrc,
+    sourcePath,
     width: video.width,
     height: video.height,
     duration: duration(info),

@@ -1,0 +1,150 @@
+{
+  "wedding": {
+    "cover": {
+      "src": "/assets/wedding/optimized/cover-mobile.mp4",
+      "sourcePath": "media-sources/wedding/videos/wedding-floral-frame-loop.mp4",
+      "description": "Ivory roses framing a clear paper centre",
+      "position": "50% 50%",
+      "width": 540,
+      "height": 960,
+      "duration": 10,
+      "fps": 24,
+      "bytes": 503917,
+      "originalBytes": 4680198,
+      "hasAudio": false,
+      "fastStart": true,
+      "poster": {
+        "src": "/assets/wedding/optimized/cover-poster.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 36488
+      },
+      "webm": {
+        "src": "/assets/wedding/optimized/cover-mobile.webm",
+        "bytes": 384302
+      }
+    },
+    "hero": {
+      "src": "/assets/wedding/optimized/hero-mobile.mp4",
+      "sourcePath": "media-sources/wedding/videos/wedding-hero-loop.mp4",
+      "description": "Ivory silk, soft bokeh and white florals",
+      "position": "50% 50%",
+      "width": 540,
+      "height": 960,
+      "duration": 10,
+      "fps": 24,
+      "bytes": 573714,
+      "originalBytes": 4066580,
+      "hasAudio": false,
+      "fastStart": true,
+      "poster": {
+        "src": "/assets/wedding/optimized/hero-poster.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 14486
+      },
+      "webm": {
+        "src": "/assets/wedding/optimized/hero-mobile.webm",
+        "bytes": 389442
+      }
+    },
+    "closing": {
+      "src": "/assets/wedding/optimized/closing-mobile.mp4",
+      "sourcePath": "media-sources/wedding/videos/wedding-closing-loop.mp4",
+      "description": "Ivory petals drifting between soft drapes",
+      "position": "50% 50%",
+      "width": 540,
+      "height": 960,
+      "duration": 10,
+      "fps": 24,
+      "bytes": 601223,
+      "originalBytes": 4159458,
+      "hasAudio": false,
+      "fastStart": true,
+      "poster": {
+        "src": "/assets/wedding/optimized/closing-poster.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 11260
+      },
+      "webm": {
+        "src": "/assets/wedding/optimized/closing-mobile.webm",
+        "bytes": 438400
+      }
+    }
+  },
+  "homecoming": {
+    "cover": {
+      "src": "/assets/homecoming/optimized/silk-mobile.mp4",
+      "sourcePath": "media-sources/homecoming/videos/homecoming-hero-loop.mp4",
+      "description": "Maroon silk and slow gold particles; shared cover and hero",
+      "position": "50% 50%",
+      "width": 540,
+      "height": 960,
+      "duration": 10,
+      "fps": 24,
+      "bytes": 944991,
+      "originalBytes": 6050943,
+      "hasAudio": false,
+      "fastStart": true,
+      "poster": {
+        "src": "/assets/homecoming/optimized/silk-poster.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 14562
+      },
+      "webm": {
+        "src": "/assets/homecoming/optimized/silk-mobile.webm",
+        "bytes": 859578
+      }
+    },
+    "hero": {
+      "src": "/assets/homecoming/optimized/silk-mobile.mp4",
+      "sourcePath": "media-sources/homecoming/videos/homecoming-hero-loop.mp4",
+      "description": "Maroon silk and slow gold particles; shared cover and hero",
+      "position": "50% 50%",
+      "width": 540,
+      "height": 960,
+      "duration": 10,
+      "fps": 24,
+      "bytes": 944991,
+      "originalBytes": 6050943,
+      "hasAudio": false,
+      "fastStart": true,
+      "poster": {
+        "src": "/assets/homecoming/optimized/silk-poster.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 14562
+      },
+      "webm": {
+        "src": "/assets/homecoming/optimized/silk-mobile.webm",
+        "bytes": 859578
+      }
+    },
+    "closing": {
+      "src": "/assets/homecoming/optimized/closing-mobile.mp4",
+      "sourcePath": "media-sources/homecoming/videos/homecoming-closing-loop.mp4",
+      "description": "Gold bokeh and a few rose petals on maroon",
+      "position": "50% 50%",
+      "width": 540,
+      "height": 960,
+      "duration": 10,
+      "fps": 24,
+      "bytes": 676357,
+      "originalBytes": 4585683,
+      "hasAudio": false,
+      "fastStart": true,
+      "poster": {
+        "src": "/assets/homecoming/optimized/closing-poster.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 9046
+      },
+      "webm": {
+        "src": "/assets/homecoming/optimized/closing-mobile.webm",
+        "bytes": 467861
+      }
+    }
+  }
+}

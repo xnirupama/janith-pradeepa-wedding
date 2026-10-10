@@ -1,73 +1,31 @@
-# Media asset guide
+﻿# Media asset guide
 
-All media is optional during development. Replace files without changing their paths.
+Couple photos, artwork, music and social preview paths remain in `public/assets/wedding/` and `public/assets/homecoming/`. Existing images are served through their optimized WebP derivatives and Next Image.
 
-| Event | Purpose | Exact path |
-|---|---|---|
-| Wedding | Hero couple photo | `public/assets/wedding/photos/wedding-hero.jpg` |
-| Wedding | Featured couple portrait | `public/assets/wedding/photos/wedding-couple-feature.jpeg` |
-| Wedding | Gallery | `public/assets/wedding/gallery/wedding-gallery-01.jpg` (continue numerically) |
-| Wedding | Couple opening film | `public/assets/wedding/videos/wedding-opening-couple.mp4` |
-| Wedding | Gate mandala ornament | `public/assets/wedding/decor/wedding-gate-mandala.webp` |
-| Wedding | Gate white lotus ornament | `public/assets/wedding/decor/wedding-gate-lotus.webp` |
-| Wedding | Gate ceremonial procession | `public/assets/wedding/decor/wedding-gate-procession.webp` |
-| Wedding | Hero video | `public/assets/wedding/videos/wedding-hero-loop.mp4` |
-| Wedding | Floral/media video | `public/assets/wedding/videos/wedding-floral-loop.mp4` |
-| Wedding | Floral frame section video | `public/assets/wedding/videos/wedding-floral-frame-loop.mp4` |
-| Wedding | Falling petals section video | `public/assets/wedding/videos/wedding-petals-loop.mp4` |
-| Wedding | Soft light section video | `public/assets/wedding/videos/wedding-soft-light-loop.mp4` |
-| Wedding | Closing video | `public/assets/wedding/videos/wedding-closing-loop.mp4` |
-| Wedding | Optional invitation-section video | `public/assets/wedding/videos/wedding-invitation-loop.mp4` |
-| Wedding | Optional photo-section video | `public/assets/wedding/videos/wedding-photo-loop.mp4` |
-| Wedding | Optional schedule-section video | `public/assets/wedding/videos/wedding-schedule-loop.mp4` |
-| Wedding | Optional countdown-section video | `public/assets/wedding/videos/wedding-countdown-loop.mp4` |
-| Wedding | Optional gallery-section video | `public/assets/wedding/videos/wedding-gallery-loop.mp4` |
-| Wedding | Optional location-section video | `public/assets/wedding/videos/wedding-location-loop.mp4` |
-| Wedding | Hero background | `public/assets/wedding/backgrounds/wedding-hero-bg.jpeg` |
-| Wedding | Section background | `public/assets/wedding/backgrounds/wedding-section-bg.jpeg` |
-| Wedding | Background music | `public/assets/wedding/music/wedding-theme.mp3` |
-| Wedding | Social preview | `public/assets/wedding/share/wedding-og.jpg` |
-| Homecoming | Hero couple photo | `public/assets/homecoming/photos/homecoming-hero.jpg` |
-| Homecoming | Featured couple portrait | `public/assets/homecoming/photos/homecoming-couple-feature.jpeg` |
-| Homecoming | Gallery | `public/assets/homecoming/gallery/homecoming-gallery-01.jpg` (continue numerically) |
-| Homecoming | Couple opening film | `public/assets/homecoming/videos/homecoming-opening-couple.mp4` |
-| Homecoming | Hero video | `public/assets/homecoming/videos/homecoming-hero-loop.mp4` |
-| Homecoming | Glow/media video | `public/assets/homecoming/videos/homecoming-glow-loop.mp4` |
-| Homecoming | Floral frame section video | `public/assets/homecoming/videos/homecoming-floral-frame-loop.mp4` |
-| Homecoming | Falling petals section video | `public/assets/homecoming/videos/homecoming-petals-loop.mp4` |
-| Homecoming | Butterfly countdown video | `public/assets/homecoming/videos/homecoming-countdown-butterfly-loop.mp4` |
-| Homecoming | Closing video | `public/assets/homecoming/videos/homecoming-closing-loop.mp4` |
-| Homecoming | Optional invitation-section video | `public/assets/homecoming/videos/homecoming-invitation-loop.mp4` |
-| Homecoming | Optional photo-section video | `public/assets/homecoming/videos/homecoming-photo-loop.mp4` |
-| Homecoming | Optional arrival-section video | `public/assets/homecoming/videos/homecoming-arrival-loop.mp4` |
-| Homecoming | Optional countdown-section video | `public/assets/homecoming/videos/homecoming-countdown-loop.mp4` |
-| Homecoming | Optional gallery-section video | `public/assets/homecoming/videos/homecoming-gallery-loop.mp4` |
-| Homecoming | Optional location-section video | `public/assets/homecoming/videos/homecoming-location-loop.mp4` |
-| Homecoming | Hero background | `public/assets/homecoming/backgrounds/homecoming-hero-bg.jpeg` |
-| Homecoming | Section background | `public/assets/homecoming/backgrounds/homecoming-section-bg.jpeg` |
-| Homecoming | Background music | `public/assets/homecoming/music/homecoming-theme.mp3` |
-| Homecoming | Social preview | `public/assets/homecoming/share/homecoming-og.jpg` |
-| Wedding | Hero video poster | `public/assets/wedding/posters/wedding-hero-poster.webp` |
-| Wedding | Invitation video poster | `public/assets/wedding/posters/wedding-invitation-poster.webp` |
-| Wedding | Feature video poster | `public/assets/wedding/posters/wedding-feature-poster.webp` |
-| Wedding | Schedule video poster | `public/assets/wedding/posters/wedding-schedule-poster.webp` |
-| Wedding | Countdown video poster | `public/assets/wedding/posters/wedding-countdown-poster.webp` |
-| Wedding | Gallery video poster | `public/assets/wedding/posters/wedding-gallery-poster.webp` |
-| Wedding | Location video poster | `public/assets/wedding/posters/wedding-location-poster.webp` |
-| Wedding | Closing video poster | `public/assets/wedding/posters/wedding-closing-poster.webp` |
-| Homecoming | Hero video poster | `public/assets/homecoming/posters/homecoming-hero-poster.webp` |
-| Homecoming | Invitation video poster | `public/assets/homecoming/posters/homecoming-invitation-poster.webp` |
-| Homecoming | Feature video poster | `public/assets/homecoming/posters/homecoming-feature-poster.webp` |
-| Homecoming | Arrival video poster | `public/assets/homecoming/posters/homecoming-arrival-poster.webp` |
-| Homecoming | Countdown video poster | `public/assets/homecoming/posters/homecoming-countdown-poster.webp` |
-| Homecoming | Gallery video poster | `public/assets/homecoming/posters/homecoming-gallery-poster.webp` |
-| Homecoming | Location video poster | `public/assets/homecoming/posters/homecoming-location-poster.webp` |
-| Homecoming | Closing video poster | `public/assets/homecoming/posters/homecoming-closing-poster.webp` |
-| Shared | Optional placeholders | `public/assets/shared/placeholders/` |
-| Shared | Optional icons | `public/assets/shared/icons/` |
+- Add distinct JPG, JPEG, PNG, WebP or AVIF photos to `public/assets/{event}/gallery/`; they are naturally sorted and discovered automatically.
+- Keep the supplied couple portraits in `public/assets/{event}/photos/`. Run `node scripts/prepare-invitation-assets.mjs` after replacing a source photo or artwork.
+- Existing music stays at `public/assets/{event}/music/{event}-theme.mp3`.
+- Keep the existing OpenGraph generators and social assets for WhatsApp previews.
 
-For previews, 1200×630 is recommended. Keep videos compressed (ideally below roughly 8 MB each) and use sensible image dimensions.
+## Video sources and published derivatives
 
-The uploaded section-specific videos are mapped centrally in `src/data/invitations.js`. Each section falls back to the event's existing feature loop if its dedicated video cannot load, and then to the static section poster if video playback is unavailable.
+The 16 supplied original videos are archived in `media-sources/{event}/videos/`. They remain in Git and are excluded from Vercel uploads by `.vercelignore`. Do not put full original clips back into `public`.
 
-Dedicated WebP posters are optional. The invitation first paints the existing event background, checks the dedicated poster in the browser, and only swaps it in after it loads successfully. Missing poster files therefore do not create a black flash, broken block, or build failure.
+The measured inventory is in `media-sources/video-inventory.json`. See [INVITATION-UPGRADE.md](./INVITATION-UPGRADE.md) for every clip, the frames inspected, assignment and exact before/after sizes.
+
+Only these silent mobile files are published:
+
+| Event | Purpose | Published files |
+| --- | --- | --- |
+| Wedding | Cover, hero and footer | `public/assets/wedding/optimized/{cover,hero,closing}-mobile.{mp4,webm}` |
+| Homecoming | Shared cover and hero | `public/assets/homecoming/optimized/silk-mobile.{mp4,webm}` |
+| Homecoming | Footer | `public/assets/homecoming/optimized/closing-mobile.{mp4,webm}` |
+| Both | Opening and replay | `public/assets/{event}/optimized/opening-mobile.mp4` |
+| Both | Background posters | `public/assets/{event}/optimized/{cover,hero,silk,closing}-poster.webp` as applicable |
+| Both | Opening poster | `public/assets/{event}/optimized/opening-poster.webp` |
+
+Regenerate backgrounds with `npm run prepare:videos`, and opening films with `node scripts/prepare-opening-films.mjs`. Both accept `FFMPEG_PATH` and `FFPROBE_PATH`; their portable Windows defaults live in ignored `.task-tools/ffmpeg/bin/`. No system installation is required.
+
+Background choices are centralized in `src/data/background-videos.json`; opening film metadata lives in `src/data/video-assets.json`. Background posters persist for reduced motion, Save-Data, slow connections or denied autoplay. Stalled VP9 playback retries H.264 over the same poster.
+
+Lotus, mandala, dotted-ring and sunburst ornaments are SVG components in `src/components/InvitationOrnaments.jsx`, so no additional ornament images are required.

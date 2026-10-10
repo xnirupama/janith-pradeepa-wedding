@@ -1,0 +1,326 @@
+[
+  {
+    "sourcePath": "media-sources/wedding/videos/wedding-soft-light-loop.mp4",
+    "duration": 10,
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 3877572,
+    "codec": "h264",
+    "audio": "aac 2ch",
+    "description": "Ivory silk and soft shadows",
+    "use": "Archived; unused",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  },
+  {
+    "sourcePath": "media-sources/wedding/videos/wedding-petals-loop.mp4",
+    "duration": 10,
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 3923001,
+    "codec": "h264",
+    "audio": "aac 2ch",
+    "description": "White petals and gold bokeh",
+    "use": "Archived; unused",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  },
+  {
+    "sourcePath": "media-sources/wedding/videos/wedding-opening-couple.mp4",
+    "duration": 10,
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 7195820,
+    "codec": "h264",
+    "audio": "aac 2ch",
+    "description": "Couple in ivory outdoors",
+    "use": "Opening and replay",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  },
+  {
+    "sourcePath": "media-sources/wedding/videos/wedding-opening-couple 2.mp4",
+    "duration": 10,
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 5858911,
+    "codec": "h264",
+    "audio": "aac 2ch",
+    "description": "Alternative couple scene with white petals",
+    "use": "Archived; unused",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  },
+  {
+    "sourcePath": "media-sources/wedding/videos/wedding-hero-loop.mp4",
+    "duration": 10,
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 4066580,
+    "codec": "h264",
+    "audio": "aac 2ch",
+    "description": "Ivory silk and floral bokeh",
+    "use": "Hero",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  },
+  {
+    "sourcePath": "media-sources/wedding/videos/wedding-floral-loop.mp4",
+    "duration": 10,
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 3342762,
+    "codec": "h264",
+    "audio": "aac 2ch",
+    "description": "Soft leaf shadows on paper",
+    "use": "Archived; unused",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  },
+  {
+    "sourcePath": "media-sources/wedding/videos/wedding-floral-frame-loop.mp4",
+    "duration": 10,
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 4680198,
+    "codec": "h264",
+    "audio": "aac 2ch",
+    "description": "Ivory rose border, clear centre",
+    "use": "Cover",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  },
+  {
+    "sourcePath": "media-sources/wedding/videos/wedding-closing-loop.mp4",
+    "duration": 10,
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 4159458,
+    "codec": "h264",
+    "audio": "aac 2ch",
+    "description": "White petals between ivory drapes",
+    "use": "Footer",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  },
+  {
+    "sourcePath": "public/assets/wedding/optimized/opening-mobile.mp4",
+    "duration": 10,
+    "width": 406,
+    "height": 720,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 604851,
+    "codec": "h264",
+    "audio": "none",
+    "description": "Existing wedding opening derivative",
+    "use": "Retained opening derivative",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  },
+  {
+    "sourcePath": "public/assets/homecoming/optimized/opening-mobile.mp4",
+    "duration": 10,
+    "width": 406,
+    "height": 720,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 483336,
+    "codec": "h264",
+    "audio": "none",
+    "description": "Existing homecoming opening derivative",
+    "use": "Retained opening derivative",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  },
+  {
+    "sourcePath": "media-sources/homecoming/videos/homecoming-petals-loop.mp4",
+    "duration": 10,
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 6671584,
+    "codec": "h264",
+    "audio": "aac 2ch",
+    "description": "Red roses, petals and bokeh",
+    "use": "Archived; unused",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  },
+  {
+    "sourcePath": "media-sources/homecoming/videos/homecoming-opening-couple.mp4",
+    "duration": 10,
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 5349863,
+    "codec": "h264",
+    "audio": "aac 2ch",
+    "description": "Couple in maroon with Homecoming Day backdrop",
+    "use": "Opening and replay",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  },
+  {
+    "sourcePath": "media-sources/homecoming/videos/homecoming-opening-couple 2.mp4",
+    "duration": 10,
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 6401023,
+    "codec": "h264",
+    "audio": "aac 2ch",
+    "description": "Alternative couple scene with red petals",
+    "use": "Archived; unused",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  },
+  {
+    "sourcePath": "media-sources/homecoming/videos/homecoming-hero-loop.mp4",
+    "duration": 10,
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 6050943,
+    "codec": "h264",
+    "audio": "aac 2ch",
+    "description": "Maroon silk and gold particles",
+    "use": "Cover and hero (one shared file)",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  },
+  {
+    "sourcePath": "media-sources/homecoming/videos/homecoming-glow-loop.mp4",
+    "duration": 10,
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 5617437,
+    "codec": "h264",
+    "audio": "aac 2ch",
+    "description": "Rose border around an ivory centre",
+    "use": "Archived; unused",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  },
+  {
+    "sourcePath": "media-sources/homecoming/videos/homecoming-floral-frame-loop.mp4",
+    "duration": 10,
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 5948033,
+    "codec": "h264",
+    "audio": "aac 2ch",
+    "description": "Maroon rose border around ivory centre",
+    "use": "Archived; unused",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  },
+  {
+    "sourcePath": "media-sources/homecoming/videos/homecoming-countdown-butterfly-loop.mp4",
+    "duration": 10,
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 10459661,
+    "codec": "h264",
+    "audio": "aac 2ch",
+    "description": "Rose frame with butterflies and petals",
+    "use": "Archived; unused",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  },
+  {
+    "sourcePath": "media-sources/homecoming/videos/homecoming-closing-loop.mp4",
+    "duration": 10,
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "fps": 24,
+    "bytes": 4585683,
+    "codec": "h264",
+    "audio": "aac 2ch",
+    "description": "Gold bokeh and rose petals on maroon",
+    "use": "Footer",
+    "inspectedAtSeconds": [
+      1,
+      5,
+      9
+    ]
+  }
+]
