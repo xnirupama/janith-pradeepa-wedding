@@ -1,6 +1,6 @@
 # Janith & Pradeepa — Digital Invitation
 
-A premium, mobile-first Next.js invitation with independent Wedding and Homecoming experiences. Each route includes a cinematic opening gate, music controller, event details, countdown, automatic gallery, calendar download, media sections, and closing experience.
+A mobile-first Next.js invitation with a shared layout and separate ivory and maroon themes. Each route includes a personalized cover, cinematic opening, music, event arches, countdown, gallery, calendar download, lazy venue map and gold Contact footer. Decorative videos and rotating ornaments respect visibility, connection and motion preferences.
 
 ## Routes
 
@@ -21,19 +21,24 @@ Open `http://localhost:3000`. For production checks:
 
 ```bash
 npm run lint
+npm run verify
 npm run build
 npm start
 ```
 
 ## Media
 
-Add media at the exact paths in [ASSETS.md](./ASSETS.md). Missing photos receive an elegant fallback, missing videos use CSS/background imagery, missing music disables gracefully, and empty gallery sections are hidden.
+See [ASSETS.md](./ASSETS.md). Source videos are archived in `media-sources/` and excluded from Vercel uploads. Only optimized silent derivatives are served from `public/assets/*/optimized/`. Posters remain visible when video playback is unsuitable or blocked.
 
 Gallery files placed in the event's `gallery` directory are discovered and naturally sorted automatically. Supported formats are JPG, JPEG, PNG, WebP, and AVIF.
 
 ## Venue configuration
 
-Venue presentation is centralized in `src/data/invitations.js`. The Wedding is configured for Hemandra Grand Hotel with a directions link. The Homecoming is described only as taking place at the house in Pitigala and intentionally has no map link.
+Venue presentation is centralized in `src/data/invitations.js`: Hemandra Grand Hotel for the wedding; Senwin Mandeer, Thalgaswala for homecoming. The couple's original map links and telephone numbers are retained.
+
+## Verification and media inventory
+
+See [INVITATION-UPGRADE.md](./INVITATION-UPGRADE.md) for every video, compression results, the mobile checklist and known limitations. Browser scripts use Playwright with Chromium and WebKit; set `INVITATION_PLAYWRIGHT_MODULE` when using an installation outside this project.
 
 ## Deployment
 
