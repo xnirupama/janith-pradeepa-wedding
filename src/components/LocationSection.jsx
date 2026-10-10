@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { MapPin, Navigation } from "lucide-react";
+import { ExternalLink, MapPin, Navigation } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 import { ContactPill, SectionHeading } from "./InvitationOrnaments";
 import { useLanguage } from "./InvitationLanguage";
@@ -42,12 +42,14 @@ export default function LocationSection({ location, active = true }) {
         {addressLines.length > 0 && <address>{addressLines.map((line) => <span key={line}>{line}</span>)}</address>}
         {location.description && <p className="location-description">{location.description}</p>}
         <div className="venue-map-shell" ref={mapRef}>
-          {active && mapReady ? <VenueMap location={location} /> : (
+          <div className="venue-map-viewport">{active && mapReady ? <VenueMap location={location} /> : (
             <button type="button" className="venue-map-placeholder" disabled={!active} onClick={() => setMapReady(true)}>
               <MapPin size={30} aria-hidden="true" />
               <span>{t("loadMap")}</span>
             </button>
-          )}
+          )}</div>
+          <p className="venue-map-note">{t("mapSearchNote")}</p>
+          {location.mapsUrl && <a className="venue-map-open" href={location.mapsUrl} target="_blank" rel="noopener noreferrer"><ExternalLink size={15} aria-hidden="true" />{t("openMaps")}</a>}
         </div>
         {location.mapsUrl && (
           <a className="primary-button venue-directions" href={location.mapsUrl} target="_blank" rel="noopener noreferrer">

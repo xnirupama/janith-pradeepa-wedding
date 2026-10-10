@@ -16,7 +16,7 @@
   --bg: #f5eddc; --ink: #392719; --accent: #806020; --muted: #705a42; --line: #c4ab775e;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; background: #f5eddc; }
+html { scroll-behavior: smooth; background: #f5eddc; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { margin: 0; font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
 button, input, textarea, select { font: inherit; }
 button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
@@ -333,3 +333,11 @@ button:disabled { cursor: default; opacity: .65; }
 .event-page[lang="si"] p, .event-page[lang="si"] .hero-date-row > span,
 .event-page[lang="si"] .sentiment, .event-page[lang="si"] .featured-couple-sentiment { font-family: var(--font-sinhala), serif; }
 .event-page[lang="si"] .closing-content h2 { font-family: var(--font-signature); line-height: 1.4; }
+.gate-button { width: min(100%, 20rem); }
+.event-page[lang="si"] .gate-script { white-space: pre-line; width: 100%; }
+.event-page[lang="si"] .blessing { font-family: var(--font-body); }
+.venue-map-viewport { height: 16rem; }
+.opening-film { width: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; }
+.opening-film::backdrop { background: #160b10; }
+.opening-film-caption { padding: .75rem 1rem; border-radius: 1rem; background: #160b10d9; }
+.lightbox[lang="si"] { font-family: var(--font-sinhala), serif; line-height: 1.7; }

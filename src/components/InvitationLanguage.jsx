@@ -53,7 +53,7 @@ export function InvitationLanguageProvider({ children, initialLanguage = "en" })
   };
   const t = (key, values = {}) => {
     const value = translations[language]?.[key] ?? translations.en[key] ?? key;
-    return Object.entries(values).reduce((result, [name, replacement]) => result.replaceAll(`{${name}}`, replacement), value);
+    return Object.entries(values).reduce((result, [name, replacement]) => result.replaceAll(`{${name}}`, () => String(replacement)), value);
   };
   return <LanguageContext.Provider value={{ language, setLanguage, t }}>{children}</LanguageContext.Provider>;
 }

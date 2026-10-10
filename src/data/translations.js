@@ -217,7 +217,7 @@ const en = {
 };
 
 const si = {
-  cordiallyInvited: "ඔබට ආදරයෙන් ආරාධනා කරමු!",
+  cordiallyInvited: "ඔබට ආදරයෙන්\nආරාධනා කරමු!",
   openInvitation: "ආරාධනාව විවෘත කරන්න",
   dearGuest: "ආදරණීය {guest},",
   especiallyFor: "විශේෂයෙන් ඔබ වෙනුවෙන්",

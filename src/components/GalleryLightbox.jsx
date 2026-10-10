@@ -14,7 +14,7 @@ const midpoint = (first, second) => ({ x: (first.x + second.x) / 2, y: (first.y 
 const initialView = { scale: 1, x: 0, y: 0 };
 
 export default function GalleryLightbox({ images, initialIndex, onClose, restoreFocusTo }) {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const [active, setActive] = useState(initialIndex);
   const [view, setView] = useState(initialView);
   const dialogRef = useRef(null);
@@ -205,6 +205,7 @@ export default function GalleryLightbox({ images, initialIndex, onClose, restore
     <dialog
       ref={dialogRef}
       className="lightbox"
+      lang={language}
       aria-modal="true"
       aria-labelledby="photo-viewer-title"
       onCancel={(event) => { event.preventDefault(); onClose(); }}

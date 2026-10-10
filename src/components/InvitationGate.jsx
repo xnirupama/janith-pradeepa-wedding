@@ -25,7 +25,7 @@ export default function InvitationGate({ invitation, guestName, open, onOpen }) 
         <h1 id="cover-names" className="couple-signature"><span>Janith</span><i>&amp;</i><span>Pradeepa</span></h1>
         <p className="gate-date">{invitation.displayDate}</p>
         {guestName && <p className="guest-line">{t("dearGuest", { guest: guestName })}</p>}
-        <button type="button" className="primary-button gate-button" disabled={!ready} onClick={onOpen}>{t(ready ? "openInvitation" : "preparingInvitation")}<ArrowRight size={17} aria-hidden="true" /></button>
+        <button type="button" className="primary-button gate-button" disabled={!ready} aria-busy={!ready} onClick={onOpen}>{t("openInvitation")}<ArrowRight size={17} aria-hidden="true" /></button>
         <LanguageToggle />
       </div>
       <p className="gate-footnote">J <span>&amp;</span> P <i aria-hidden="true" /> {invitation.dateParts.year}</p>
