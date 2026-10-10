@@ -1,0 +1,158 @@
+{
+  "checkedAt": "2026-10-10T16:47:58.291Z",
+  "origin": "https://janith-pradeepa.vercel.app",
+  "sourceCommit": "d8269e4",
+  "first": [
+    {
+      "event": "wedding",
+      "language": "en",
+      "reducedMotion": false,
+      "shifts": [
+        {
+          "value": 0.00011340329563576738,
+          "time": 10515.100000023842,
+          "sources": [
+            {
+              "node": "sinhala-blessing",
+              "previous": {
+                "x": 151.515625,
+                "y": 230.28125,
+                "width": 86.953125,
+                "height": 25.921875
+              },
+              "current": {
+                "x": 139.5,
+                "y": 230.28125,
+                "width": 110,
+                "height": 25.921875
+              }
+            }
+          ]
+        }
+      ],
+      "lcpMs": 10108,
+      "lcpElement": "",
+      "lcpURL": "",
+      "cls": 0.0001,
+      "encodedJSBytes": 189927,
+      "videoRequestsBeforeTap": 0,
+      "encodedVideoBytesBeforeTap": 0,
+      "audioRequestsBeforeTap": 0,
+      "profile": "Cold cache, 150ms latency, 1.6Mbps download, 4x CPU throttle; seven-second observation after fonts",
+      "lcpTargetMet": false
+    },
+    {
+      "event": "homecoming",
+      "language": "en",
+      "reducedMotion": false,
+      "shifts": [],
+      "lcpMs": 1764,
+      "lcpElement": "",
+      "lcpURL": "",
+      "cls": 0,
+      "encodedJSBytes": 189927,
+      "videoRequestsBeforeTap": 2,
+      "encodedVideoBytesBeforeTap": 0,
+      "audioRequestsBeforeTap": 0,
+      "profile": "Cold cache, 150ms latency, 1.6Mbps download, 4x CPU throttle; seven-second observation after fonts",
+      "lcpTargetMet": true
+    }
+  ],
+  "repeat": [
+    {
+      "event": "wedding",
+      "language": "en",
+      "reducedMotion": false,
+      "shifts": [
+        {
+          "value": 0.0009652991112232258,
+          "time": 2888.5,
+          "sources": [
+            {
+              "node": "gate-script",
+              "previous": {
+                "x": 96.71875,
+                "y": 284.984375,
+                "width": 196.5625,
+                "height": 50.6875
+              },
+              "current": {
+                "x": 75.34375,
+                "y": 284.984375,
+                "width": 246,
+                "height": 50.6875
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.00011340329563576738,
+          "time": 3092.8000000715256,
+          "sources": [
+            {
+              "node": "sinhala-blessing",
+              "previous": {
+                "x": 151.515625,
+                "y": 230.28125,
+                "width": 86.953125,
+                "height": 25.921875
+              },
+              "current": {
+                "x": 139.5,
+                "y": 230.28125,
+                "width": 110,
+                "height": 25.921875
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.000096706020034337,
+          "time": 3294.4000000953674,
+          "sources": [
+            {
+              "node": "blessing",
+              "previous": {
+                "x": 112.703125,
+                "y": 204.890625,
+                "width": 164,
+                "height": 19
+              },
+              "current": {
+                "x": 117.453125,
+                "y": 204.890625,
+                "width": 155.078125,
+                "height": 19
+              }
+            },
+            {
+              "node": "section-kicker",
+              "previous": {
+                "x": 131.203125,
+                "y": 348.46875,
+                "width": 127,
+                "height": 19.28125
+              },
+              "current": {
+                "x": 135.953125,
+                "y": 348.46875,
+                "width": 118,
+                "height": 19.28125
+              }
+            }
+          ]
+        }
+      ],
+      "lcpMs": 2704,
+      "lcpElement": "",
+      "lcpURL": "",
+      "cls": 0.0012,
+      "encodedJSBytes": 189927,
+      "videoRequestsBeforeTap": 2,
+      "encodedVideoBytesBeforeTap": 957478,
+      "audioRequestsBeforeTap": 0,
+      "profile": "Cold cache, 150ms latency, 1.6Mbps download, 4x CPU throttle; seven-second observation after fonts",
+      "lcpTargetMet": false
+    }
+  ]
+}

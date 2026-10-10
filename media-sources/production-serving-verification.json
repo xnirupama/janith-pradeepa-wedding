@@ -1,0 +1,154 @@
+{
+  "checkedAt": "2026-10-10T16:43:30.206Z",
+  "origin": "https://janith-pradeepa.vercel.app",
+  "sourceCommit": "d8269e4",
+  "checks": [
+    {
+      "path": "/assets/wedding/media/wedding-closing-loop.ac32ec3a22c1.mp4",
+      "status": 206,
+      "type": "video/mp4",
+      "range": "bytes 0-1023/627534",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/wedding/media/wedding-closing-loop.5427a4af35a6.webm",
+      "status": 206,
+      "type": "video/webm",
+      "range": "bytes 0-1023/465264",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/wedding/media/wedding-closing-loop-poster.0937bbb116e5.webp",
+      "status": 206,
+      "type": "image/webp",
+      "range": "bytes 0-1023/12588",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/wedding/media/wedding-floral-frame-loop.c361d35c3681.mp4",
+      "status": 206,
+      "type": "video/mp4",
+      "range": "bytes 0-1023/591676",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/wedding/media/wedding-floral-frame-loop.cf58f4fa24d2.webm",
+      "status": 206,
+      "type": "video/webm",
+      "range": "bytes 0-1023/478739",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/wedding/media/wedding-floral-frame-loop-poster.5bb1020ab120.webp",
+      "status": 206,
+      "type": "image/webp",
+      "range": "bytes 0-1023/37710",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/wedding/media/wedding-hero-loop.95bab1605f3d.mp4",
+      "status": 206,
+      "type": "video/mp4",
+      "range": "bytes 0-1023/596195",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/wedding/media/wedding-hero-loop.41de145487c3.webm",
+      "status": 206,
+      "type": "video/webm",
+      "range": "bytes 0-1023/417424",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/wedding/media/wedding-hero-loop-poster.f7aa2df02de1.webp",
+      "status": 206,
+      "type": "image/webp",
+      "range": "bytes 0-1023/16072",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/wedding/media/wedding-opening-couple.752c6ab65ba9.mp4",
+      "status": 206,
+      "type": "video/mp4",
+      "range": "bytes 0-1023/692153",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/wedding/media/wedding-opening-couple.4c6a4aef7654.webm",
+      "status": 206,
+      "type": "video/webm",
+      "range": "bytes 0-1023/627956",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/wedding/media/wedding-opening-couple-poster.76260729c5ba.webp",
+      "status": 206,
+      "type": "image/webp",
+      "range": "bytes 0-1023/36332",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/homecoming/media/homecoming-closing-loop.6bf2faad49a0.mp4",
+      "status": 206,
+      "type": "video/mp4",
+      "range": "bytes 0-1023/694729",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/homecoming/media/homecoming-closing-loop.a7b8f8bd42ce.webm",
+      "status": 206,
+      "type": "video/webm",
+      "range": "bytes 0-1023/492150",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/homecoming/media/homecoming-closing-loop-poster.1628c8b62297.webp",
+      "status": 206,
+      "type": "image/webp",
+      "range": "bytes 0-1023/10146",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/homecoming/media/homecoming-hero-loop.fb536d132e83.mp4",
+      "status": 206,
+      "type": "video/mp4",
+      "range": "bytes 0-1023/973458",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/homecoming/media/homecoming-hero-loop.5a36f6087913.webm",
+      "status": 206,
+      "type": "video/webm",
+      "range": "bytes 0-1023/890873",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/homecoming/media/homecoming-hero-loop-poster.3286326375d1.webp",
+      "status": 206,
+      "type": "image/webp",
+      "range": "bytes 0-1023/16000",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/homecoming/media/homecoming-opening-couple.fb07dd087000.mp4",
+      "status": 206,
+      "type": "video/mp4",
+      "range": "bytes 0-1023/576688",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/homecoming/media/homecoming-opening-couple.fdc325483458.webm",
+      "status": 206,
+      "type": "video/webm",
+      "range": "bytes 0-1023/490167",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/homecoming/media/homecoming-opening-couple-poster.69fb2fb906cb.webp",
+      "status": 206,
+      "type": "image/webp",
+      "range": "bytes 0-1023/28106",
+      "cache": "public, max-age=31536000, immutable"
+    }
+  ]
+}
