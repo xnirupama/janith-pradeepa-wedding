@@ -1,26 +1,42 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Check, LockKeyhole, MessageSquareText, Minus, Phone, Plus, Send, Sparkles, UserRound, UsersRound } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Check, LockKeyhole, Minus, Plus, Send } from "lucide-react";
 import SectionReveal from "./SectionReveal";
-import VideoBackdrop from "./VideoBackdrop";
+import { SectionHeading } from "./InvitationOrnaments";
+import { useLanguage } from "./InvitationLanguage";
 
 const initial = { fullName: "", phoneNumber: "", attending: "", numberOfGuests: "1", message: "", website: "" };
 const SUBMISSION_COOLDOWN = 15;
+const errorKeys = {
+  fullName: "rsvpNameError",
+  phoneNumber: "rsvpPhoneError",
+  attending: "rsvpAttendanceError",
+  numberOfGuests: "rsvpGuestsError",
+  message: "rsvpMessageError",
+};
 
-export default function RSVPForm({ invitation, active }) {
+export default function RSVPForm({ invitation }) {
+  const { language, t } = useLanguage();
   const [form, setForm] = useState(initial);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
   const [serverMessage, setServerMessage] = useState("");
+  const [serverErrorKey, setServerErrorKey] = useState("rsvpError");
+  const [successKey, setSuccessKey] = useState("rsvpAccepted");
   const [cooldown, setCooldown] = useState(0);
+  const successRef = useRef(null);
+  const id = (field) => `${invitation.slug}-rsvp-${field}`;
 
   useEffect(() => {
     if (cooldown <= 0) return;
     const timer = window.setTimeout(() => setCooldown((current) => Math.max(0, current - 1)), 1000);
     return () => window.clearTimeout(timer);
   }, [cooldown]);
+
+  useEffect(() => {
+    if (status === "success") successRef.current?.focus({ preventScroll: true });
+  }, [status]);
 
   const update = (event) => {
     const { name, value } = event.target;
@@ -34,53 +50,50 @@ export default function RSVPForm({ invitation, active }) {
   };
 
   const adjustGuests = (amount) => {
-    setForm((current) => ({
-      ...current,
-      numberOfGuests: String(Math.min(20, Math.max(1, Number(current.numberOfGuests || 1) + amount))),
-    }));
+    setForm((current) => ({ ...current, numberOfGuests: String(Math.min(20, Math.max(1, Number(current.numberOfGuests || 1) + amount))) }));
     setErrors((current) => ({ ...current, numberOfGuests: "" }));
   };
 
   const validate = () => {
     const next = {};
-    if (form.fullName.trim().length < 2) next.fullName = "Please enter your full name.";
-    if (!/^[+()\-\s\d]{7,40}$/.test(form.phoneNumber.trim())) next.phoneNumber = "Please enter a valid phone number.";
-    if (!form.attending) next.attending = "Please tell us whether you can attend.";
-    if (form.message.trim().length > 800) next.message = "Please keep your message under 800 characters.";
+    if (form.fullName.trim().length < 2) next.fullName = errorKeys.fullName;
+    if (!/^[+()\-\s\d]{7,40}$/.test(form.phoneNumber.trim())) next.phoneNumber = errorKeys.phoneNumber;
+    if (!form.attending) next.attending = errorKeys.attending;
+    if (form.message.trim().length > 800) next.message = errorKeys.message;
     if (form.attending === "yes" && (!Number.isInteger(Number(form.numberOfGuests)) || Number(form.numberOfGuests) < 1 || Number(form.numberOfGuests) > 20)) {
-      next.numberOfGuests = "Please enter a guest count from 1 to 20.";
+      next.numberOfGuests = errorKeys.numberOfGuests;
     }
     setErrors(next);
-    return Object.keys(next).length === 0;
+    if (Object.keys(next).length) {
+      window.requestAnimationFrame(() => document.getElementById(id(Object.keys(next)[0]))?.focus());
+      return false;
+    }
+    return true;
   };
 
   const fireConfetti = async () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     try {
       const confetti = (await import("canvas-confetti")).default;
-      const burst = (originX) =>
-        confetti({
-          particleCount: 70,
-          spread: 80,
-          startVelocity: 38,
-          decay: 0.92,
-          origin: { x: originX, y: 0.78 },
-          colors: ["#d6a759", "#f1cd8d", "#8f2736", "#fff8e9", "#e8c97a", "#fce4ec"],
-          shapes: ["circle", "square"],
-          scalar: 0.95,
-        });
+      const burst = (originX) => confetti({
+        particleCount: 70, spread: 80, startVelocity: 38, decay: 0.92,
+        origin: { x: originX, y: 0.78 },
+        colors: ["#d6a759", "#f1cd8d", "#8f2736", "#fff8e9", "#e8c97a", "#fce4ec"],
+        shapes: ["circle", "square"], scalar: 0.95,
+      });
       burst(0.28);
-      setTimeout(() => burst(0.72), 180);
+      window.setTimeout(() => burst(0.72), 180);
     } catch {
-      // confetti is decorative; silently ignore failures
+      // Decorative confetti never affects a saved RSVP.
     }
   };
 
   const submit = async (event) => {
     event.preventDefault();
-    if (status === "sending" || cooldown > 0) return;
-    if (!validate()) return;
+    if (status === "sending" || cooldown > 0 || !validate()) return;
     setStatus("sending");
     setServerMessage("");
+    setServerErrorKey("rsvpError");
     try {
       const response = await fetch("/api/rsvp", {
         method: "POST",
@@ -89,17 +102,14 @@ export default function RSVPForm({ invitation, active }) {
       });
       const result = await response.json().catch(() => null);
       if (!response.ok) {
-        if (result?.errors) setErrors(result.errors);
-        throw new Error(result?.error || "We couldn't save your RSVP just now. Please try again in a moment.");
+        if (result?.errors) {
+          setErrors(Object.fromEntries(Object.keys(result.errors).filter((field) => errorKeys[field]).map((field) => [field, errorKeys[field]])));
+        }
+        if (response.status === 503) setServerErrorKey("rsvpUnavailable");
+        throw new Error(result?.error || t("rsvpError"));
       }
+      setSuccessKey(result.updated ? "rsvpUpdated" : form.attending === "yes" ? "rsvpAccepted" : "rsvpDeclined");
       setStatus("success");
-      setServerMessage(
-        result.updated
-          ? "Your RSVP has been updated successfully."
-          : form.attending === "yes"
-            ? "Your RSVP has been received. We are delighted to celebrate with you."
-            : "Your response has been received. We truly appreciate you letting us know.",
-      );
       setCooldown(SUBMISSION_COOLDOWN);
       if (form.attending === "yes") fireConfetti();
     } catch (error) {
@@ -108,84 +118,81 @@ export default function RSVPForm({ invitation, active }) {
     }
   };
 
+  const reset = () => {
+    setForm(initial);
+    setErrors({});
+    setServerMessage("");
+    setCooldown(0);
+    setStatus("idle");
+    window.requestAnimationFrame(() => document.getElementById(id("fullName"))?.focus({ preventScroll: true }));
+  };
+
+  const fieldError = (field) => errors[field] ? <small id={id(`${field}-error`)} className="field-error">{t(errors[field])}</small> : null;
+  const description = (field) => errors[field] ? id(`${field}-error`) : undefined;
+
   return (
-    <section className="rsvp-section cinematic-section section-shell" id="rsvp" aria-labelledby="rsvp-title">
-      <VideoBackdrop src={invitation.sectionVideos.rsvp} fallbackSrc={invitation.videos.feature} poster={invitation.videoPosters?.rsvp} fallbackPoster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" opacity={.62} />
-      <SectionReveal className="section-heading">
-        <div className="rsvp-title-seal" aria-hidden="true"><Sparkles size={18} /></div>
-        <p className="section-kicker">Kindly Reply</p>
-        <h2 id="rsvp-title">Will You Join Us?</h2>
-        <p>{invitation.rsvpIntro}</p>
-        {invitation.rsvpNote && <p>{invitation.rsvpNote}</p>}
-      </SectionReveal>
+    <section className="rsvp-section section-shell" id="rsvp" aria-labelledby="rsvp-title">
+      <SectionHeading kicker={t("rsvpKicker")} title={t("rsvpTitle")} id="rsvp-title" />
+      <p className="section-description">{invitation.rsvpIntro}</p>
+      {invitation.rsvpNote && <p className="section-description">{invitation.rsvpNote}</p>}
       <SectionReveal className="rsvp-card">
-        <span className="rsvp-corner rsvp-corner-tl" aria-hidden="true" />
-        <span className="rsvp-corner rsvp-corner-tr" aria-hidden="true" />
-        <span className="rsvp-corner rsvp-corner-bl" aria-hidden="true" />
-        <span className="rsvp-corner rsvp-corner-br" aria-hidden="true" />
-        <AnimatePresence mode="wait">
-          {status === "success" ? (
-            <motion.div className="rsvp-success" key="success" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }}>
-              <span className="rsvp-success-flourish" aria-hidden="true">{Array.from({ length: 5 }, (_, index) => <i key={index} style={{ "--flourish-index": index }} />)}</span>
-              <span><Check size={30} /></span>
-              <h3>Thank you, {form.fullName.trim().split(/\s+/)[0]}{form.attending === "no" ? "." : "!"}</h3>
-              <p>{serverMessage || "Your RSVP has been received. We are so happy to share this celebration with you."}</p>
-              <button type="button" className="text-button" onClick={() => { setForm(initial); setErrors({}); setServerMessage(""); setCooldown(0); setStatus("idle"); }}>Submit another response</button>
-            </motion.div>
-          ) : (
-            <motion.form key="form" onSubmit={submit} noValidate initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .55, ease: [0.22, 1, 0.36, 1] }}>
-              <div className="honeypot-field" aria-hidden="true">
-                <label htmlFor={`${invitation.slug}-website`}>Website</label>
-                <input id={`${invitation.slug}-website`} name="website" value={form.website} onChange={update} tabIndex={-1} autoComplete="off" />
+        {status === "success" ? (
+          <div className="rsvp-success" role="status" tabIndex={-1} ref={successRef}>
+            <span className="rsvp-success-icon" aria-hidden="true"><Check size={28} /></span>
+            <h3>{t("rsvpThankYou", { name: form.fullName.trim().split(/\s+/)[0] })}{form.attending === "no" ? "." : "!"}</h3>
+            <p>{t(successKey)}</p>
+            <button type="button" className="text-button" onClick={reset}>{t("rsvpAnother")}</button>
+          </div>
+        ) : (
+          <form onSubmit={submit} noValidate aria-busy={status === "sending"}>
+            <div className="honeypot-field" aria-hidden="true" hidden>
+              <label htmlFor={id("website")}>Website</label>
+              <input id={id("website")} name="website" value={form.website} onChange={update} tabIndex={-1} autoComplete="off" />
+            </div>
+            <p className="rsvp-form-intro">{t("rsvpFormIntro")}</p>
+            <div className="form-grid">
+              <div className="form-field">
+                <label htmlFor={id("fullName")}>{t("rsvpFullName")} <span aria-hidden="true">*</span></label>
+                <input id={id("fullName")} name="fullName" type="text" required autoComplete="name" maxLength={120} placeholder={t("rsvpNamePlaceholder")} value={form.fullName} onChange={update} aria-invalid={!!errors.fullName} aria-describedby={description("fullName")} />
+                {fieldError("fullName")}
               </div>
-              <div className="rsvp-form-heading">
-                <span className="rsvp-monogram">J <i>&amp;</i> P</span>
-                <p>Please share your response below</p>
+              <div className="form-field">
+                <label htmlFor={id("phoneNumber")}>{t("rsvpPhone")} <span aria-hidden="true">*</span></label>
+                <input id={id("phoneNumber")} name="phoneNumber" type="tel" required inputMode="tel" autoComplete="tel" maxLength={40} placeholder={t("rsvpPhonePlaceholder")} value={form.phoneNumber} onChange={update} aria-invalid={!!errors.phoneNumber} aria-describedby={description("phoneNumber")} />
+                {fieldError("phoneNumber")}
               </div>
-              <div className="rsvp-form-grid">
-                <div className="form-field form-field-icon">
-                  <label htmlFor={`${invitation.slug}-name`}><span><UserRound size={15} /> Full Name</span><b>*</b></label>
-                  <input id={`${invitation.slug}-name`} name="fullName" autoComplete="name" placeholder="Your name" value={form.fullName} onChange={update} aria-invalid={!!errors.fullName} aria-describedby={errors.fullName ? `${invitation.slug}-name-error` : undefined} />
-                  {errors.fullName && <small id={`${invitation.slug}-name-error`} className="field-error">{errors.fullName}</small>}
-                </div>
-                <div className="form-field form-field-icon">
-                  <label htmlFor={`${invitation.slug}-phone`}><span><Phone size={15} /> Phone Number</span><b>*</b></label>
-                  <input id={`${invitation.slug}-phone`} name="phoneNumber" type="tel" inputMode="tel" autoComplete="tel" placeholder="07X XXX XXXX" value={form.phoneNumber} onChange={update} aria-invalid={!!errors.phoneNumber} aria-describedby={errors.phoneNumber ? `${invitation.slug}-phone-error` : undefined} />
-                  {errors.phoneNumber && <small id={`${invitation.slug}-phone-error`} className="field-error">{errors.phoneNumber}</small>}
-                </div>
+            </div>
+            <fieldset className="form-field attendance-field" aria-describedby={description("attending")}>
+              <legend>{t("rsvpAttendance")} <span aria-hidden="true">*</span></legend>
+              <div className="choice-row">
+                <label><input id={id("attending")} type="radio" name="attending" value="yes" required checked={form.attending === "yes"} onChange={update} aria-describedby={description("attending")} /><span>{t("rsvpAccept")}</span></label>
+                <label><input type="radio" name="attending" value="no" checked={form.attending === "no"} onChange={update} aria-describedby={description("attending")} /><span>{t("rsvpDecline")}</span></label>
               </div>
-              <fieldset className="form-field attendance-field">
-                <legend><span><UsersRound size={15} /> Will you be attending?</span><b>*</b></legend>
-                <div className="choice-row">
-                  <label><input type="radio" name="attending" value="yes" checked={form.attending === "yes"} onChange={update} /><span><Check size={16} />Joyfully Accept</span></label>
-                  <label><input type="radio" name="attending" value="no" checked={form.attending === "no"} onChange={update} /><span>Regretfully Decline</span></label>
-                </div>
-                {errors.attending && <small className="field-error">{errors.attending}</small>}
-              </fieldset>
-              <div className="form-field guest-field">
-                <label htmlFor={`${invitation.slug}-guests`}><span><UsersRound size={15} /> Number of Guests</span><b>*</b></label>
-                <div className={`guest-stepper ${form.attending === "no" ? "is-disabled" : ""}`}>
-                  <button type="button" onClick={() => adjustGuests(-1)} disabled={form.attending === "no" || Number(form.numberOfGuests) <= 1} aria-label="Decrease number of guests"><Minus size={18} /></button>
-                  <input id={`${invitation.slug}-guests`} name="numberOfGuests" type="number" inputMode="numeric" min="1" max="20" readOnly disabled={form.attending === "no"} value={form.numberOfGuests} aria-invalid={!!errors.numberOfGuests} />
-                  <button type="button" onClick={() => adjustGuests(1)} disabled={form.attending === "no" || Number(form.numberOfGuests) >= 20} aria-label="Increase number of guests"><Plus size={18} /></button>
-                </div>
-                {form.attending === "no" && <small>Guest count is set to 0 when not attending.</small>}
-                {errors.numberOfGuests && <small className="field-error">{errors.numberOfGuests}</small>}
+              {fieldError("attending")}
+            </fieldset>
+            <div className="form-field guest-field">
+              <label htmlFor={id("numberOfGuests")}>{t("rsvpGuests")} <span aria-hidden="true">*</span></label>
+              <div className="guest-stepper">
+                <button type="button" onClick={() => adjustGuests(-1)} disabled={form.attending === "no" || Number(form.numberOfGuests) <= 1} aria-label={t("rsvpDecreaseGuests")}><Minus size={18} /></button>
+                <input id={id("numberOfGuests")} name="numberOfGuests" type="number" inputMode="numeric" min="1" max="20" readOnly disabled={form.attending === "no"} value={form.numberOfGuests} aria-invalid={!!errors.numberOfGuests} aria-describedby={description("numberOfGuests")} />
+                <button type="button" onClick={() => adjustGuests(1)} disabled={form.attending === "no" || Number(form.numberOfGuests) >= 20} aria-label={t("rsvpIncreaseGuests")}><Plus size={18} /></button>
               </div>
-              <div className="form-field message-field">
-                <label htmlFor={`${invitation.slug}-message`}><span><MessageSquareText size={15} /> A Note for the Couple</span><em>optional</em></label>
-                <textarea id={`${invitation.slug}-message`} name="message" rows="4" maxLength="800" placeholder="Share your wishes…" value={form.message} onChange={update} aria-invalid={!!errors.message} aria-describedby={errors.message ? `${invitation.slug}-message-error` : undefined} />
-                {errors.message && <small id={`${invitation.slug}-message-error`} className="field-error">{errors.message}</small>}
-              </div>
-              {status === "error" && <p className="form-status" role="alert">{serverMessage}</p>}
-              <button className="primary-button submit-button" type="submit" disabled={status === "sending" || cooldown > 0}>
-                <Send size={17} aria-hidden="true" />
-                {status === "sending" ? "Sending…" : cooldown > 0 ? `Please wait ${cooldown}s` : "Send RSVP"}
-              </button>
-              <p className="rsvp-privacy"><LockKeyhole size={12} /> Your response is shared privately with the couple.</p>
-            </motion.form>
-          )}
-        </AnimatePresence>
+              {form.attending === "no" && <small>{t("rsvpZeroGuests")}</small>}
+              {fieldError("numberOfGuests")}
+            </div>
+            <div className="form-field">
+              <label htmlFor={id("message")}>{t("rsvpMessage")} <small>{t("rsvpOptional")}</small></label>
+              <textarea id={id("message")} name="message" rows={4} maxLength={800} placeholder={t("rsvpMessagePlaceholder")} value={form.message} onChange={update} aria-invalid={!!errors.message} aria-describedby={description("message")} />
+              {fieldError("message")}
+            </div>
+            {status === "error" && <p className="form-status" role="alert">{language === "si" ? t(serverErrorKey) : serverMessage}</p>}
+            <button className="primary-button submit-button" type="submit" disabled={status === "sending" || cooldown > 0}>
+              <Send size={17} aria-hidden="true" />
+              {status === "sending" ? t("rsvpSending") : cooldown > 0 ? t("rsvpWait", { seconds: cooldown }) : t("rsvpSend")}
+            </button>
+            <p className="rsvp-privacy"><LockKeyhole size={14} aria-hidden="true" />{t("rsvpPrivacy")}</p>
+          </form>
+        )}
       </SectionReveal>
     </section>
   );

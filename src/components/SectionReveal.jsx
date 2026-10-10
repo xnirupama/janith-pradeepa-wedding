@@ -1,20 +1,19 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
-export default function SectionReveal({ children, className = "", delay = 0, as = "div" }) {
-  const reduceMotion = useReducedMotion();
-  const Component = motion[as] || motion.div;
-
-  return (
-    <Component
-      className={className}
-      initial={reduceMotion ? false : { opacity: 0, y: 34 }}
-      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.18 }}
-      transition={{ duration: 0.85, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {children}
-    </Component>
-  );
+export default function SectionReveal({ children, className = "", delay = 0, as: Component = "div", ...props }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+    if (element.getBoundingClientRect().top < window.innerHeight) return;
+    element.classList.add("reveal-pending");
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { element.classList.remove("reveal-pending"); observer.disconnect(); }
+    }, { threshold: .08 });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+  return <Component ref={ref} className={"section-reveal " + className} style={{ "--reveal-delay": Math.min(delay, .3) + "s" }} {...props}>{children}</Component>;
 }

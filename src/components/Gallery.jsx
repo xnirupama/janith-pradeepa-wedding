@@ -1,157 +1,58 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import dynamic from "next/dynamic";
+import { Expand } from "lucide-react";
 import SectionReveal from "./SectionReveal";
-import VideoBackdrop from "./VideoBackdrop";
+import { SectionHeading } from "./InvitationOrnaments";
+import { useLanguage } from "./InvitationLanguage";
 
-export default function Gallery({ images, invitation, contentActive }) {
-  const [active, setActive] = useState(null);
-  const [loaded, setLoaded] = useState({});
-  const [swipeHinted, setSwipeHinted] = useState(false);
-  const touchStart = useRef(null);
+const GalleryLightbox = dynamic(() => import("./GalleryLightbox"), { ssr: false });
 
-  const close = useCallback(() => setActive(null), []);
-  const previous = useCallback(() => setActive((current) => (current - 1 + images.length) % images.length), [images.length]);
-  const next = useCallback(() => setActive((current) => (current + 1) % images.length), [images.length]);
-
-  useEffect(() => {
-    if (active === null) return;
-    const onKey = (event) => {
-      if (event.key === "Escape") close();
-      if (event.key === "ArrowLeft") previous();
-      if (event.key === "ArrowRight") next();
-    };
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKey);
-
-    // Show swipe hint on first lightbox open (mobile UX)
-    if (!swipeHinted) {
-      setSwipeHinted(true);
-    }
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [active, close, next, previous, swipeHinted]);
-
-  useEffect(() => {
-    if (active === null || images.length < 2) return;
-    const adjacent = [
-      images[(active - 1 + images.length) % images.length],
-      images[(active + 1) % images.length],
-    ];
-    adjacent.forEach((image) => {
-      const preload = new window.Image();
-      preload.src = image.src;
-    });
-  }, [active, images]);
+export default function Gallery({ images = [] }) {
+  const { t } = useLanguage();
+  const [viewer, setViewer] = useState(null);
+  const close = useCallback(() => setViewer(null), []);
 
   if (!images.length) return null;
 
-  const activeImage = active !== null ? images[active] : null;
-  const caption = activeImage?.alt && activeImage.alt !== "Gallery photo" ? activeImage.alt : null;
-
   return (
-    <section className="gallery-section cinematic-section section-shell" aria-labelledby="gallery-title">
-      <VideoBackdrop src={invitation.sectionVideos.gallery} fallbackSrc={invitation.videos.feature} poster={invitation.videoPosters?.gallery} fallbackPoster={invitation.backgrounds.section} active={contentActive} tone={invitation.theme} overlay="strong" className="section-video" opacity={.68} />
-      <SectionReveal className="section-heading">
-        <p className="section-kicker">A few favourite moments</p>
-        <h2 id="gallery-title">Our Gallery</h2>
+    <section className="gallery-section section-shell" id="gallery" aria-labelledby="gallery-title">
+      <SectionReveal>
+        <SectionHeading id="gallery-title" kicker={t("galleryKicker")} title={t("galleryTitle")} />
       </SectionReveal>
-      <div className="gallery-grid">
+      <div className={`gallery-grid ${images.length === 1 ? "gallery-single" : images.length === 2 ? "gallery-pair" : "gallery-bento"}`}>
         {images.map((image, index) => (
-          <SectionReveal key={image.src} className={`gallery-tile tile-${(index % 5) + 1}`} delay={(index % 4) * 0.06}>
-            <button className={loaded[image.src] ? "is-loaded" : "is-loading"} type="button" onClick={() => setActive(index)} aria-label={`Open gallery image ${index + 1}`}>
-              <span className="gallery-skeleton" aria-hidden="true" />
-              <Image className="gallery-image" src={image.src} alt={image.alt} fill sizes="(max-width: 700px) 48vw, 30vw" onLoad={() => setLoaded((current) => ({ ...current, [image.src]: true }))} />
-              <span className="gallery-number">{String(index + 1).padStart(2, "0")}</span>
+          <SectionReveal key={image.src} className={`gallery-tile ${index === 0 ? "gallery-feature" : `tile-${(index % 4) + 1}`}`} delay={(index % 4) * 0.08}>
+            <button
+              className="gallery-photo"
+              type="button"
+              onClick={(event) => {
+                setViewer({ index, trigger: event.currentTarget });
+              }}
+              aria-label={`${t("galleryOpen")} ${index + 1}: ${t("photoAlt")}`}
+              aria-haspopup="dialog"
+            >
+              <Image
+                className="gallery-image"
+                src={image.src}
+                alt={t("photoAlt")}
+                fill
+                sizes={images.length === 1 || (index === 0 && images.length > 2) ? "(max-width: 700px) 88vw, (max-width: 1100px) 84vw, 880px" : "(max-width: 700px) 43vw, (max-width: 1100px) 40vw, 430px"}
+                placeholder={image.blurDataURL ? "blur" : "empty"}
+                blurDataURL={image.blurDataURL}
+                loading="lazy"
+              />
+              <span className="gallery-open-hint" aria-hidden="true"><Expand size={16} /></span>
+              <span className="gallery-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
             </button>
           </SectionReveal>
         ))}
       </div>
-      <AnimatePresence>
-        {active !== null && (
-          <motion.div
-            className="lightbox"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Photo viewer"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={close}
-            onTouchStart={(event) => { touchStart.current = event.touches[0].clientX; }}
-            onTouchEnd={(event) => {
-              if (touchStart.current === null) return;
-              const distance = event.changedTouches[0].clientX - touchStart.current;
-              if (Math.abs(distance) > 45) distance > 0 ? previous() : next();
-              touchStart.current = null;
-            }}
-          >
-            <button className="lightbox-close" type="button" onClick={close} aria-label="Close gallery"><X /></button>
-            <button className="lightbox-nav lightbox-prev" type="button" onClick={(e) => { e.stopPropagation(); previous(); }} aria-label="Previous image"><ChevronLeft /></button>
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div key={images[active].src} className="lightbox-image" onClick={(e) => e.stopPropagation()} initial={{ opacity: 0, scale: 0.975 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.015 }} transition={{ duration: .28 }}>
-                <Image src={images[active].src} alt={images[active].alt} fill sizes="95vw" priority />
-              </motion.div>
-            </AnimatePresence>
-            <button className="lightbox-nav lightbox-next" type="button" onClick={(e) => { e.stopPropagation(); next(); }} aria-label="Next image"><ChevronRight /></button>
-
-            {/* Dot indicators */}
-            {images.length > 1 && (
-              <div className="lightbox-dots" aria-hidden="true">
-                {images.map((_, i) => (
-                  <span
-                    key={i}
-                    className={`lightbox-dot ${i === active ? "is-active" : ""}`}
-                    onClick={(e) => { e.stopPropagation(); setActive(i); }}
-                  />
-                ))}
-              </div>
-            )}
-
-            {/* Caption */}
-            {caption && (
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={caption}
-                  className="lightbox-caption"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -4 }}
-                  transition={{ duration: 0.22 }}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  {caption}
-                </motion.p>
-              </AnimatePresence>
-            )}
-
-            {/* Swipe hint — shown only on the very first open, mobile */}
-            {swipeHinted && active === 0 && images.length > 1 && (
-              <motion.div
-                className="lightbox-swipe-hint"
-                initial={{ opacity: 0, x: 0 }}
-                animate={{ opacity: [0, 1, 1, 0], x: [0, -18, 18, 0] }}
-                transition={{ duration: 1.6, delay: 0.5, times: [0, 0.25, 0.75, 1] }}
-                aria-hidden="true"
-              >
-                <ChevronLeft size={16} />
-                <span>Swipe</span>
-                <ChevronRight size={16} />
-              </motion.div>
-            )}
-
-            <div className="lightbox-progress" aria-hidden="true"><i style={{ transform: `scaleX(${(active + 1) / images.length})` }} /></div>
-            <span className="lightbox-count">{String(active + 1).padStart(2, "0")} <i>/</i> {String(images.length).padStart(2, "0")}</span>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {viewer !== null && (
+        <GalleryLightbox images={images} initialIndex={viewer.index} onClose={close} restoreFocusTo={viewer.trigger} />
+      )}
     </section>
   );
 }

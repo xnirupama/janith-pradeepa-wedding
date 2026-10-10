@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-
 // Petal shapes: 0 = round orb, 1 = petal, 2 = star sparkle
 const PARTICLES = [
   { shape: 1, size: 7,  left: 8,  dur: 18, delay: 0,    drift: -18, opacity: 0.38 },
@@ -24,7 +22,7 @@ const PARTICLES = [
 export default function FloatingAtmosphere() {
   return (
     <div className="atmosphere" aria-hidden="true">
-      {PARTICLES.map((p, i) => (
+      {PARTICLES.slice(0, 6).map((p, i) => (
         <i
           key={i}
           className={`atm-particle atm-shape-${p.shape}`}

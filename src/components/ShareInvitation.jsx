@@ -2,19 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Check, Share2 } from "lucide-react";
+import { useLanguage } from "./InvitationLanguage";
 
 export default function ShareInvitation({ invitation }) {
+  const { t } = useLanguage();
   const [message, setMessage] = useState("");
+  const [busy, setBusy] = useState(false);
   const timerRef = useRef(null);
 
-  useEffect(() => () => {
-    if (timerRef.current) window.clearTimeout(timerRef.current);
-  }, []);
+  useEffect(() => () => window.clearTimeout(timerRef.current), []);
 
-  const showMessage = (nextMessage) => {
-    if (timerRef.current) window.clearTimeout(timerRef.current);
-    setMessage(nextMessage);
-    timerRef.current = window.setTimeout(() => setMessage(""), 2600);
+  const showMessage = (key) => {
+    window.clearTimeout(timerRef.current);
+    setMessage(key);
+    timerRef.current = window.setTimeout(() => setMessage(""), 3200);
   };
 
   const copyLink = async (url) => {
@@ -28,46 +29,41 @@ export default function ShareInvitation({ invitation }) {
       input.style.opacity = "0";
       document.body.appendChild(input);
       input.select();
-      document.execCommand("copy");
+      const copied = document.execCommand("copy");
       input.remove();
+      if (!copied) throw new Error("Clipboard unavailable");
     }
-    showMessage("Invitation link copied");
+    showMessage("shareCopied");
   };
 
   const share = async () => {
+    setBusy(true);
     const url = window.location.href;
-    const data = {
-      title: invitation.eventTitle,
-      text: `You are invited to ${invitation.eventTitle}.`,
-      url,
-    };
-
+    const data = { title: invitation.eventTitle, text: t("shareText") + invitation.eventTitle + ".", url };
     try {
       if (navigator.share) {
         await navigator.share(data);
-        showMessage("Invitation shared");
+        showMessage("shareSuccess");
       } else {
         await copyLink(url);
       }
     } catch (error) {
       if (error?.name !== "AbortError") {
-        try {
-          await copyLink(url);
-        } catch {
-          showMessage("Please copy the page link from your browser");
-        }
+        try { await copyLink(url); }
+        catch { showMessage("shareFallback"); }
       }
+    } finally {
+      setBusy(false);
     }
   };
 
   return (
     <div className="share-invitation">
-      <button type="button" className="secondary-button share-button" onClick={share} aria-label={`Share ${invitation.eventTitle}`}>
-        <Share2 size={17} aria-hidden="true" />
-        Share Invitation
+      <button type="button" className="secondary-button share-button" onClick={share} disabled={busy} aria-label={t("shareInvitation") + ": " + invitation.eventTitle}>
+        <Share2 size={17} aria-hidden="true" />{t("shareInvitation")}
       </button>
-      <span className={`share-toast ${message ? "is-visible" : ""}`} role="status" aria-live="polite">
-        {message && <><Check size={14} aria-hidden="true" />{message}</>}
+      <span className={"share-toast" + (message ? " is-visible" : "")} role="status">
+        {message && <>{message !== "shareFallback" && <Check size={14} aria-hidden="true" />}{t(message)}</>}
       </span>
     </div>
   );

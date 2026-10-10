@@ -1,8 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useReducedMotion, useScroll, useTransform, motion } from "framer-motion";
-import { Heart, Sparkles } from "lucide-react";
+import { localizeInvitation } from "@/data/translations";
+import { invitationThemes } from "@/data/themes";
+import { InvitationLanguageProvider, LanguageToggle, useLanguage } from "./InvitationLanguage";
+import { Lotus, SectionHeading } from "./InvitationOrnaments";
 import InvitationGate from "./InvitationGate";
 import OpeningFilm from "./OpeningFilm";
 import MusicController from "./MusicController";
@@ -13,214 +15,88 @@ import PhotoFeature from "./PhotoFeature";
 import EventSchedule from "./EventSchedule";
 import Countdown from "./Countdown";
 import Gallery from "./Gallery";
-import VideoBackdrop from "./VideoBackdrop";
 import LocationSection from "./LocationSection";
-import AddToCalendar from "./AddToCalendar";
 import RSVPForm from "./RSVPForm";
+import GuestExtras from "./GuestExtras";
 import ClosingSection from "./ClosingSection";
 import SectionNavigator from "./SectionNavigator";
 
-function InvitationMessage({ invitation, active }) {
-  const dp = invitation.dateParts;
-  // Parse the time directly from the countdownTarget ISO string (e.g. "2026-11-26T09:16:00+05:30")
-  // This is deterministic on both server and client — avoids locale hydration mismatch.
-  const timeMatch = invitation.countdownTarget.match(/T(\d{2}):(\d{2})/);
-  let eventTime = "";
-  if (timeMatch) {
-    const h = parseInt(timeMatch[1], 10);
-    const m = timeMatch[2];
-    const ampm = h >= 12 ? "PM" : "AM";
-    const h12 = h % 12 === 0 ? 12 : h % 12;
-    eventTime = `${h12}:${m} ${ampm}`;
-  }
-
-  return (
-    <section className="invitation-message cinematic-section section-shell" id="invitation-message">
-      <VideoBackdrop src={invitation.sectionVideos.invitation} fallbackSrc={invitation.videos.feature} poster={invitation.videoPosters?.invitation} fallbackPoster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
-      <SectionReveal className="section-heading message-heading">
-        <div className="heritage-section-emblem" aria-hidden="true"><Sparkles size={17} /></div>
-        <p className="section-kicker">Together with joyful hearts</p>
-        {invitation.intro.map((line) => <p key={line}>{line}</p>)}
-
-        {/* Premium date plaque */}
-        <div className="msg-date-plaque" aria-label={invitation.displayDate}>
-          <span className="msg-date-weekday">{dp?.weekday ?? ""}</span>
-          <div className="msg-date-main">
-            <strong className="msg-date-day">{dp?.day ?? ""}</strong>
-            <div className="msg-date-month-year">
-              <span className="msg-date-month">{dp?.month ?? ""}</span>
-              <span className="msg-date-year">{dp?.year ?? ""}</span>
-            </div>
-          </div>
-          <div className="msg-date-time-row" aria-label={`Ceremony begins at ${eventTime}`}>
-            <span className="msg-date-time-dot" aria-hidden="true" />
-            <time className="msg-date-time">{eventTime}</time>
-          </div>
-        </div>
-
-        <span className="ornament"><i /><Heart size={13} fill="currentColor" /><i /></span>
-        <div className="sentiment">
-          {invitation.sentiment.map((line) => <p key={line}>{line}</p>)}
-        </div>
-        {invitation.presence && <p className="presence">{invitation.presence}</p>}
-        <AddToCalendar calendar={invitation.calendar} eventSlug={invitation.slug} />
-      </SectionReveal>
-    </section>
-  );
-}
-
-function Arrival({ arrival, invitation, active }) {
-  if (!arrival) return null;
-  return (
-    <section className="arrival-section cinematic-section section-shell" id="event-details">
-      <VideoBackdrop src={invitation.sectionVideos.arrival} fallbackSrc={invitation.videos.feature} poster={invitation.videoPosters?.arrival} fallbackPoster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="strong" className="section-video" />
-      <SectionReveal className="arrival-card">
-        <div className="heritage-card-crown" aria-hidden="true" />
-        <p className="section-kicker">A joyful welcome</p>
-        <h2>{arrival.title}</h2>
-        <div className="arrival-time-ring" aria-label={`Arrival time ${arrival.time}`}>
-          <span aria-hidden="true" />
-          <strong>{arrival.time}</strong>
-          <i aria-hidden="true" />
-        </div>
-        <p>{arrival.text}</p>
-      </SectionReveal>
-    </section>
-  );
-}
-
-function Celebration({ invitation, active }) {
-  const sectionRef = useRef(null);
-  const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const contentY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [-28, 28]);
-  return (
-    <section ref={sectionRef} className="celebration-section cinematic-section" style={{ "--section-image": `url(${invitation.backgrounds.section})` }}>
-      <VideoBackdrop src={invitation.videos.feature} poster={invitation.videoPosters?.feature} fallbackPoster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="none" className="feature-video" />
-      <div className="celebration-scrim" />
-      <SectionReveal className="celebration-content-wrap">
-        <motion.div className="celebration-content" style={{ y: contentY }}>
-          <div className="heritage-section-emblem heritage-section-emblem-light" aria-hidden="true"><Heart size={15} fill="currentColor" /></div>
-          <p className="section-kicker">Together is a beautiful place to be</p>
-          <h2>Celebrate With Us</h2>
-          {invitation.celebration.map((line) => <p key={line}>{line}</p>)}
-        </motion.div>
-      </SectionReveal>
-    </section>
-  );
-}
-
-export default function EventExperience({ invitation, galleryImages, guestName = "" }) {
+function Experience({ invitation: original, galleryImages, guestName, coupleArtwork }) {
+  const { language, t } = useLanguage();
+  const invitation = localizeInvitation(original, language);
   const [open, setOpen] = useState(false);
   const [openingFinished, setOpeningFinished] = useState(false);
-  const [replayingOpening, setReplayingOpening] = useState(false);
-  const pendingHashRef = useRef("");
-  const replayScrollRef = useRef(0);
-  // This ref is forwarded to the <video> element inside OpeningFilm.
-  // Holding a direct reference lets us call .play() synchronously inside the
-  // "Open Invitation" tap handler — iOS Safari only permits autoplay when play()
-  // is called within the same synchronous call stack as the user gesture.
+  const [replaying, setReplaying] = useState(false);
   const openingVideoRef = useRef(null);
-
-  useEffect(() => {
-    const hash = window.location.hash.slice(1);
-    if (["top", "our-story", "event-details", "location", "rsvp"].includes(hash)) {
-      pendingHashRef.current = hash;
-    }
-    window.scrollTo({ top: 0, behavior: "auto" });
-  }, []);
-
-  const openInvitation = useCallback(() => {
-    const audio = document.getElementById("invitation-music");
-    if (audio) {
-      audio.volume = 0;
-      audio.play().catch(() => {});
-    }
-
-    // ── iOS Safari autoplay fix ───────────────────────────────────────────────
-    // Call play() RIGHT NOW, while we are still inside the tap event handler.
-    // openingVideoRef points to the hidden <video> that OpeningFilm keeps in
-    // the DOM at all times (preloading). This satisfies iOS Safari's requirement
-    // that media play() be triggered synchronously within the gesture.
-    if (openingVideoRef.current) {
-      openingVideoRef.current.currentTime = 0;
-      openingVideoRef.current.play().catch(() => {});
-    }
-    // ─────────────────────────────────────────────────────────────────────────
-
-    setOpen(true);
-    setOpeningFinished(false);
-    window.scrollTo({ top: 0, behavior: "auto" });
-  }, []);
-
-  const finishOpening = useCallback(() => setOpeningFinished(true), []);
-  const replayOpening = useCallback(() => {
-    replayScrollRef.current = window.scrollY;
-    setReplayingOpening(true);
-  }, []);
-  const finishReplay = useCallback(() => {
-    setReplayingOpening(false);
-    window.requestAnimationFrame(() => {
-      window.scrollTo({ top: replayScrollRef.current, behavior: "auto" });
-    });
-  }, []);
+  const pendingHash = useRef("");
+  const savedScroll = useRef(0);
   const contentActive = open && openingFinished;
-
   useEffect(() => {
-    const previousBodyOverflow = document.body.style.overflow;
-    const previousHtmlOverflow = document.documentElement.style.overflow;
-
-    if (!contentActive || replayingOpening) {
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = previousBodyOverflow;
-      document.documentElement.style.overflow = previousHtmlOverflow;
-    };
-  }, [contentActive, replayingOpening]);
-
+    pendingHash.current = window.location.hash.slice(1);
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
   useEffect(() => {
-    if (!contentActive || !pendingHashRef.current) return;
-    const targetId = pendingHashRef.current;
-    pendingHashRef.current = "";
-    const frame = window.requestAnimationFrame(() => {
-      document.getElementById(targetId)?.scrollIntoView({
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-        block: "start",
-      });
-    });
-    return () => window.cancelAnimationFrame(frame);
+    const previous = document.body.style.overflow;
+    if (!contentActive || replaying) document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previous; };
+  }, [contentActive, replaying]);
+  useEffect(() => {
+    if (!contentActive || !pendingHash.current) return;
+    const id = pendingHash.current;
+    pendingHash.current = "";
+    const frame = requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: "instant" }));
+    return () => cancelAnimationFrame(frame);
   }, [contentActive]);
-
-  return (
-    <main className={`event-page theme-${invitation.theme} ${contentActive ? "has-section-nav" : ""}`}>
-      <InvitationGate invitation={invitation} guestName={guestName} open={open} onOpen={openInvitation} />
-      <OpeningFilm
-        key={replayingOpening ? "replay" : "initial"}
-        ref={openingVideoRef}
-        invitation={invitation}
-        visible={(open && !openingFinished) || replayingOpening}
-        onComplete={replayingOpening ? finishReplay : finishOpening}
-      />
-      <MusicController src={invitation.music} invitationOpen={open} />
-      <FloatingAtmosphere />
-      {contentActive && <SectionNavigator invitation={invitation} />}
-      <HeroSection invitation={invitation} active={contentActive} />
-      <InvitationMessage invitation={invitation} active={contentActive} />
-      <PhotoFeature invitation={invitation} active={contentActive} />
-      {invitation.schedule && <EventSchedule items={invitation.schedule} invitation={invitation} active={contentActive} />}
-      <Arrival arrival={invitation.arrival} invitation={invitation} active={contentActive} />
-      <Countdown invitation={invitation} active={contentActive} />
-      <Gallery images={galleryImages} invitation={invitation} contentActive={contentActive} />
-      <Celebration invitation={invitation} active={contentActive} />
-      <LocationSection location={invitation.location} invitation={invitation} active={contentActive} />
-      <RSVPForm invitation={invitation} active={contentActive} />
-      <ClosingSection invitation={invitation} active={contentActive} onReplayOpening={replayOpening} />
-    </main>
-  );
+  const playOpening = () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const video = openingVideoRef.current;
+    if (!video) return;
+    if (!video.getAttribute("src")) {
+      video.src = video.dataset.openingSrc;
+      video.poster = video.dataset.openingPoster;
+      video.load();
+    }
+    video.currentTime = 0;
+    video.play().catch(() => {});
+  };
+  const openInvitation = () => {
+    const audio = document.getElementById("invitation-music");
+    if (audio) { audio.volume = 0; audio.play().catch(() => {}); }
+    playOpening();
+    setOpen(true);
+  };
+  const finishOpening = useCallback(() => setOpeningFinished(true), []);
+  const replayOpening = () => { savedScroll.current = window.scrollY; playOpening(); setReplaying(true); };
+  const finishReplay = useCallback(() => {
+    setReplaying(false);
+    requestAnimationFrame(() => window.scrollTo({ top: savedScroll.current, behavior: "instant" }));
+  }, []);
+  return <main className={"event-page theme-" + original.theme + (contentActive ? " has-section-nav" : "")} style={invitationThemes[original.theme]} lang={language}>
+    <LanguageToggle floating />
+    <InvitationGate invitation={invitation} guestName={guestName} open={open} onOpen={openInvitation} />
+    <OpeningFilm ref={openingVideoRef} invitation={invitation} visible={(open && !openingFinished) || replaying} onComplete={replaying ? finishReplay : finishOpening} />
+    <MusicController src={original.music} invitationOpen={open} controlsVisible={contentActive && !replaying} />
+    {contentActive && <>
+      <div className="invitation-content" inert={replaying}>
+        <FloatingAtmosphere />
+        <HeroSection invitation={invitation} guestName={guestName} coupleArtwork={coupleArtwork} />
+        <section className="invitation-message section-shell" id="invitation-message">
+          <SectionReveal className="message-card"><p className="section-kicker">{t("invitationKicker")}</p>{invitation.intro.map(line => <p key={line}>{line}</p>)}<Lotus /><div className="sentiment">{invitation.sentiment.map(line => <p key={line}>{line}</p>)}</div>{invitation.presence && <p>{invitation.presence}</p>}</SectionReveal>
+        </section>
+        <EventSchedule invitation={invitation} active />
+        <Countdown invitation={invitation} active />
+        <PhotoFeature invitation={invitation} active />
+        <Gallery images={galleryImages} invitation={invitation} contentActive />
+        <section className="celebration-section section-shell"><SectionReveal><SectionHeading kicker={t("celebrationKicker")} title={t("celebrationTitle")} />{invitation.celebration.map(line => <p key={line}>{line}</p>)}</SectionReveal></section>
+        <LocationSection location={invitation.location} invitation={invitation} active />
+        <RSVPForm invitation={invitation} eventSlug={original.slug} guestName={guestName} />
+        <GuestExtras invitation={invitation} />
+        <ClosingSection invitation={invitation} active onReplayOpening={replayOpening} />
+      </div>
+      {!replaying && <SectionNavigator invitation={invitation} />}
+    </>}
+  </main>;
+}
+export default function EventExperience(props) {
+  return <InvitationLanguageProvider><Experience {...props} /></InvitationLanguageProvider>;
 }

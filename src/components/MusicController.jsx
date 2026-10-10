@@ -2,12 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Music2, Pause, Play } from "lucide-react";
+import { useLanguage } from "./InvitationLanguage";
 
 const TARGET_VOLUME = 0.35;
 const FADE_IN_MS = 1750;
 const FADE_OUT_MS = 650;
 
-export default function MusicController({ src, invitationOpen }) {
+export default function MusicController({ src, invitationOpen, controlsVisible = invitationOpen }) {
+  const { t } = useLanguage();
   const audioRef = useRef(null);
   const fadeFrameRef = useRef(null);
   const intendedPlayingRef = useRef(false);
@@ -87,18 +89,18 @@ export default function MusicController({ src, invitationOpen }) {
         src={src}
         loop
         preload="none"
-        onPause={() => { if (!intendedPlayingRef.current) setPlaying(false); }}
+        onPause={() => { intendedPlayingRef.current = false; setPlaying(false); }}
         onPlay={() => setPlaying(true)}
         onError={() => { intendedPlayingRef.current = false; cancelFade(); setUnavailable(true); setPlaying(false); }}
       />
-      {invitationOpen && (
+      {controlsVisible && (
         <button
           type="button"
           className={`music-control ${playing ? "is-playing" : ""}`}
           onClick={toggle}
           disabled={unavailable}
-          aria-label={unavailable ? "Background music unavailable" : playing ? "Pause background music" : "Play background music"}
-          title={unavailable ? "Music will be available when an audio file is added" : undefined}
+          aria-label={t(unavailable ? "musicUnavailable" : playing ? "musicPause" : "musicPlay")}
+          aria-pressed={playing}
         >
           <span className="music-ring" aria-hidden="true" />
           {unavailable ? <Music2 size={20} /> : playing ? <Pause size={19} /> : <Play size={19} fill="currentColor" />}

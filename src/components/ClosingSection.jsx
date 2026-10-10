@@ -1,60 +1,40 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUp, Heart, RotateCcw } from "lucide-react";
+import { ArrowUp, RotateCcw } from "lucide-react";
+import SectionReveal from "./SectionReveal";
 import ShareInvitation from "./ShareInvitation";
-import VideoBackdrop from "./VideoBackdrop";
+import { ContactPill, Lotus, Mandala } from "./InvitationOrnaments";
+import { useLanguage } from "./InvitationLanguage";
 
-const closingVariants = {
-  hidden: {},
-  visible: { transition: { delayChildren: .08, staggerChildren: .13 } },
-};
-
-const closingItem = {
-  hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: .68, ease: [0.22, 1, 0.36, 1] } },
-};
-
-export default function ClosingSection({ invitation, active, onReplayOpening }) {
-  const reduceMotion = useReducedMotion();
+export default function ClosingSection({ invitation, onReplayOpening }) {
+  const { t } = useLanguage();
+  const [year, month, day] = invitation.countdownTarget.slice(0, 10).split("-");
   const backToTop = () => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
     window.history.replaceState(null, "", "#top");
   };
 
   return (
-    <section className="closing-section">
-      <VideoBackdrop src={invitation.videos.closing} poster={invitation.videoPosters?.closing} fallbackPoster={invitation.backgrounds.section} active={active} tone={invitation.theme} overlay="none" className="closing-video" />
-      <div className="closing-scrim" />
-      <div className="closing-petals" aria-hidden="true">{Array.from({ length: 6 }, (_, index) => <i key={index} style={{ "--petal-index": index }} />)}</div>
-      <motion.div
-        className="closing-content"
-        variants={closingVariants}
-        initial={reduceMotion ? false : "hidden"}
-        whileInView={reduceMotion ? undefined : "visible"}
-        viewport={{ once: true, amount: .22 }}
-      >
-        <motion.p className="blessing" variants={closingItem}>{invitation.blessing}</motion.p>
-        <motion.p className="sinhala-blessing" lang="si" variants={closingItem}>{invitation.sinhalaBlessing}</motion.p>
-        <motion.div variants={closingItem}><Heart className="closing-heart" size={17} fill="currentColor" aria-hidden="true" /></motion.div>
-        <motion.h2 variants={closingItem}>{invitation.couple}</motion.h2>
-        <motion.span className="closing-divider" aria-hidden="true" variants={closingItem}><i /><Heart size={11} fill="currentColor" /><i /></motion.span>
-        {invitation.closingLead && <motion.p className="closing-lead" variants={closingItem}>{invitation.closingLead}</motion.p>}
-        <motion.div className="closing-copy" variants={closingItem}>
-          {invitation.closing.map((line) => <p key={line}>{line}</p>)}
-        </motion.div>
-        <motion.div className="closing-actions" variants={closingItem}>
+    <footer className="closing-section" aria-labelledby="closing-title">
+      <Mandala className="closing-mandala" />
+      <SectionReveal className="closing-content">
+        <p className="closing-save-date section-kicker">{t("saveDate")}</p>
+        <time className="closing-date" dateTime={invitation.countdownTarget.slice(0, 10)}>{day} . {month} . {year.slice(-2)}</time>
+        <Lotus className="closing-lotus" />
+        <p className="blessing">{invitation.blessing}</p>
+        <p className="sinhala-blessing" lang="si">{invitation.sinhalaBlessing}</p>
+        <h2 id="closing-title">{invitation.couple}</h2>
+        <span className="closing-divider" aria-hidden="true" />
+        {invitation.closingLead && <p className="closing-lead">{invitation.closingLead}</p>}
+        <div className="closing-copy">{invitation.closing.map((line) => <p key={line}>{line}</p>)}</div>
+        <div className="closing-contact-actions">{invitation.location.contact && <ContactPill contact={invitation.location.contact} />}</div>
+        <div className="closing-actions">
           <ShareInvitation invitation={invitation} />
-          <button type="button" className="replay-opening" onClick={onReplayOpening}>
-            <RotateCcw size={16} aria-hidden="true" />
-            Replay Opening
-          </button>
-          <button type="button" className="back-to-top" onClick={backToTop}>
-            <ArrowUp size={16} aria-hidden="true" />
-            Back to top
-          </button>
-        </motion.div>
-      </motion.div>
-    </section>
+          <button type="button" className="replay-opening" onClick={onReplayOpening}><RotateCcw size={16} aria-hidden="true" />{t("replayOpening")}</button>
+          <button type="button" className="back-to-top" onClick={backToTop}><ArrowUp size={16} aria-hidden="true" />{t("backToTop")}</button>
+        </div>
+      </SectionReveal>
+    </footer>
   );
 }
