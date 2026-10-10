@@ -1,0 +1,42 @@
+{
+  "wedding": {
+    "src": "/assets/wedding/optimized/opening-mobile.mp4",
+    "originalSrc": "/assets/wedding/videos/wedding-opening-couple.mp4",
+    "width": 406,
+    "height": 720,
+    "duration": 10,
+    "bytes": 604851,
+    "originalBytes": 7195820,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "hasAudio": false,
+    "fastStart": true,
+    "poster": {
+      "src": "/assets/wedding/optimized/opening-poster.webp",
+      "width": 405,
+      "height": 720,
+      "bytes": 45412,
+      "blurDataURL": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAADwAQCdASoEAAgAA8BgJZQCw7EPD3AyOAAA+9P8BuNS0c/6tHTXUmhq6oAAAA=="
+    }
+  },
+  "homecoming": {
+    "src": "/assets/homecoming/optimized/opening-mobile.mp4",
+    "originalSrc": "/assets/homecoming/videos/homecoming-opening-couple.mp4",
+    "width": 406,
+    "height": 720,
+    "duration": 10,
+    "bytes": 483336,
+    "originalBytes": 5349863,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "hasAudio": false,
+    "fastStart": true,
+    "poster": {
+      "src": "/assets/homecoming/optimized/opening-poster.webp",
+      "width": 405,
+      "height": 720,
+      "bytes": 36332,
+      "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoEAAgAA8BgJbACdAEPDApvQAD977ChGoHm7FmE6ZhYJAZ6WewUpDflPVtC93zQAAA="
+    }
+  }
+}

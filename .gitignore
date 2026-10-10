@@ -7,3 +7,5 @@ npm-debug.log*
 .vercel/
 Thumbs.db
 .DS_Store
+artifacts/qa/
+.task-tools/

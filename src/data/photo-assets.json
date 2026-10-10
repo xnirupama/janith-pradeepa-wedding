@@ -1,0 +1,113 @@
+{
+  "wedding": {
+    "feature": {
+      "src": "/assets/wedding/optimized/couple-feature.webp",
+      "original": "/assets/wedding/photos/wedding-couple-feature.jpeg",
+      "width": 1071,
+      "height": 1469,
+      "bytes": 136494,
+      "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoGAAgAA8BgJZQCdAD0ewQIAAD2RrcMxqyT3Pvkspg1wQkF1Mfhc1JvzyCCy/DRAAA=",
+      "alt": "Janith and Pradeepa"
+    },
+    "artwork": {
+      "src": "/assets/wedding/optimized/couple-artwork.webp",
+      "original": "/assets/wedding/photos/wedding-couple-feature.png",
+      "width": 900,
+      "height": 900,
+      "bytes": 87364,
+      "blurDataURL": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoIAAgAA8BgJYwCdADzgwlYAAD+8KM/fB39C1jE1cyYS3XikmMgz12AAAA=",
+      "alt": "Janith and Pradeepa"
+    },
+    "backgrounds": {
+      "hero": {
+        "src": "/assets/wedding/optimized/hero-background.webp",
+        "original": "/assets/wedding/backgrounds/wedding-hero-bg.jpeg",
+        "width": 768,
+        "height": 1376,
+        "bytes": 84298,
+        "blurDataURL": "data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAACwAQCdASoEAAgAA8BgJQBOgCHXcikQAP7uUHHBTSMESubAxGKGqxoAAAA=",
+        "alt": "Janith and Pradeepa"
+      },
+      "section": {
+        "src": "/assets/wedding/optimized/section-background.webp",
+        "original": "/assets/wedding/backgrounds/wedding-section-bg.jpeg",
+        "width": 768,
+        "height": 1376,
+        "bytes": 35946,
+        "blurDataURL": "data:image/webp;base64,UklGRjIAAABXRUJQVlA4ICYAAABQAQCdASoEAAgAA8BgJZQABDOAAP7w0gnRw8HeOtZjZ2O3e9gOAA==",
+        "alt": "Janith and Pradeepa"
+      }
+    },
+    "gallery": [
+      {
+        "src": "/assets/wedding/optimized/couple-feature.webp",
+        "original": "/assets/wedding/photos/wedding-couple-feature.jpeg",
+        "width": 1071,
+        "height": 1469,
+        "bytes": 136494,
+        "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoGAAgAA8BgJZQCdAD0ewQIAAD2RrcMxqyT3Pvkspg1wQkF1Mfhc1JvzyCCy/DRAAA=",
+        "alt": "Janith and Pradeepa"
+      },
+      {
+        "src": "/assets/wedding/optimized/couple-feature-02.webp",
+        "original": "/assets/wedding/photos/wedding-couple-feature%202.jpeg",
+        "width": 788,
+        "height": 1080,
+        "bytes": 41732,
+        "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoGAAgAA8BgJZQCdAD0uUFNNwAA/sBmujVzvfKqVUGazVim0twfQaGbzV2QAAAA",
+        "alt": "Janith and Pradeepa"
+      }
+    ]
+  },
+  "homecoming": {
+    "feature": {
+      "src": "/assets/homecoming/optimized/couple-feature.webp",
+      "original": "/assets/homecoming/photos/homecoming-couple-feature.jpeg",
+      "width": 788,
+      "height": 1080,
+      "bytes": 30880,
+      "blurDataURL": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAACwAQCdASoGAAgAA8BgJZQAApxY9taAAP7s0ie9PmZaT3boCYeBy72MxJeAAA==",
+      "alt": "Janith and Pradeepa"
+    },
+    "artwork": {
+      "src": "/assets/homecoming/optimized/couple-artwork.webp",
+      "original": "/assets/homecoming/photos/homecoming-couple-feature.png",
+      "width": 656,
+      "height": 900,
+      "bytes": 42484,
+      "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAACwAQCdASoGAAgAA8BgJZgCdAD0lZdQAP7l2zA5Td7zuDBFUF/S/CcKgxfbvpY2Qb+7+gAA",
+      "alt": "Janith and Pradeepa"
+    },
+    "backgrounds": {
+      "hero": {
+        "src": "/assets/homecoming/optimized/hero-background.webp",
+        "original": "/assets/homecoming/backgrounds/homecoming-hero-bg.jpeg",
+        "width": 768,
+        "height": 1376,
+        "bytes": 32682,
+        "blurDataURL": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAADQAQCdASoEAAgAA8BgJQBOgCKUEnoSAAD+7sX/P/cE1jvDwxjEpP647AAAAA==",
+        "alt": "Janith and Pradeepa"
+      },
+      "section": {
+        "src": "/assets/homecoming/optimized/section-background.webp",
+        "original": "/assets/homecoming/backgrounds/homecoming-section-bg.jpeg",
+        "width": 768,
+        "height": 1376,
+        "bytes": 14596,
+        "blurDataURL": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAADQAQCdASoEAAgAA8BgJZgCdAEOaQ6gAAD+7M8Sbu9owIujk/7s7WBEVAAAAA==",
+        "alt": "Janith and Pradeepa"
+      }
+    },
+    "gallery": [
+      {
+        "src": "/assets/homecoming/optimized/couple-feature.webp",
+        "original": "/assets/homecoming/photos/homecoming-couple-feature.jpeg",
+        "width": 788,
+        "height": 1080,
+        "bytes": 30880,
+        "blurDataURL": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAACwAQCdASoGAAgAA8BgJZQAApxY9taAAP7s0ie9PmZaT3boCYeBy72MxJeAAA==",
+        "alt": "Janith and Pradeepa"
+      }
+    ]
+  }
+}

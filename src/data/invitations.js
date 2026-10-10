@@ -1,3 +1,7 @@
+import photoAssets from "./photo-assets.json";
+import videoAssets from "./video-assets.json";
+import { applyInvitationCopy, translations } from "./translations";
+
 const shared = {
   couple: "Janith & Pradeepa",
   groom: "Janith Madushanka",
@@ -11,36 +15,16 @@ export const invitations = {
     ...shared,
     slug: "wedding",
     theme: "wedding",
-    eyebrow: "The Wedding of",
-    eventTitle: "The Wedding of Janith & Pradeepa",
-    gateTitle: "The Wedding",
-    date: "Thursday, 26 November 2026",
-    displayDate: "Thursday, 26th November 2026",
-    dateParts: { weekday: "Thursday", day: "26", month: "November", year: "2026" },
+    dateParts: { day: "26", year: "2026" },
     countdownTarget: "2026-11-26T09:16:00+05:30",
-    countdownHeading: "Until We Say \"I Do\"",
-    countdownText: "Join us as we count down the days, hours, minutes and seconds until our celebration begins.",
-    countdownComplete: "Today is the day — our celebration has begun.",
-    intro: [
-      "With joyful hearts,",
-      "we invite you to share in the celebration of our wedding as we begin a beautiful new chapter together.",
-    ],
-    sentiment: ["Two hearts, two lives,", "one beautiful journey."],
-    presence: "Your presence would make our special day even more meaningful.",
     schedule: [
-      { title: "Poruwa Ceremony", time: "9:16 AM" },
-      { title: "Registration", time: "10:10 AM" },
-      { title: "Departure of the Newlyweds", time: "4:08 PM" },
+      { time: "9:16 AM" },
+      { time: "10:10 AM" },
+      { time: "4:08 PM" },
     ],
-    celebration: [
-      "Love brought us together,",
-      "and we would be honoured to celebrate this unforgettable day with you.",
-    ],
-    rsvpIntro: "Kindly let us know whether you will be joining us.",
-    closingLead: "We look forward to celebrating love, laughter and new beginnings with you.",
-    closing: ["With love,", "thank you for being part of our journey."],
     heroPhoto: "/assets/wedding/photos/wedding-hero.jpg",
     featurePhoto: "/assets/wedding/photos/wedding-couple-feature.jpeg",
+    stickerPhoto: "/assets/wedding/photos/wedding-couple-feature.png",
     music: "/assets/wedding/music/wedding-theme.mp3",
     videos: {
       opening: "/assets/wedding/videos/wedding-opening-couple.mp4",
@@ -56,7 +40,6 @@ export const invitations = {
       countdown: "/assets/wedding/videos/wedding-petals-loop.mp4",
       gallery: "/assets/wedding/videos/wedding-floral-frame-loop.mp4",
       location: "/assets/wedding/videos/wedding-soft-light-loop.mp4",
-      rsvp: "/assets/wedding/videos/wedding-petals-loop.mp4",
     },
     backgrounds: {
       hero: "/assets/wedding/backgrounds/wedding-hero-bg.jpeg",
@@ -70,7 +53,6 @@ export const invitations = {
       countdown: "/assets/wedding/posters/wedding-countdown-poster.webp",
       gallery: "/assets/wedding/posters/wedding-gallery-poster.webp",
       location: "/assets/wedding/posters/wedding-location-poster.webp",
-      rsvp: "/assets/wedding/posters/wedding-rsvp-poster.webp",
       closing: "/assets/wedding/posters/wedding-closing-poster.webp",
     },
     gateArtwork: {
@@ -83,7 +65,6 @@ export const invitations = {
       name: "Hemandra Grand Hotel",
       address: "",
       addressLines: [],
-      description: "We look forward to welcoming you there for our wedding celebration.",
       mapsUrl: "https://maps.app.goo.gl/urnjWCBNcUmjTYrZ7",
       contact: { phone: "+94775339705", display: "077 533 9705" },
     },
@@ -100,35 +81,14 @@ export const invitations = {
     ...shared,
     slug: "homecoming",
     theme: "homecoming",
-    eyebrow: "Homecoming Celebration",
-    eventTitle: "Janith & Pradeepa — Homecoming Celebration",
-    gateTitle: "Homecoming Celebration",
-    date: "Monday, 30 November 2026",
-    displayDate: "Monday, 30th November 2026",
-    dateParts: { weekday: "Monday", day: "30", month: "November", year: "2026" },
+    dateParts: { day: "30", year: "2026" },
     countdownTarget: "2026-11-30T11:08:00+05:30",
-    countdownHeading: "Until We Welcome Them Home",
-    countdownText: "Join us as we count down to a day of love, family, laughter and celebration.",
-    countdownComplete: "Today is the day — our Homecoming Celebration has begun.",
-    intro: [
-      "Our wedding journey continues,",
-      "and with happiness in our hearts, we warmly invite you to join us for our Homecoming Celebration.",
-    ],
-    sentiment: ["A new beginning.", "A warm welcome home.", "A day filled with love, family, laughter and celebration."],
     arrival: {
-      title: "Arrival of the Newlyweds",
       time: "11:08 AM",
-      text: "The celebration will continue throughout the day and into the evening.",
     },
-    celebration: [
-      "Come share the happiness, make memories with us and be part of another beautiful chapter in our journey together.",
-    ],
-    rsvpIntro: "We would love to know if you will be joining us.",
-    rsvpNote: "Your presence will make our Homecoming Celebration even more special.",
-    closingLead: "Your presence will make our Homecoming Celebration even more special.",
-    closing: ["With love and gratitude,", "we look forward to celebrating with you."],
     heroPhoto: "/assets/homecoming/photos/homecoming-hero.jpg",
     featurePhoto: "/assets/homecoming/photos/homecoming-couple-feature.jpeg",
+    stickerPhoto: "/assets/homecoming/photos/homecoming-couple-feature.png",
     music: "/assets/homecoming/music/homecoming-theme.mp3",
     videos: {
       opening: "/assets/homecoming/videos/homecoming-opening-couple.mp4",
@@ -143,7 +103,6 @@ export const invitations = {
       countdown: "/assets/homecoming/videos/homecoming-countdown-butterfly-loop.mp4",
       gallery: "/assets/homecoming/videos/homecoming-floral-frame-loop.mp4",
       location: "/assets/homecoming/videos/homecoming-petals-loop.mp4",
-      rsvp: "/assets/homecoming/videos/homecoming-petals-loop.mp4",
     },
     backgrounds: {
       hero: "/assets/homecoming/backgrounds/homecoming-hero-bg.jpeg",
@@ -157,7 +116,6 @@ export const invitations = {
       countdown: "/assets/homecoming/posters/homecoming-countdown-poster.webp",
       gallery: "/assets/homecoming/posters/homecoming-gallery-poster.webp",
       location: "/assets/homecoming/posters/homecoming-location-poster.webp",
-      rsvp: "/assets/homecoming/posters/homecoming-rsvp-poster.webp",
       closing: "/assets/homecoming/posters/homecoming-closing-poster.webp",
     },
     location: {
@@ -165,7 +123,6 @@ export const invitations = {
       name: "Senwin Mandeer",
       address: "Thalgaswala",
       addressLines: ["Thalgaswala"],
-      description: "We look forward to welcoming you there for our Homecoming Celebration.",
       mapsUrl: "https://share.google/yjhuVkqNNSOrz0HFx",
       contact: { phone: "+94705525625", display: "0705 525 625" },
     },
@@ -181,5 +138,12 @@ export const invitations = {
 };
 
 export function getInvitation(slug) {
-  return invitations[slug];
+  const invitation = invitations[slug];
+  if (!invitation) return undefined;
+  const localized = applyInvitationCopy(invitation, translations.en.invitationCopy[slug]);
+  return {
+    ...localized,
+    videos: { ...localized.videos, openingMobile: videoAssets[slug]?.src },
+    videoPosters: { ...localized.videoPosters, opening: videoAssets[slug]?.poster.src ?? photoAssets[slug].backgrounds.hero.src },
+  };
 }
