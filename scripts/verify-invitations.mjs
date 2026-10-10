@@ -1,18 +1,16 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { fileURLToPath } from "node:url";
 import test from "node:test";
 
 // Run with: node scripts/verify-invitations.mjs
-// Uses the actual source modules and mocks every upstream RSVP request.
+// Uses the actual source modules; no external requests are sent.
 const root = fileURLToPath(new URL("../", import.meta.url));
 const read = (file) => fs.readFile(path.join(root, file), "utf8");
 const moduleUrl = (source) => `data:text/javascript;base64,${Buffer.from(source).toString("base64")}`;
 const translationUrl = moduleUrl(await read("src/data/translations.js"));
-const validationUrl = moduleUrl(await read("src/lib/validation.js"));
 const { translations, localizeInvitation } = await import(translationUrl);
-const { validateRsvp, normalizePhoneNumber } = await import(validationUrl);
 const { sanitizeGuestName } = await import(moduleUrl(await read("src/lib/personalization.js")));
 const { createCalendarFile, createGoogleCalendarUrl } = await import(moduleUrl(await read("src/lib/calendar.js")));
 
@@ -23,15 +21,6 @@ const invitationSource = (await read("src/data/invitations.js"))
   .replace('import videoAssets from "./video-assets.json";', `const videoAssets = ${await read("src/data/video-assets.json")};`)
   .replace('"./translations"', JSON.stringify(translationUrl));
 const { getInvitation } = await import(moduleUrl(invitationSource));
-const nextServerUrl = pathToFileURL(path.join(root, "node_modules/next/server.js")).href;
-const routeSource = (await read("src/app/api/rsvp/route.js"))
-  .replace('"@/lib/validation"', JSON.stringify(validationUrl))
-  .replace('"next/server"', JSON.stringify(nextServerUrl));
-const healthSource = (await read("src/app/api/rsvp/health/route.js"))
-  .replace('"next/server"', JSON.stringify(nextServerUrl));
-const { POST } = await import(moduleUrl(routeSource));
-const { GET } = await import(moduleUrl(healthSource));
-
 const canonical = {
   wedding: {
     date: "Thursday, 26 November 2026",
@@ -82,7 +71,6 @@ test("both invitations retain their factual dates, event times, contacts and lin
     assert.deepEqual(invitation.location.contact, expected.contact);
     assert.equal(invitation.videos.opening, `/assets/${slug}/videos/${slug}-opening-couple.mp4`);
     assert.equal(invitation.music, `/assets/${slug}/music/${slug}-theme.mp3`);
-    assert.ok(invitation.rsvpIntro);
     assert.ok(invitation.videoPosters.opening);
   }
   assert.equal(getInvitation("unknown"), undefined);
@@ -138,6 +126,19 @@ test("localizing narrative keeps media, canonical calendar data, phone numbers a
   }
 });
 
+test("removed guest features have no routes, components, translation keys or dependencies", async () => {
+  for (const file of ["src/app/api/rsvp/route.js", "src/app/api/rsvp/health/route.js", "src/components/RSVPForm.jsx", "src/components/GuestExtras.jsx", "src/data/features.js", "src/lib/validation.js"]) {
+    await assert.rejects(fs.access(path.join(root, file)), { code: "ENOENT" });
+  }
+  for (const strings of Object.values(translations)) {
+    assert.ok(!Object.keys(strings).some(key => /rsvp|seating|upload|extras/i.test(key)));
+    for (const copy of Object.values(strings.invitationCopy)) assert.ok(!Object.keys(copy).some(key => /rsvp/i.test(key)));
+  }
+  const { dependencies } = JSON.parse(await read("package.json"));
+  assert.equal(dependencies["canvas-confetti"], undefined);
+  assert.equal(dependencies["framer-motion"], undefined);
+});
+
 test("guest personalization limits length, preserves Sinhala and removes controls, markup brackets and bidi marks", () => {
   assert.equal(sanitizeGuestName(undefined), "");
   assert.equal(sanitizeGuestName({ name: "Guest" }), "");
@@ -167,90 +168,6 @@ test("calendar actions retain the Colombo ceremony time and exclusive homecoming
   assert.equal(homecomingUrl.searchParams.get("dates"), "20261130/20261201");
   assert.equal(homecomingUrl.searchParams.has("ctz"), false);
   assert.equal(homecomingUrl.searchParams.get("location"), "Senwin Mandeer, Thalgaswala");
-});
-
-const validRsvp = {
-  event: "wedding", fullName: "Guest Name", phoneNumber: "077 123 4567",
-  attending: "yes", numberOfGuests: 2, message: "Best wishes", website: "",
-};
-
-test("RSVP validation normalizes phones, enforces field limits, rejects invalid events and sets declines to zero", () => {
-  for (const phone of ["077 123 4567", "771234567", "0094771234567", "+94771234567"]) {
-    assert.equal(normalizePhoneNumber(phone), "+94771234567");
-  }
-  assert.equal(validateRsvp(validRsvp).valid, true);
-  assert.equal(validateRsvp({ ...validRsvp, event: "homecoming", attending: "no", numberOfGuests: 99 }).data.numberOfGuests, 0);
-  assert.equal(validateRsvp({ ...validRsvp, numberOfGuests: 20 }).valid, true);
-  for (const change of [{ numberOfGuests: 21 }, { numberOfGuests: 1.5 }, { fullName: "x" }, { fullName: "x".repeat(121) }, { phoneNumber: "letters" }, { event: "other" }, { message: "x".repeat(801) }]) {
-    assert.equal(validateRsvp({ ...validRsvp, ...change }).valid, false, JSON.stringify(change));
-  }
-  assert.equal(validateRsvp({ ...validRsvp, website: "bot.example" }).spam, true);
-});
-
-test("RSVP routes reject malformed input and preserve mocked forwarding, updates, receipt reconciliation and health", async () => {
-  const originalFetch = globalThis.fetch;
-  const originalScriptUrl = process.env.RSVP_GOOGLE_SCRIPT_URL;
-  const originalError = console.error;
-  const originalInfo = console.info;
-  const request = (value, headers = {}) => new Request("http://localhost/api/rsvp", {
-    method: "POST", headers: { "Content-Type": "application/json", ...headers }, body: JSON.stringify(value),
-  });
-  let unexpectedRequests = 0;
-  try {
-    // Every fetch is mocked: this script cannot send an RSVP to a real service.
-    globalThis.fetch = async () => { unexpectedRequests++; throw new Error("Unexpected upstream request"); };
-    delete process.env.RSVP_GOOGLE_SCRIPT_URL;
-    assert.deepEqual(await (await GET()).json(), { configured: false, upstreamReachable: false });
-    assert.equal((await POST(new Request("http://localhost/api/rsvp", { method: "POST", body: "plain text" }))).status, 415);
-    assert.equal((await POST(request(validRsvp, { "Content-Length": "5001" }))).status, 413);
-    assert.equal((await POST(new Request("http://localhost/api/rsvp", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{" }))).status, 400);
-    const invalidResponse = await POST(request({ ...validRsvp, fullName: "" }));
-    assert.equal(invalidResponse.status, 400);
-    assert.ok((await invalidResponse.json()).errors.fullName);
-    assert.equal((await POST(request(validRsvp))).status, 503);
-    assert.equal((await POST(request({ ...validRsvp, website: "bot.example" }))).status, 200);
-    assert.equal(unexpectedRequests, 0);
-
-    process.env.RSVP_GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/test/exec";
-    let forwarded;
-    globalThis.fetch = async (url, options) => {
-      assert.equal(url, process.env.RSVP_GOOGLE_SCRIPT_URL);
-      assert.equal(options.method, "POST");
-      forwarded = JSON.parse(options.body);
-      return Response.json({ success: true, updated: true, notificationSent: true });
-    };
-    assert.deepEqual(await (await POST(request(validRsvp))).json(), { success: true, updated: true, notificationSent: true });
-    assert.equal(forwarded.phoneNumber, "+94771234567");
-    assert.equal(forwarded.event, "wedding");
-    assert.equal(forwarded.fullName, validRsvp.fullName);
-    assert.equal(forwarded.numberOfGuests, 2);
-    assert.match(forwarded.requestId, /^[\da-f-]{36}$/i);
-
-    console.error = () => {};
-    console.info = () => {};
-    let calls = 0;
-    globalThis.fetch = async (_url, options) => {
-      calls++;
-      if (options?.method === "POST") {
-        forwarded = JSON.parse(options.body);
-        return Response.json({ success: false }, { status: 502 });
-      }
-      return Response.json({ success: true, receipts: [{ requestId: forwarded.requestId, saved: true, updated: false, notificationSent: true }] });
-    };
-    assert.deepEqual(await (await POST(request(validRsvp))).json(), { success: true, updated: false, notificationSent: true, reconciled: true });
-    assert.equal(calls, 2);
-    globalThis.fetch = async () => { throw new Error("Mock upstream offline"); };
-    assert.equal((await POST(request(validRsvp))).status, 502);
-    assert.deepEqual(await (await GET()).json(), { configured: true, upstreamReachable: false });
-    globalThis.fetch = async () => new Response("", { status: 200 });
-    assert.deepEqual(await (await GET()).json(), { configured: true, upstreamReachable: true });
-  } finally {
-    globalThis.fetch = originalFetch;
-    console.error = originalError;
-    console.info = originalInfo;
-    if (originalScriptUrl === undefined) delete process.env.RSVP_GOOGLE_SCRIPT_URL;
-    else process.env.RSVP_GOOGLE_SCRIPT_URL = originalScriptUrl;
-  }
 });
 
 const { invitationThemes } = await import(moduleUrl(await read("src/data/themes.js")));

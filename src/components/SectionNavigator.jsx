@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { CalendarDays, Home, Images, MapPin, Send } from "lucide-react";
+import { CalendarDays, Home, Images, MapPin, Phone } from "lucide-react";
 import { useLanguage } from "./InvitationLanguage";
 
-const SECTION_IDS = ["top", "event-details", "gallery", "location", "rsvp"];
+const SECTION_IDS = ["top", "event-details", "gallery", "location", "contact"];
 
 export default function SectionNavigator() {
   const { t } = useLanguage();
@@ -16,7 +16,7 @@ export default function SectionNavigator() {
     { id: "event-details", label: t("navEvents"), icon: CalendarDays },
     { id: "gallery", label: t("navGallery"), icon: Images },
     { id: "location", label: t("navLocation"), icon: MapPin },
-    { id: "rsvp", label: t("navRsvp"), icon: Send },
+    { id: "contact", label: t("navContact"), icon: Phone },
   ];
 
   const finishNavigation = useCallback(() => {

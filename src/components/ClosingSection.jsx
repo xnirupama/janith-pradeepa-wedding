@@ -16,7 +16,7 @@ export default function ClosingSection({ invitation, onReplayOpening }) {
   };
 
   return (
-    <footer className="closing-section" aria-labelledby="closing-title">
+    <footer className="closing-section" id="contact" aria-labelledby="closing-title">
       <Mandala className="closing-mandala" />
       <SectionReveal className="closing-content">
         <p className="closing-save-date section-kicker">{t("saveDate")}</p>
@@ -28,7 +28,12 @@ export default function ClosingSection({ invitation, onReplayOpening }) {
         <span className="closing-divider" aria-hidden="true" />
         {invitation.closingLead && <p className="closing-lead">{invitation.closingLead}</p>}
         <div className="closing-copy">{invitation.closing.map((line) => <p key={line}>{line}</p>)}</div>
-        <div className="closing-contact-actions">{invitation.location.contact && <ContactPill contact={invitation.location.contact} />}</div>
+        <div className="closing-contact-actions">
+          <p className="section-kicker">{t("contactHelpKicker")}</p>
+          <h3>{t("contactTitle")}</h3>
+          <p>{t("contactHelpText")}</p>
+          {invitation.location.contact && <ContactPill contact={invitation.location.contact} />}
+        </div>
         <div className="closing-actions">
           <ShareInvitation invitation={invitation} />
           <button type="button" className="replay-opening" onClick={onReplayOpening}><RotateCcw size={16} aria-hidden="true" />{t("replayOpening")}</button>

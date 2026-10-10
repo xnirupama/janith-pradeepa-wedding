@@ -45,34 +45,21 @@ for (const [name, engine] of [["chromium", chromium], ["webkit", webkit]]) {
           assert.equal(await page.locator(".section-navigator a").count(), 5);
           const contentMetrics = await page.evaluate(() => ({
             width:innerWidth,scrollWidth:document.documentElement.scrollWidth,
-            inputSizes:[...document.querySelectorAll("input:not([type=radio]):not([name=website]),textarea")].map(el=>parseFloat(getComputedStyle(el).fontSize)),
             nav:[...document.querySelectorAll(".section-navigator a")].map(el=>({w:el.getBoundingClientRect().width,h:el.getBoundingClientRect().height})),
             guestText:document.querySelector(".hero-content .guest-line").textContent,
           }));
           assert.ok(contentMetrics.scrollWidth <= viewport.width, "Invitation horizontal overflow");
-          assert.ok(contentMetrics.inputSizes.every(size => size >= 16), "Form text smaller than 16px");
           assert.ok(contentMetrics.nav.every(target => target.w >= 44 && target.h >= 44), "Navigation tap targets smaller than44");
           assert.ok(!contentMetrics.guestText.includes("<"));
           if (viewport.width === 390) await page.screenshot({path:path.join(output,name+"-"+event+"-"+language+"-hero.png")});
-          for (const section of ["event-details","gallery","location","rsvp"]) {
+          for (const section of ["event-details","gallery","location","contact"]) {
             await page.locator('.section-navigator a[href="#'+section+'"]').click();
             await page.waitForTimeout(200);
             assert.equal(await page.locator('.section-navigator a[aria-current="location"]').getAttribute("href"), "#"+section);
             if (viewport.width === 390 && name === "chromium") await page.screenshot({path:path.join(output,event+"-"+language+"-"+section+".png")});
           }
-          await page.locator('input[name="fullName"]').fill("Test Guest");
-          await page.locator('input[name="phoneNumber"]').fill("0771234567");
-          await page.locator('input[name="attending"][value="yes"]').check();
-          let payload;
-          await page.route("**/api/rsvp",async route=>{
-            payload=route.request().postDataJSON();
-            await route.fulfill({status:200,contentType:"application/json",body:JSON.stringify({success:true,updated:false})});
-          });
-          await page.locator(".submit-button").click();
-          await page.locator(".rsvp-success").waitFor();
-          assert.equal(payload.event,event);
-          assert.equal(payload.numberOfGuests,1);
-          assert.equal(payload.fullName,"Test Guest");
+          assert.equal(await page.locator("form").count(),0,"Unexpected guest form");
+          assert.equal(await page.locator("footer#contact a[href^=tel]").count(),1);
           await page.locator(".back-to-top").scrollIntoViewIfNeeded();
           await page.locator(".back-to-top").click();
           assert.ok(await page.evaluate(()=>scrollY) < 10);
@@ -81,7 +68,7 @@ for (const [name, engine] of [["chromium", chromium], ["webkit", webkit]]) {
           await page.locator(".replay-opening").click();
           await page.waitForTimeout(200);
           assert.ok(Math.abs((await page.evaluate(()=>scrollY))-beforeReplay)<5,"Replay lost scroll position");
-          reports.push({engine:name,event,language,...viewport,coverOverflow:false,contentOverflow:false,tapTargets:true,formFont16:true,nav:true,rsvpMock:true});
+          reports.push({engine:name,event,language,...viewport,coverOverflow:false,contentOverflow:false,tapTargets:true,nav:true,contact:true,noForms:true});
           await context.close();
           console.log("PASS " + name + " " + event + " " + language + " " + viewport.width);
         }
@@ -91,4 +78,4 @@ for (const [name, engine] of [["chromium", chromium], ["webkit", webkit]]) {
 }
 assert.deepEqual(errors, [], "Browser console errors");
 await fs.writeFile(path.join(output,process.env.QA_LANGUAGES ? "results-"+process.env.QA_LANGUAGES.replaceAll(",","-")+".json" : "results.json"),JSON.stringify({baseURL,scenarios:reports.length,reports,errors},null,2));
-console.log("PASS "+reports.length+" browser/route/language/viewport scenarios; no JS errors; RSVP mocked.");
+console.log("PASS "+reports.length+" browser/route/language/viewport scenarios; no JS errors; Contact nav and footer passed.");

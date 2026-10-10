@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { ExternalLink, MapPin, Navigation } from "lucide-react";
 import SectionReveal from "./SectionReveal";
-import { ContactPill, SectionHeading } from "./InvitationOrnaments";
+import { SectionHeading } from "./InvitationOrnaments";
 import { useLanguage } from "./InvitationLanguage";
 
 const VenueMap = dynamic(() => import("./VenueMap"), { ssr: false });
@@ -56,12 +56,6 @@ export default function LocationSection({ location, active = true }) {
             <Navigation size={17} aria-hidden="true" />{t("getDirections")}
           </a>
         )}
-      </SectionReveal>
-      <SectionReveal className="contact-help-card">
-        <p className="section-kicker">{t("contactHelpKicker")}</p>
-        <h3>{t("contactTitle")}</h3>
-        <p>{t("contactHelpText")}</p>
-        <div className="contact-help-actions">{location.contact && <ContactPill contact={location.contact} />}</div>
       </SectionReveal>
     </section>
   );

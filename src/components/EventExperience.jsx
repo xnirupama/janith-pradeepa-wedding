@@ -16,8 +16,6 @@ import EventSchedule from "./EventSchedule";
 import Countdown from "./Countdown";
 import Gallery from "./Gallery";
 import LocationSection from "./LocationSection";
-import RSVPForm from "./RSVPForm";
-import GuestExtras from "./GuestExtras";
 import ClosingSection from "./ClosingSection";
 import SectionNavigator from "./SectionNavigator";
 
@@ -89,8 +87,6 @@ function Experience({ invitation: original, galleryImages, guestName, coupleArtw
         <Gallery images={galleryImages} invitation={invitation} contentActive />
         <section className="celebration-section section-shell"><SectionReveal><SectionHeading kicker={t("celebrationKicker")} title={t("celebrationTitle")} />{invitation.celebration.map(line => <p key={line}>{line}</p>)}</SectionReveal></section>
         <LocationSection location={invitation.location} invitation={invitation} active />
-        <RSVPForm invitation={invitation} eventSlug={original.slug} guestName={guestName} />
-        <GuestExtras invitation={invitation} />
         <ClosingSection invitation={invitation} active onReplayOpening={replayOpening} />
       </div>
       {!replaying && <SectionNavigator invitation={invitation} />}

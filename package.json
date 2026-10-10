@@ -14,8 +14,6 @@
     "verify:performance": "node scripts/verify-performance.mjs"
   },
   "dependencies": {
-    "canvas-confetti": "^1.9.4",
-    "framer-motion": "latest",
     "lucide-react": "latest",
     "next": "latest",
     "react": "latest",
