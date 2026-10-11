@@ -1,6 +1,6 @@
 [
   {
-    "src": "/assets/wedding/media/wedding-closing-loop.ac32ec3a22c1.mp4",
+    "src": "media-sources/wedding/compatible/wedding-closing-loop.ac32ec3a22c1.mp4",
     "sourcePath": "media-sources/wedding/videos/wedding-closing-loop.mp4",
     "description": "wedding closing loop",
     "position": "50% 50%",
@@ -18,18 +18,18 @@
     "fastStart": true,
     "keyframeSeconds": 2,
     "poster": {
-      "src": "/assets/wedding/media/wedding-closing-loop-poster.0937bbb116e5.webp",
+      "src": "media-sources/wedding/compatible/wedding-closing-loop-poster.0937bbb116e5.webp",
       "width": 540,
       "height": 960,
       "bytes": 12588,
       "blurDataURL": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAAAQAgCdASoIAA4ABIByJYgCdADdKIx/r80AAP7nL3LREgB9pLrAKf2eEx2vHB2AAAA="
     },
     "webm": {
-      "src": "/assets/wedding/media/wedding-closing-loop.5427a4af35a6.webm",
+      "src": "media-sources/wedding/compatible/wedding-closing-loop.5427a4af35a6.webm",
       "bytes": 465264
     },
-    "deployed": true,
-    "use": "closing"
+    "deployed": false,
+    "use": "archived alternative; not deployed"
   },
   {
     "src": "/assets/wedding/media/wedding-floral-frame-loop.c361d35c3681.mp4",
@@ -64,15 +64,15 @@
     "use": "cover"
   },
   {
-    "src": "media-sources/wedding/compatible/wedding-floral-loop.36aee95b5a48.mp4",
+    "src": "/assets/wedding/media/wedding-floral-loop-seamless.6df7f51fbf55.mp4",
     "sourcePath": "media-sources/wedding/videos/wedding-floral-loop.mp4",
-    "description": "wedding floral loop",
+    "description": "wedding floral loop with seamless dissolve",
     "position": "50% 50%",
     "width": 540,
     "height": 960,
-    "duration": 10,
+    "duration": 9.083333,
     "fps": 24,
-    "bytes": 456923,
+    "bytes": 427880,
     "originalBytes": 3342762,
     "codec": "h264",
     "profile": "Main",
@@ -82,21 +82,22 @@
     "fastStart": true,
     "keyframeSeconds": 2,
     "poster": {
-      "src": "media-sources/wedding/compatible/wedding-floral-loop-poster.79b9891b19bd.webp",
+      "src": "/assets/wedding/media/wedding-floral-loop-seamless-poster.34cebca2052b.webp",
       "width": 540,
       "height": 960,
-      "bytes": 15542,
-      "blurDataURL": "data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAACQAQCdASoIAA4ABIByJZQAAu1eCeAA/tcdZkbKNMGNDe+LxX0JreqQ4AA="
+      "bytes": 16784,
+      "blurDataURL": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAACwAQCdASoIAA4ABIByJZQCsAEQBirgAP7XHWZXcBq26kfUU3Fn9ooCxSkAAA=="
     },
-    "webm": {
-      "src": "media-sources/wedding/compatible/wedding-floral-loop.9c909c934dbc.webm",
-      "bytes": 301604
-    },
-    "deployed": false,
-    "use": "archived alternative; not deployed"
+    "deployed": true,
+    "use": "hero",
+    "event": "wedding",
+    "section": "hero",
+    "opacity": 0.22,
+    "blend": "multiply",
+    "seamMeanAbsoluteDifference": 1.59
   },
   {
-    "src": "/assets/wedding/media/wedding-hero-loop.95bab1605f3d.mp4",
+    "src": "media-sources/wedding/compatible/wedding-hero-loop.95bab1605f3d.mp4",
     "sourcePath": "media-sources/wedding/videos/wedding-hero-loop.mp4",
     "description": "wedding hero loop",
     "position": "50% 50%",
@@ -114,18 +115,18 @@
     "fastStart": true,
     "keyframeSeconds": 2,
     "poster": {
-      "src": "/assets/wedding/media/wedding-hero-loop-poster.f7aa2df02de1.webp",
+      "src": "media-sources/wedding/compatible/wedding-hero-loop-poster.f7aa2df02de1.webp",
       "width": 540,
       "height": 960,
       "bytes": 16072,
       "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoIAA4ABIByJQBOgBuwVnVj4AD+xej/3WgJZ7ZApbqcBH4o4Yg7WKZiZuATk6mmgAA="
     },
     "webm": {
-      "src": "/assets/wedding/media/wedding-hero-loop.41de145487c3.webm",
+      "src": "media-sources/wedding/compatible/wedding-hero-loop.41de145487c3.webm",
       "bytes": 417424
     },
-    "deployed": true,
-    "use": "hero"
+    "deployed": false,
+    "use": "archived alternative; not deployed"
   },
   {
     "src": "media-sources/wedding/compatible/wedding-opening-couple-2.5ac2fc42f16e.mp4",
@@ -192,15 +193,15 @@
     "use": "opening"
   },
   {
-    "src": "media-sources/wedding/compatible/wedding-petals-loop.6f7b17da6c58.mp4",
+    "src": "/assets/wedding/media/wedding-petals-loop-seamless.53772fc18afe.mp4",
     "sourcePath": "media-sources/wedding/videos/wedding-petals-loop.mp4",
-    "description": "wedding petals loop",
+    "description": "wedding petals loop with seamless dissolve",
     "position": "50% 50%",
     "width": 540,
     "height": 960,
-    "duration": 10,
+    "duration": 9.083333,
     "fps": 24,
-    "bytes": 631251,
+    "bytes": 601234,
     "originalBytes": 3923001,
     "codec": "h264",
     "profile": "Main",
@@ -210,18 +211,19 @@
     "fastStart": true,
     "keyframeSeconds": 2,
     "poster": {
-      "src": "media-sources/wedding/compatible/wedding-petals-loop-poster.9af8acceadb0.webp",
+      "src": "/assets/wedding/media/wedding-petals-loop-seamless-poster.bef01bf9ffe7.webp",
       "width": 540,
       "height": 960,
-      "bytes": 13188,
-      "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADQAQCdASoIAA4ABIByJQBOgB8xxF9kwAD+lqwqT5/7Q4AyftVOKicZhwkZh3J+joWgAA=="
+      "bytes": 14450,
+      "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADQAQCdASoIAA4ABIByJQBOgCP7svRsmAD+l+A9doBH5UABbgXUxLk8JkuY8n6OhaAAAA=="
     },
-    "webm": {
-      "src": "media-sources/wedding/compatible/wedding-petals-loop.799856b8e56e.webm",
-      "bytes": 528058
-    },
-    "deployed": false,
-    "use": "archived alternative; not deployed"
+    "deployed": true,
+    "use": "celebration",
+    "event": "wedding",
+    "section": "celebration",
+    "opacity": 0.24,
+    "blend": "multiply",
+    "seamMeanAbsoluteDifference": 2.73
   },
   {
     "src": "media-sources/wedding/compatible/wedding-soft-light-loop.122f607711b7.mp4",
@@ -256,15 +258,15 @@
     "use": "archived alternative; not deployed"
   },
   {
-    "src": "/assets/homecoming/media/homecoming-closing-loop.6bf2faad49a0.mp4",
+    "src": "/assets/homecoming/media/homecoming-closing-loop-seamless.e9a614d2a6c2.mp4",
     "sourcePath": "media-sources/homecoming/videos/homecoming-closing-loop.mp4",
-    "description": "homecoming closing loop",
+    "description": "homecoming closing loop with seamless dissolve",
     "position": "50% 50%",
     "width": 540,
     "height": 960,
-    "duration": 10,
+    "duration": 9.083333,
     "fps": 24,
-    "bytes": 694729,
+    "bytes": 657224,
     "originalBytes": 4585683,
     "codec": "h264",
     "profile": "Main",
@@ -274,18 +276,19 @@
     "fastStart": true,
     "keyframeSeconds": 2,
     "poster": {
-      "src": "/assets/homecoming/media/homecoming-closing-loop-poster.1628c8b62297.webp",
+      "src": "/assets/homecoming/media/homecoming-closing-loop-seamless-poster.bcd6974c685f.webp",
       "width": 540,
       "height": 960,
-      "bytes": 10146,
-      "blurDataURL": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAACwAQCdASoIAA4ABIByJZACdADyfWUAAP6FBXZYeF0Bf1/ZdYhXawptzhgAAA=="
-    },
-    "webm": {
-      "src": "/assets/homecoming/media/homecoming-closing-loop.a7b8f8bd42ce.webm",
-      "bytes": 492150
+      "bytes": 13400,
+      "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACwAQCdASoIAA4ABIByJZACdADx9FgAAP6Eg2pUEb+8Rc+fmfeZLrarCMptyuAA"
     },
     "deployed": true,
-    "use": "closing"
+    "use": "hero",
+    "event": "homecoming",
+    "section": "hero",
+    "opacity": 0.22,
+    "blend": "screen",
+    "seamMeanAbsoluteDifference": 1.68
   },
   {
     "src": "media-sources/homecoming/compatible/homecoming-countdown-butterfly-loop.2b00f586e78b.mp4",
@@ -401,7 +404,7 @@
       "bytes": 890873
     },
     "deployed": true,
-    "use": "cover + hero"
+    "use": "cover"
   },
   {
     "src": "media-sources/homecoming/compatible/homecoming-opening-couple-2.42495575a0e0.mp4",

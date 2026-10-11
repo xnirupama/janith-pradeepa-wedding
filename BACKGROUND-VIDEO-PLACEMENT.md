@@ -61,3 +61,7 @@ Two content ambient instances per page, plus the one existing gate backdrop that
 Use one encoded seamless file per placement, rather than stacked playback instances. Only hero receives early media priority after content mounts. Celebration uses preload none and viewport observers. Retain the shared player’s real-playing fade, stall/decoder fallback, maximum-two scheduler, hidden-tab/offscreen pause and far-away source cleanup. All new placements are poster-only for reduced motion, Save-Data, slow connections and low-memory devices; the existing opening and gate policies remain unchanged.
 
 Implementation and measured verification results will be appended after the review commit.
+
+### Restraint adjustment during media verification
+
+The proposed homecoming petal band failed the stricter encoded seam review (7.92 mean pixel difference, compared with 1.59–2.73 for the other selected loops). Its bright bokeh and larger petals also make it the busiest candidate. Drop it entirely rather than relaxing the check. Homecoming therefore has **one content ambient video**, in Hero; Celebrate With Us uses its existing maroon surface and faint CSS mandalas. Wedding keeps its two planned placements. This stays below the three-instance limit including the unchanged gate.

@@ -9,11 +9,8 @@ const ffmpeg = process.env.FFMPEG_PATH || path.join(root, ".task-tools/ffmpeg/bi
 const ffprobe = process.env.FFPROBE_PATH || path.join(root, ".task-tools/ffmpeg/bin/ffprobe.exe");
 const selected = {
   "wedding-floral-frame-loop.mp4": ["wedding", "cover"],
-  "wedding-hero-loop.mp4": ["wedding", "hero"],
-  "wedding-closing-loop.mp4": ["wedding", "closing"],
   "wedding-opening-couple.mp4": ["wedding", "opening"],
-  "homecoming-hero-loop.mp4": ["homecoming", "cover", "hero"],
-  "homecoming-closing-loop.mp4": ["homecoming", "closing"],
+  "homecoming-hero-loop.mp4": ["homecoming", "cover"],
   "homecoming-opening-couple.mp4": ["homecoming", "opening"],
 };
 const background = { wedding: {}, homecoming: {} }, opening = {}, inventory = [];
@@ -72,3 +69,4 @@ for (const event of ["wedding", "homecoming"]) {
 await fs.writeFile("src/data/background-videos.json", JSON.stringify(background, null, 2) + "\n");
 await fs.writeFile("src/data/video-assets.json", JSON.stringify(opening, null, 2) + "\n");
 await fs.writeFile("media-sources/compatible-video-inventory.json", JSON.stringify(inventory, null, 2) + "\n");
+await import("./prepare-ambient-videos.mjs");
