@@ -30,16 +30,16 @@
     }
   },
   "homecoming": {
-    "src": "/assets/homecoming/media/homecoming-opening-couple.fb07dd087000.mp4",
-    "sourcePath": "media-sources/homecoming/videos/homecoming-opening-couple.mp4",
-    "description": "homecoming opening couple",
+    "src": "/assets/homecoming/media/homecoming-opening-couple-replacement.3323745045bd.mp4",
+    "bytes": 574491,
+    "sourcePath": "media-sources/homecoming/videos/homecoming-opening-couple-replacement.mp4",
+    "description": "Replacement homecoming opening couple film",
     "position": "50% 50%",
     "width": 406,
     "height": 720,
     "duration": 10,
     "fps": 24,
-    "bytes": 576688,
-    "originalBytes": 5349863,
+    "originalBytes": 6285526,
     "codec": "h264",
     "profile": "Main",
     "level": 31,
@@ -48,15 +48,11 @@
     "fastStart": true,
     "keyframeSeconds": 2,
     "poster": {
-      "src": "/assets/homecoming/media/homecoming-opening-couple-poster.69fb2fb906cb.webp",
+      "src": "/assets/homecoming/media/homecoming-opening-couple-replacement-poster.aa1ffa03f5d5.webp",
+      "bytes": 19946,
       "width": 406,
       "height": 720,
-      "bytes": 28106,
-      "blurDataURL": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAACwAQCdASoIAA4ABIByJbACdAD0RtuIAP5k3l1yh3E15JV7110sThRPfHXr+SFb44fdpGWBD5FzhcdclxcJqmVor6m9CgAA"
-    },
-    "webm": {
-      "src": "/assets/homecoming/media/homecoming-opening-couple.fdc325483458.webm",
-      "bytes": 490167
+      "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAAAQAgCdASoIAA4ABIByJZQAAp2c2cYk7oMAAP65/Glnx/XmyfzD6OADcZvWr7m3Iljd+gAA"
     }
   }
 }

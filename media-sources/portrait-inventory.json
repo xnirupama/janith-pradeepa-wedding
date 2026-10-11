@@ -63,30 +63,30 @@
   },
   {
     "event": "homecoming",
-    "source": "media-sources/homecoming/photos/homecoming-couple-feature.jpeg",
-    "originalBytes": 52318,
+    "source": "media-sources/homecoming/photos/homecoming-gallery-couple.jpeg",
+    "originalBytes": 61025,
     "originalFormat": "jpeg",
     "originalWidth": 788,
     "originalHeight": 1080,
     "variants": {
       "640": {
         "webp": {
-          "src": "/assets/homecoming/media/portrait-1-640.2ed3fd11d1f6.webp",
-          "bytes": 25480
+          "src": "/assets/homecoming/media/portrait-1-640.26f18736c81b.webp",
+          "bytes": 31574
         },
         "avif": {
-          "src": "/assets/homecoming/media/portrait-1-640.6e7168349e50.avif",
-          "bytes": 18021
+          "src": "/assets/homecoming/media/portrait-1-640.cd052f908e9d.avif",
+          "bytes": 22118
         }
       },
       "1080": {
         "webp": {
-          "src": "/assets/homecoming/media/portrait-1-1080.55b3a1440e8d.webp",
-          "bytes": 34704
+          "src": "/assets/homecoming/media/portrait-1-1080.0a115de5267e.webp",
+          "bytes": 43178
         },
         "avif": {
-          "src": "/assets/homecoming/media/portrait-1-1080.6804e8a9ebfb.avif",
-          "bytes": 26072
+          "src": "/assets/homecoming/media/portrait-1-1080.72d496d064ba.avif",
+          "bytes": 31203
         }
       }
     },

@@ -97,34 +97,35 @@
   },
   "homecoming": {
     "feature": {
-      "src": "/assets/homecoming/media/portrait-1-640.2ed3fd11d1f6.webp",
-      "original": "/assets/homecoming/photos/homecoming-couple-feature.jpeg",
+      "src": "/assets/homecoming/media/portrait-1-640.26f18736c81b.webp",
+      "bytes": 31574,
+      "original": "/assets/homecoming/photos/homecoming-gallery-couple.jpeg",
       "width": 640,
       "height": 877,
-      "bytes": 25480,
-      "blurDataURL": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAADwAQCdASoIAAsABIByJZQAAupzekZQwAAA/tx6hPGW3Hi1LZW5Z/1opFyAAA==",
+      "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACwAQCdASoIAAsABIByJZwAAt0JIakAAP655Af/TZVgzSfnBByomiTq2S+AlAAA",
       "alt": "Janith and Pradeepa",
-      "avif": "/assets/homecoming/media/portrait-1-640.6e7168349e50.avif",
+      "avif": "/assets/homecoming/media/portrait-1-640.cd052f908e9d.avif",
       "large": {
         "webp": {
-          "src": "/assets/homecoming/media/portrait-1-1080.55b3a1440e8d.webp",
-          "bytes": 34704
+          "src": "/assets/homecoming/media/portrait-1-1080.0a115de5267e.webp",
+          "bytes": 43178
         },
         "avif": {
-          "src": "/assets/homecoming/media/portrait-1-1080.6804e8a9ebfb.avif",
-          "bytes": 26072
+          "src": "/assets/homecoming/media/portrait-1-1080.72d496d064ba.avif",
+          "bytes": 31203
         }
       },
       "objectPosition": "50% 30%"
     },
     "artwork": {
-      "src": "/assets/homecoming/optimized/couple-artwork.webp",
-      "original": "/assets/homecoming/photos/homecoming-couple-feature.png",
+      "src": "/assets/homecoming/media/homecoming-hero-couple.3a5d517a5c6e.webp",
+      "bytes": 70754,
+      "original": "/assets/homecoming/photos/homecoming-hero-couple.jpg",
       "width": 656,
       "height": 900,
-      "bytes": 42484,
-      "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAACwAQCdASoGAAgAA8BgJZgCdAD0lZdQAP7l2zA5Td7zuDBFUF/S/CcKgxfbvpY2Qb+7+gAA",
-      "alt": "Janith and Pradeepa"
+      "blurDataURL": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADQAQCdASoIAAsABIByJbACdADbU7IMAAD+BKK2TKVZ31XParrlS7UYc9ZNuBMm0CHubtPhzL1M9CYunVx052GESTb0u2fGlFgAAA==",
+      "alt": "Janith and Pradeepa",
+      "kind": "photo"
     },
     "backgrounds": {
       "hero": {
@@ -148,22 +149,22 @@
     },
     "gallery": [
       {
-        "src": "/assets/homecoming/media/portrait-1-640.2ed3fd11d1f6.webp",
-        "original": "/assets/homecoming/photos/homecoming-couple-feature.jpeg",
+        "src": "/assets/homecoming/media/portrait-1-640.26f18736c81b.webp",
+        "bytes": 31574,
+        "original": "/assets/homecoming/photos/homecoming-gallery-couple.jpeg",
         "width": 640,
         "height": 877,
-        "bytes": 25480,
-        "blurDataURL": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAADwAQCdASoIAAsABIByJZQAAupzekZQwAAA/tx6hPGW3Hi1LZW5Z/1opFyAAA==",
+        "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACwAQCdASoIAAsABIByJZwAAt0JIakAAP655Af/TZVgzSfnBByomiTq2S+AlAAA",
         "alt": "Janith and Pradeepa",
-        "avif": "/assets/homecoming/media/portrait-1-640.6e7168349e50.avif",
+        "avif": "/assets/homecoming/media/portrait-1-640.cd052f908e9d.avif",
         "large": {
           "webp": {
-            "src": "/assets/homecoming/media/portrait-1-1080.55b3a1440e8d.webp",
-            "bytes": 34704
+            "src": "/assets/homecoming/media/portrait-1-1080.0a115de5267e.webp",
+            "bytes": 43178
           },
           "avif": {
-            "src": "/assets/homecoming/media/portrait-1-1080.6804e8a9ebfb.avif",
-            "bytes": 26072
+            "src": "/assets/homecoming/media/portrait-1-1080.72d496d064ba.avif",
+            "bytes": 31203
           }
         },
         "objectPosition": "50% 30%"

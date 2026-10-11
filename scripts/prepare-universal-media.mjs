@@ -11,7 +11,7 @@ const selected = {
   "wedding-floral-frame-loop.mp4": ["wedding", "cover"],
   "wedding-opening-couple.mp4": ["wedding", "opening"],
   "homecoming-hero-loop.mp4": ["homecoming", "cover"],
-  "homecoming-opening-couple.mp4": ["homecoming", "opening"],
+  "homecoming-opening-couple-replacement.mp4": ["homecoming", "opening"],
 };
 const background = { wedding: {}, homecoming: {} }, opening = {}, inventory = [];
 const probe = file => JSON.parse(execFileSync(ffprobe, ["-v", "error", "-show_format", "-show_streams", "-of", "json", file]));
