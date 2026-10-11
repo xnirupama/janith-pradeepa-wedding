@@ -1,0 +1,18 @@
+{
+  "wedding": {
+    "src": "/assets/wedding/backgrounds/paper-grain.7b87542882d5.webp",
+    "bytes": 6186,
+    "width": 128,
+    "height": 128,
+    "format": "webp",
+    "use": "Static repeating background texture; never animated"
+  },
+  "homecoming": {
+    "src": "/assets/homecoming/backgrounds/velvet-grain.9dcdfbecdb51.webp",
+    "bytes": 6102,
+    "width": 128,
+    "height": 128,
+    "format": "webp",
+    "use": "Static repeating background texture; never animated"
+  }
+}

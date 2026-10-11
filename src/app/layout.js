@@ -1,5 +1,6 @@
 import { Cormorant_Garamond, Great_Vibes, Manrope, Noto_Serif_Sinhala } from "next/font/google";
 import "./globals.css";
+import "./backgrounds.css";
 import { invitationMetadata } from "@/lib/invitation-metadata";
 
 const display = Cormorant_Garamond({

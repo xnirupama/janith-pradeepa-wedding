@@ -1,0 +1,61 @@
+/* Shared paper/velvet atmosphere. Decoration never enters the content plane. */
+.event-page { isolation: isolate; background-image: none; }
+.page-background { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: clip; user-select: none; }
+.page-background-base, .page-background-grain, .page-background-vignette { position: absolute; inset: 0; }
+.page-background-base { background: linear-gradient(180deg, var(--background-start) 0%, var(--background-middle) 45%, var(--background-end) 100%); }
+.page-background-grain { background-image: var(--background-grain); background-size: 128px 128px; opacity: var(--background-grain-opacity); mix-blend-mode: var(--background-grain-blend); }
+.page-background-vignette { background: linear-gradient(90deg, rgba(var(--background-vignette-rgb), var(--background-vignette-opacity)), transparent 18%, transparent 82%, rgba(var(--background-vignette-rgb), var(--background-vignette-opacity))); }
+.invitation-content { position: relative; z-index: 1; }
+.background-air { position: fixed; inset-block: 0; left: 50%; width: min(100%, var(--content-width)); height: 100dvh; transform: translateX(-50%); pointer-events: none; overflow: clip; }
+.page-background[data-background-active="false"] .background-air { display: none; }
+.background-bokeh { position: absolute; width: 24rem; height: 24rem; border-radius: 50%; background: radial-gradient(circle, rgba(var(--background-glow-rgb), .5), rgba(var(--background-glow-rgb), .16) 32%, transparent 68%); opacity: var(--background-bokeh-opacity); animation: background-breathe var(--background-bokeh-duration) ease-in-out infinite alternate; animation-play-state: paused; }
+.background-bokeh-0 { left: -19rem; top: 8%; }
+.background-bokeh-1 { right: -18rem; top: 40%; animation-delay: -33s; animation-direction: alternate-reverse; background: radial-gradient(circle, rgba(var(--background-rose-rgb), .5), rgba(var(--background-glow-rgb), .12) 30%, transparent 68%); }
+.background-bokeh-2 { left: -16rem; bottom: -6rem; animation-delay: -61s; width: 28rem; height: 28rem; }
+.background-dust { position: absolute; inset: 0; mask-image: linear-gradient(90deg, #000, #000 7%, transparent 20%, transparent 80%, #000 93%, #000); -webkit-mask-image: linear-gradient(90deg, #000, #000 7%, transparent 20%, transparent 80%, #000 93%, #000); }
+.gold-speck { position: absolute; bottom: -4px; left: var(--dust-left); width: var(--dust-size); height: var(--dust-size); border-radius: 50%; background: var(--accent-light); box-shadow: var(--background-dust-glow); opacity: 0; animation: background-dust-rise var(--dust-duration) linear var(--dust-delay) infinite; animation-play-state: paused; }
+.gold-speck:nth-child(n+17) { display: none; }
+.page-background[data-background-motion="running"] .background-bokeh, .page-background[data-background-motion="running"] .gold-speck { animation-play-state: running; }
+@keyframes background-breathe { from { transform: translate3d(0,0,0) scale(.94); } to { transform: translate3d(14px,-20px,0) scale(1.04); } }
+@keyframes background-dust-rise { 0% { transform: translate3d(0,0,0); opacity: 0; } 18% { opacity: var(--dust-opacity); } 48% { opacity: calc(var(--dust-opacity) * .45); } 70% { opacity: var(--dust-opacity); } 100% { transform: translate3d(var(--dust-drift),-104dvh,0); opacity: 0; } }
+
+.section-shell, .closing-section { isolation: isolate; }
+.section-atmosphere { display: contents; pointer-events: none; user-select: none; }
+.section-tone, .section-halo, .section-watermarks, .hero-light-sweep { position: absolute; inset: 0; pointer-events: none; overflow: clip; }
+.section-tone { z-index: 0; mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent); background: linear-gradient(180deg, transparent, rgba(var(--background-neutral-rgb), .65) 45%, transparent); }
+.section-halo { z-index: 2; background: none; }
+.section-watermarks { z-index: 3; color: var(--accent); }
+.background-corner { position: absolute; left: -1.25rem; top: 1rem; width: 9rem; height: 9rem; opacity: var(--background-watermark-opacity); }
+.background-corner--reverse { left: auto; right: -1.25rem; top: auto; bottom: 1rem; transform: rotate(180deg); }
+.section-watermarks .background-lotus { position: absolute; width: 20rem; height: auto; right: -11rem; top: 40%; margin: 0; opacity: .05; transform: rotate(-22deg); }
+.background-vine { position: absolute; left: 0; top: 13%; width: 4rem; height: 70%; opacity: .065; }
+.background-vine-mirror { position: absolute; inset: 0; transform: scaleX(-1); }
+.section-atmosphere[data-background-tone="hero"] .section-halo { background: radial-gradient(ellipse at 50% 30%, rgba(var(--background-glow-rgb), .085), transparent 60%); }
+.section-atmosphere[data-background-tone="countdown"] .section-halo { background: radial-gradient(ellipse at 50% 62%, rgba(var(--background-glow-rgb), .1), transparent 70%); }
+.closing-section { background: none; }
+.section-atmosphere[data-background-tone="closing"] .section-tone { background: var(--closing-gradient); mask-image: linear-gradient(to bottom, transparent, #000 3.5rem); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 3.5rem); }
+.section-atmosphere[data-background-tone="closing"] .section-halo { background: radial-gradient(ellipse at -12% 30%, rgba(var(--background-glow-rgb), .14), transparent 60%), radial-gradient(ellipse at 118% 80%, rgba(var(--background-glow-rgb), .17), transparent 65%); }
+.section-atmosphere[data-background-tone="location"] .background-corner { opacity: .035; }
+.hero-light-sweep { z-index: 2; opacity: 0; background: linear-gradient(120deg, transparent 25%, rgba(var(--background-glow-rgb), .28) 40%, #fff4df55 50%, transparent 67%); transform: translate3d(-110%,0,0); animation: hero-atmosphere-sweep var(--background-sweep-duration) ease-in-out infinite; animation-play-state: paused; }
+.section-atmosphere[data-background-running="true"] .hero-light-sweep { animation-play-state: running; }
+@keyframes hero-atmosphere-sweep { 0%,70% { transform: translate3d(-110%,0,0); opacity: 0; } 76% { opacity: var(--background-sweep-opacity); } 92% { transform: translate3d(110%,0,0); opacity: var(--background-sweep-opacity); } 100% { transform: translate3d(110%,0,0); opacity: 0; } }
+.invitation-content .mandala-layers { z-index: 1; }
+.invitation-content .ambient-backdrop { z-index: 4; }
+.hero-content, .closing-content { z-index: 5; }
+.invitation-content .section-shell > :not(.section-atmosphere):not(.mandala-layers):not(.video-backdrop) { position: relative; z-index: 5; }
+.invitation-gate::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0; background: radial-gradient(ellipse, transparent 55%, rgba(var(--background-vignette-rgb), var(--background-vignette-opacity))); }
+.gate-footnote { z-index: 1; }
+
+.theme-wedding .invitation-content { --muted: #604e39; }
+.theme-wedding .hero-content .section-kicker, .theme-wedding .hero-eyebrow, .theme-wedding .hero-date-block { color: #61471b; }
+.gallery-number { padding: .15rem .4rem; border: 1px solid #e2c58c88; border-radius: var(--radius-pill); background: #302114; color: #fff4df; line-height: 1.5; text-shadow: none; }
+.theme-homecoming .closing-section { --closing-gradient: linear-gradient(145deg, #26050e, #3d101e 48%, #451523); color: var(--ink); --accent: #e2c58c; --muted: #e6cdbd; --line: #d9b7735e; --surface: #501425; }
+.theme-homecoming .closing-actions button { color: var(--ink); }
+.theme-homecoming .closing-contact-actions { padding: 1.1rem .75rem; border: 1px solid var(--line); border-radius: var(--radius-card); background: #320b18b3; }
+.theme-homecoming .closing-contact-actions .contact-pill { background: #501425; }
+
+.background-music-glow { position: absolute; inset: 25% -65% 10%; opacity: 0; background: radial-gradient(ellipse, rgba(var(--background-glow-rgb), .13), transparent 60%); animation: background-music-breathe 7s ease-in-out infinite; animation-play-state: paused; }
+.page-background[data-background-motion="running"][data-music-playing="true"] .background-music-glow { animation-play-state: running; }
+@keyframes background-music-breathe { 0%,100% { opacity: .2; } 50% { opacity: .6; } }
+@media (min-width: 720px) { .gold-speck:nth-child(n+17) { display: block; } }
+@media (prefers-reduced-motion: reduce) { .background-air, .hero-light-sweep { display: none; } }
