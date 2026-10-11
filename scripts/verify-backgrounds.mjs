@@ -50,7 +50,7 @@ for (const engine of (process.env.QA_ENGINES || "chromium,webkit").split(",")) {
           assert.equal(await page.locator(".background-air").evaluate(el => getComputedStyle(el).display), "none");
           assert.equal(await page.locator('.rotation-layer[data-motion-running="true"]').count(), 0);
         } else {
-          assert.equal(await page.locator(".gold-speck").evaluateAll(nodes => nodes.filter(node => getComputedStyle(node).display !== "none").length), 16);
+          assert.equal(await page.locator(".gold-speck").evaluateAll(nodes => nodes.filter(node => getComputedStyle(node).display !== "none").length), 15);
           await page.waitForFunction(() => document.querySelector(".hero-light-sweep").closest(".section-atmosphere").dataset.backgroundRunning === "true");
           await page.evaluate(() => { Object.defineProperty(document, "visibilityState", { configurable: true, value: "hidden" }); document.dispatchEvent(new Event("visibilitychange")); });
           await page.waitForFunction(() => document.querySelector(".page-background").dataset.backgroundMotion === "paused");

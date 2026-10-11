@@ -5,13 +5,13 @@ import textures from "@/data/background-textures.json";
 import { backgroundFeatures } from "@/data/themes";
 import { useInvitationMotion } from "./InvitationMotion";
 
-const DUST = Array.from({ length: 24 }, (_, index) => ({
+const DUST = Array.from({ length: 15 }, (_, index) => ({
   left: index % 2 ? 89 + (index * 7 % 10) : 1 + (index * 5 % 11),
   size: 1 + index % 3,
   duration: 18 + index * 7 % 23,
   delay: -(index * 11 % 37),
   drift: (index % 2 ? -1 : 1) * (4 + index % 9),
-  opacity: .18 + index % 4 * .04,
+  opacity: .3 + index % 4 * .05,
 }));
 
 export default function PageBackground({ theme, active }) {
