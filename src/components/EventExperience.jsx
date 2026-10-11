@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { localizeInvitation } from "@/data/translations";
 import { invitationThemes } from "@/data/themes";
+import venuePhotos from "@/data/venue-photos";
 import { InvitationLanguageProvider, LanguageToggle, useLanguage } from "./InvitationLanguage";
 import { Lotus, MandalaLayers, SectionHeading } from "./InvitationOrnaments";
 import VideoBackdrop from "./VideoBackdrop";
@@ -86,7 +87,7 @@ function Experience({ invitation: original, galleryImages, guestName, coupleArtw
         <PhotoFeature invitation={invitation} active />
         <Gallery images={galleryImages} invitation={invitation} contentActive />
         <section className="celebration-section section-shell"><MandalaLayers className="celebration-mandalas" /><VideoBackdrop clip={invitation.motionVideos.celebration} className="celebration-backdrop" /><SectionReveal className="celebration-content"><SectionHeading kicker={t("celebrationKicker")} title={t("celebrationTitle")} />{invitation.celebration.map(line => <p key={line}>{line}</p>)}</SectionReveal></section>
-        <LocationSection location={invitation.location} invitation={invitation} active />
+        <LocationSection location={invitation.location} images={venuePhotos[original.slug]} active />
         <ClosingSection invitation={invitation} active onReplayOpening={replayOpening} />
       </div>
       {contentActive && !replaying && <SectionNavigator invitation={invitation} />}

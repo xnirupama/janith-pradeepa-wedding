@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { ExternalLink, MapPin, Navigation } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 import { SectionHeading, SunburstRing } from "./InvitationOrnaments";
@@ -10,7 +11,7 @@ import { useLanguage } from "./InvitationLanguage";
 
 const VenueMap = dynamic(() => import("./VenueMap"), { ssr: false });
 
-export default function LocationSection({ location, active = true }) {
+export default function LocationSection({ location, images = [], active = true }) {
   const { t } = useLanguage();
   const mapRef = useRef(null);
   const [mapReady, setMapReady] = useState(false);
@@ -33,6 +34,11 @@ export default function LocationSection({ location, active = true }) {
 
   return (
     <section className="location-section section-shell" id="location" aria-labelledby="location-title">
+      {images.length > 0 && <div className="venue-photos">
+        {images.map(photo => <SectionReveal key={photo.image.src} as="figure" className="venue-photo">
+          <Image src={photo.image} alt={t(photo.altKey, { venue: location.name })} className="venue-photo-image" sizes="(max-width: 480px) 90vw, 430px" placeholder="blur" loading="lazy" />
+        </SectionReveal>)}
+      </div>}
       <SectionReveal>
         <SectionHeading kicker={t("locationKicker")} title={t("locationTitle")} id="location-title" />
       </SectionReveal>
