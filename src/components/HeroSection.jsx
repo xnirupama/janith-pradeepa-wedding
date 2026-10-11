@@ -12,8 +12,8 @@ export default function HeroSection({ invitation, guestName, coupleArtwork }) {
   const time = invitation.schedule?.[0].time ?? invitation.arrival.time;
   return (
     <section className="hero-section" id="top" aria-labelledby="hero-names">
-      <VideoBackdrop clip={invitation.motionVideos.hero} className="hero-backdrop" />
       <MandalaLayers className="hero-mandalas" />
+      <VideoBackdrop clip={invitation.motionVideos.hero} hero className="hero-backdrop" />
       <div className="hero-content">
         <p className="hero-eyebrow">{t("heroInvitation")}</p>
         {guestName && <p className="guest-line">{t("dearGuest", { guest: guestName })}</p>}

@@ -176,24 +176,27 @@ const stylesheet = await read("src/app/globals.css");
 
 test("background derivatives are small, silent, portrait, and backed by archived sources", async () => {
   const clips = JSON.parse(await read("src/data/background-videos.json"));
-  for (const sections of Object.values(clips)) {
-    assert.deepEqual(Object.keys(sections).sort(), ["closing", "cover", "hero"]);
+  for (const [event, sections] of Object.entries(clips)) {
+    assert.deepEqual(Object.keys(sections).sort(), event === "wedding" ? ["celebration", "cover", "hero"] : ["cover", "hero"]);
     for (const clip of Object.values(sections)) {
       assert.ok(clip.bytes <= 1_500_000);
       assert.equal(clip.hasAudio, false);
       assert.equal(clip.width, 540);
       assert.equal(clip.height, 960);
-      assert.equal(clip.duration, 10);
+      assert.ok(clip.duration >= 9 && clip.duration <= 10);
       assert.equal(clip.fps, 24);
       assert.equal(clip.fastStart, true);
       assert.equal((await fs.stat(path.join(root, "public", clip.src))).size, clip.bytes);
       assert.equal((await fs.stat(path.join(root, clip.sourcePath))).size, clip.originalBytes);
       assert.ok(!clip.sourcePath.startsWith("public/"));
-      assert.ok(clip.webm.bytes < clip.bytes);
-      assert.equal((await fs.stat(path.join(root, "public", clip.webm.src))).size, clip.webm.bytes);
+      if (clip.webm) {
+        assert.ok(clip.webm.bytes < clip.bytes);
+        assert.equal((await fs.stat(path.join(root, "public", clip.webm.src))).size, clip.webm.bytes);
+      }
+      if (clip.seamMeanAbsoluteDifference !== undefined) assert.ok(clip.seamMeanAbsoluteDifference <= 6);
     }
   }
-  assert.equal(clips.homecoming.cover.src, clips.homecoming.hero.src);
+  assert.notEqual(clips.homecoming.cover.src, clips.homecoming.hero.src);
 });
 test("theme text and gold surfaces meet WCAG AA contrast", () => {
   const luminance = (color) => {

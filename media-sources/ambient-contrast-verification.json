@@ -1,0 +1,86 @@
+[
+  {
+    "event": "wedding",
+    "section": "hero",
+    "ratios": [
+      {
+        "color": "#392719",
+        "ratio": 8.96
+      },
+      {
+        "color": "#684e1b",
+        "ratio": 4.92
+      },
+      {
+        "color": "#604e39",
+        "ratio": 5.01
+      }
+    ],
+    "minimumRatio": 4.92,
+    "backgroundBound": [
+      213,
+      205,
+      188
+    ],
+    "brightestMeanLumaFrame": 40,
+    "brightestMeanLumaSeconds": 1.6666666666666667,
+    "decodedFrames": 218,
+    "method": "All-frame worst-color bound with minimum scrim and 10% ornament/texture allowance; scan every decoded frame for peak mean luminance"
+  },
+  {
+    "event": "wedding",
+    "section": "celebration",
+    "ratios": [
+      {
+        "color": "#392719",
+        "ratio": 8.76
+      },
+      {
+        "color": "#684e1b",
+        "ratio": 4.81
+      },
+      {
+        "color": "#604e39",
+        "ratio": 4.9
+      }
+    ],
+    "minimumRatio": 4.81,
+    "backgroundBound": [
+      210,
+      203,
+      186
+    ],
+    "brightestMeanLumaFrame": 163,
+    "brightestMeanLumaSeconds": 6.791666666666667,
+    "decodedFrames": 218,
+    "method": "All-frame worst-color bound with minimum scrim and 10% ornament/texture allowance; scan every decoded frame for peak mean luminance"
+  },
+  {
+    "event": "homecoming",
+    "section": "hero",
+    "ratios": [
+      {
+        "color": "#fff4df",
+        "ratio": 10.81
+      },
+      {
+        "color": "#e2c58c",
+        "ratio": 7.07
+      },
+      {
+        "color": "#e6cdbd",
+        "ratio": 7.77
+      }
+    ],
+    "minimumRatio": 7.07,
+    "backgroundBound": [
+      87,
+      42,
+      51
+    ],
+    "brightestMeanLumaFrame": 128,
+    "brightestMeanLumaSeconds": 5.333333333333333,
+    "decodedFrames": 218,
+    "method": "All-frame worst-color bound with minimum scrim and 10% ornament/texture allowance; scan every decoded frame for peak mean luminance"
+  }
+]

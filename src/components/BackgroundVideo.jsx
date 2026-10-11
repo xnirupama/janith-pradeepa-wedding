@@ -12,7 +12,7 @@ export function clipSources(clip) {
   return [...(clip.webm ? [{ src: clip.webm.src, type: 'video/webm; codecs="vp9"' }] : []), { src: clip.src, type: "video/mp4" }];
 }
 
-export default function BackgroundVideo({ ref, sources, poster, priority = "ambient", active = true, onPlaybackState, onEnded, objectPosition = "50% 50%", className = "" }) {
+export default function BackgroundVideo({ ref, sources, poster, priority = "ambient", active = true, onPlaybackState, onEnded, objectPosition = "50% 50%", className = "", style }) {
   const containerRef = useRef(null), videoRef = useRef(null), retryUsed = useRef(false), lastError = useRef("");
   const [nearby, setNearby] = useState(false), [inView, setInView] = useState(false);
   const [status, setStatus] = useState("loading"), [progress, setProgress] = useState(0);
@@ -22,7 +22,7 @@ export default function BackgroundVideo({ ref, sources, poster, priority = "ambi
   const [posterPainted, setPosterPainted] = useState(false);
   const { backgroundVideo, pageVisible, suspended, lowEnd } = useInvitationMotion();
   const { t } = useLanguage();
-  const important = priority !== "ambient";
+  const important = priority === "cover" || priority === "opening";
   const opening = priority === "opening";
   const allowed = opening || (backgroundVideo && (!lowEnd || priority === "cover"));
   const eligible = opening ? active && pageVisible : allowed && pageVisible && nearby && inView && (priority !== "cover" || posterPainted) && !suspended;
@@ -167,12 +167,12 @@ export default function BackgroundVideo({ ref, sources, poster, priority = "ambi
     return () => clearInterval(timer);
   }, [status, failure, priority]);
 
-  return <div ref={containerRef} className={`video-backdrop ${className}`} data-video-state={status} style={{ "--video-position": objectPosition }}>
-    <Image className="video-poster" src={poster.src} alt="" fill unoptimized sizes="(max-width: 480px) 100vw, 480px" preload={priority === "cover"} loading={priority === "cover" ? undefined : "lazy"} placeholder={poster.blurDataURL ? "blur" : "empty"} blurDataURL={poster.blurDataURL} onLoad={() => {
+  return <div ref={containerRef} className={`video-backdrop ${className}`} data-video-state={status} style={{ "--video-position": objectPosition, ...style }}>
+    <Image className="video-poster" src={poster.src} alt="" fill unoptimized sizes="(max-width: 480px) 100vw, 480px" preload={priority === "cover" || priority === "hero"} loading={priority === "cover" || priority === "hero" ? undefined : "lazy"} placeholder={poster.blurDataURL ? "blur" : "empty"} blurDataURL={poster.blurDataURL} onLoad={() => {
       if (priority !== "cover") return;
       Promise.race([document.fonts.ready, new Promise(resolve => setTimeout(resolve, 1200))]).then(() => requestAnimationFrame(() => requestAnimationFrame(() => setPosterPainted(true))));
     }} />
-    <video ref={videoRef} data-background-video data-priority={priority} className={(status === "playing" && eligible ? "is-playing " : "") + (showPlaybackControls ? "has-playback-controls" : "")} poster={opening ? undefined : poster.src} crossOrigin="anonymous" muted loop={!opening} playsInline webkit-playsinline="true" autoPlay={!opening} preload={opening ? "none" : important ? "auto" : "metadata"} controls={showPlaybackControls} disablePictureInPicture disableRemotePlayback aria-hidden={opening ? undefined : "true"} aria-label={opening ? t("openingFilm") : undefined} tabIndex={showPlaybackControls ? 0 : -1} />
+    <video ref={videoRef} data-background-video data-priority={priority} className={(status === "playing" && eligible ? "is-playing " : "") + (showPlaybackControls ? "has-playback-controls" : "")} poster={opening ? undefined : poster.src} crossOrigin="anonymous" muted loop={!opening} playsInline webkit-playsinline="true" autoPlay={!opening} preload={opening ? "none" : important || priority === "hero" ? "auto" : "none"} controls={showPlaybackControls} disablePictureInPicture disableRemotePlayback aria-hidden={opening ? undefined : "true"} aria-label={opening ? t("openingFilm") : undefined} tabIndex={showPlaybackControls ? 0 : -1} />
     <span className="video-scrim" aria-hidden="true" />
     {priority === "cover" && !loaderExpired && status !== "playing" && status !== "fallback" && <LotusLoader progress={progress} label={t("preparingInvitation")} />}
     {!important && inView && pageVisible && !suspended && (status === "loading" || status === "ready") && <span className="poster-shimmer" aria-hidden="true" />}

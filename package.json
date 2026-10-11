@@ -18,7 +18,8 @@
     "prepare:brand": "node scripts/prepare-brand-assets.mjs",
     "verify:resilience": "node scripts/verify-resilience.mjs",
     "dev:webpack": "next dev --webpack",
-    "verify:opening": "node scripts/verify-opening.mjs"
+    "verify:opening": "node scripts/verify-opening.mjs",
+    "verify:ambient": "node scripts/verify-ambient-placement.mjs"
   },
   "dependencies": {
     "lucide-react": "latest",

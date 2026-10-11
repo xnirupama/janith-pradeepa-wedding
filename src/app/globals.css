@@ -161,8 +161,8 @@ button:disabled { cursor: default; opacity: .65; }
 .gallery-image { object-fit: cover; }
 .gallery-open-hint { position: absolute; bottom: .65rem; right: .65rem; width: 32px; height: 32px; display: grid; place-items: center; background: #fff4dfeb; color: #392719; border-radius: 50%; }
 .gallery-number { position: absolute; bottom: .7rem; left: .85rem; color: #fff; font: .8rem var(--font-display); text-shadow: 0 1px 4px #000; }
-.celebration-section { text-align: center; border-block: 1px solid var(--line); margin: 1.5rem var(--page-gutter); padding-inline: 1rem; background: radial-gradient(ellipse at center, #d7b76a0c, transparent 65%); }
-.celebration-section > div { max-width: 35rem; }
+.celebration-section { position: relative; isolation: isolate; overflow: hidden; text-align: center; margin: 1.5rem 0; background: radial-gradient(ellipse at center, #d7b76a0c, transparent 65%); }
+.celebration-content { position: relative; z-index: 2; max-width: 35rem; }
 .celebration-section p { color: var(--muted); font-size: .95rem; }
 .location-card { max-width: 36rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); box-shadow: 0 15px 40px rgba(var(--shadow-color),.055); padding: 2rem 1.25rem; text-align: center; }
 .location-description { font-size: .9rem; color: var(--muted); }
@@ -314,6 +314,19 @@ button:disabled { cursor: default; opacity: .65; }
 .video-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(var(--video-scrim-rgb), .98), rgba(var(--video-scrim-rgb), var(--video-scrim-min)) 48%, rgba(var(--video-scrim-rgb), .98)); }
 .footer-backdrop .video-scrim { background: linear-gradient(115deg, rgba(209,171,99,.96), rgba(240,219,172,.96) 47%, rgba(208,169,97,.96)); }
 .gate-footnote { position: relative; }
+
+/* Ambient imagery shares the same strength and grading in motion or poster mode. */
+.hero-section { isolation: isolate; }
+.hero-content { position: relative; z-index: 2; }
+.ambient-backdrop { z-index: 1; mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 85%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 85%, transparent); }
+.ambient-backdrop .video-poster, .ambient-backdrop video { filter: saturate(.85); mix-blend-mode: var(--ambient-blend, normal); }
+.ambient-backdrop .video-poster { opacity: var(--ambient-opacity, .2); transition: opacity var(--motion-video-fade) ease; }
+.ambient-backdrop video.is-playing { opacity: var(--ambient-opacity, .2); }
+.ambient-backdrop[data-video-state="playing"] .video-poster { opacity: 0; }
+.ambient-backdrop .video-scrim { background: linear-gradient(to bottom, rgba(var(--video-scrim-rgb), .7), rgba(var(--video-scrim-rgb), .5) 35%, rgba(var(--video-scrim-rgb), .5) 65%, rgba(var(--video-scrim-rgb), .7)); }
+.theme-wedding .hero-section, .theme-wedding .celebration-section { --accent: #684e1b; --muted: #604e39; }
+.celebration-mandalas .mandala-primary { left: -25rem; top: -12rem; opacity: .05; }
+.celebration-mandalas .mandala-secondary { right: -22rem; bottom: -10rem; opacity: .04; }
 
 /* Only dedicated ornament layers rotate. Text, icons and anchors remain still. */
 .rotation-frame { position: absolute; display: block; pointer-events: none; }
