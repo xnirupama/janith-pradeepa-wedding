@@ -1,0 +1,603 @@
+{
+  "date": "2026-10-11",
+  "scope": "Shared backgrounds on /wedding and /homecoming",
+  "textureBytes": 12288,
+  "textures": {
+    "wedding": {
+      "src": "/assets/wedding/backgrounds/paper-grain.7b87542882d5.webp",
+      "bytes": 6186,
+      "width": 128,
+      "height": 128,
+      "format": "webp",
+      "use": "Static repeating background texture; never animated"
+    },
+    "homecoming": {
+      "src": "/assets/homecoming/backgrounds/velvet-grain.9dcdfbecdb51.webp",
+      "bytes": 6102,
+      "width": 128,
+      "height": 128,
+      "format": "webp",
+      "use": "Static repeating background texture; never animated"
+    }
+  },
+  "motionPolicyCases": 20,
+  "closingCases": 8,
+  "mobileCases": 24,
+  "openingCases": 12,
+  "actions": [
+    {
+      "event": "wedding",
+      "music": true,
+      "calendarDownload": true,
+      "calendarFocus": true
+    },
+    {
+      "event": "homecoming",
+      "music": true,
+      "calendarDownload": true,
+      "calendarFocus": true
+    }
+  ],
+  "contrastMethod": "390px rendered text boxes, glyphs hidden; black/white video bounds using original scrims/blend/opacity; solid ornament fills at actual opacity bound all rotations; peak radial glow fill bounds drift; dark/light sweep phases. Fixed controls checked by existing theme/gold-surface assertions. Embedded map uses an external fixture and is excluded from invitation-text sampling.",
+  "contrast": [
+    {
+      "event": "wedding",
+      "section": "invitation-gate",
+      "minimum": 4.6,
+      "failures": []
+    },
+    {
+      "event": "wedding",
+      "section": "hero-section",
+      "minimum": 4.98,
+      "failures": []
+    },
+    {
+      "event": "wedding",
+      "section": "invitation-message",
+      "minimum": 5.93,
+      "failures": []
+    },
+    {
+      "event": "wedding",
+      "section": "schedule-section",
+      "minimum": 5.32,
+      "failures": []
+    },
+    {
+      "event": "wedding",
+      "section": "countdown-section",
+      "minimum": 5.94,
+      "failures": []
+    },
+    {
+      "event": "wedding",
+      "section": "photo-feature",
+      "minimum": 5.9,
+      "failures": []
+    },
+    {
+      "event": "wedding",
+      "section": "gallery-section",
+      "minimum": 5.88,
+      "failures": []
+    },
+    {
+      "event": "wedding",
+      "section": "celebration-section",
+      "minimum": 4.91,
+      "failures": []
+    },
+    {
+      "event": "wedding",
+      "section": "location-section",
+      "minimum": 5.95,
+      "failures": []
+    },
+    {
+      "event": "wedding",
+      "section": "closing-section",
+      "minimum": 7.49,
+      "failures": []
+    },
+    {
+      "event": "homecoming",
+      "section": "invitation-gate",
+      "minimum": 7.93,
+      "failures": []
+    },
+    {
+      "event": "homecoming",
+      "section": "hero-section",
+      "minimum": 7.14,
+      "failures": []
+    },
+    {
+      "event": "homecoming",
+      "section": "invitation-message",
+      "minimum": 10.08,
+      "failures": []
+    },
+    {
+      "event": "homecoming",
+      "section": "schedule-section",
+      "minimum": 8.58,
+      "failures": []
+    },
+    {
+      "event": "homecoming",
+      "section": "countdown-section",
+      "minimum": 8.58,
+      "failures": []
+    },
+    {
+      "event": "homecoming",
+      "section": "photo-feature",
+      "minimum": 10.51,
+      "failures": []
+    },
+    {
+      "event": "homecoming",
+      "section": "gallery-section",
+      "minimum": 10.59,
+      "failures": []
+    },
+    {
+      "event": "homecoming",
+      "section": "celebration-section",
+      "minimum": 9.66,
+      "failures": []
+    },
+    {
+      "event": "homecoming",
+      "section": "location-section",
+      "minimum": 7.44,
+      "failures": []
+    },
+    {
+      "event": "homecoming",
+      "section": "closing-section",
+      "minimum": 7.28,
+      "failures": []
+    }
+  ],
+  "animatedCounts": [
+    {
+      "engine": "chromium",
+      "event": "wedding",
+      "effectCounts": [
+        {
+          "section": ".hero-section",
+          "running": 25,
+          "backgroundRunning": 20,
+          "sectionRunning": 3
+        },
+        {
+          "section": ".invitation-message",
+          "running": 21,
+          "backgroundRunning": 19,
+          "sectionRunning": 0
+        },
+        {
+          "section": ".schedule-section",
+          "running": 27,
+          "backgroundRunning": 19,
+          "sectionRunning": 5
+        },
+        {
+          "section": ".countdown-section",
+          "running": 21,
+          "backgroundRunning": 19,
+          "sectionRunning": 1
+        },
+        {
+          "section": ".photo-feature",
+          "running": 22,
+          "backgroundRunning": 19,
+          "sectionRunning": 0
+        },
+        {
+          "section": ".gallery-section",
+          "running": 22,
+          "backgroundRunning": 19,
+          "sectionRunning": 0
+        },
+        {
+          "section": ".celebration-section",
+          "running": 25,
+          "backgroundRunning": 19,
+          "sectionRunning": 2
+        },
+        {
+          "section": ".location-section",
+          "running": 21,
+          "backgroundRunning": 19,
+          "sectionRunning": 1
+        },
+        {
+          "section": ".closing-section",
+          "running": 23,
+          "backgroundRunning": 19,
+          "sectionRunning": 3
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "event": "homecoming",
+      "effectCounts": [
+        {
+          "section": ".hero-section",
+          "running": 25,
+          "backgroundRunning": 20,
+          "sectionRunning": 3
+        },
+        {
+          "section": ".invitation-message",
+          "running": 22,
+          "backgroundRunning": 19,
+          "sectionRunning": 0
+        },
+        {
+          "section": ".schedule-section",
+          "running": 23,
+          "backgroundRunning": 19,
+          "sectionRunning": 3
+        },
+        {
+          "section": ".countdown-section",
+          "running": 21,
+          "backgroundRunning": 19,
+          "sectionRunning": 1
+        },
+        {
+          "section": ".photo-feature",
+          "running": 22,
+          "backgroundRunning": 19,
+          "sectionRunning": 0
+        },
+        {
+          "section": ".gallery-section",
+          "running": 21,
+          "backgroundRunning": 19,
+          "sectionRunning": 0
+        },
+        {
+          "section": ".celebration-section",
+          "running": 23,
+          "backgroundRunning": 19,
+          "sectionRunning": 2
+        },
+        {
+          "section": ".location-section",
+          "running": 21,
+          "backgroundRunning": 19,
+          "sectionRunning": 1
+        },
+        {
+          "section": ".closing-section",
+          "running": 23,
+          "backgroundRunning": 19,
+          "sectionRunning": 3
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "event": "wedding",
+      "effectCounts": [
+        {
+          "section": ".hero-section",
+          "running": 25,
+          "backgroundRunning": 20,
+          "sectionRunning": 3
+        },
+        {
+          "section": ".invitation-message",
+          "running": 21,
+          "backgroundRunning": 19,
+          "sectionRunning": 0
+        },
+        {
+          "section": ".schedule-section",
+          "running": 27,
+          "backgroundRunning": 19,
+          "sectionRunning": 5
+        },
+        {
+          "section": ".countdown-section",
+          "running": 21,
+          "backgroundRunning": 19,
+          "sectionRunning": 1
+        },
+        {
+          "section": ".photo-feature",
+          "running": 22,
+          "backgroundRunning": 19,
+          "sectionRunning": 0
+        },
+        {
+          "section": ".gallery-section",
+          "running": 22,
+          "backgroundRunning": 19,
+          "sectionRunning": 0
+        },
+        {
+          "section": ".celebration-section",
+          "running": 25,
+          "backgroundRunning": 19,
+          "sectionRunning": 2
+        },
+        {
+          "section": ".location-section",
+          "running": 21,
+          "backgroundRunning": 19,
+          "sectionRunning": 1
+        },
+        {
+          "section": ".closing-section",
+          "running": 23,
+          "backgroundRunning": 19,
+          "sectionRunning": 3
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "event": "homecoming",
+      "effectCounts": [
+        {
+          "section": ".hero-section",
+          "running": 25,
+          "backgroundRunning": 20,
+          "sectionRunning": 3
+        },
+        {
+          "section": ".invitation-message",
+          "running": 23,
+          "backgroundRunning": 19,
+          "sectionRunning": 0
+        },
+        {
+          "section": ".schedule-section",
+          "running": 23,
+          "backgroundRunning": 19,
+          "sectionRunning": 3
+        },
+        {
+          "section": ".countdown-section",
+          "running": 21,
+          "backgroundRunning": 19,
+          "sectionRunning": 1
+        },
+        {
+          "section": ".photo-feature",
+          "running": 22,
+          "backgroundRunning": 19,
+          "sectionRunning": 0
+        },
+        {
+          "section": ".gallery-section",
+          "running": 21,
+          "backgroundRunning": 19,
+          "sectionRunning": 0
+        },
+        {
+          "section": ".celebration-section",
+          "running": 23,
+          "backgroundRunning": 19,
+          "sectionRunning": 2
+        },
+        {
+          "section": ".location-section",
+          "running": 21,
+          "backgroundRunning": 19,
+          "sectionRunning": 1
+        },
+        {
+          "section": ".closing-section",
+          "running": 23,
+          "backgroundRunning": 19,
+          "sectionRunning": 3
+        }
+      ]
+    }
+  ],
+  "frames": [
+    {
+      "event": "wedding",
+      "section": "hero-section",
+      "cpuThrottle": 4,
+      "samples": 360,
+      "medianMs": 16.699999999999818,
+      "p95Ms": 16.700000000000728,
+      "over34ms": 0,
+      "runningAnimations": 23
+    },
+    {
+      "event": "wedding",
+      "section": "schedule-section",
+      "cpuThrottle": 4,
+      "samples": 349,
+      "medianMs": 16.69999999999891,
+      "p95Ms": 16.80000000000109,
+      "over34ms": 0,
+      "runningAnimations": 24
+    },
+    {
+      "event": "wedding",
+      "section": "countdown-section",
+      "cpuThrottle": 4,
+      "samples": 352,
+      "medianMs": 16.700000000000728,
+      "p95Ms": 16.799999999999272,
+      "over34ms": 0,
+      "runningAnimations": 22
+    },
+    {
+      "event": "wedding",
+      "section": "closing-section",
+      "cpuThrottle": 4,
+      "samples": 353,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 16.799999999999272,
+      "over34ms": 0,
+      "runningAnimations": 23
+    },
+    {
+      "event": "homecoming",
+      "section": "hero-section",
+      "cpuThrottle": 4,
+      "samples": 348,
+      "medianMs": 16.699999999999818,
+      "p95Ms": 16.800000000000182,
+      "over34ms": 1,
+      "runningAnimations": 23
+    },
+    {
+      "event": "homecoming",
+      "section": "schedule-section",
+      "cpuThrottle": 4,
+      "samples": 355,
+      "medianMs": 16.69999999999891,
+      "p95Ms": 16.799999999999272,
+      "over34ms": 0,
+      "runningAnimations": 23
+    },
+    {
+      "event": "homecoming",
+      "section": "countdown-section",
+      "cpuThrottle": 4,
+      "samples": 354,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 16.799999999999272,
+      "over34ms": 0,
+      "runningAnimations": 22
+    },
+    {
+      "event": "homecoming",
+      "section": "closing-section",
+      "cpuThrottle": 4,
+      "samples": 351,
+      "medianMs": 16.700000000000728,
+      "p95Ms": 16.799999999999272,
+      "over34ms": 0,
+      "runningAnimations": 22
+    }
+  ],
+  "performance": [
+    {
+      "event": "wedding",
+      "language": "en",
+      "reducedMotion": false,
+      "shifts": [
+        {
+          "value": 0.000096706020034337,
+          "time": 2796.1999999284744,
+          "sources": [
+            {
+              "node": "blessing",
+              "previous": {
+                "x": 112.703125,
+                "y": 204.890625,
+                "width": 164,
+                "height": 19
+              },
+              "current": {
+                "x": 117.453125,
+                "y": 204.890625,
+                "width": 155.078125,
+                "height": 19
+              }
+            },
+            {
+              "node": "section-kicker",
+              "previous": {
+                "x": 131.203125,
+                "y": 348.46875,
+                "width": 127,
+                "height": 19.28125
+              },
+              "current": {
+                "x": 135.953125,
+                "y": 348.46875,
+                "width": 118,
+                "height": 19.28125
+              }
+            }
+          ]
+        }
+      ],
+      "lcpMs": 2636,
+      "lcpElement": "",
+      "lcpURL": "",
+      "cls": 0.0001,
+      "encodedJSBytes": 616462,
+      "videoRequestsBeforeTap": 2,
+      "encodedVideoBytesBeforeTap": 957478,
+      "requestedVideoByteUpperBoundBeforeTap": 957478,
+      "videoBudgetMet": true,
+      "ambientContentRequestsBeforeTap": 0,
+      "audioRequestsBeforeTap": 0,
+      "profile": "Cold cache, 150ms latency, 1.6Mbps download, 4x CPU throttle; seven-second observation after fonts",
+      "lcpTargetMet": false
+    },
+    {
+      "event": "homecoming",
+      "language": "en",
+      "reducedMotion": false,
+      "shifts": [
+        {
+          "value": 0.00016031130368325173,
+          "time": 2850.399999976158,
+          "sources": [
+            {
+              "node": "section-kicker",
+              "previous": {
+                "x": 92.109375,
+                "y": 348.46875,
+                "width": 205,
+                "height": 19.28125
+              },
+              "current": {
+                "x": 99.28125,
+                "y": 348.46875,
+                "width": 191.421875,
+                "height": 19.28125
+              }
+            },
+            {
+              "node": "blessing",
+              "previous": {
+                "x": 112.703125,
+                "y": 204.890625,
+                "width": 164,
+                "height": 19
+              },
+              "current": {
+                "x": 117.453125,
+                "y": 204.890625,
+                "width": 155.078125,
+                "height": 19
+              }
+            }
+          ]
+        }
+      ],
+      "lcpMs": 2652,
+      "lcpElement": "",
+      "lcpURL": "",
+      "cls": 0.0002,
+      "encodedJSBytes": 616462,
+      "videoRequestsBeforeTap": 2,
+      "encodedVideoBytesBeforeTap": 0,
+      "requestedVideoByteUpperBoundBeforeTap": 1781746,
+      "videoBudgetMet": true,
+      "ambientContentRequestsBeforeTap": 0,
+      "audioRequestsBeforeTap": 0,
+      "profile": "Cold cache, 150ms latency, 1.6Mbps download, 4x CPU throttle; seven-second observation after fonts",
+      "lcpTargetMet": false
+    }
+  ],
+  "limits": "Headless Chromium/WebKit mobile emulation. Frame cadence uses 4x CPU throttling, eight six-second samples. Physical Android/iOS hardware and embedded social browsers are not tested. Local resource bytes precede deployment CDN compression; a single cold-load sample per route is not a field percentile."
+}
