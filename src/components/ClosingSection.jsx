@@ -5,6 +5,7 @@ import SectionReveal from "./SectionReveal";
 import ShareInvitation from "./ShareInvitation";
 import { ContactPill, MandalaLayers, RingedLotus } from "./InvitationOrnaments";
 import { useLanguage } from "./InvitationLanguage";
+import SectionAtmosphere from "./SectionAtmosphere";
 
 export default function ClosingSection({ invitation, onReplayOpening }) {
   const { t } = useLanguage();
@@ -17,6 +18,7 @@ export default function ClosingSection({ invitation, onReplayOpening }) {
 
   return (
     <footer className="closing-section" id="contact" aria-labelledby="closing-title">
+      <SectionAtmosphere tone="closing" />
       <MandalaLayers className="closing-mandalas" />
       <SectionReveal className="closing-content">
         <p className="closing-save-date section-kicker">{t("saveDate")}</p>

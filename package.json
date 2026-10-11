@@ -19,7 +19,9 @@
     "verify:resilience": "node scripts/verify-resilience.mjs",
     "dev:webpack": "next dev --webpack",
     "verify:opening": "node scripts/verify-opening.mjs",
-    "verify:ambient": "node scripts/verify-ambient-placement.mjs"
+    "verify:ambient": "node scripts/verify-ambient-placement.mjs",
+    "prepare:backgrounds": "node scripts/prepare-background-textures.mjs",
+    "verify:backgrounds": "node scripts/verify-backgrounds.mjs"
   },
   "dependencies": {
     "lucide-react": "latest",

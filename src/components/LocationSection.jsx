@@ -8,6 +8,7 @@ import SectionReveal from "./SectionReveal";
 import { SectionHeading, SunburstRing } from "./InvitationOrnaments";
 import { RotatingDecoration } from "./InvitationMotion";
 import { useLanguage } from "./InvitationLanguage";
+import SectionAtmosphere from "./SectionAtmosphere";
 
 const VenueMap = dynamic(() => import("./VenueMap"), { ssr: false });
 
@@ -34,6 +35,7 @@ export default function LocationSection({ location, images = [], active = true }
 
   return (
     <section className="location-section section-shell" id="location" aria-labelledby="location-title">
+      <SectionAtmosphere tone="location" />
       <SectionReveal>
         <SectionHeading kicker={t("locationKicker")} title={t("locationTitle")} id="location-title" />
       </SectionReveal>

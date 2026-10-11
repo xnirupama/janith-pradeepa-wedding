@@ -7,6 +7,7 @@ import { Expand } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 import { SectionHeading } from "./InvitationOrnaments";
 import { useLanguage } from "./InvitationLanguage";
+import SectionAtmosphere from "./SectionAtmosphere";
 
 const GalleryLightbox = dynamic(() => import("./GalleryLightbox"), { ssr: false });
 
@@ -19,6 +20,7 @@ export default function Gallery({ images = [] }) {
 
   return (
     <section className="gallery-section section-shell" id="gallery" aria-labelledby="gallery-title">
+      <SectionAtmosphere tone="gallery" />
       <SectionReveal>
         <SectionHeading id="gallery-title" kicker={t("galleryKicker")} title={t("galleryTitle")} />
       </SectionReveal>

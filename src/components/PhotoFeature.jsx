@@ -3,12 +3,14 @@
 import SectionReveal from "./SectionReveal";
 import { Lotus, SectionHeading } from "./InvitationOrnaments";
 import { useLanguage } from "./InvitationLanguage";
+import SectionAtmosphere from "./SectionAtmosphere";
 
 export default function PhotoFeature({ invitation }) {
   const { t } = useLanguage();
 
   return (
     <section className="photo-feature section-shell" id="our-story" aria-labelledby="story-title">
+      <SectionAtmosphere tone="portrait" />
       <SectionReveal className="story-card">
         <SectionHeading id="story-title" kicker={t("storyKicker")} title={t("storyTitle")} />
         <div className="featured-couple-sentiment">

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import SectionReveal from "./SectionReveal";
 import { Lotus, SectionHeading } from "./InvitationOrnaments";
 import { useLanguage } from "./InvitationLanguage";
+import SectionAtmosphere from "./SectionAtmosphere";
 
 function calculate(target) {
   const distance = Math.max(0, new Date(target).getTime() - Date.now());
@@ -38,6 +39,7 @@ export default function Countdown({ invitation, active = true }) {
 
   return (
     <section className="countdown-section section-shell" aria-labelledby="countdown-title">
+      <SectionAtmosphere tone="countdown" />
       <SectionReveal>
         <SectionHeading kicker={t("countdownKicker")} title={invitation.countdownHeading} id="countdown-title" ringed />
         <p className="section-intro">{invitation.countdownText}</p>

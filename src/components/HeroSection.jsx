@@ -5,6 +5,7 @@ import { ChevronDown } from "lucide-react";
 import { useLanguage } from "./InvitationLanguage";
 import { Lotus, MandalaLayers } from "./InvitationOrnaments";
 import VideoBackdrop from "./VideoBackdrop";
+import SectionAtmosphere from "./SectionAtmosphere";
 
 export default function HeroSection({ invitation, guestName, coupleArtwork }) {
   const { t } = useLanguage();
@@ -12,6 +13,7 @@ export default function HeroSection({ invitation, guestName, coupleArtwork }) {
   const time = invitation.schedule?.[0].time ?? invitation.arrival.time;
   return (
     <section className="hero-section" id="top" aria-labelledby="hero-names">
+      <SectionAtmosphere tone="hero" />
       <MandalaLayers className="hero-mandalas" />
       <VideoBackdrop clip={invitation.motionVideos.hero} hero className="hero-backdrop" />
       <div className="hero-content">
