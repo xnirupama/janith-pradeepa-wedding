@@ -1,0 +1,498 @@
+[
+  {
+    "name": "wedding-closing-loop",
+    "original": {
+      "codec": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 4159458,
+      "pixelFormat": "yuv420p",
+      "audio": true
+    },
+    "optimized": {
+      "codec": "h264",
+      "profile": "Main",
+      "width": 540,
+      "height": 960,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 627534,
+      "pixelFormat": "yuv420p",
+      "audio": false
+    },
+    "frames": [
+      "artifacts\\qa\\ambient-review\\wedding-closing-loop-0.png",
+      "artifacts\\qa\\ambient-review\\wedding-closing-loop-5.png",
+      "artifacts\\qa\\ambient-review\\wedding-closing-loop-9.95.png"
+    ],
+    "seamMeanAbsoluteDifference": 40.64
+  },
+  {
+    "name": "wedding-floral-frame-loop",
+    "original": {
+      "codec": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 4680198,
+      "pixelFormat": "yuv420p",
+      "audio": true
+    },
+    "optimized": {
+      "codec": "h264",
+      "profile": "Main",
+      "width": 540,
+      "height": 960,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 591676,
+      "pixelFormat": "yuv420p",
+      "audio": false
+    },
+    "frames": [
+      "artifacts\\qa\\ambient-review\\wedding-floral-frame-loop-0.png",
+      "artifacts\\qa\\ambient-review\\wedding-floral-frame-loop-5.png",
+      "artifacts\\qa\\ambient-review\\wedding-floral-frame-loop-9.95.png"
+    ],
+    "seamMeanAbsoluteDifference": 18.11
+  },
+  {
+    "name": "wedding-floral-loop",
+    "original": {
+      "codec": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 3342762,
+      "pixelFormat": "yuv420p",
+      "audio": true
+    },
+    "optimized": {
+      "codec": "h264",
+      "profile": "Main",
+      "width": 540,
+      "height": 960,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 456923,
+      "pixelFormat": "yuv420p",
+      "audio": false
+    },
+    "frames": [
+      "artifacts\\qa\\ambient-review\\wedding-floral-loop-0.png",
+      "artifacts\\qa\\ambient-review\\wedding-floral-loop-5.png",
+      "artifacts\\qa\\ambient-review\\wedding-floral-loop-9.95.png"
+    ],
+    "seamMeanAbsoluteDifference": 4.7
+  },
+  {
+    "name": "wedding-hero-loop",
+    "original": {
+      "codec": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 4066580,
+      "pixelFormat": "yuv420p",
+      "audio": true
+    },
+    "optimized": {
+      "codec": "h264",
+      "profile": "Main",
+      "width": 540,
+      "height": 960,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 596195,
+      "pixelFormat": "yuv420p",
+      "audio": false
+    },
+    "frames": [
+      "artifacts\\qa\\ambient-review\\wedding-hero-loop-0.png",
+      "artifacts\\qa\\ambient-review\\wedding-hero-loop-5.png",
+      "artifacts\\qa\\ambient-review\\wedding-hero-loop-9.95.png"
+    ],
+    "seamMeanAbsoluteDifference": 23.05
+  },
+  {
+    "name": "wedding-opening-couple 2",
+    "original": {
+      "codec": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 5858911,
+      "pixelFormat": "yuv420p",
+      "audio": true
+    },
+    "optimized": {
+      "codec": "h264",
+      "profile": "Main",
+      "width": 406,
+      "height": 720,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 698829,
+      "pixelFormat": "yuv420p",
+      "audio": false
+    },
+    "frames": [
+      "artifacts\\qa\\ambient-review\\wedding-opening-couple 2-0.png",
+      "artifacts\\qa\\ambient-review\\wedding-opening-couple 2-5.png",
+      "artifacts\\qa\\ambient-review\\wedding-opening-couple 2-9.95.png"
+    ],
+    "seamMeanAbsoluteDifference": 56.02
+  },
+  {
+    "name": "wedding-opening-couple",
+    "original": {
+      "codec": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 7195820,
+      "pixelFormat": "yuv420p",
+      "audio": true
+    },
+    "optimized": {
+      "codec": "h264",
+      "profile": "Main",
+      "width": 406,
+      "height": 720,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 692153,
+      "pixelFormat": "yuv420p",
+      "audio": false
+    },
+    "frames": [
+      "artifacts\\qa\\ambient-review\\wedding-opening-couple-0.png",
+      "artifacts\\qa\\ambient-review\\wedding-opening-couple-5.png",
+      "artifacts\\qa\\ambient-review\\wedding-opening-couple-9.95.png"
+    ],
+    "seamMeanAbsoluteDifference": 40.17
+  },
+  {
+    "name": "wedding-petals-loop",
+    "original": {
+      "codec": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 3923001,
+      "pixelFormat": "yuv420p",
+      "audio": true
+    },
+    "optimized": {
+      "codec": "h264",
+      "profile": "Main",
+      "width": 540,
+      "height": 960,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 631251,
+      "pixelFormat": "yuv420p",
+      "audio": false
+    },
+    "frames": [
+      "artifacts\\qa\\ambient-review\\wedding-petals-loop-0.png",
+      "artifacts\\qa\\ambient-review\\wedding-petals-loop-5.png",
+      "artifacts\\qa\\ambient-review\\wedding-petals-loop-9.95.png"
+    ],
+    "seamMeanAbsoluteDifference": 7.16
+  },
+  {
+    "name": "wedding-soft-light-loop",
+    "original": {
+      "codec": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 3877572,
+      "pixelFormat": "yuv420p",
+      "audio": true
+    },
+    "optimized": {
+      "codec": "h264",
+      "profile": "Main",
+      "width": 540,
+      "height": 960,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 530453,
+      "pixelFormat": "yuv420p",
+      "audio": false
+    },
+    "frames": [
+      "artifacts\\qa\\ambient-review\\wedding-soft-light-loop-0.png",
+      "artifacts\\qa\\ambient-review\\wedding-soft-light-loop-5.png",
+      "artifacts\\qa\\ambient-review\\wedding-soft-light-loop-9.95.png"
+    ],
+    "seamMeanAbsoluteDifference": 17.14
+  },
+  {
+    "name": "homecoming-closing-loop",
+    "original": {
+      "codec": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 4585683,
+      "pixelFormat": "yuv420p",
+      "audio": true
+    },
+    "optimized": {
+      "codec": "h264",
+      "profile": "Main",
+      "width": 540,
+      "height": 960,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 694729,
+      "pixelFormat": "yuv420p",
+      "audio": false
+    },
+    "frames": [
+      "artifacts\\qa\\ambient-review\\homecoming-closing-loop-0.png",
+      "artifacts\\qa\\ambient-review\\homecoming-closing-loop-5.png",
+      "artifacts\\qa\\ambient-review\\homecoming-closing-loop-9.95.png"
+    ],
+    "seamMeanAbsoluteDifference": 19.26
+  },
+  {
+    "name": "homecoming-countdown-butterfly-loop",
+    "original": {
+      "codec": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 10459661,
+      "pixelFormat": "yuv420p",
+      "audio": true
+    },
+    "optimized": {
+      "codec": "h264",
+      "profile": "Main",
+      "width": 540,
+      "height": 960,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 1161904,
+      "pixelFormat": "yuv420p",
+      "audio": false
+    },
+    "frames": [
+      "artifacts\\qa\\ambient-review\\homecoming-countdown-butterfly-loop-0.png",
+      "artifacts\\qa\\ambient-review\\homecoming-countdown-butterfly-loop-5.png",
+      "artifacts\\qa\\ambient-review\\homecoming-countdown-butterfly-loop-9.95.png"
+    ],
+    "seamMeanAbsoluteDifference": 17.08
+  },
+  {
+    "name": "homecoming-floral-frame-loop",
+    "original": {
+      "codec": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 5948033,
+      "pixelFormat": "yuv420p",
+      "audio": true
+    },
+    "optimized": {
+      "codec": "h264",
+      "profile": "Main",
+      "width": 540,
+      "height": 960,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 833624,
+      "pixelFormat": "yuv420p",
+      "audio": false
+    },
+    "frames": [
+      "artifacts\\qa\\ambient-review\\homecoming-floral-frame-loop-0.png",
+      "artifacts\\qa\\ambient-review\\homecoming-floral-frame-loop-5.png",
+      "artifacts\\qa\\ambient-review\\homecoming-floral-frame-loop-9.95.png"
+    ],
+    "seamMeanAbsoluteDifference": 17.17
+  },
+  {
+    "name": "homecoming-glow-loop",
+    "original": {
+      "codec": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 5617437,
+      "pixelFormat": "yuv420p",
+      "audio": true
+    },
+    "optimized": {
+      "codec": "h264",
+      "profile": "Main",
+      "width": 540,
+      "height": 960,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 823903,
+      "pixelFormat": "yuv420p",
+      "audio": false
+    },
+    "frames": [
+      "artifacts\\qa\\ambient-review\\homecoming-glow-loop-0.png",
+      "artifacts\\qa\\ambient-review\\homecoming-glow-loop-5.png",
+      "artifacts\\qa\\ambient-review\\homecoming-glow-loop-9.95.png"
+    ],
+    "seamMeanAbsoluteDifference": 35.06
+  },
+  {
+    "name": "homecoming-hero-loop",
+    "original": {
+      "codec": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 6050943,
+      "pixelFormat": "yuv420p",
+      "audio": true
+    },
+    "optimized": {
+      "codec": "h264",
+      "profile": "Main",
+      "width": 540,
+      "height": 960,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 973458,
+      "pixelFormat": "yuv420p",
+      "audio": false
+    },
+    "frames": [
+      "artifacts\\qa\\ambient-review\\homecoming-hero-loop-0.png",
+      "artifacts\\qa\\ambient-review\\homecoming-hero-loop-5.png",
+      "artifacts\\qa\\ambient-review\\homecoming-hero-loop-9.95.png"
+    ],
+    "seamMeanAbsoluteDifference": 25.07
+  },
+  {
+    "name": "homecoming-opening-couple 2",
+    "original": {
+      "codec": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 6401023,
+      "pixelFormat": "yuv420p",
+      "audio": true
+    },
+    "optimized": {
+      "codec": "h264",
+      "profile": "Main",
+      "width": 406,
+      "height": 720,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 711474,
+      "pixelFormat": "yuv420p",
+      "audio": false
+    },
+    "frames": [
+      "artifacts\\qa\\ambient-review\\homecoming-opening-couple 2-0.png",
+      "artifacts\\qa\\ambient-review\\homecoming-opening-couple 2-5.png",
+      "artifacts\\qa\\ambient-review\\homecoming-opening-couple 2-9.95.png"
+    ],
+    "seamMeanAbsoluteDifference": 39.33
+  },
+  {
+    "name": "homecoming-opening-couple",
+    "original": {
+      "codec": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 5349863,
+      "pixelFormat": "yuv420p",
+      "audio": true
+    },
+    "optimized": {
+      "codec": "h264",
+      "profile": "Main",
+      "width": 406,
+      "height": 720,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 576688,
+      "pixelFormat": "yuv420p",
+      "audio": false
+    },
+    "frames": [
+      "artifacts\\qa\\ambient-review\\homecoming-opening-couple-0.png",
+      "artifacts\\qa\\ambient-review\\homecoming-opening-couple-5.png",
+      "artifacts\\qa\\ambient-review\\homecoming-opening-couple-9.95.png"
+    ],
+    "seamMeanAbsoluteDifference": 46.78
+  },
+  {
+    "name": "homecoming-petals-loop",
+    "original": {
+      "codec": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 6671584,
+      "pixelFormat": "yuv420p",
+      "audio": true
+    },
+    "optimized": {
+      "codec": "h264",
+      "profile": "Main",
+      "width": 540,
+      "height": 960,
+      "fps": "24/1",
+      "duration": 10,
+      "bytes": 1092425,
+      "pixelFormat": "yuv420p",
+      "audio": false
+    },
+    "frames": [
+      "artifacts\\qa\\ambient-review\\homecoming-petals-loop-0.png",
+      "artifacts\\qa\\ambient-review\\homecoming-petals-loop-5.png",
+      "artifacts\\qa\\ambient-review\\homecoming-petals-loop-9.95.png"
+    ],
+    "seamMeanAbsoluteDifference": 26.61
+  }
+]
