@@ -34,11 +34,6 @@ export default function LocationSection({ location, images = [], active = true }
 
   return (
     <section className="location-section section-shell" id="location" aria-labelledby="location-title">
-      {images.length > 0 && <div className="venue-photos">
-        {images.map(photo => <SectionReveal key={photo.image.src} as="figure" className="venue-photo">
-          <Image src={photo.image} alt={t(photo.altKey, { venue: location.name })} className="venue-photo-image" sizes="(max-width: 480px) 90vw, 430px" placeholder="blur" loading="lazy" />
-        </SectionReveal>)}
-      </div>}
       <SectionReveal>
         <SectionHeading kicker={t("locationKicker")} title={t("locationTitle")} id="location-title" />
       </SectionReveal>
@@ -63,6 +58,11 @@ export default function LocationSection({ location, images = [], active = true }
             <Navigation size={17} aria-hidden="true" />{t("getDirections")}
           </a>
         )}
+        {images.length > 0 && <div className="venue-photos">
+          {images.map(photo => <SectionReveal key={photo.image.src} as="figure" className="venue-photo">
+            <Image src={photo.image} alt={t(photo.altKey, { venue: location.name })} className="venue-photo-image" sizes="(max-width: 480px) 80vw, 390px" placeholder="blur" loading="lazy" />
+          </SectionReveal>)}
+        </div>}
       </SectionReveal>
     </section>
   );
