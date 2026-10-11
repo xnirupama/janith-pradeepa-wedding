@@ -6,6 +6,7 @@ const {chromium}=await import(modulePath?pathToFileURL(modulePath).href:"playwri
 const baseURL=process.env.INVITATION_TEST_URL||"http://127.0.0.1:3101";
 const browser=await chromium.launch({headless:true});
 const results=[];
+const backgroundClips=JSON.parse(await fs.readFile('src/data/background-videos.json','utf8'));
 const language=process.env.QA_LANGUAGE || "en";
 const reducedMotion=process.env.QA_REDUCED_MOTION === "1";
 try {
@@ -36,7 +37,14 @@ try {
     }));
     const jsBytes=metric.resources.filter(item=>item.name.endsWith(".js")).reduce((sum,item)=>sum+item.bytes,0);
     const media=metric.resources.filter(item=>/\.(mp4|webm)$/.test(item.name));
-    results.push({event,language,reducedMotion,shifts:metric.shifts,lcpMs:Math.round(metric.lcp),lcpElement:metric.lcpElement,lcpURL:metric.lcpURL,cls:Number(metric.cls.toFixed(4)),encodedJSBytes:jsBytes,videoRequestsBeforeTap:mediaRequests.filter(url=>/\.(mp4|webm)(\?|$)/.test(url)).length,encodedVideoBytesBeforeTap:media.reduce((sum,item)=>sum+item.bytes,0),audioRequestsBeforeTap:mediaRequests.filter(url=>/\.mp3(\?|$)/.test(url)).length,profile:"Cold cache, 150ms latency, 1.6Mbps download, 4x CPU throttle; seven-second observation after fonts",lcpTargetMet:metric.lcp<2500});
+    const videoRequests=mediaRequests.filter(url=>/\.(mp4|webm)(\?|$)/.test(url));
+    const cover=backgroundClips[event].cover;
+    const coverBytes=new Map([[cover.src,cover.bytes],...(cover.webm?[[cover.webm.src,cover.webm.bytes]]:[])]);
+    // Resource Timing omits unfinished native streaming requests. Charge each
+    // observed request its entire file size for a conservative budget bound.
+    const videoByteUpperBound=videoRequests.reduce((sum,url)=>sum+(coverBytes.get(new URL(url).pathname)??0),0);
+    if(videoRequests.some(url=>!coverBytes.has(new URL(url).pathname)))throw Error('Unexpected video before interaction');
+    results.push({event,language,reducedMotion,shifts:metric.shifts,lcpMs:Math.round(metric.lcp),lcpElement:metric.lcpElement,lcpURL:metric.lcpURL,cls:Number(metric.cls.toFixed(4)),encodedJSBytes:jsBytes,videoRequestsBeforeTap:videoRequests.length,encodedVideoBytesBeforeTap:media.reduce((sum,item)=>sum+item.bytes,0),requestedVideoByteUpperBoundBeforeTap:videoByteUpperBound,videoBudgetMet:videoByteUpperBound<=5000000,ambientContentRequestsBeforeTap:videoRequests.filter(url=>url.includes('seamless')).length,audioRequestsBeforeTap:mediaRequests.filter(url=>/\.mp3(\?|$)/.test(url)).length,profile:"Cold cache, 150ms latency, 1.6Mbps download, 4x CPU throttle; seven-second observation after fonts",lcpTargetMet:metric.lcp<2500});
     console.log(JSON.stringify(results.at(-1)));
     await context.close();
   }

@@ -1,0 +1,1501 @@
+{
+  "checkedAt": "2026-10-11T03:21:55.570Z",
+  "sourceCommit": "7471b90",
+  "origin": "https://janith-pradeepa.vercel.app",
+  "environment": "Isolated Chromium/WebKit; mobile 390x844; policies mocked; physical phones and social webviews untested",
+  "mediaPolicies": [
+    {
+      "engine": "chromium",
+      "event": "wedding",
+      "profile": "normal",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "wedding",
+      "profile": "disabled",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "wedding",
+      "profile": "low-end",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "wedding",
+      "profile": "slow",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "wedding",
+      "profile": "reduced-motion",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "wedding",
+      "profile": "blocked",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "wedding",
+      "profile": "stalled",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "wedding",
+      "profile": "hidden",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "homecoming",
+      "profile": "normal",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "homecoming",
+      "profile": "disabled",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "homecoming",
+      "profile": "low-end",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "homecoming",
+      "profile": "slow",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "homecoming",
+      "profile": "reduced-motion",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "homecoming",
+      "profile": "blocked",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "homecoming",
+      "profile": "stalled",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "homecoming",
+      "profile": "hidden",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "wedding",
+      "profile": "normal",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "wedding",
+      "profile": "disabled",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "wedding",
+      "profile": "low-end",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "wedding",
+      "profile": "slow",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "wedding",
+      "profile": "reduced-motion",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "wedding",
+      "profile": "blocked",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "wedding",
+      "profile": "stalled",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "wedding",
+      "profile": "hidden",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "homecoming",
+      "profile": "normal",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "homecoming",
+      "profile": "disabled",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "homecoming",
+      "profile": "low-end",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "homecoming",
+      "profile": "slow",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "homecoming",
+      "profile": "reduced-motion",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "homecoming",
+      "profile": "blocked",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "homecoming",
+      "profile": "stalled",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "homecoming",
+      "profile": "hidden",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    }
+  ],
+  "finalScreenshotCases": [
+    {
+      "engine": "chromium",
+      "event": "wedding",
+      "profile": "normal",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "wedding",
+      "profile": "disabled",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "homecoming",
+      "profile": "normal",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "homecoming",
+      "profile": "disabled",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "wedding",
+      "profile": "normal",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "wedding",
+      "profile": "disabled",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "homecoming",
+      "profile": "normal",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "homecoming",
+      "profile": "disabled",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    }
+  ],
+  "opening": [
+    {
+      "engine": "chromium",
+      "route": "wedding",
+      "mode": "normal",
+      "first": {
+        "time": 0.275605,
+        "src": "http://127.0.0.1:3102/assets/wedding/media/wedding-opening-couple.752c6ab65ba9.mp4",
+        "muted": true,
+        "inline": true,
+        "loop": false,
+        "display": "block"
+      },
+      "directGesture": true,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "route": "wedding",
+      "mode": "gesture-required",
+      "first": {
+        "time": 0.287722,
+        "src": "http://127.0.0.1:3102/assets/wedding/media/wedding-opening-couple.752c6ab65ba9.mp4",
+        "muted": true,
+        "inline": true,
+        "loop": false,
+        "display": "block"
+      },
+      "directGesture": true,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "route": "homecoming",
+      "mode": "normal",
+      "first": {
+        "time": 0.277973,
+        "src": "http://127.0.0.1:3102/assets/homecoming/media/homecoming-opening-couple.fb07dd087000.mp4",
+        "muted": true,
+        "inline": true,
+        "loop": false,
+        "display": "block"
+      },
+      "directGesture": true,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "route": "homecoming",
+      "mode": "gesture-required",
+      "first": {
+        "time": 0.26427,
+        "src": "http://127.0.0.1:3102/assets/homecoming/media/homecoming-opening-couple.fb07dd087000.mp4",
+        "muted": true,
+        "inline": true,
+        "loop": false,
+        "display": "block"
+      },
+      "directGesture": true,
+      "passed": true
+    },
+    {
+      "engine": "webkit",
+      "route": "wedding",
+      "mode": "normal",
+      "first": {
+        "time": 0.3363114,
+        "src": "http://127.0.0.1:3102/assets/wedding/media/wedding-opening-couple.752c6ab65ba9.mp4",
+        "muted": true,
+        "inline": true,
+        "loop": false,
+        "display": "block"
+      },
+      "directGesture": true,
+      "passed": true
+    },
+    {
+      "engine": "webkit",
+      "route": "wedding",
+      "mode": "gesture-required",
+      "first": {
+        "time": 0.4408575,
+        "src": "http://127.0.0.1:3102/assets/wedding/media/wedding-opening-couple.752c6ab65ba9.mp4",
+        "muted": true,
+        "inline": true,
+        "loop": false,
+        "display": "block"
+      },
+      "directGesture": true,
+      "passed": true
+    },
+    {
+      "engine": "webkit",
+      "route": "homecoming",
+      "mode": "normal",
+      "first": {
+        "time": 0.3564982,
+        "src": "http://127.0.0.1:3102/assets/homecoming/media/homecoming-opening-couple.fb07dd087000.mp4",
+        "muted": true,
+        "inline": true,
+        "loop": false,
+        "display": "block"
+      },
+      "directGesture": true,
+      "passed": true
+    },
+    {
+      "engine": "webkit",
+      "route": "homecoming",
+      "mode": "gesture-required",
+      "first": {
+        "time": 0.3095892,
+        "src": "http://127.0.0.1:3102/assets/homecoming/media/homecoming-opening-couple.fb07dd087000.mp4",
+        "muted": true,
+        "inline": true,
+        "loop": false,
+        "display": "block"
+      },
+      "directGesture": true,
+      "passed": true
+    }
+  ],
+  "livePages": [
+    {
+      "engine": "chromium",
+      "event": "wedding",
+      "profile": "normal",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "chromium",
+      "event": "homecoming",
+      "profile": "normal",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "wedding",
+      "profile": "normal",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        },
+        {
+          "opacity": "0.24",
+          "blend": "multiply",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "engine": "webkit",
+      "event": "homecoming",
+      "profile": "normal",
+      "passed": true,
+      "maxPlaying": 1,
+      "styles": [
+        {
+          "opacity": "0.22",
+          "blend": "screen",
+          "mask": "linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0) 12%, rgb(0, 0, 0) 85%, rgba(0, 0, 0, 0))",
+          "controls": false,
+          "poster": true,
+          "filter": "saturate(0.85)"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    }
+  ],
+  "serving": {
+    "origin": "https://janith-pradeepa.vercel.app",
+    "checkedAt": "2026-10-11T03:18:40.171Z",
+    "results": [
+      {
+        "src": "/assets/wedding/media/wedding-floral-loop-seamless.6df7f51fbf55.mp4",
+        "status": 206,
+        "type": "video/mp4",
+        "cache": "public, max-age=31536000, immutable",
+        "range": "bytes 0-1023/427880",
+        "receivedBytes": 1024,
+        "fileBytes": 427880
+      },
+      {
+        "src": "/assets/wedding/media/wedding-floral-loop-seamless-poster.34cebca2052b.webp",
+        "status": 206,
+        "type": "image/webp",
+        "cache": "public, max-age=31536000, immutable",
+        "range": "bytes 0-1023/16784",
+        "receivedBytes": 1024,
+        "fileBytes": 16784
+      },
+      {
+        "src": "/assets/wedding/media/wedding-petals-loop-seamless.53772fc18afe.mp4",
+        "status": 206,
+        "type": "video/mp4",
+        "cache": "public, max-age=31536000, immutable",
+        "range": "bytes 0-1023/601234",
+        "receivedBytes": 1024,
+        "fileBytes": 601234
+      },
+      {
+        "src": "/assets/wedding/media/wedding-petals-loop-seamless-poster.bef01bf9ffe7.webp",
+        "status": 206,
+        "type": "image/webp",
+        "cache": "public, max-age=31536000, immutable",
+        "range": "bytes 0-1023/14450",
+        "receivedBytes": 1024,
+        "fileBytes": 14450
+      },
+      {
+        "src": "/assets/homecoming/media/homecoming-closing-loop-seamless.e9a614d2a6c2.mp4",
+        "status": 206,
+        "type": "video/mp4",
+        "cache": "public, max-age=31536000, immutable",
+        "range": "bytes 0-1023/657224",
+        "receivedBytes": 1024,
+        "fileBytes": 657224
+      },
+      {
+        "src": "/assets/homecoming/media/homecoming-closing-loop-seamless-poster.bcd6974c685f.webp",
+        "status": 206,
+        "type": "image/webp",
+        "cache": "public, max-age=31536000, immutable",
+        "range": "bytes 0-1023/13400",
+        "receivedBytes": 1024,
+        "fileBytes": 13400
+      }
+    ]
+  },
+  "performance": [
+    {
+      "event": "wedding",
+      "language": "en",
+      "reducedMotion": false,
+      "shifts": [],
+      "lcpMs": 3008,
+      "lcpElement": "",
+      "lcpURL": "",
+      "cls": 0,
+      "encodedJSBytes": 607039,
+      "videoRequestsBeforeTap": 0,
+      "encodedVideoBytesBeforeTap": 0,
+      "requestedVideoByteUpperBoundBeforeTap": 0,
+      "videoBudgetMet": true,
+      "ambientContentRequestsBeforeTap": 0,
+      "audioRequestsBeforeTap": 0,
+      "profile": "Cold cache, 150ms latency, 1.6Mbps download, 4x CPU throttle; seven-second observation after fonts",
+      "lcpTargetMet": false
+    },
+    {
+      "event": "homecoming",
+      "language": "en",
+      "reducedMotion": false,
+      "shifts": [
+        {
+          "value": 0.00011340329563576738,
+          "time": 2526.2999999523163,
+          "sources": [
+            {
+              "node": "sinhala-blessing",
+              "previous": {
+                "x": 151.515625,
+                "y": 230.28125,
+                "width": 86.953125,
+                "height": 25.921875
+              },
+              "current": {
+                "x": 139.5,
+                "y": 230.28125,
+                "width": 110,
+                "height": 25.921875
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.00016031130368325173,
+          "time": 2642.600000023842,
+          "sources": [
+            {
+              "node": "section-kicker",
+              "previous": {
+                "x": 92.109375,
+                "y": 348.46875,
+                "width": 205,
+                "height": 19.28125
+              },
+              "current": {
+                "x": 99.28125,
+                "y": 348.46875,
+                "width": 191.421875,
+                "height": 19.28125
+              }
+            },
+            {
+              "node": "blessing",
+              "previous": {
+                "x": 112.703125,
+                "y": 204.890625,
+                "width": 164,
+                "height": 19
+              },
+              "current": {
+                "x": 117.453125,
+                "y": 204.890625,
+                "width": 155.078125,
+                "height": 19
+              }
+            }
+          ]
+        }
+      ],
+      "lcpMs": 2288,
+      "lcpElement": "",
+      "lcpURL": "",
+      "cls": 0.0003,
+      "encodedJSBytes": 607039,
+      "videoRequestsBeforeTap": 2,
+      "encodedVideoBytesBeforeTap": 0,
+      "requestedVideoByteUpperBoundBeforeTap": 1781746,
+      "videoBudgetMet": true,
+      "ambientContentRequestsBeforeTap": 0,
+      "audioRequestsBeforeTap": 0,
+      "profile": "Cold cache, 150ms latency, 1.6Mbps download, 4x CPU throttle; seven-second observation after fonts",
+      "lcpTargetMet": true
+    }
+  ],
+  "mobile": {
+    "baseURL": "http://127.0.0.1:3102",
+    "scenarios": 8,
+    "reports": [
+      {
+        "engine": "chromium",
+        "event": "wedding",
+        "language": "en",
+        "width": 390,
+        "height": 844,
+        "coverOverflow": false,
+        "contentOverflow": false,
+        "tapTargets": true,
+        "nav": true,
+        "contact": true,
+        "noForms": true
+      },
+      {
+        "engine": "chromium",
+        "event": "wedding",
+        "language": "si",
+        "width": 390,
+        "height": 844,
+        "coverOverflow": false,
+        "contentOverflow": false,
+        "tapTargets": true,
+        "nav": true,
+        "contact": true,
+        "noForms": true
+      },
+      {
+        "engine": "chromium",
+        "event": "homecoming",
+        "language": "en",
+        "width": 390,
+        "height": 844,
+        "coverOverflow": false,
+        "contentOverflow": false,
+        "tapTargets": true,
+        "nav": true,
+        "contact": true,
+        "noForms": true
+      },
+      {
+        "engine": "chromium",
+        "event": "homecoming",
+        "language": "si",
+        "width": 390,
+        "height": 844,
+        "coverOverflow": false,
+        "contentOverflow": false,
+        "tapTargets": true,
+        "nav": true,
+        "contact": true,
+        "noForms": true
+      },
+      {
+        "engine": "webkit",
+        "event": "wedding",
+        "language": "en",
+        "width": 390,
+        "height": 844,
+        "coverOverflow": false,
+        "contentOverflow": false,
+        "tapTargets": true,
+        "nav": true,
+        "contact": true,
+        "noForms": true
+      },
+      {
+        "engine": "webkit",
+        "event": "wedding",
+        "language": "si",
+        "width": 390,
+        "height": 844,
+        "coverOverflow": false,
+        "contentOverflow": false,
+        "tapTargets": true,
+        "nav": true,
+        "contact": true,
+        "noForms": true
+      },
+      {
+        "engine": "webkit",
+        "event": "homecoming",
+        "language": "en",
+        "width": 390,
+        "height": 844,
+        "coverOverflow": false,
+        "contentOverflow": false,
+        "tapTargets": true,
+        "nav": true,
+        "contact": true,
+        "noForms": true
+      },
+      {
+        "engine": "webkit",
+        "event": "homecoming",
+        "language": "si",
+        "width": 390,
+        "height": 844,
+        "coverOverflow": false,
+        "contentOverflow": false,
+        "tapTargets": true,
+        "nav": true,
+        "contact": true,
+        "noForms": true
+      }
+    ],
+    "errors": []
+  },
+  "contrast": [
+    {
+      "event": "wedding",
+      "section": "hero",
+      "ratios": [
+        {
+          "color": "#392719",
+          "ratio": 8.96
+        },
+        {
+          "color": "#684e1b",
+          "ratio": 4.92
+        },
+        {
+          "color": "#604e39",
+          "ratio": 5.01
+        }
+      ],
+      "minimumRatio": 4.92,
+      "backgroundBound": [
+        213,
+        205,
+        188
+      ],
+      "brightestMeanLumaFrame": 40,
+      "brightestMeanLumaSeconds": 1.6666666666666667,
+      "decodedFrames": 218,
+      "method": "All-frame worst-color bound with minimum scrim and 10% ornament/texture allowance; scan every decoded frame for peak mean luminance"
+    },
+    {
+      "event": "wedding",
+      "section": "celebration",
+      "ratios": [
+        {
+          "color": "#392719",
+          "ratio": 8.76
+        },
+        {
+          "color": "#684e1b",
+          "ratio": 4.81
+        },
+        {
+          "color": "#604e39",
+          "ratio": 4.9
+        }
+      ],
+      "minimumRatio": 4.81,
+      "backgroundBound": [
+        210,
+        203,
+        186
+      ],
+      "brightestMeanLumaFrame": 163,
+      "brightestMeanLumaSeconds": 6.791666666666667,
+      "decodedFrames": 218,
+      "method": "All-frame worst-color bound with minimum scrim and 10% ornament/texture allowance; scan every decoded frame for peak mean luminance"
+    },
+    {
+      "event": "homecoming",
+      "section": "hero",
+      "ratios": [
+        {
+          "color": "#fff4df",
+          "ratio": 10.81
+        },
+        {
+          "color": "#e2c58c",
+          "ratio": 7.07
+        },
+        {
+          "color": "#e6cdbd",
+          "ratio": 7.77
+        }
+      ],
+      "minimumRatio": 7.07,
+      "backgroundBound": [
+        87,
+        42,
+        51
+      ],
+      "brightestMeanLumaFrame": 128,
+      "brightestMeanLumaSeconds": 5.333333333333333,
+      "decodedFrames": 218,
+      "method": "All-frame worst-color bound with minimum scrim and 10% ornament/texture allowance; scan every decoded frame for peak mean luminance"
+    }
+  ]
+}

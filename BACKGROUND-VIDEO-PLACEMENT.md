@@ -65,3 +65,62 @@ Implementation and measured verification results will be appended after the revi
 ### Restraint adjustment during media verification
 
 The proposed homecoming petal band failed the stricter encoded seam review (7.92 mean pixel difference, compared with 1.59–2.73 for the other selected loops). Its bright bokeh and larger petals also make it the busiest candidate. Drop it entirely rather than relaxing the check. Homecoming therefore has **one content ambient video**, in Hero; Celebrate With Us uses its existing maroon surface and faint CSS mandalas. Wedding keeps its two planned placements. This stays below the three-instance limit including the unchanged gate.
+
+## Final implementation
+
+| Page / placement | Source bytes | Final MP4 bytes | WebP poster bytes | Opacity / blend | Loop seam difference |
+|---|---:|---:|---:|---|---:|
+| Wedding Hero, floral shadows | 3,342,762 | 427,880 | 16,784 | .22 / multiply | 1.59 |
+| Wedding Celebrate With Us, ivory petals | 3,923,001 | 601,234 | 14,450 | .24 / multiply | 2.73 |
+| Homecoming Hero, maroon/gold glow | 4,585,683 | 657,224 | 13,400 | .22 / screen | 1.68 |
+
+These three mobile MP4s are silent H.264 Main 3.1, yuv420p, faststart, 540×960, fixed 24 fps, 9.083 seconds including the baked one-second dissolve and boundary frames. Each file was fully decoded after encoding. No stacked video instances or runtime crossfade are needed. New layers are graded with saturate(.85), masked at both edges, and covered by theme-color scrims (minimum alpha .5). Darker small gold and muted text are scoped to the two wedding ambient sections; shared themes remain unchanged.
+
+Hero has early poster/media priority once content mounts. The wedding celebration player has preload none and attaches its source only when visible; an observer watches one screen beyond the viewport for memory cleanup. Offscreen and hidden players pause; far-away players drop their sources. Real playing is required before video fades in. Policy vetoes, blocked autoplay, decode/network failure or a four-second stall show the equally graded poster with CSS ornaments, without ambient controls or a black box.
+
+Unchanged: both gate clip URLs/bytes/presentation, both ten-second opening films and trusted-tap behavior, music/controller, all EN/SI copy and factual data, links, calendar, contacts, countdown, existing rotating-circle CSS, all portrait files and lightbox. The celebration band is now full width with soft edges and faint CSS mandalas. Closing loses its decorative video so its dense text/contact/actions remain on the original gold surface.
+
+Unused old hero/closing derivatives and rejected alternatives are outside `public`, archived in `media-sources`, which `.vercelignore` excludes from deployment. `npm run prepare:videos` regenerates base media then the selected seamless assets. The three new MP4s total 1,686,338 bytes; their posters total 44,634 bytes. No new asset is required. If floral motion is wanted on Homecoming later, regenerate a **dark maroon loop with small, slow petals, restrained gold lights, and matching first/last framing**; avoid bright ivory center panels.
+
+## Verification
+
+- `npm run build`, `npm run lint` and all eight preservation/media/contrast checks passed.
+- Chromium + WebKit at 390×844: 32 route/profile cases passed (normal, Save-Data, low memory, 3g, reduced motion, rejected autoplay, forced stall and hidden/visible tab). No page errors or console warnings/errors. No videos behind prohibited sections, no RSVP, fifth nav Contact, at most two simultaneous playing videos, and far-away sources released.
+- Eight final screenshot cases capture both pages in both engines, with video and poster-only mode. Tall sections were scrolled through before capture so all reveal-on-scroll content is visible. Full 390px screenshots for the nine content sections, gate and opening are in `artifacts/qa/ambient-final-{chromium,webkit}`. Compact comparison sheets are committed in [docs/ambient-preview](./docs/ambient-preview): left video enabled, right Save-Data poster mode. All sheets were visually reviewed. Map embeds use an isolated test fixture; original links remain verified.
+- Eight opening regression cases passed in Chromium/WebKit, including four natural full-film completions and four trusted-gesture requirements. The opening does not inherit ambient policy vetoes.
+- Eight 390px EN/SI route/engine layout cases passed, with no JavaScript errors and working Contact navigation/footer. Four final live-page cases passed (both routes in both engines), including actual ambient playback, matching posters, all section screenshots, source cleanup and an empty console error/warning log.
+- Every frame of every new clip was decoded for a brightness scan. A conservative bound using solid black/white frames, the weakest scrim and 10% ornament/texture influence gives minimum small-text contrast 4.92:1 (Wedding Hero), 4.81:1 (Wedding celebration), and 7.07:1 (Homecoming Hero). See `media-sources/ambient-contrast-verification.json`; this bound also covers the brightest decoded frame.
+- Final local cold mobile performance: 150ms latency, 1.6Mbps download, 4× CPU throttle. Wedding LCP 3,008ms / CLS 0; Homecoming LCP 2,288ms / CLS .0003. The earlier run measured 2,408ms / 2,312ms; timings vary, so a universal sub-2.5-second LCP is not claimed. No new ambient or opening file, and no audio, loaded before Open.
+- Final pre-interaction video bounds: Wedding 0 bytes when the connection policy chose its poster; Homecoming 1,781,746 bytes charging both observed cover requests the entire WebM file. The earlier Wedding run received 957,478 bytes. All are below the 5MB target. Native streaming can omit unfinished requests from Resource Timing; the report includes a conservative full-file-per-request bound rather than treating missing entries as zero downloads.
+- Both live route HTML responses contain the new asset URLs. All three new MP4s and their posters returned 206 for a 0–1023 range, correct MIME/file size and `public, max-age=31536000, immutable`. Runtime deployment commit: `7471b90`.
+
+Results, final live checks and mobile EN/SI checks are recorded in `media-sources/ambient-placement-verification.json`. These are isolated browser-engine/mobile-emulation checks; physical iPhone low-power mode, Samsung Internet and social-app webviews were not tested. Browser/connection restrictions can suppress decorative videos; the requested opening film retains its existing tap-to-play recovery.
+
+## Final implementation
+
+| Page / placement | Source bytes | Final MP4 bytes | WebP poster bytes | Opacity / blend | Loop seam difference |
+|---|---:|---:|---:|---|---:|
+| Wedding Hero, floral shadows | 3,342,762 | 427,880 | 16,784 | .22 / multiply | 1.59 |
+| Wedding Celebrate With Us, ivory petals | 3,923,001 | 601,234 | 14,450 | .24 / multiply | 2.73 |
+| Homecoming Hero, maroon/gold glow | 4,585,683 | 657,224 | 13,400 | .22 / screen | 1.68 |
+
+These three mobile MP4s are silent H.264 Main 3.1, yuv420p, faststart, 540×960, fixed 24 fps, 9.083 seconds including the baked one-second dissolve and boundary frames. Each file was fully decoded after encoding. No stacked video instances or runtime crossfade are needed. New layers are graded with saturate(.85), masked at both edges, and covered by theme-color scrims (minimum alpha .5). Darker small gold and muted text are scoped to the two wedding ambient sections; shared themes remain unchanged.
+
+Hero has early poster/media priority once content mounts. The wedding celebration player has preload none and attaches its source only when visible; an observer watches one screen beyond the viewport for memory cleanup. Offscreen and hidden players pause; far-away players drop their sources. Real playing is required before video fades in. Policy vetoes, blocked autoplay, decode/network failure or a four-second stall show the equally graded poster with CSS ornaments, without ambient controls or a black box.
+
+Unchanged: both gate clip URLs/bytes/presentation, both ten-second opening films and trusted-tap behavior, music/controller, all EN/SI copy and factual data, links, calendar, contacts, countdown, existing rotating-circle CSS, all portrait files and lightbox. The celebration band is now full width with soft edges and faint CSS mandalas. Closing loses its decorative video so its dense text/contact/actions remain on the original gold surface.
+
+Unused old hero/closing derivatives and rejected alternatives are outside `public`, archived in `media-sources`, which `.vercelignore` excludes from deployment. `npm run prepare:videos` regenerates base media then the selected seamless assets. The three new MP4s total 1,686,338 bytes; their posters total 44,634 bytes. No new asset is required. If floral motion is wanted on Homecoming later, regenerate a **dark maroon loop with small, slow petals, restrained gold lights, and matching first/last framing**; avoid bright ivory center panels.
+
+## Verification
+
+- `npm run build`, `npm run lint` and all eight preservation/media/contrast checks passed.
+- Chromium + WebKit at 390×844: 32 route/profile cases passed (normal, Save-Data, low memory, 3g, reduced motion, rejected autoplay, forced stall and hidden/visible tab). No page errors or console warnings/errors. No videos behind prohibited sections, no RSVP, fifth nav Contact, at most two simultaneous playing videos, and far-away sources released.
+- Eight final screenshot cases capture both pages in both engines, with video and poster-only mode. Tall sections were scrolled through before capture so all reveal-on-scroll content is visible. Full 390px screenshots for the nine content sections, gate and opening are in `artifacts/qa/ambient-final-{chromium,webkit}`. Compact comparison sheets are committed in [docs/ambient-preview](./docs/ambient-preview): left video enabled, right Save-Data poster mode. All sheets were visually reviewed. Map embeds use an isolated test fixture; original links remain verified.
+- Eight opening regression cases passed in Chromium/WebKit, including four natural full-film completions and four trusted-gesture requirements. The opening does not inherit ambient policy vetoes.
+- Every frame of every new clip was decoded for a brightness scan. A conservative bound using solid black/white frames, the weakest scrim and 10% ornament/texture influence gives minimum small-text contrast 4.92:1 (Wedding Hero), 4.81:1 (Wedding celebration), and 7.07:1 (Homecoming Hero). See `media-sources/ambient-contrast-verification.json`; this bound also covers the brightest decoded frame.
+- Final local cold mobile performance: 150ms latency, 1.6Mbps download, 4× CPU throttle. Wedding LCP 3,008ms / CLS 0; Homecoming LCP 2,288ms / CLS .0003. The earlier run measured 2,408ms / 2,312ms; timings vary, so a universal sub-2.5-second LCP is not claimed. No new ambient or opening file, and no audio, loaded before Open.
+- Final pre-interaction video bounds: Wedding 0 bytes when the connection policy chose its poster; Homecoming 1,781,746 bytes charging both observed cover requests the entire WebM file. The earlier Wedding run received 957,478 bytes. All are below the 5MB target. Native streaming can omit unfinished requests from Resource Timing; the report includes a conservative full-file-per-request bound rather than treating missing entries as zero downloads.
+- Both live route HTML responses contain the new asset URLs. All three new MP4s and their posters returned 206 for a 0–1023 range, correct MIME/file size and `public, max-age=31536000, immutable`. Runtime deployment commit: `7471b90`.
+
+Results, final live checks and mobile EN/SI checks are recorded in `media-sources/ambient-placement-verification.json`. These are isolated browser-engine/mobile-emulation checks; physical iPhone low-power mode, Samsung Internet and social-app webviews were not tested. Browser/connection restrictions can suppress decorative videos; the requested opening film retains its existing tap-to-play recovery.

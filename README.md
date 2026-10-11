@@ -38,7 +38,7 @@ Venue presentation is centralized in `src/data/invitations.js`: Hemandra Grand H
 
 ## Verification and media inventory
 
-See [ADDON-DIAGNOSIS.md](./ADDON-DIAGNOSIS.md), [ADDON-ASSETS.md](./ADDON-ASSETS.md) and [ADDON-UPGRADE.md](./ADDON-UPGRADE.md) for the current diagnosis, exact asset tables, test matrix and limitations. [INVITATION-UPGRADE.md](./INVITATION-UPGRADE.md) records the previous upgrade. Browser scripts use Playwright with Chromium and WebKit; set `INVITATION_PLAYWRIGHT_MODULE` when using an installation outside this project.
+See [BACKGROUND-VIDEO-PLACEMENT.md](./BACKGROUND-VIDEO-PLACEMENT.md) for the current ambient clip review, placements, exact sizes, screenshot comparisons and verification. [OPENING-VIDEO-FIX.md](./OPENING-VIDEO-FIX.md) records full opening playback. [ADDON-DIAGNOSIS.md](./ADDON-DIAGNOSIS.md), [ADDON-ASSETS.md](./ADDON-ASSETS.md), [ADDON-UPGRADE.md](./ADDON-UPGRADE.md) and [INVITATION-UPGRADE.md](./INVITATION-UPGRADE.md) record earlier upgrades. Browser scripts use Playwright with Chromium and WebKit; set `INVITATION_PLAYWRIGHT_MODULE` when using an installation outside this project. Run `npm run verify:ambient` for placements, policy fallbacks and mobile screenshots.
 
 ## Deployment
 
