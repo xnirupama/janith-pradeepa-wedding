@@ -3,7 +3,7 @@
 import { ArrowUp, RotateCcw } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 import ShareInvitation from "./ShareInvitation";
-import { ContactPill, MandalaLayers, RingedLotus } from "./InvitationOrnaments";
+import { ContactPill, RingedLotus } from "./InvitationOrnaments";
 import { useLanguage } from "./InvitationLanguage";
 import SectionAtmosphere from "./SectionAtmosphere";
 
@@ -19,7 +19,6 @@ export default function ClosingSection({ invitation, onReplayOpening }) {
   return (
     <footer className="closing-section" id="contact" aria-labelledby="closing-title">
       <SectionAtmosphere tone="closing" />
-      <MandalaLayers className="closing-mandalas" />
       <SectionReveal className="closing-content">
         <p className="closing-save-date section-kicker">{t("saveDate")}</p>
         <time className="closing-date" dateTime={invitation.countdownTarget.slice(0, 10)}>{day} . {month} . {year.slice(-2)}</time>

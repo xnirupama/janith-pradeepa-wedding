@@ -51,7 +51,7 @@ export const getServerMotionSnapshot = () => serverSnapshot;
 
 const playingVideos = new Set();
 export function claimBackgroundVideo(video) {
-  if (!playingVideos.has(video) && playingVideos.size >= 2) {
+  if (!playingVideos.has(video) && playingVideos.size >= 1) {
     const oldest = playingVideos.values().next().value;
     playingVideos.delete(oldest);
     oldest.pause();

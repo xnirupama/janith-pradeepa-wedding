@@ -177,7 +177,7 @@ const stylesheet = await read("src/app/globals.css");
 test("background derivatives are small, silent, portrait, and backed by archived sources", async () => {
   const clips = JSON.parse(await read("src/data/background-videos.json"));
   for (const [event, sections] of Object.entries(clips)) {
-    assert.deepEqual(Object.keys(sections).sort(), event === "wedding" ? ["celebration", "cover", "hero"] : ["cover", "hero"]);
+    assert.deepEqual(Object.keys(sections).sort(), event === "wedding" ? ["celebration", "cover", "hero", "page"] : ["cover", "hero", "page"]);
     for (const clip of Object.values(sections)) {
       assert.ok(clip.bytes <= 1_500_000);
       assert.equal(clip.hasAudio, false);

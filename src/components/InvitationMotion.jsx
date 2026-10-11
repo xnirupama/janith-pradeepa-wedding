@@ -6,7 +6,7 @@ import { getMotionSnapshot, getServerMotionSnapshot, subscribeMotion } from "@/l
 const MotionContext = createContext({ pageVisible: true, reducedMotion: true, backgroundVideo: false, suspended: false });
 export function InvitationMotionProvider({ children, suspended = false }) {
   const environment = useSyncExternalStore(subscribeMotion, getMotionSnapshot, getServerMotionSnapshot);
-  return <MotionContext.Provider value={{ ...environment, suspended, decorativeMotion: environment.backgroundVideo && !environment.lowEnd }}>{children}</MotionContext.Provider>;
+  return <MotionContext.Provider value={{ ...environment, suspended, decorativeMotion: environment.backgroundVideo && !environment.lowEnd, sceneMotion: !environment.reducedMotion && !environment.lowEnd }}>{children}</MotionContext.Provider>;
 }
 export const useInvitationMotion = () => useContext(MotionContext);
 

@@ -25,7 +25,7 @@ export default function BackgroundVideo({ ref, sources, poster, priority = "ambi
   const important = priority === "cover" || priority === "opening";
   const opening = priority === "opening";
   const allowed = opening || (backgroundVideo && (!lowEnd || priority === "cover"));
-  const eligible = opening ? active && pageVisible : allowed && pageVisible && nearby && inView && (priority !== "cover" || posterPainted) && !suspended;
+  const eligible = opening ? active && pageVisible : active && allowed && pageVisible && nearby && inView && (priority !== "cover" || posterPainted) && !suspended;
   const showPlaybackControls = opening && status === "fallback" && !failure.startsWith("Opening media error");
   useOpeningVideo({ enabled: opening, ref, videoRef, sources, poster, setStatus, setProgress, setFailure, lastError, onPlaybackState, onEnded });
 
@@ -116,7 +116,8 @@ export default function BackgroundVideo({ ref, sources, poster, priority = "ambi
     const wait = () => {
       if (!started || video.ended) return;
       setStatus("ready"); clearTimeout(stallTimer);
-      stallTimer = setTimeout(() => fail("Playback stalled for 4 seconds"), 4000);
+      const seconds = priority === "page" ? 6 : 4;
+      stallTimer = setTimeout(() => fail(`Playback stalled for ${seconds} seconds`), seconds * 1000);
     };
     const tick = () => {
       if (video.currentTime !== lastTime) { lastTime = video.currentTime; lastAdvance = performance.now(); }
@@ -139,23 +140,23 @@ export default function BackgroundVideo({ ref, sources, poster, priority = "ambi
     }, 2000);
     const ticker = setInterval(() => {
       if (!started) setProgress(current => Math.max(current, Math.min(.95, (performance.now() - began) / 6000)));
-      else if (!video.paused && performance.now() - lastAdvance >= 4000) fail("Video clock stopped for 4 seconds");
+      else if (!video.paused && performance.now() - lastAdvance >= (priority === "page" ? 6000 : 4000)) fail("Video clock stopped");
     }, 150);
     return () => {
       cancelled = true; clearTimers(); clearInterval(ticker);
       for (const [event, handler] of Object.entries(events)) video.removeEventListener(event, handler);
       reset();
     };
-  }, [eligible, nearby, allowed, sources, attempt, failure, important, opening]);
+  }, [eligible, nearby, allowed, sources, attempt, failure, important, opening, priority]);
 
   useEffect(() => {
     if (opening || !failure || retryUsed.current || !allowed) return;
-    const events = ["touchstart", "pointerdown", "scroll", "click"];
+    const events = priority === "page" ? ["touchstart", "pointerdown"] : ["touchstart", "pointerdown", "scroll", "click"];
     const remove = () => events.forEach(event => window.removeEventListener(event, retry, true));
     const retry = () => { retryUsed.current = true; setFailure(""); setAttempt(current => current + 1); remove(); };
     events.forEach(event => window.addEventListener(event, retry, { capture: true, passive: true }));
     return remove;
-  }, [failure, allowed, opening]);
+  }, [failure, allowed, opening, priority]);
 
   useEffect(() => {
     if (process.env.NODE_ENV !== "development" || new URLSearchParams(window.location.search).get("debug") !== "1") return;
@@ -172,10 +173,10 @@ export default function BackgroundVideo({ ref, sources, poster, priority = "ambi
       if (priority !== "cover") return;
       Promise.race([document.fonts.ready, new Promise(resolve => setTimeout(resolve, 1200))]).then(() => requestAnimationFrame(() => requestAnimationFrame(() => setPosterPainted(true))));
     }} />
-    <video ref={videoRef} data-background-video data-priority={priority} className={(status === "playing" && eligible ? "is-playing " : "") + (showPlaybackControls ? "has-playback-controls" : "")} poster={opening ? undefined : poster.src} crossOrigin="anonymous" muted loop={!opening} playsInline webkit-playsinline="true" autoPlay={!opening} preload={opening ? "none" : important || priority === "hero" ? "auto" : "none"} controls={showPlaybackControls} disablePictureInPicture disableRemotePlayback aria-hidden={opening ? undefined : "true"} aria-label={opening ? t("openingFilm") : undefined} tabIndex={showPlaybackControls ? 0 : -1} />
+    <video ref={videoRef} data-background-video data-priority={priority} className={(status === "playing" && eligible ? "is-playing " : "") + (showPlaybackControls ? "has-playback-controls" : "")} poster={opening ? undefined : poster.src} crossOrigin="anonymous" muted loop={!opening} playsInline webkit-playsinline="true" autoPlay={!opening} preload={priority === "page" ? "metadata" : opening ? "none" : important || priority === "hero" ? "auto" : "none"} controls={showPlaybackControls} disablePictureInPicture disableRemotePlayback aria-hidden={opening ? undefined : "true"} aria-label={opening ? t("openingFilm") : undefined} tabIndex={showPlaybackControls ? 0 : -1} />
     <span className="video-scrim" aria-hidden="true" />
     {priority === "cover" && !loaderExpired && status !== "playing" && status !== "fallback" && <LotusLoader progress={progress} label={t("preparingInvitation")} />}
-    {!important && inView && pageVisible && !suspended && (status === "loading" || status === "ready") && <span className="poster-shimmer" aria-hidden="true" />}
+    {!important && priority !== "page" && inView && pageVisible && !suspended && (status === "loading" || status === "ready") && <span className="poster-shimmer" aria-hidden="true" />}
     {debug && <output className="video-debug">{debug}</output>}
   </div>;
 }

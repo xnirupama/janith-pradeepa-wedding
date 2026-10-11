@@ -5,8 +5,7 @@ import { localizeInvitation } from "@/data/translations";
 import { invitationThemes } from "@/data/themes";
 import venuePhotos from "@/data/venue-photos";
 import { InvitationLanguageProvider, LanguageToggle, useLanguage } from "./InvitationLanguage";
-import { Lotus, MandalaLayers, SectionHeading } from "./InvitationOrnaments";
-import VideoBackdrop from "./VideoBackdrop";
+import { Lotus, SectionHeading } from "./InvitationOrnaments";
 import InvitationGate from "./InvitationGate";
 import OpeningFilm from "./OpeningFilm";
 import MusicController from "./MusicController";
@@ -88,7 +87,7 @@ function Experience({ invitation: original, galleryImages, guestName, coupleArtw
         <Countdown invitation={invitation} active />
         <PhotoFeature invitation={invitation} active />
         <Gallery images={galleryImages} invitation={invitation} contentActive />
-        <section className="celebration-section section-shell"><SectionAtmosphere tone="celebration" /><MandalaLayers className="celebration-mandalas" /><VideoBackdrop clip={invitation.motionVideos.celebration} className="celebration-backdrop" /><SectionReveal className="celebration-content"><SectionHeading kicker={t("celebrationKicker")} title={t("celebrationTitle")} />{invitation.celebration.map(line => <p key={line}>{line}</p>)}</SectionReveal></section>
+        <section className="celebration-section section-shell"><SectionAtmosphere tone="celebration" /><SectionReveal className="celebration-content"><SectionHeading kicker={t("celebrationKicker")} title={t("celebrationTitle")} />{invitation.celebration.map(line => <p key={line}>{line}</p>)}</SectionReveal></section>
         <LocationSection location={invitation.location} images={venuePhotos[original.slug]} active />
         <ClosingSection invitation={invitation} active onReplayOpening={replayOpening} />
       </div>

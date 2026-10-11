@@ -87,6 +87,36 @@
         "bytes": 14450,
         "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADQAQCdASoIAA4ABIByJQBOgCP7svRsmAD+l+A9doBH5UABbgXUxLk8JkuY8n6OhaAAAA=="
       }
+    },
+    "page": {
+      "src": "/assets/wedding/media/wedding-soft-light-loop-immersive.6b8b0705c89b.mp4",
+      "sourcePath": "media-sources/wedding/videos/wedding-soft-light-loop.mp4",
+      "description": "wedding soft light loop with seamless dissolve",
+      "position": "50% 50%",
+      "width": 540,
+      "height": 960,
+      "duration": 9.083333,
+      "fps": 24,
+      "bytes": 554172,
+      "originalBytes": 3877572,
+      "codec": "h264",
+      "profile": "Main",
+      "level": 31,
+      "pixelFormat": "yuv420p",
+      "hasAudio": false,
+      "fastStart": true,
+      "keyframeSeconds": 2,
+      "seamMeanAbsoluteDifference": 2.41,
+      "brightestFrame": 163,
+      "darkestFrame": 12,
+      "analysedFrames": 218,
+      "poster": {
+        "src": "/assets/wedding/media/wedding-soft-light-loop-immersive-poster.aa3bf8e0e83c.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 11326,
+        "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADwAQCdASoIAA4ABIByJQBOgB6W1C5qqyAA/tTSR1blFuD3EqWIkAiwnuVykoz5GAAAAA=="
+      }
     }
   },
   "homecoming": {
@@ -147,6 +177,36 @@
         "height": 960,
         "bytes": 13400,
         "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACwAQCdASoIAA4ABIByJZACdADx9FgAAP6Eg2pUEb+8Rc+fmfeZLrarCMptyuAA"
+      }
+    },
+    "page": {
+      "src": "/assets/homecoming/media/homecoming-hero-loop-immersive.23462fde330c.mp4",
+      "sourcePath": "media-sources/homecoming/videos/homecoming-hero-loop.mp4",
+      "description": "homecoming hero loop with seamless dissolve",
+      "position": "50% 50%",
+      "width": 540,
+      "height": 960,
+      "duration": 9.083333,
+      "fps": 24,
+      "bytes": 1027187,
+      "originalBytes": 6050943,
+      "codec": "h264",
+      "profile": "Main",
+      "level": 31,
+      "pixelFormat": "yuv420p",
+      "hasAudio": false,
+      "fastStart": true,
+      "keyframeSeconds": 2,
+      "seamMeanAbsoluteDifference": 4.14,
+      "brightestFrame": 24,
+      "darkestFrame": 140,
+      "analysedFrames": 218,
+      "poster": {
+        "src": "/assets/homecoming/media/homecoming-hero-loop-immersive-poster.8d0944fa7510.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 24430,
+        "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoIAA4ABIByJaACdAEO9Bmhn4AA/uzbZdr3ErUU4eIM2NVXZkYGftOuLjeqxKSqAAA="
       }
     }
   }

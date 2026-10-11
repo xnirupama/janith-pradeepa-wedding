@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { useInvitationMotion } from "./InvitationMotion";
 import { Lotus } from "./InvitationOrnaments";
 
 function Corner({ reverse = false }) {
@@ -12,23 +10,10 @@ function Vine() {
 }
 
 export default function SectionAtmosphere({ tone = "calm" }) {
-  const ref = useRef(null);
-  const { decorativeMotion, pageVisible, suspended } = useInvitationMotion();
-  useEffect(() => {
-    const node = ref.current, section = node?.parentElement;
-    if (!section) return;
-    let visible = false;
-    const update = () => { node.dataset.backgroundRunning = String(visible && decorativeMotion && pageVisible && !suspended); };
-    update();
-    if (!("IntersectionObserver" in window)) { visible = true; update(); return; }
-    const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; update(); }, { threshold: .01 });
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, [decorativeMotion, pageVisible, suspended]);
-  return <div ref={ref} className="section-atmosphere" data-background-tone={tone} data-background-running="false" aria-hidden="true">
+  return <div className="section-atmosphere" data-background-tone={tone} data-background-running="false" aria-hidden="true">
     <span className="section-tone" />
     <span className="section-halo" />
-    <div className="section-watermarks"><Corner /><Corner reverse />{["message", "portrait", "timeline"].includes(tone) && <Lotus decorative className="background-lotus" />}{tone === "timeline" && <><Vine /><span className="background-vine-mirror"><Vine /></span></>}</div>
+    <div className="section-watermarks"><div className="watermark-track" data-parallax-rate="0.9"><Corner />{["message", "portrait", "timeline"].includes(tone) && <Lotus decorative className="background-lotus" />}{tone === "timeline" && <Vine />}</div><div className="watermark-track" data-parallax-rate="1.1"><Corner reverse />{tone === "timeline" && <span className="background-vine-mirror"><Vine /></span>}</div></div>
     {tone === "hero" && <span className="hero-light-sweep" />}
   </div>;
 }

@@ -21,7 +21,10 @@
     "verify:opening": "node scripts/verify-opening.mjs",
     "verify:ambient": "node scripts/verify-ambient-placement.mjs",
     "prepare:backgrounds": "node scripts/prepare-background-textures.mjs",
-    "verify:backgrounds": "node scripts/verify-backgrounds.mjs"
+    "verify:backgrounds": "node scripts/verify-backgrounds.mjs",
+    "prepare:immersive": "node scripts/prepare-immersive-videos.mjs",
+    "verify:immersive:contrast": "node scripts/verify-immersive-contrast.mjs",
+    "verify:immersive:playback": "node scripts/verify-immersive-playback.mjs"
   },
   "dependencies": {
     "lucide-react": "latest",

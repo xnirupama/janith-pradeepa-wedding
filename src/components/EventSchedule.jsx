@@ -3,7 +3,7 @@
 import { CarFront, FileSignature, Gem } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 import AddToCalendar from "./AddToCalendar";
-import { MandalaLayers, SectionHeading, SunburstRing } from "./InvitationOrnaments";
+import { SectionHeading, SunburstRing } from "./InvitationOrnaments";
 import { RotatingDecoration } from "./InvitationMotion";
 import { useLanguage } from "./InvitationLanguage";
 import SectionAtmosphere from "./SectionAtmosphere";
@@ -16,7 +16,6 @@ export default function EventSchedule({ items, invitation }) {
   return (
     <section className="schedule-section section-shell" id="event-details" aria-labelledby="schedule-title">
       <SectionAtmosphere tone="timeline" />
-      <MandalaLayers className="section-mandalas" />
       <SectionReveal>
         <SectionHeading kicker={t("scheduleKicker")} title={t(invitation.arrival ? "homecomingDay" : "weddingDay")} id="schedule-title" />
       </SectionReveal>

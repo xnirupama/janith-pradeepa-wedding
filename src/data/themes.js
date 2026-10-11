@@ -11,7 +11,11 @@ export const invitationThemes = {
     "--background-vignette-opacity": .035, "--background-grain-opacity": .04,
     "--background-grain-blend": "multiply", "--background-bokeh-opacity": .12,
     "--background-bokeh-duration": "88s", "--background-sweep-duration": "12s", "--background-sweep-opacity": .14,
-    "--background-dust-glow": "none", "--background-watermark-opacity": .055,
+    "--background-dust-glow": "none", "--background-watermark-opacity": .12,
+    "--background-video-blend": "normal", "--background-video-opacity": .94,
+    "--background-reading-opacity": .48, "--background-card-rgb": "255,250,241", "--background-hero-ink": "#553913",
+    "--background-closing": "linear-gradient(115deg, #ad7a238c, #e5c5788c 47%, #b687318c)",
+    "--background-closing-read-rgb": "216,184,112", "--background-closing-read-opacity": .42,
   },
   homecoming: {
     "--bg": "#3b0715", "--bg-deep": "#26050e", "--surface": "#501425",
@@ -25,7 +29,11 @@ export const invitationThemes = {
     "--background-vignette-opacity": .2, "--background-grain-opacity": .04,
     "--background-grain-blend": "soft-light", "--background-bokeh-opacity": .16,
     "--background-bokeh-duration": "112s", "--background-sweep-duration": "15s", "--background-sweep-opacity": .08,
-    "--background-dust-glow": "0 0 3px #efcb8966", "--background-watermark-opacity": .065,
+    "--background-dust-glow": "0 0 3px #efcb8999", "--background-watermark-opacity": .12,
+    "--background-video-blend": "screen", "--background-video-opacity": .88,
+    "--background-reading-opacity": .78, "--background-card-rgb": "65,13,29", "--background-hero-ink": "#f4dbac",
+    "--background-closing": "linear-gradient(145deg, #26050e80, #3d101e80 48%, #b1844045)",
+    "--background-closing-read-rgb": "59,7,21", "--background-closing-read-opacity": .78,
   },
 };
 

@@ -70,3 +70,5 @@ await fs.writeFile("src/data/background-videos.json", JSON.stringify(background,
 await fs.writeFile("src/data/video-assets.json", JSON.stringify(opening, null, 2) + "\n");
 await fs.writeFile("media-sources/compatible-video-inventory.json", JSON.stringify(inventory, null, 2) + "\n");
 await import("./prepare-ambient-videos.mjs");
+await import("./prepare-immersive-videos.mjs");
+await import("./prepare-immersive-videos.mjs");

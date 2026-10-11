@@ -41,14 +41,20 @@ for (const engine of (process.env.QA_ENGINES || "chromium,webkit").split(",")) {
         await page.addStyleTag({ content: 'html { scroll-behavior: auto !important; } .section-navigator, .music-control, .language-toggle--floating { visibility: hidden !important; }' });
         assert.equal(await page.locator(".section-atmosphere").count(), 9);
         assert.equal(await page.locator(".background-music-glow").count(), 0);
-        assert.equal(await page.locator(".background-bokeh").count(), 3);
+        assert.equal(await page.locator(".background-bokeh").count(), 2);
         assert.equal(await page.locator(".hero-light-sweep").count(), 1);
         assert.equal(await page.locator(".location-card .venue-photos img").count(), 2);
-        const policyOff = profile !== "normal";
-        await page.waitForFunction(off => document.querySelector(".page-background").dataset.backgroundActive === String(!off), policyOff);
+        const policyOff = ["reduced-motion", "low-end"].includes(profile);
+        await page.waitForFunction(() => document.querySelector(".page-background").dataset.backgroundActive === "true");
+        assert.equal(await page.locator('.page-video video').count(), 1);
+        assert.equal(await page.locator('.invitation-content video').count(), 0);
+        assert.equal(await page.locator('.page-video video').getAttribute('preload'), 'metadata');
+        assert.equal(await page.locator('.page-mandala-turn').count(), 2);
+        if (profile === "normal") await page.waitForFunction(() => document.querySelector('.page-video').dataset.videoState === 'playing');
+        else await page.waitForFunction(() => document.querySelector('.page-video').dataset.videoState === 'fallback');
         if (policyOff) {
-          assert.equal(await page.locator(".background-air").evaluate(el => getComputedStyle(el).display), "none");
-          assert.equal(await page.locator('.rotation-layer[data-motion-running="true"]').count(), 0);
+          assert.equal(await page.locator(".page-background").getAttribute("data-background-motion"), "paused");
+          assert.ok(await page.locator('.page-mandala-turn').first().evaluate(el => getComputedStyle(el).animationPlayState === 'paused' || getComputedStyle(el).animationName === 'none'));
         } else {
           assert.equal(await page.locator(".gold-speck").evaluateAll(nodes => nodes.filter(node => getComputedStyle(node).display !== "none").length), 15);
           await page.waitForFunction(() => document.querySelector(".hero-light-sweep").closest(".section-atmosphere").dataset.backgroundRunning === "true");
@@ -100,4 +106,4 @@ for (const engine of (process.env.QA_ENGINES || "chromium,webkit").split(",")) {
   } finally { await browser.close(); }
 }
 assert.ok(results.length);
-await fs.writeFile(`${output}/results.json`, JSON.stringify(results, null, 2) + "\n");
+await fs.writeFile(`${output}/${process.env.QA_RESULT_FILE || "results.json"}`, JSON.stringify(results, null, 2) + "\n");

@@ -3,8 +3,7 @@
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { useLanguage } from "./InvitationLanguage";
-import { Lotus, MandalaLayers } from "./InvitationOrnaments";
-import VideoBackdrop from "./VideoBackdrop";
+import { Lotus } from "./InvitationOrnaments";
 import SectionAtmosphere from "./SectionAtmosphere";
 
 export default function HeroSection({ invitation, guestName, coupleArtwork }) {
@@ -14,8 +13,6 @@ export default function HeroSection({ invitation, guestName, coupleArtwork }) {
   return (
     <section className="hero-section" id="top" aria-labelledby="hero-names">
       <SectionAtmosphere tone="hero" />
-      <MandalaLayers className="hero-mandalas" />
-      <VideoBackdrop clip={invitation.motionVideos.hero} hero className="hero-backdrop" />
       <div className="hero-content">
         <p className="hero-eyebrow">{t("heroInvitation")}</p>
         {guestName && <p className="guest-line">{t("dearGuest", { guest: guestName })}</p>}
