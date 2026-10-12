@@ -5,12 +5,12 @@ import senwinExterior from "../../public/assets/homecoming/photos/Senwin Mandeer
 
 const venuePhotos = {
   wedding: [
-    { image: hemandraHall, altKey: "venuePhotoInterior" },
     { image: hemandraEntrance, altKey: "venuePhotoEntrance" },
+    { image: hemandraHall, altKey: "venuePhotoInterior" },
   ],
   homecoming: [
-    { image: senwinHall, altKey: "venuePhotoInterior" },
     { image: senwinExterior, altKey: "venuePhotoExterior" },
+    { image: senwinHall, altKey: "venuePhotoInterior" },
   ],
 };
 
