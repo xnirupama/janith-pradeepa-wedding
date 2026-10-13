@@ -6,7 +6,8 @@ import { translations } from "@/data/translations";
 const LanguageContext = createContext(null);
 const STORAGE_KEY = "invitation-language";
 const EVENT = "invitation-language-change";
-let fallbackLanguage = "en";
+const DEFAULT_LANGUAGE = "en";
+let fallbackLanguage = DEFAULT_LANGUAGE;
 let storageBlocked = false;
 let fallbackSelected = false;
 function getCookieLanguage() {
@@ -41,11 +42,11 @@ function getLanguage() {
   }
   return fallbackSelected ? fallbackLanguage : getCookieLanguage() || fallbackLanguage;
 }
-export function InvitationLanguageProvider({ children, initialLanguage = "en" }) {
-  const serverLanguage = initialLanguage === "si" ? "si" : "en";
+export function InvitationLanguageProvider({ children, initialLanguage = DEFAULT_LANGUAGE }) {
+  const serverLanguage = initialLanguage === "si" ? "si" : DEFAULT_LANGUAGE;
   const language = useSyncExternalStore(subscribe, getLanguage, () => serverLanguage);
   const setLanguage = (next) => {
-    fallbackLanguage = next === "si" ? "si" : "en";
+    fallbackLanguage = next === "si" ? "si" : DEFAULT_LANGUAGE;
     fallbackSelected = true;
     try { localStorage.setItem(STORAGE_KEY, fallbackLanguage); } catch { storageBlocked = true; }
     saveLanguageCookie(fallbackLanguage);
@@ -62,8 +63,8 @@ export function LanguageToggle({ floating = false }) {
   const { language, setLanguage, t } = useLanguage();
   return (
     <div className={`language-toggle ${floating ? "language-toggle--floating" : ""}`} role="group" aria-label={t("languageLabel")}>
-      <button type="button" lang="si" aria-pressed={language === "si"} onClick={() => setLanguage("si")}>සිං</button>
       <button type="button" lang="en" aria-pressed={language === "en"} onClick={() => setLanguage("en")}>EN</button>
+      <button type="button" lang="si" aria-pressed={language === "si"} onClick={() => setLanguage("si")}>සිං</button>
     </div>
   );
 }
