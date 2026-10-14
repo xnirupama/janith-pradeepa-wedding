@@ -26,7 +26,7 @@ export default function Gallery({ images = [] }) {
       </SectionReveal>
       <div className={`gallery-grid ${images.length === 1 ? "gallery-single" : images.length === 2 ? "gallery-pair" : "gallery-bento"}`}>
         {images.map((image, index) => (
-          <SectionReveal key={image.src} className={`gallery-tile ${index === 0 ? "gallery-feature" : `tile-${(index % 4) + 1}`}`} delay={(index % 4) * 0.08}>
+          <SectionReveal key={image.src} className="gallery-tile" delay={(index % 4) * 0.08}>
             <button
               className="gallery-photo"
               type="button"

@@ -52,48 +52,6 @@
     },
     "gallery": [
       {
-        "src": "/assets/wedding/media/portrait-1-640.ad2312d26bf7.webp",
-        "original": "/assets/wedding/photos/wedding-couple-feature.jpeg",
-        "width": 640,
-        "height": 878,
-        "bytes": 74050,
-        "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAACwAQCdASoIAAsABIByJQBdgBtqjBHgAP1KDEi0wr07NWEf7RnE+89SsGdmGbwlh3RFA60jzkXrY6AA",
-        "alt": "Janith and Pradeepa",
-        "avif": "/assets/wedding/media/portrait-1-640.e8a5d9f50b2e.avif",
-        "large": {
-          "webp": {
-            "src": "/assets/wedding/media/portrait-1-1080.bc6b009cb975.webp",
-            "bytes": 150560
-          },
-          "avif": {
-            "src": "/assets/wedding/media/portrait-1-1080.960e7a2ea54d.avif",
-            "bytes": 93036
-          }
-        },
-        "objectPosition": "50% 30%"
-      },
-      {
-        "src": "/assets/wedding/media/portrait-2-640.b08fa2369896.webp",
-        "original": "/assets/wedding/photos/wedding-couple-feature%202.jpeg",
-        "width": 640,
-        "height": 877,
-        "bytes": 32798,
-        "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoIAAsABIByJZQCdAEOuG9agAAA/rvfZiarrBGJ7LhpgZi+jC4gOUT85DVC5szUEAA=",
-        "alt": "Janith and Pradeepa",
-        "avif": "/assets/wedding/media/portrait-2-640.ea192710107f.avif",
-        "large": {
-          "webp": {
-            "src": "/assets/wedding/media/portrait-2-1080.5a45a34000be.webp",
-            "bytes": 46650
-          },
-          "avif": {
-            "src": "/assets/wedding/media/portrait-2-1080.427b12182b2b.avif",
-            "bytes": 36292
-          }
-        },
-        "objectPosition": "50% 30%"
-      },
-      {
         "src": "/assets/shared/media/gallery-memory-1-640.c27b7efa5599.webp",
         "bytes": 91010,
         "original": "/assets/shared/photos/couple-memory-restaurant.png",
@@ -191,27 +149,6 @@
       }
     },
     "gallery": [
-      {
-        "src": "/assets/homecoming/media/portrait-1-640.a1ae67333752.webp",
-        "bytes": 36838,
-        "original": "/assets/homecoming/photos/homecoming-gallery-couple-replacement.png",
-        "width": 640,
-        "height": 877,
-        "blurDataURL": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAACwAQCdASoIAAsABIByJZQAAl16AjoAAP65/GuK5qyfF7QYvgTKxpXsgbgAAA==",
-        "alt": "Janith and Pradeepa",
-        "avif": "/assets/homecoming/media/portrait-1-640.c32d151864bd.avif",
-        "large": {
-          "webp": {
-            "src": "/assets/homecoming/media/portrait-1-1080.e88d1c7cef02.webp",
-            "bytes": 67158
-          },
-          "avif": {
-            "src": "/assets/homecoming/media/portrait-1-1080.aa6f59668148.avif",
-            "bytes": 47066
-          }
-        },
-        "objectPosition": "50% 30%"
-      },
       {
         "src": "/assets/shared/media/gallery-memory-1-640.c27b7efa5599.webp",
         "bytes": 91010,
