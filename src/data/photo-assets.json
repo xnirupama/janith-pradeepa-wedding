@@ -22,12 +22,12 @@
       "objectPosition": "50% 30%"
     },
     "artwork": {
-      "src": "/assets/wedding/optimized/couple-artwork.webp",
-      "original": "/assets/wedding/photos/wedding-couple-feature.png",
+      "src": "/assets/wedding/optimized/couple-artwork-no-scarf.ab084d60a4fe.webp",
+      "original": "/assets/wedding/photos/wedding-couple-artwork-no-scarf.png",
       "width": 900,
       "height": 900,
-      "bytes": 87364,
-      "blurDataURL": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoIAAgAA8BgJYwCdADzgwlYAAD+8KM/fB39C1jE1cyYS3XikmMgz12AAAA=",
+      "bytes": 86402,
+      "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAACwAQCdASoIAAgAA8BgJYwCdADzHKwAAP7woz98Hf0Lhd5w4DC6pxxjFLuoGPL3lJSAAA==",
       "alt": "Janith and Pradeepa"
     },
     "backgrounds": {
