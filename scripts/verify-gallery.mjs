@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
@@ -12,6 +12,8 @@ const output = path.resolve("artifacts/qa/gallery");
 await mkdir(output, { recursive: true });
 const language = process.env.QA_LANGUAGE || "en";
 const report = { baseURL, language, testedAt: new Date().toISOString(), results: [] };
+const photoAssets = JSON.parse(await readFile("src/data/photo-assets.json", "utf8"));
+const largePaths = new Set(Object.values(photoAssets).flatMap(event => event.gallery).flatMap(image => Object.values(image.large || {}).map(variant => variant.src)));
 
 async function imageView(page) {
   return page.locator(".lightbox-image").evaluate((element) => {
@@ -49,7 +51,7 @@ for (const engine of (process.env.QA_ENGINES || "chromium,webkit").split(",")) {
       await context.addInitScript(lang=>localStorage.setItem("invitation-language",lang),language);
       const page = await context.newPage();
       const largeRequests = [];
-      page.on("request", request => { if (/portrait-\d+-1080/.test(request.url())) largeRequests.push(request.url()); });
+      page.on("request", request => { if (largePaths.has(new URL(request.url()).pathname)) largeRequests.push(request.url()); });
       page.setDefaultTimeout(30000);
       page.on("pageerror", (error) => result.errors.push(error.message));
       try {
@@ -64,7 +66,7 @@ for (const engine of (process.env.QA_ENGINES || "chromium,webkit").split(",")) {
         await page.locator(".opening-film").waitFor({state:"hidden"});
         await page.locator(".gallery-photo").first().waitFor();
         const count = await page.locator(".gallery-photo").count();
-        assert.equal(count, route === "wedding" ? 2 : 1, "Only distinct supplied couple portraits appear");
+        assert.equal(count, photoAssets[route].gallery.length, "Every configured gallery photograph appears once");
         const trigger = page.locator(".gallery-photo").first();
         await trigger.scrollIntoViewIfNeeded();
         const originalScroll = await page.evaluate(() => scrollY);
@@ -76,10 +78,11 @@ for (const engine of (process.env.QA_ENGINES || "chromium,webkit").split(",")) {
           return image?.complete && image.naturalWidth > 0;
         });
         result.checks.push("Photo loads inside full-screen native modal");
-        assert.ok((await page.locator(".lightbox-image img").evaluate(image => image.currentSrc)).includes("1080"), "Viewer uses the larger portrait");
+        const currentSrc = await page.locator(".lightbox-image img").evaluate(image => image.currentSrc);
+        assert.ok(Object.values(photoAssets[route].gallery[0].large).some(variant => currentSrc.endsWith(variant.src)), "Viewer uses the larger portrait");
         if (count > 1) {
           await page.waitForTimeout(600);
-          assert.ok(largeRequests.some(url => url.includes("portrait-2-1080")), "Next/previous portrait is preloaded after opening");
+          assert.ok(largeRequests.some(url => Object.values(photoAssets[route].gallery[1].large).some(variant => url.endsWith(variant.src))), "Next/previous portrait is preloaded after opening");
         }
         result.checks.push("Large variants are deferred and neighboring portraits preload on open");
         assert.equal(await page.locator(".lightbox-close").evaluate((element) => element === document.activeElement), true);

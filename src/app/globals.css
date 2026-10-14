@@ -158,8 +158,6 @@ button:disabled { cursor: default; opacity: .65; }
 .gallery-feature .gallery-photo { border-radius: 50% 50% var(--radius-card) var(--radius-card) / 28% 28% var(--radius-card) var(--radius-card); aspect-ratio: 3/4.4; }
 .gallery-pair .gallery-tile:nth-child(2) { margin-top: 3.5rem; }
 .gallery-single { max-width: 29rem; grid-template-columns: minmax(0,1fr); }
-.gallery-bento .gallery-feature { grid-row: span 2; }
-.gallery-bento .gallery-tile:nth-child(3n) .gallery-photo { aspect-ratio: 1; }
 .gallery-image { object-fit: cover; }
 .gallery-open-hint { position: absolute; bottom: .65rem; right: .65rem; width: 32px; height: 32px; display: grid; place-items: center; background: #fff4dfeb; color: #392719; border-radius: 50%; }
 .gallery-number { position: absolute; bottom: .7rem; left: .85rem; color: #fff; font: .8rem var(--font-display); text-shadow: 0 1px 4px #000; }

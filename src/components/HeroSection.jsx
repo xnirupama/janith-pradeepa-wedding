@@ -24,7 +24,7 @@ export default function HeroSection({ invitation, guestName, coupleArtwork }) {
           <div className="hero-date-row"><span>{month}</span><strong>{day}</strong><span>{weekday}</span></div>
           <time dateTime={invitation.countdownTarget}>{time}</time>
         </div>
-        {coupleArtwork && <div className={"hero-couple-art" + (coupleArtwork.kind === "photo" ? " hero-couple-art--photo" : "")}><Image src={coupleArtwork.src} alt={t("photoAlt")} width={coupleArtwork.width} height={coupleArtwork.height} sizes="(max-width: 480px) 68vw, 300px" placeholder="blur" blurDataURL={coupleArtwork.blurDataURL} loading="lazy" /></div>}
+        {coupleArtwork && <div className={"hero-couple-art" + (coupleArtwork.framed || coupleArtwork.kind === "photo" ? " hero-couple-art--photo" : "")}><Image src={coupleArtwork.src} alt={t("photoAlt")} width={coupleArtwork.width} height={coupleArtwork.height} sizes="(max-width: 480px) 68vw, 300px" placeholder="blur" blurDataURL={coupleArtwork.blurDataURL} loading="lazy" /></div>}
         <Lotus />
         <a className="scroll-cue" href="#invitation-message"><span>{t("storyCue")}</span><ChevronDown size={18} aria-hidden="true" /></a>
       </div>

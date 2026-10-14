@@ -92,40 +92,83 @@
           }
         },
         "objectPosition": "50% 30%"
+      },
+      {
+        "src": "/assets/shared/media/gallery-memory-1-640.c27b7efa5599.webp",
+        "bytes": 91010,
+        "original": "/assets/shared/photos/couple-memory-restaurant.png",
+        "width": 640,
+        "height": 853,
+        "blurDataURL": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADwAQCdASoIAAsABIByJbACdAD5ek02gwAA/tbX2GbaT9Ym0e2FQIGMhZjNywmDF6f+3coH/xdH6n0pJLnInHZQDTwAAA==",
+        "alt": "Janith and Pradeepa",
+        "avif": "/assets/shared/media/gallery-memory-1-640.043de85f7563.avif",
+        "large": {
+          "webp": {
+            "src": "/assets/shared/media/gallery-memory-1-1080.a43cb066457b.webp",
+            "bytes": 184870
+          },
+          "avif": {
+            "src": "/assets/shared/media/gallery-memory-1-1080.71947071d6c4.avif",
+            "bytes": 107533
+          }
+        },
+        "objectPosition": "50% 30%"
+      },
+      {
+        "src": "/assets/shared/media/gallery-memory-2-640.ace19a19eccd.webp",
+        "bytes": 58594,
+        "original": "/assets/shared/photos/couple-memory-selfie.png",
+        "width": 640,
+        "height": 816,
+        "blurDataURL": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAgCdASoIAAoABIByJZgCdAEWYGmLEBQAAPsVoAeMMR2Ch3yty1381lY0flKTwyglXQqLR+DXiiDInKsobdajjDWzV+AA",
+        "alt": "Janith and Pradeepa",
+        "avif": "/assets/shared/media/gallery-memory-2-640.f2625c2ff8fe.avif",
+        "large": {
+          "webp": {
+            "src": "/assets/shared/media/gallery-memory-2-1080.689f79ab60e9.webp",
+            "bytes": 131406
+          },
+          "avif": {
+            "src": "/assets/shared/media/gallery-memory-2-1080.0ce1464b04d1.avif",
+            "bytes": 84634
+          }
+        },
+        "objectPosition": "50% 30%"
       }
     ]
   },
   "homecoming": {
     "feature": {
-      "src": "/assets/homecoming/media/portrait-1-640.26f18736c81b.webp",
-      "bytes": 31574,
-      "original": "/assets/homecoming/photos/homecoming-gallery-couple.jpeg",
+      "src": "/assets/homecoming/media/portrait-1-640.a1ae67333752.webp",
+      "bytes": 36838,
+      "original": "/assets/homecoming/photos/homecoming-gallery-couple-replacement.png",
       "width": 640,
       "height": 877,
-      "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACwAQCdASoIAAsABIByJZwAAt0JIakAAP655Af/TZVgzSfnBByomiTq2S+AlAAA",
+      "blurDataURL": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAACwAQCdASoIAAsABIByJZQAAl16AjoAAP65/GuK5qyfF7QYvgTKxpXsgbgAAA==",
       "alt": "Janith and Pradeepa",
-      "avif": "/assets/homecoming/media/portrait-1-640.cd052f908e9d.avif",
+      "avif": "/assets/homecoming/media/portrait-1-640.c32d151864bd.avif",
       "large": {
         "webp": {
-          "src": "/assets/homecoming/media/portrait-1-1080.0a115de5267e.webp",
-          "bytes": 43178
+          "src": "/assets/homecoming/media/portrait-1-1080.e88d1c7cef02.webp",
+          "bytes": 67158
         },
         "avif": {
-          "src": "/assets/homecoming/media/portrait-1-1080.72d496d064ba.avif",
-          "bytes": 31203
+          "src": "/assets/homecoming/media/portrait-1-1080.aa6f59668148.avif",
+          "bytes": 47066
         }
       },
       "objectPosition": "50% 30%"
     },
     "artwork": {
-      "src": "/assets/homecoming/media/homecoming-hero-couple.3a5d517a5c6e.webp",
-      "bytes": 70754,
-      "original": "/assets/homecoming/photos/homecoming-hero-couple.jpg",
+      "src": "/assets/homecoming/media/homecoming-hero-cartoon.e7f7a3e46478.webp",
+      "bytes": 52484,
+      "original": "/assets/homecoming/photos/elegant-couple-portrait-with-roses.png",
       "width": 656,
-      "height": 900,
-      "blurDataURL": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADQAQCdASoIAAsABIByJbACdADbU7IMAAD+BKK2TKVZ31XParrlS7UYc9ZNuBMm0CHubtPhzL1M9CYunVx052GESTb0u2fGlFgAAA==",
+      "height": 898,
+      "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAAAQAgCdASoIAAsAA8BgJZACdAEQEeAnDyWAAP7ZYtrw9W2u6PGXu0n3RsMY4KEFFjT5mOv5GTSm+aScV+nIAA==",
       "alt": "Janith and Pradeepa",
-      "kind": "photo"
+      "kind": "illustration",
+      "framed": true
     },
     "backgrounds": {
       "hero": {
@@ -149,22 +192,64 @@
     },
     "gallery": [
       {
-        "src": "/assets/homecoming/media/portrait-1-640.26f18736c81b.webp",
-        "bytes": 31574,
-        "original": "/assets/homecoming/photos/homecoming-gallery-couple.jpeg",
+        "src": "/assets/homecoming/media/portrait-1-640.a1ae67333752.webp",
+        "bytes": 36838,
+        "original": "/assets/homecoming/photos/homecoming-gallery-couple-replacement.png",
         "width": 640,
         "height": 877,
-        "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACwAQCdASoIAAsABIByJZwAAt0JIakAAP655Af/TZVgzSfnBByomiTq2S+AlAAA",
+        "blurDataURL": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAACwAQCdASoIAAsABIByJZQAAl16AjoAAP65/GuK5qyfF7QYvgTKxpXsgbgAAA==",
         "alt": "Janith and Pradeepa",
-        "avif": "/assets/homecoming/media/portrait-1-640.cd052f908e9d.avif",
+        "avif": "/assets/homecoming/media/portrait-1-640.c32d151864bd.avif",
         "large": {
           "webp": {
-            "src": "/assets/homecoming/media/portrait-1-1080.0a115de5267e.webp",
-            "bytes": 43178
+            "src": "/assets/homecoming/media/portrait-1-1080.e88d1c7cef02.webp",
+            "bytes": 67158
           },
           "avif": {
-            "src": "/assets/homecoming/media/portrait-1-1080.72d496d064ba.avif",
-            "bytes": 31203
+            "src": "/assets/homecoming/media/portrait-1-1080.aa6f59668148.avif",
+            "bytes": 47066
+          }
+        },
+        "objectPosition": "50% 30%"
+      },
+      {
+        "src": "/assets/shared/media/gallery-memory-1-640.c27b7efa5599.webp",
+        "bytes": 91010,
+        "original": "/assets/shared/photos/couple-memory-restaurant.png",
+        "width": 640,
+        "height": 853,
+        "blurDataURL": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADwAQCdASoIAAsABIByJbACdAD5ek02gwAA/tbX2GbaT9Ym0e2FQIGMhZjNywmDF6f+3coH/xdH6n0pJLnInHZQDTwAAA==",
+        "alt": "Janith and Pradeepa",
+        "avif": "/assets/shared/media/gallery-memory-1-640.043de85f7563.avif",
+        "large": {
+          "webp": {
+            "src": "/assets/shared/media/gallery-memory-1-1080.a43cb066457b.webp",
+            "bytes": 184870
+          },
+          "avif": {
+            "src": "/assets/shared/media/gallery-memory-1-1080.71947071d6c4.avif",
+            "bytes": 107533
+          }
+        },
+        "objectPosition": "50% 30%"
+      },
+      {
+        "src": "/assets/shared/media/gallery-memory-2-640.ace19a19eccd.webp",
+        "bytes": 58594,
+        "original": "/assets/shared/photos/couple-memory-selfie.png",
+        "width": 640,
+        "height": 816,
+        "blurDataURL": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAgCdASoIAAoABIByJZgCdAEWYGmLEBQAAPsVoAeMMR2Ch3yty1381lY0flKTwyglXQqLR+DXiiDInKsobdajjDWzV+AA",
+        "alt": "Janith and Pradeepa",
+        "avif": "/assets/shared/media/gallery-memory-2-640.f2625c2ff8fe.avif",
+        "large": {
+          "webp": {
+            "src": "/assets/shared/media/gallery-memory-2-1080.689f79ab60e9.webp",
+            "bytes": 131406
+          },
+          "avif": {
+            "src": "/assets/shared/media/gallery-memory-2-1080.0ce1464b04d1.avif",
+            "bytes": 84634
           }
         },
         "objectPosition": "50% 30%"
