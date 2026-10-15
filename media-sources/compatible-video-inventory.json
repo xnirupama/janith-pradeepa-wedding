@@ -161,7 +161,7 @@
     "use": "archived alternative; not deployed"
   },
   {
-    "src": "/assets/wedding/media/wedding-opening-couple.752c6ab65ba9.mp4",
+    "src": "media-sources/wedding/compatible/wedding-opening-couple.752c6ab65ba9.mp4",
     "sourcePath": "media-sources/wedding/videos/wedding-opening-couple.mp4",
     "description": "wedding opening couple",
     "position": "50% 50%",
@@ -179,18 +179,18 @@
     "fastStart": true,
     "keyframeSeconds": 2,
     "poster": {
-      "src": "/assets/wedding/media/wedding-opening-couple-poster.76260729c5ba.webp",
+      "src": "media-sources/wedding/compatible/wedding-opening-couple-poster.76260729c5ba.webp",
       "width": 406,
       "height": 720,
       "bytes": 36332,
       "blurDataURL": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAACwAQCdASoIAA4ABIByJQAAXOFX0PRAAP5D/252jtCBNP03QPPzsPl31jT/WA2nFO17/s8ImYIfeKg8AAA="
     },
     "webm": {
-      "src": "/assets/wedding/media/wedding-opening-couple.4c6a4aef7654.webm",
+      "src": "media-sources/wedding/compatible/wedding-opening-couple.4c6a4aef7654.webm",
       "bytes": 627956
     },
-    "deployed": true,
-    "use": "opening"
+    "deployed": false,
+    "use": "superseded opening; archived outside public"
   },
   {
     "src": "/assets/wedding/media/wedding-petals-loop-seamless.53772fc18afe.mp4",
@@ -526,6 +526,34 @@
       "width": 406,
       "height": 720,
       "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAAAQAgCdASoIAA4ABIByJZQAAp2c2cYk7oMAAP65/Glnx/XmyfzD6OADcZvWr7m3Iljd+gAA"
+    },
+    "deployed": true,
+    "use": "opening"
+  },
+  {
+    "src": "/assets/wedding/media/wedding-opening-couple-replacement.d962ad1b4d96.mp4",
+    "bytes": 614830,
+    "sourcePath": "media-sources/wedding/videos/wedding-opening-couple-replacement.mp4",
+    "description": "Replacement Wedding opening couple film",
+    "position": "50% 50%",
+    "width": 406,
+    "height": 720,
+    "duration": 10,
+    "fps": 24,
+    "originalBytes": 5565986,
+    "codec": "h264",
+    "profile": "Main",
+    "level": 31,
+    "pixelFormat": "yuv420p",
+    "hasAudio": false,
+    "fastStart": true,
+    "keyframeSeconds": 2,
+    "poster": {
+      "src": "/assets/wedding/media/wedding-opening-couple-replacement-poster.926e2a5bab87.webp",
+      "bytes": 31702,
+      "width": 406,
+      "height": 720,
+      "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAACwAQCdASoIAA4ABIByJQAAWN8WjQAAAP2lYwLzKITMFbmBBWKv7q+tWaHXaNoXuT31V7RjacmxVBrn5tw4AA=="
     },
     "deployed": true,
     "use": "opening"
