@@ -7,11 +7,12 @@ import sharp from "sharp";
 const root = process.cwd();
 const ffmpeg = process.env.FFMPEG_PATH || path.join(root, ".task-tools/ffmpeg/bin/ffmpeg.exe");
 const ffprobe = process.env.FFPROBE_PATH || path.join(root, ".task-tools/ffmpeg/bin/ffprobe.exe");
+const currentOpening = JSON.parse(await fs.readFile("src/data/video-assets.json", "utf8"));
 const selected = {
   "wedding-floral-frame-loop.mp4": ["wedding", "cover"],
-  "wedding-opening-couple-replacement.mp4": ["wedding", "opening"],
+  [path.basename(currentOpening.wedding.sourcePath)]: ["wedding", "opening"],
   "homecoming-hero-loop.mp4": ["homecoming", "cover"],
-  "homecoming-opening-couple-replacement.mp4": ["homecoming", "opening"],
+  [path.basename(currentOpening.homecoming.sourcePath)]: ["homecoming", "opening"],
 };
 const background = { wedding: {}, homecoming: {} }, opening = {}, inventory = [];
 const probe = file => JSON.parse(execFileSync(ffprobe, ["-v", "error", "-show_format", "-show_streams", "-of", "json", file]));

@@ -8,12 +8,12 @@ import sharp from "sharp";
 const root = process.cwd();
 const ffmpeg = process.env.FFMPEG_PATH || ".task-tools/ffmpeg/bin/ffmpeg.exe";
 const ffprobe = process.env.FFPROBE_PATH || ".task-tools/ffmpeg/bin/ffprobe.exe";
-const upload = "public/assets/wedding/media/wedding-opening-couple.4c6a4aef7654.mp4";
-const sourcePath = "media-sources/wedding/videos/wedding-opening-couple-replacement.mp4";
+const upload = process.argv[2] || "public/assets/wedding/media/wedding-opening-couple.4c6a4aef7654.mp4";
 const directory = "public/assets/wedding/media";
 const assets = JSON.parse(await fs.readFile("src/data/video-assets.json", "utf8"));
 const inventory = JSON.parse(await fs.readFile("media-sources/compatible-video-inventory.json", "utf8"));
 const previous = structuredClone(assets.wedding);
+let sourcePath = previous.sourcePath;
 const homecoming = JSON.stringify(assets.homecoming);
 const digest = data => createHash("sha256").update(data).digest("hex");
 const exists = file => fs.access(file).then(() => true, () => false);
@@ -40,6 +40,7 @@ async function save(file, stem, extension) {
 await fs.mkdir(checked(path.dirname(sourcePath)), { recursive: true });
 if (await exists(checked(upload))) {
   const original = await fs.readFile(checked(upload));
+  sourcePath = `media-sources/wedding/videos/wedding-opening-couple-source.${digest(original).slice(0, 12)}.mp4`;
   if (await exists(checked(sourcePath))) {
     assert.equal(digest(await fs.readFile(checked(sourcePath))), digest(original), "A different replacement source is already archived");
   } else {
@@ -78,9 +79,15 @@ if (previous.src !== opening.src) {
     const archive = `media-sources/wedding/compatible/${path.basename(asset.src)}`;
     await fs.mkdir(checked(path.dirname(archive)), { recursive: true });
     if (!(await exists(checked(archive)))) {
-      const oldBytes = await exists(checked(publicFile))
-        ? await fs.readFile(checked(publicFile))
-        : execFileSync("git", ["show", `HEAD:${publicFile}`], { windowsHide: true, maxBuffer: 10 * 1024 * 1024 });
+      let oldBytes;
+      try {
+        // A pasted upload may have overwritten the prior immutable filename.
+        oldBytes = execFileSync("git", ["show", `HEAD:${publicFile}`], { windowsHide: true, maxBuffer: 10 * 1024 * 1024, stdio: ["ignore", "pipe", "pipe"] });
+      } catch {
+        oldBytes = await fs.readFile(checked(publicFile));
+      }
+      const oldHash = path.basename(asset.src).match(/\.([a-f0-9]{12})\.[^.]+$/)?.[1];
+      if (oldHash) assert.equal(digest(oldBytes).slice(0, 12), oldHash, "Archived media must match its immutable filename");
       await fs.writeFile(checked(archive), oldBytes);
     }
     if (await exists(checked(publicFile))) await fs.unlink(checked(publicFile));
@@ -96,7 +103,7 @@ if (currentEntry) Object.assign(currentEntry, opening, { deployed: true, use: "o
 else inventory.push({ ...opening, deployed: true, use: "opening" });
 await fs.writeFile("src/data/video-assets.json", JSON.stringify(assets, null, 2) + "\n");
 await fs.writeFile("media-sources/compatible-video-inventory.json", JSON.stringify(inventory, null, 2) + "\n");
-if (await exists(checked(upload))) {
+if (upload !== "public" + opening.src && await exists(checked(upload))) {
   assert.equal(digest(await fs.readFile(checked(upload))), digest(await fs.readFile(checked(sourcePath))), "The uploaded original is safely archived");
   await fs.unlink(checked(upload));
 }

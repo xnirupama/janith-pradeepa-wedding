@@ -1,15 +1,15 @@
 {
   "wedding": {
-    "src": "/assets/wedding/media/wedding-opening-couple-replacement.d962ad1b4d96.mp4",
-    "bytes": 614830,
-    "sourcePath": "media-sources/wedding/videos/wedding-opening-couple-replacement.mp4",
+    "src": "/assets/wedding/media/wedding-opening-couple-replacement.541e962a7438.mp4",
+    "bytes": 605718,
+    "sourcePath": "media-sources/wedding/videos/wedding-opening-couple-source.209a0e7a751b.mp4",
     "description": "Replacement Wedding opening couple film",
     "position": "50% 50%",
     "width": 406,
     "height": 720,
     "duration": 10,
     "fps": 24,
-    "originalBytes": 5565986,
+    "originalBytes": 5424996,
     "codec": "h264",
     "profile": "Main",
     "level": 31,
@@ -18,11 +18,11 @@
     "fastStart": true,
     "keyframeSeconds": 2,
     "poster": {
-      "src": "/assets/wedding/media/wedding-opening-couple-replacement-poster.926e2a5bab87.webp",
-      "bytes": 31702,
+      "src": "/assets/wedding/media/wedding-opening-couple-replacement-poster.6c6a5f5cdea5.webp",
+      "bytes": 31224,
       "width": 406,
       "height": 720,
-      "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAACwAQCdASoIAA4ABIByJQAAWN8WjQAAAP2lYwLzKITMFbmBBWKv7q+tWaHXaNoXuT31V7RjacmxVBrn5tw4AA=="
+      "blurDataURL": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADQAQCdASoIAA4ABIByJQBdgB8wo4KEAAD9pWMC8yiEzBW3t16ewhxy/xsBBmFpVRh7rjIdUtzd/2NfB2ilhvCAAAA="
     }
   },
   "homecoming": {
