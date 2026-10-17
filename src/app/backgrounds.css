@@ -48,8 +48,7 @@
 .background-vine { position: absolute; left: -.5rem; top: 13%; width: 4rem; height: 70%; opacity: .1; }
 .background-vine-mirror { position: absolute; inset: 0; transform: scaleX(-1); }
 .closing-section { background: none; }
-.section-atmosphere[data-background-tone="closing"] .section-tone { background: var(--background-closing); mask-image: linear-gradient(to bottom, transparent, #000 3.5rem); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 3.5rem); }
-.section-atmosphere[data-background-tone="closing"] .section-halo { --background-neutral-rgb: var(--background-closing-read-rgb); --background-reading-opacity: var(--background-closing-read-opacity); }
+.section-atmosphere[data-background-tone="closing"] .section-tone { mask-image: linear-gradient(to bottom, transparent, #000 3.5rem); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 3.5rem); }
 .hero-light-sweep { z-index: 6; opacity: 0; background: linear-gradient(120deg, transparent 25%, rgba(var(--background-glow-rgb), .28) 40%, #fff4df55 50%, transparent 67%); transform: translate3d(-110%,0,0); animation: hero-atmosphere-sweep var(--background-sweep-duration) ease-in-out infinite; animation-play-state: paused; }
 .section-atmosphere[data-background-running="true"] .hero-light-sweep { animation-play-state: running; }
 @keyframes hero-atmosphere-sweep { 0%,70% { transform: translate3d(-110%,0,0); opacity: 0; } 76% { opacity: var(--background-sweep-opacity); } 92% { transform: translate3d(110%,0,0); opacity: var(--background-sweep-opacity); } 100% { transform: translate3d(110%,0,0); opacity: 0; } }
@@ -63,8 +62,6 @@
 .hero-content .section-kicker, .hero-eyebrow { color: var(--background-hero-ink); }
 .theme-wedding .hero-date-block { color: #604215; }
 .gallery-number { padding: .15rem .4rem; border: 1px solid #e2c58c88; border-radius: var(--radius-pill); background: #302114; color: #fff4df; line-height: 1.5; text-shadow: none; }
-.theme-homecoming .closing-section { --closing-gradient: linear-gradient(145deg, #26050e, #3d101e 48%, #451523); color: var(--ink); --accent: #e2c58c; --muted: #e6cdbd; --line: #d9b7735e; --surface: #501425; }
-.theme-homecoming .closing-actions button { color: var(--ink); }
 .closing-contact-actions { padding: 1.1rem .75rem; border: 1px solid var(--line); border-radius: var(--radius-card); background: rgba(var(--background-neutral-rgb), .88); }
 .theme-homecoming .closing-contact-actions .contact-pill { background: #501425; }
 

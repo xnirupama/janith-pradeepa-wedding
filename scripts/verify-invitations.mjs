@@ -214,7 +214,7 @@ test("theme text and gold surfaces meet WCAG AA contrast", () => {
   }
   const goldInk = stylesheet.match(/--gold-ink:\s*(#[a-f\d]{6})/i)[1];
   const goldStops = stylesheet.match(/--gold-gradient: ([^;]+)/)[1].match(/#[a-f\d]{6}/gi);
-  const footerMuted = stylesheet.match(/\.closing-section\s*\{([^}]+)\}/)[1].match(/--muted:\s*(#[a-f\d]{6})/i)[1];
+  const footerMuted = stylesheet.match(/\.closing-message\s*\{([^}]+)\}/)[1].match(/--muted:\s*(#[a-f\d]{6})/i)[1];
   for (const stop of goldStops) {
     assert.ok(ratio(goldInk, stop) >= 4.5, "Gold action text");
     assert.ok(ratio(footerMuted, stop) >= 4.5, "Gold footer text");

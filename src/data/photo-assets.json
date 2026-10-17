@@ -22,13 +22,15 @@
       "objectPosition": "50% 30%"
     },
     "artwork": {
-      "src": "/assets/wedding/optimized/couple-artwork-no-scarf.ab084d60a4fe.webp",
-      "original": "/assets/wedding/photos/wedding-couple-artwork-no-scarf.png",
-      "width": 900,
-      "height": 900,
-      "bytes": 86402,
-      "blurDataURL": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAACwAQCdASoIAAgAA8BgJYwCdADzHKwAAP7woz98Hf0Lhd5w4DC6pxxjFLuoGPL3lJSAAA==",
-      "alt": "Janith and Pradeepa"
+      "src": "/assets/wedding/media/wedding-couple-artwork-matched.230f065182e6.webp",
+      "original": "/assets/wedding/photos/wedding-couple-artwork-matched.png",
+      "width": 720,
+      "height": 960,
+      "bytes": 114338,
+      "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoIAAsABIByJYgCdAD0lCr5OgAA/sRZG7BOpl5U21myfM8RrLr9qLhXEtFDSAAA",
+      "alt": "Janith and Pradeepa",
+      "kind": "illustration",
+      "framed": true
     },
     "backgrounds": {
       "hero": {

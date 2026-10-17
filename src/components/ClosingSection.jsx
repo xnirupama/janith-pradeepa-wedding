@@ -20,15 +20,17 @@ export default function ClosingSection({ invitation, onReplayOpening }) {
     <footer className="closing-section" id="contact" aria-labelledby="closing-title">
       <SectionAtmosphere tone="closing" />
       <SectionReveal className="closing-content">
-        <p className="closing-save-date section-kicker">{t("saveDate")}</p>
-        <time className="closing-date" dateTime={invitation.countdownTarget.slice(0, 10)}>{day} . {month} . {year.slice(-2)}</time>
-        <RingedLotus className="closing-lotus" />
-        <p className="blessing">{invitation.blessing}</p>
-        <p className="sinhala-blessing" lang="si">{invitation.sinhalaBlessing}</p>
-        <h2 id="closing-title">{invitation.couple}</h2>
-        <span className="closing-divider" aria-hidden="true" />
-        {invitation.closingLead && <p className="closing-lead">{invitation.closingLead}</p>}
-        <div className="closing-copy">{invitation.closing.map((line) => <p key={line}>{line}</p>)}</div>
+        <div className="closing-message">
+          <p className="closing-save-date section-kicker">{t("saveDate")}</p>
+          <time className="closing-date" dateTime={invitation.countdownTarget.slice(0, 10)}>{day} . {month} . {year.slice(-2)}</time>
+          <RingedLotus className="closing-lotus" />
+          <p className="blessing">{invitation.blessing}</p>
+          <p className="sinhala-blessing" lang="si">{invitation.sinhalaBlessing}</p>
+          <h2 id="closing-title">{invitation.couple}</h2>
+          <span className="closing-divider" aria-hidden="true" />
+          {invitation.closingLead && <p className="closing-lead">{invitation.closingLead}</p>}
+          <div className="closing-copy">{invitation.closing.map((line) => <p key={line}>{line}</p>)}</div>
+        </div>
         <div className="closing-contact-actions">
           <p className="section-kicker">{t("contactHelpKicker")}</p>
           <h3>{t("contactTitle")}</h3>
